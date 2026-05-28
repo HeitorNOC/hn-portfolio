@@ -10,6 +10,11 @@
     var canvas = document.getElementById('cta-canvas');
     if (!canvas || !window.WebGLRenderingContext) return;
 
+    if (window.innerWidth <= 767) {
+      canvas.style.display = 'none';
+      return;
+    }
+
     var gl = canvas.getContext('webgl', {
       alpha: true, antialias: true, powerPreference: 'high-performance'
     });

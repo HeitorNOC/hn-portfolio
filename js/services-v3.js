@@ -24,6 +24,21 @@ window.initServicesV3 = function () {
   var navItems   = document.querySelectorAll('.svc3-bottom-nav__item');
 
   if (!root || !stage || panels.length < 2) return;
+
+  var isMobile = window.innerWidth <= 991;
+
+  if (isMobile) {
+    // On mobile, just activate all panels and ensure SVG strokes are drawn
+    panels.forEach(function (p) {
+      p.classList.add('is-active');
+      var iconStrokes = p.querySelectorAll('.svc3-icon__stroke, .svc3-icon__fill');
+      iconStrokes.forEach(function (stroke) {
+        stroke.style.strokeDashoffset = 0;
+      });
+    });
+    return;
+  }
+
   if (!window.gsap || !window.ScrollTrigger) return;
 
   var N       = panels.length;

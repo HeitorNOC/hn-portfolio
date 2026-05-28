@@ -2889,3 +2889,174 @@ body::after {
     gap: var(--space-3);
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Fase 17 — Overhaul de Responsividade Mobile e Correções Globais
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1. Global Section Paddings on Mobile for perfectly cohesive standard spacing */
+@media (max-width: 768px) {
+  .section {
+    padding-top: clamp(2.5rem, 5.5vh, 4rem) !important;
+    padding-bottom: clamp(2rem, 4.5vh, 3rem) !important;
+  }
+}
+
+/* 2. Hero Mobile Overrides: anti-clipping titles & repositioned faded globe */
+@media (max-width: 768px) {
+  .hero__heading {
+    font-size: clamp(1.8rem, 8.2vw, 3rem) !important;
+    line-height: 1.05 !important;
+  }
+  .hero__canvas {
+    opacity: 0.30 !important;
+    transform: scale(0.78) translateY(9vh) !important;
+    transform-origin: center center !important;
+  }
+  .hero__ctas {
+    width: 100% !important;
+  }
+  .hero__ctas .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* 3. Manifesto Mobile Overrides: nowrap single-line titles & glowing CSS gradient fallback */
+@media (max-width: 768px) {
+  .manifesto__line {
+    font-size: clamp(1.5rem, 7.5vw, 2.8rem) !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+  }
+  .manifesto-section {
+    background: radial-gradient(circle at 20% 50%, rgba(201, 243, 29, 0.05) 0%, #080808 80%) !important;
+  }
+}
+
+/* 4. Portfolio 3D Ring Mobile Overrides: multi-viewport CSS scaling & radial fallback */
+@media (max-width: 991px) {
+  .port-scene {
+    transform: scale(0.72) translateY(4vh) !important;
+    transform-origin: center center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .port-scene {
+    transform: scale(0.55) translateY(3vh) !important;
+    transform-origin: center center !important;
+  }
+  .port-stage {
+    background: radial-gradient(circle at 50% 50%, rgba(201, 243, 29, 0.06) 0%, #080808 75%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .port-scene {
+    transform: scale(0.48) translateY(2vh) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* 5. CTA Bridge Mobile Overrides: glowing CSS gradient fallback */
+@media (max-width: 768px) {
+  .cta-bridge {
+    background: radial-gradient(circle at 50% 60%, rgba(201, 243, 29, 0.07) 0%, #080808 80%) !important;
+  }
+}
+
+/* 6. Services Mobile Stack Layout: native vertical scroll list bypass */
+@media (max-width: 991px) {
+  .svc3-root {
+    height: auto !important;
+    background: #080808 !important;
+  }
+  .svc3-stage {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    contain: none !important;
+  }
+  .svc3-panel {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    padding: clamp(3rem, 8vh, 6rem) var(--space-4) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-color: #080808 !important;
+  }
+  .svc3-ui, 
+  .svc3-bottom-nav, 
+  .svc3-prog, 
+  .svc3-prog-rail,
+  .svc3-bottom-prog {
+    display: none !important;
+  }
+  .svc3-panel__inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-6) !important;
+    height: auto !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  .svc3-panel__left, 
+  .svc3-panel__right {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .svc3-panel__right {
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: var(--space-4) !important;
+  }
+
+  .svc3-icon-wrap {
+    transform: none !important;
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  .svc3-icon {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .svc3-title {
+    font-size: clamp(2rem, 7vw, 2.8rem) !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  
+  .svc3-panel__left {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  
+  .svc3-desc {
+    margin: 0 0 var(--space-4) 0 !important;
+    text-align: left !important;
+  }
+
+  .svc3-tags {
+    justify-content: flex-start !important;
+  }
+
+  .svc3-cta {
+    align-self: flex-start !important;
+  }
+}

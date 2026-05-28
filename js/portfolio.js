@@ -50,15 +50,16 @@ window.initPortfolio3D = function () {
     radius = Math.round(radius * factor);
     
     // Enforce a minimum radius for beautiful volumetric space on desktop/mobile
-    var minRadius = (window.innerWidth > 991) ? 440 : 120;
+    var minRadius = (window.innerWidth > 991) ? 440 : 220;
     if (radius < minRadius) radius = minRadius;
 
     // Mathematical Bound for Anti-Clipping:
-    // Span = (2 * radius) + cardWidth < screenWidth - 40px
-    // This caps radius at: maxRadius = (window.innerWidth - 40 - cardWidth) / 2
-    var maxRadius = (window.innerWidth - 40 - cardWidth) / 2;
-    if (maxRadius < 50) maxRadius = 50; // Garantir profundidade 3D mínima mesmo em telas ultra-estreitas
-    if (radius > maxRadius) radius = Math.round(maxRadius);
+    // Capped only on desktop. On mobile, we use CSS transform scale on the scene to prevent clipping!
+    if (window.innerWidth > 991) {
+      var maxRadius = (window.innerWidth - 40 - cardWidth) / 2;
+      if (maxRadius < 50) maxRadius = 50;
+      if (radius > maxRadius) radius = Math.round(maxRadius);
+    }
 
     cards.forEach(function (card, idx) {
       var angle = idx * angleStep;
