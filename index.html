@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta -->
+  <title>HN Services — Tecnologia que Transforma</title>
+  <meta name="description"
+    content="HN Services — Criação de sites, consultoria de TI e sistemas web que transformam negócios. Tecnologia com propósito, design com impacto.">
+  <meta name="keywords"
+    content="criação de sites, consultoria de TI, sistemas web, UI/UX design, desenvolvimento web, Recife, agência digital">
+  <meta name="author" content="HN Services">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#C9F31D">
+  <link rel="canonical" href="https://hnservices.com.br/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hnservices.com.br/">
+  <meta property="og:site_name" content="HN Services">
+  <meta property="og:title" content="HN Services — Tecnologia que Transforma">
+  <meta property="og:description"
+    content="Criação de sites, consultoria de TI e sistemas web que transformam negócios. Tecnologia com propósito, design com impacto.">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HN Services — Tecnologia que Transforma">
+  <meta name="twitter:description"
+    content="Criação de sites, consultoria de TI e sistemas web que transformam negócios.">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "HN Services",
+    "description": "Criação de sites, consultoria de TI, sistemas web e design de interfaces digitais para empresas que querem crescer.",
+    "url": "https://hnservices.com.br",
+    "email": "contato@hnservices.com.br",
+    "telephone": "+55-81-9-9999-9999",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Recife",
+      "addressRegion": "PE",
+      "addressCountry": "BR"
+    },
+    "areaServed": "BR",
+    "serviceType": [
+      "Criação de Sites",
+      "Consultoria de TI",
+      "Sistemas Web",
+      "UI/UX Design",
+      "Manutenção e Suporte"
+    ],
+    "sameAs": [
+      "https://instagram.com/hnservices",
+      "https://linkedin.com/company/hn-services",
+      "https://github.com/hn-services"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500&family=Space+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- SVG shared defs: gradient + water displacement filter -->
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+      <linearGradient id="logo-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C9F31D" />
+        <stop offset="100%" stop-color="#7A9610" />
+      </linearGradient>
+      <!-- Water surface displacement for showcase images -->
+      <filter id="showcase-water" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+        <feTurbulence id="sw-turb" type="fractalNoise" baseFrequency="0.010 0.006" numOctaves="1" seed="8"
+          result="noise" />
+        <feDisplacementMap id="sw-disp" in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R"
+          yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Global WebGL canvas (fixed, covers full page, z-index 0) -->
+  <canvas id="webgl-canvas" class="webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Scroll progress bar (Igloo/Orano-style) -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Section Tracker (fixed right side, Orano-style) -->
+  <nav class="section-tracker" id="section-tracker" aria-label="Navegação por seções">
+    <a href="#hero" class="section-tracker__item is-active" data-section="hero">
+      <span class="section-tracker__label">Início</span>
+      <span class="section-tracker__line"></span>
+    </a>
+    <a href="#sobre" class="section-tracker__item" data-section="sobre">
+      <span class="section-tracker__label">Sobre</span>
+      <span class="section-tracker__line"></span>
+    </a>
+    <a href="#processo" class="section-tracker__item" data-section="processo">
+      <span class="section-tracker__label">Processo</span>
+      <span class="section-tracker__line"></span>
+    </a>
+    <a href="#servicos" class="section-tracker__item" data-section="servicos">
+      <span class="section-tracker__label">Serviços</span>
+      <span class="section-tracker__line"></span>
+    </a>
+    <a href="#portfolio" class="section-tracker__item" data-section="portfolio">
+      <span class="section-tracker__label">Portfólio</span>
+      <span class="section-tracker__line"></span>
+    </a>
+    <a href="#contato" class="section-tracker__item" data-section="contato">
+      <span class="section-tracker__label">Contato</span>
+      <span class="section-tracker__line"></span>
+    </a>
+  </nav>
+
+  <!-- Loader -->
+  <div id="loader" class="loader">
+    <div class="loader__inner">
+      <div class="loader__logo">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+          <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
+            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="loader__bar-wrap">
+        <div class="loader__bar" id="loader-bar"></div>
+      </div>
+      <span class="loader__label label">Carregando...</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav__logo" aria-label="HN Services — início">
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
+          stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="nav__wordmark">HN Services</span>
+    </a>
+    <div class="nav__links" id="nav-links">
+      <a href="#sobre" class="nav__link">Sobre</a>
+      <a href="#processo" class="nav__link">Processo</a>
+      <a href="#servicos" class="nav__link">Serviços</a>
+      <a href="#portfolio" class="nav__link">Portfólio</a>
+      <a href="#contato" class="nav__link">Contato</a>
+    </div>
+    <a href="#contato" class="btn btn--outline nav__cta">Iniciar Projeto</a>
+    <button class="nav__hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span class="nav__ham-line"></span>
+      <span class="nav__ham-line"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay Menu -->
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+    <div class="nav-overlay__links">
+      <a href="#sobre" class="nav-overlay__link" data-index="01">Sobre</a>
+      <a href="#processo" class="nav-overlay__link" data-index="02">Processo</a>
+      <a href="#servicos" class="nav-overlay__link" data-index="03">Serviços</a>
+      <a href="#portfolio" class="nav-overlay__link" data-index="04">Portfólio</a>
+      <a href="#contato" class="nav-overlay__link" data-index="05">Contato</a>
+    </div>
+    <div class="nav-overlay__bottom">
+      <span class="nav-overlay__tagline">Tecnologia que Transforma</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section id="hero" class="section hero">
+    <!-- Lightning canvas (2D, hero only) -->
+    <canvas id="lightning-canvas" class="hero__lightning" aria-hidden="true"></canvas>
+    <div class="hero__noise"></div>
+
+    <div class="container hero__content">
+      <span class="hero__eyebrow label">001 — Soluções Digitais</span>
+      <h1 class="hero__heading">
+        <span class="hero__line">
+          <span class="hero__word hero__word--fill" data-original="Tecnologia">Tecnologia</span>
+        </span>
+        <span class="hero__line">
+          <span class="hero__word hero__word--stroke" data-original="que Transforma">que Transforma</span>
+        </span>
+      </h1>
+      <p class="hero__sub">Criamos experiências digitais que conectam marcas ao futuro.<br>Design com impacto. Código
+        com propósito.</p>
+      <div class="hero__ctas">
+        <a href="#processo" class="btn btn--primary">Como Trabalhamos</a>
+        <a href="#contato" class="btn btn--outline">Falar Conosco ↗</a>
+      </div>
+
+      <!-- Floating badge -->
+      <div class="hero__badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100" class="hero__badge-ring">
+          <path id="badge-path" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
+          <text class="hero__badge-text">
+            <textPath href="#badge-path" startOffset="0%">★ HN SERVICES ★ WEB · IT · DESIGN ★ </textPath>
+          </text>
+        </svg>
+        <svg class="hero__badge-logo" viewBox="0 0 56 56" fill="none" width="22" height="22">
+          <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
+            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero__scroll-hint">
+      <div class="hero__scroll-line"></div>
+      <span class="hero__scroll-label">SCROLL</span>
+    </div>
+
+    <!-- Bottom gradient — dissolves hero into manifesto -->
+    <div class="hero__bottom-fade" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══════════════════════ MANIFESTO ════════════════════ -->
+  <section id="manifesto" class="manifesto-section">
+    <canvas id="manifesto-canvas" class="manifesto__canvas" aria-hidden="true"></canvas>
+
+    <div class="container manifesto__content">
+      <div class="manifesto__headline" aria-label="Não criamos sites. Criamos experiências.">
+        <div class="manifesto__line-wrap">
+          <span class="manifesto__line" aria-hidden="true">Não criamos</span>
+        </div>
+        <div class="manifesto__line-wrap">
+          <span class="manifesto__line manifesto__line--stroke" aria-hidden="true">sites.</span>
+        </div>
+        <div class="manifesto__line-wrap">
+          <span class="manifesto__line" aria-hidden="true">Criamos</span>
+        </div>
+        <div class="manifesto__line-wrap">
+          <span class="manifesto__line manifesto__line--lime" aria-hidden="true">experiências.</span>
+        </div>
+      </div>
+
+      <p class="manifesto__sub">
+        Cada decisão carrega intenção. Cada pixel, propósito.<br>
+        Do primeiro scroll ao último clique — isso é o que fazemos.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TICKER ═══════════════════════ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__inner">
+      <div class="ticker__track">
+        <span class="ticker__item">React</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">Next.js</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">Node.js</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">UI/UX Design</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">Three.js</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">PostgreSQL</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">TypeScript</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">AWS</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">Docker</span><span class="ticker__sep">★</span>
+        <span class="ticker__item">CI/CD</span><span class="ticker__sep">★</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ SOBRE ═══════════════════════ -->
+  <section id="sobre" class="section about">
+    <div class="container about__grid">
+
+      <div class="about__left">
+        <span class="label about__label">// 002 — Sobre nós</span>
+        <h2 class="about__heading">
+          <span class="reveal-line"><span>Agilidade real,</span></span>
+          <span class="reveal-line"><span>código de</span></span>
+          <span class="reveal-line about__heading-accent"><span>elite.</span></span>
+        </h2>
+        <p class="about__text">
+          Criamos sites rápidos, sistemas web robustos e interfaces sob medida. Nosso foco é simples: engenharia de alta qualidade com velocidade de entrega e comunicação direta.
+        </p>
+        <p class="about__text">
+          Adotamos um processo ágil e estruturado para garantir que cada etapa seja transparente e sem ruídos. O alinhamento direto e o foco na execução nos permitem entregar resultados superiores dentro do prazo combinado.
+        </p>
+        <!-- <div class="about__stats">
+          <div class="stat">
+            <span class="stat__number" data-target="100" data-suffix="%">0%</span>
+            <span class="stat__label">Código Limpo</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-target="15" data-suffix=" Dias">0 Dias</span>
+            <span class="stat__label">Prazo Médio</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-target="100" data-suffix="%">0%</span>
+            <span class="stat__label">Entrega</span>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="about__right">
+        <canvas class="about__canvas" id="about-canvas" aria-hidden="true"></canvas>
+        <div class="about__bg-letters" aria-hidden="true">HN</div>
+        <div class="about__card">
+          <div class="about__card-tag label">Manifesto</div>
+          <p class="about__card-text">
+            "Nossa estrutura é enxuta por escolha. Sem burocracia, entregamos projetos premium em tempo recorde, direto do código para o ar."
+          </p>
+          <div class="about__card-line"></div>
+          <span class="about__card-author">— Time HN Services</span>
+        </div>
+        <div class="about__deco-square"></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ PROCESSO ════════════════════ -->
+  <section id="processo" class="section process-section">
+
+    <div class="container">
+      <div class="process-header">
+        <span class="label process-header__label">// Como trabalhamos</span>
+        <span class="process-header__tag label">Nosso processo</span>
+      </div>
+
+      <!-- Step 01 -->
+      <div class="process-step" data-step="01">
+        <div class="process-step__aside">
+          <canvas class="process-step__canvas" id="process-canvas-1" aria-hidden="true"></canvas>
+          <span class="process-step__bg-num" aria-hidden="true">01</span>
+        </div>
+        <div class="process-step__body">
+          <span class="label process-step__num">Etapa 01</span>
+          <h3 class="process-step__title">Descoberta</h3>
+          <p class="process-step__text">Mergulhamos no seu negócio. Mapeamos desafios, objetivos e oportunidades digitais para construir uma estratégia sólida e personalizada.</p>
+          <ul class="process-step__tags">
+            <li>Diagnóstico</li>
+            <li>Pesquisa UX</li>
+            <li>Briefing</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="process-step" data-step="02">
+        <div class="process-step__aside">
+          <canvas class="process-step__canvas" id="process-canvas-2" aria-hidden="true"></canvas>
+          <span class="process-step__bg-num" aria-hidden="true">02</span>
+        </div>
+        <div class="process-step__body">
+          <span class="label process-step__num">Etapa 02</span>
+          <h3 class="process-step__title">Construção</h3>
+          <p class="process-step__text">Desenvolvimento ágil e iterativo. Design e código em paralelo, com entregas incrementais, testes constantes e feedback que molda o resultado.</p>
+          <ul class="process-step__tags">
+            <li>Design System</li>
+            <li>Dev Ágil</li>
+            <li>QA</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="process-step" data-step="03">
+        <div class="process-step__aside">
+          <canvas class="process-step__canvas" id="process-canvas-3" aria-hidden="true"></canvas>
+          <span class="process-step__bg-num" aria-hidden="true">03</span>
+        </div>
+        <div class="process-step__body">
+          <span class="label process-step__num">Etapa 03</span>
+          <h3 class="process-step__title">Lançamento</h3>
+          <p class="process-step__text">Deploy com qualidade, monitoramento em tempo real e suporte contínuo para garantir que a solução cresce junto com o negócio.</p>
+          <ul class="process-step__tags">
+            <li>CI/CD</li>
+            <li>Monitoramento</li>
+            <li>Suporte</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════ SERVIÇOS v3 — Stacked Immersive Panels ════════ -->
+  <section id="servicos" class="svc3-root" aria-label="Nossos Serviços">
+
+    <!-- ── Pinned stage: holds all stacked panels ── -->
+    <div class="svc3-stage" id="svc3-stage">
+
+      <!-- ═══ PANEL 01 — Criação de Sites ═══ -->
+      <article class="svc3-panel" data-idx="0"
+               data-bg="#080808" data-accent="#C9F31D"
+               aria-label="Criação de Sites">
+
+        <div class="svc3-blob" aria-hidden="true"></div>
+
+        <div class="svc3-panel__inner">
+          <div class="svc3-panel__left">
+            <div class="svc3-panel__top-row">
+              <span class="svc3-cat label">Web · Design</span>
+              <span class="svc3-num-small label">01 / 05</span>
+            </div>
+
+            <h2 class="svc3-title">
+              <span class="svc3-title__line svc3-title__line--fill" data-text="Criação">Criação</span>
+              <span class="svc3-title__line svc3-title__line--stroke" data-text="de Sites">de Sites</span>
+            </h2>
+
+            <p class="svc3-desc">
+              Sites modernos, rápidos e focados em conversão. Do landing page estratégico ao portal
+              corporativo completo — cada pixel é projetado para gerar resultado. Performance acima de
+              90 no Lighthouse, SEO técnico e design que comunica antes de uma palavra ser lida.
+            </p>
+
+            <ul class="svc3-tags">
+              <li>Landing Pages</li><li>Portais</li><li>E-commerce</li><li>SEO</li>
+            </ul>
+
+            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+          </div>
+
+          <div class="svc3-panel__right">
+            <div class="svc3-icon-wrap">
+              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="20" y="40" width="160" height="120" rx="12" class="svc3-icon__stroke"/>
+                <line x1="20" y1="70" x2="180" y2="70" class="svc3-icon__stroke"/>
+                <circle cx="42" cy="55" r="6" class="svc3-icon__dot"/>
+                <circle cx="62" cy="55" r="6" class="svc3-icon__dot"/>
+                <circle cx="82" cy="55" r="6" class="svc3-icon__dot"/>
+                <rect x="40" y="90" width="120" height="10" rx="5" class="svc3-icon__fill svc3-icon__fill--1"/>
+                <rect x="40" y="110" width="80" height="8" rx="4" class="svc3-icon__fill svc3-icon__fill--2"/>
+                <rect x="40" y="128" width="100" height="8" rx="4" class="svc3-icon__fill svc3-icon__fill--3"/>
+              </svg>
+              <div class="svc3-icon-ring" aria-hidden="true"></div>
+              <div class="svc3-icon-glow" aria-hidden="true"></div>
+            </div>
+            <div class="svc3-bg-num" aria-hidden="true">01</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ PANEL 02 — Consultoria de TI ═══ -->
+      <article class="svc3-panel" data-idx="1"
+               data-bg="#060c08" data-accent="#9ABB11"
+               aria-label="Consultoria de TI">
+
+        <div class="svc3-blob" aria-hidden="true"></div>
+
+        <div class="svc3-panel__inner">
+          <div class="svc3-panel__left">
+            <div class="svc3-panel__top-row">
+              <span class="svc3-cat label">Tech · Strategy</span>
+              <span class="svc3-num-small label">02 / 05</span>
+            </div>
+
+            <h2 class="svc3-title">
+              <span class="svc3-title__line svc3-title__line--fill" data-text="Consultoria">Consultoria</span>
+              <span class="svc3-title__line svc3-title__line--stroke" data-text="de TI">de TI</span>
+            </h2>
+
+            <p class="svc3-desc">
+              Diagnóstico completo do stack tecnológico, mapeamento de gargalos e um roadmap claro com
+              prioridades reais e ROI calculado. Trabalhamos lado a lado com o seu time para garantir
+              que cada decisão tecnológica impulsione o negócio — não apenas resolva problemas pontuais.
+            </p>
+
+            <ul class="svc3-tags">
+              <li>Diagnóstico</li><li>Arquitetura</li><li>Roadmap</li><li>Implementação</li>
+            </ul>
+
+            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+          </div>
+
+          <div class="svc3-panel__right">
+            <div class="svc3-icon-wrap">
+              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="100" cy="100" r="40" class="svc3-icon__stroke"/>
+                <circle cx="100" cy="100" r="18" class="svc3-icon__stroke"/>
+                <line x1="100" y1="20" x2="100" y2="60" class="svc3-icon__stroke"/>
+                <line x1="100" y1="140" x2="100" y2="180" class="svc3-icon__stroke"/>
+                <line x1="20" y1="100" x2="60" y2="100" class="svc3-icon__stroke"/>
+                <line x1="140" y1="100" x2="180" y2="100" class="svc3-icon__stroke"/>
+                <line x1="43" y1="43" x2="72" y2="72" class="svc3-icon__stroke"/>
+                <line x1="128" y1="128" x2="157" y2="157" class="svc3-icon__stroke"/>
+                <circle cx="100" cy="100" r="7" class="svc3-icon__dot"/>
+              </svg>
+              <div class="svc3-icon-ring" aria-hidden="true"></div>
+              <div class="svc3-icon-glow" aria-hidden="true"></div>
+            </div>
+            <div class="svc3-bg-num" aria-hidden="true">02</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ PANEL 03 — Sistemas Web ═══ -->
+      <article class="svc3-panel" data-idx="2"
+               data-bg="#060808" data-accent="#C9F31D"
+               aria-label="Sistemas Web">
+
+        <div class="svc3-blob" aria-hidden="true"></div>
+
+        <div class="svc3-panel__inner">
+          <div class="svc3-panel__left">
+            <div class="svc3-panel__top-row">
+              <span class="svc3-cat label">Dev · Cloud</span>
+              <span class="svc3-num-small label">03 / 05</span>
+            </div>
+
+            <h2 class="svc3-title">
+              <span class="svc3-title__line svc3-title__line--fill" data-text="Sistemas">Sistemas</span>
+              <span class="svc3-title__line svc3-title__line--stroke" data-text="Web">Web</span>
+            </h2>
+
+            <p class="svc3-desc">
+              Plataformas robustas e aplicações customizadas que escalam com o negócio. De ERPs internos
+              a marketplaces completos — arquitetura cloud-native, APIs documentadas e código que resiste
+              ao tempo. Projetamos para 100 ou para 1 milhão de usuários simultâneos.
+            </p>
+
+            <ul class="svc3-tags">
+              <li>SaaS</li><li>ERP</li><li>API REST</li><li>Microserviços</li>
+            </ul>
+
+            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+          </div>
+
+          <div class="svc3-panel__right">
+            <div class="svc3-icon-wrap">
+              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="20" y="30" width="160" height="60" rx="10" class="svc3-icon__stroke"/>
+                <rect x="20" y="110" width="160" height="60" rx="10" class="svc3-icon__stroke"/>
+                <circle cx="42" cy="60" r="7" class="svc3-icon__dot"/>
+                <circle cx="42" cy="140" r="7" class="svc3-icon__dot"/>
+                <line x1="65" y1="52" x2="160" y2="52" class="svc3-icon__fill svc3-icon__fill--1"
+                      style="stroke-width:8; stroke-linecap:round;"/>
+                <line x1="65" y1="68" x2="120" y2="68" class="svc3-icon__fill svc3-icon__fill--2"
+                      style="stroke-width:8; stroke-linecap:round;"/>
+                <line x1="65" y1="132" x2="155" y2="132" class="svc3-icon__fill svc3-icon__fill--1"
+                      style="stroke-width:8; stroke-linecap:round;"/>
+                <line x1="65" y1="148" x2="100" y2="148" class="svc3-icon__fill svc3-icon__fill--2"
+                      style="stroke-width:8; stroke-linecap:round;"/>
+              </svg>
+              <div class="svc3-icon-ring" aria-hidden="true"></div>
+              <div class="svc3-icon-glow" aria-hidden="true"></div>
+            </div>
+            <div class="svc3-bg-num" aria-hidden="true">03</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ PANEL 04 — UI/UX Design ═══ -->
+      <article class="svc3-panel" data-idx="3"
+               data-bg="#080608" data-accent="#E8FF60"
+               aria-label="UI/UX Design">
+
+        <div class="svc3-blob" aria-hidden="true"></div>
+
+        <div class="svc3-panel__inner">
+          <div class="svc3-panel__left">
+            <div class="svc3-panel__top-row">
+              <span class="svc3-cat label">Design · UX</span>
+              <span class="svc3-num-small label">04 / 05</span>
+            </div>
+
+            <h2 class="svc3-title">
+              <span class="svc3-title__line svc3-title__line--fill" data-text="UI/UX">UI/UX</span>
+              <span class="svc3-title__line svc3-title__line--stroke" data-text="Design">Design</span>
+            </h2>
+
+            <p class="svc3-desc">
+              Interfaces que encantam, engajam e convertem. Cada projeto começa com pesquisa real de
+              usuários, avança por prototipagem iterativa e é validado antes de uma única linha de código.
+              Design System escalável e documentado, pronto para implementação, incluso em cada projeto.
+            </p>
+
+            <ul class="svc3-tags">
+              <li>Pesquisa UX</li><li>Prototipagem</li><li>Design System</li><li>Testes A/B</li>
+            </ul>
+
+            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+          </div>
+
+          <div class="svc3-panel__right">
+            <div class="svc3-icon-wrap">
+              <!-- Design/Cursor icon -->
+              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polygon points="40,20 40,140 80,100 110,170 130,160 100,88 150,88"
+                         class="svc3-icon__stroke"/>
+                <circle cx="148" cy="150" r="30" class="svc3-icon__stroke"/>
+                <circle cx="148" cy="150" r="12" class="svc3-icon__dot"/>
+              </svg>
+              <div class="svc3-icon-ring" aria-hidden="true"></div>
+              <div class="svc3-icon-glow" aria-hidden="true"></div>
+            </div>
+            <div class="svc3-bg-num" aria-hidden="true">04</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ PANEL 05 — Manutenção & Suporte ═══ -->
+      <article class="svc3-panel" data-idx="4"
+               data-bg="#070708" data-accent="#9ABB11"
+               aria-label="Manutenção e Suporte">
+
+        <div class="svc3-blob" aria-hidden="true"></div>
+
+        <div class="svc3-panel__inner">
+          <div class="svc3-panel__left">
+            <div class="svc3-panel__top-row">
+              <span class="svc3-cat label">Support · SLA</span>
+              <span class="svc3-num-small label">05 / 05</span>
+            </div>
+
+            <h2 class="svc3-title">
+              <span class="svc3-title__line svc3-title__line--fill" data-text="Manutenção">Manutenção</span>
+              <span class="svc3-title__line svc3-title__line--stroke" data-text="& Suporte">&amp; Suporte</span>
+            </h2>
+
+            <p class="svc3-desc">
+              Sua presença digital sempre atualizada, segura e com performance máxima. SLA com tempo
+              de resposta garantido por contrato, monitoramento proativo 24/7 e atualizações regulares
+              de segurança. Você foca no negócio — nós garantimos que a tecnologia nunca te deixa na mão.
+            </p>
+
+            <ul class="svc3-tags">
+              <li>SLA Garantido</li><li>Monitoramento</li><li>Segurança</li><li>Updates</li>
+            </ul>
+
+            <a href="#contato" class="svc3-cta btn btn--outline">Iniciar projeto <span>→</span></a>
+          </div>
+
+          <div class="svc3-panel__right">
+            <div class="svc3-icon-wrap">
+              <!-- Shield/Support icon -->
+              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M100 20 L170 50 L170 110 C170 150 100 180 100 180 C100 180 30 150 30 110 L30 50 Z"
+                      class="svc3-icon__stroke"/>
+                <path d="M70 100 L90 120 L130 80" class="svc3-icon__stroke" style="stroke-width:6;stroke-linecap:round;stroke-linejoin:round;"/>
+              </svg>
+              <div class="svc3-icon-ring" aria-hidden="true"></div>
+              <div class="svc3-icon-glow" aria-hidden="true"></div>
+            </div>
+            <div class="svc3-bg-num" aria-hidden="true">05</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Persistent overlay UI (always on top, z:100) -->
+      <div class="svc3-ui" aria-hidden="true">
+        <span class="svc3-ui__label label">// 004 — Serviços</span>
+        <div class="svc3-ui__counter">
+          <div class="svc3-ui__counter-inner" id="svc3-cur-wrap">
+            <span id="svc3-cur">01</span>
+          </div>
+          <span class="svc3-ui__sep">/</span>
+          <span class="svc3-ui__tot">05</span>
+        </div>
+      </div>
+
+      <!-- Scroll progress line — right edge -->
+      <div class="svc3-prog-rail" aria-hidden="true">
+        <div class="svc3-prog-fill" id="svc3-prog"></div>
+      </div>
+
+      <!-- ══ Bottom connected navigation bar ══ -->
+      <nav class="svc3-bottom-nav" aria-label="Navegar pelos serviços">
+        <div class="svc3-bottom-nav__progress-bar">
+          <div class="svc3-bottom-nav__progress-fill" id="svc3-bottom-prog"></div>
+        </div>
+        <div class="svc3-bottom-nav__items">
+          <button class="svc3-bottom-nav__item is-active" data-target="0">
+            <span class="svc3-bottom-nav__dot"></span>
+            <span class="svc3-bottom-nav__name">Criação de Sites</span>
+          </button>
+          <button class="svc3-bottom-nav__item" data-target="1">
+            <span class="svc3-bottom-nav__dot"></span>
+            <span class="svc3-bottom-nav__name">Consultoria de TI</span>
+          </button>
+          <button class="svc3-bottom-nav__item" data-target="2">
+            <span class="svc3-bottom-nav__dot"></span>
+            <span class="svc3-bottom-nav__name">Sistemas Web</span>
+          </button>
+          <button class="svc3-bottom-nav__item" data-target="3">
+            <span class="svc3-bottom-nav__dot"></span>
+            <span class="svc3-bottom-nav__name">UI/UX Design</span>
+          </button>
+          <button class="svc3-bottom-nav__item" data-target="4">
+            <span class="svc3-bottom-nav__dot"></span>
+            <span class="svc3-bottom-nav__name">Manutenção &amp; Suporte</span>
+          </button>
+        </div>
+      </nav>
+
+    </div><!-- /.svc3-stage -->
+
+  </section>
+
+
+
+  <!-- ═══════════════════════ PORTFÓLIO ═══════════════════════ -->
+  <section id="portfolio" class="port-root">
+    <div id="port-stage" class="port-stage">
+      <canvas id="portfolio-canvas" class="port-bg-canvas" aria-hidden="true"></canvas>
+
+      <div class="port-scene">
+        <div id="port-ring" class="port-ring">
+
+          <article class="port-card" tabindex="0">
+            <div class="port-card__inner">
+              <div class="port-card__img" style="background-image:url('assets/images/jd.png')"></div>
+              <div class="port-card__body">
+                <span class="label port-card__cat">Web · Serviços</span>
+                <h3 class="port-card__name">JD Flooring & Cleaning</h3>
+                <p class="port-card__desc">Plataforma de alta conversão para serviços de pisos e limpeza profissional na Flórida. Otimização de SEO local extrema e interface premium.</p>
+                <a href="https://www.jdfcs.com" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="port-card" tabindex="0">
+            <div class="port-card__inner">
+              <div class="port-card__img" style="background-image:url('assets/images/heitor.png')"></div>
+              <div class="port-card__body">
+                <span class="label port-card__cat">Design · Portfólio</span>
+                <h3 class="port-card__name">Heitor Negromonte</h3>
+                <p class="port-card__desc">Portfólio interativo de Engenharia de Software. Foco em arquiteturas de alto desempenho, Next.js, Node.js e interfaces táteis imersivas.</p>
+                <a href="https://www.heitor-negromonte.com.br" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="port-card" tabindex="0">
+            <div class="port-card__inner">
+              <div class="port-card__img" style="background-image:url('assets/images/jofer.png')"></div>
+              <div class="port-card__body">
+                <span class="label port-card__cat">Web · Literatura</span>
+                <h3 class="port-card__name">Jofer Poeta</h3>
+                <p class="port-card__desc">Portal lírico do escritor e palestrante João Ferreira. Divulgação da tradicional literatura de cordel espírita da Série Reluz e venda de livros autorais.</p>
+                <a href="https://www.jofer-poeta.com.br" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="port-card" tabindex="0">
+            <div class="port-card__inner">
+              <div class="port-card__img" style="background-image:url('assets/images/marim.png')"></div>
+              <div class="port-card__body">
+                <span class="label port-card__cat">Dev · Frevo e Cultura</span>
+                <h3 class="port-card__name">Marim dos Caetés</h3>
+                <p class="port-card__desc">Portal oficial da histórica agremiação carnavalesca de Olinda. Preservação do Frevo (patrimônio UNESCO), memória e projetos educacionais.</p>
+                <a href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- #port-ring -->
+      </div><!-- .port-scene -->
+
+      <header class="port-header">
+        <span class="label port-header__label">// 005 — Cases</span>
+        <h2 class="port-header__title">Portfólio</h2>
+        <p class="port-header__sub">Projetos reais. Resultados mensuráveis.</p>
+      </header>
+
+      <div class="port-indicator" aria-hidden="true">
+        <span class="port-indicator__line"></span>
+        <span class="port-indicator__text">SCROLL</span>
+      </div>
+
+    </div><!-- #port-stage -->
+  </section>
+
+  <!-- ═══════════════════════ BRIDGE CTA ══════════════════════ -->
+  <div class="cta-root">
+    <section id="cta-bridge" class="cta-bridge">
+      <canvas id="cta-canvas" class="cta-bridge__canvas" aria-hidden="true"></canvas>
+
+      <div class="cta-bridge__inner">
+        <p class="cta-bridge__kicker label">// Próximo passo</p>
+
+        <h2 class="cta-bridge__title">Construímos o digital que você merece.</h2>
+
+        <div class="cta-bridge__actions">
+          <a href="#contato" class="btn btn--primary">Iniciar Projeto →</a>
+          <a href="#portfolio" class="btn btn--outline">Ver mais cases</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════ CONTATO ══════════════════════ -->
+  <section id="contato" class="section contact">
+    <div class="contact__blob" aria-hidden="true"></div>
+    <div class="container contact__grid">
+
+      <div class="contact__left">
+        <span class="label contact__label">// 006 — Contato</span>
+        <h2 class="display contact__heading">
+          <span class="reveal-line"><span>Vamos criar</span></span>
+          <span class="reveal-line"><span>algo incrível</span></span>
+          <span class="reveal-line"><span>juntos.</span></span>
+        </h2>
+        <p class="contact__sub">Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 24h.</p>
+
+        <ul class="contact__info-list">
+          <li>
+            <span class="label">E-mail</span>
+            <a href="mailto:contato@hnservices.com.br">contato@hnservices.com.br</a>
+          </li>
+          <li>
+            <span class="label">WhatsApp</span>
+            <a href="https://wa.me/5581999999999" target="_blank" rel="noopener">+55 81 9 9999-9999</a>
+          </li>
+          <li>
+            <span class="label">Localização</span>
+            <span>Recife, Brasil — atendemos globalmente</span>
+          </li>
+        </ul>
+
+        <div class="contact__socials">
+          <a href="https://instagram.com/hnservices" target="_blank" rel="noopener" class="contact__social-link label">Instagram ↗</a>
+          <a href="https://linkedin.com/company/hn-services" target="_blank" rel="noopener" class="contact__social-link label">LinkedIn ↗</a>
+          <a href="https://github.com/hn-services" target="_blank" rel="noopener" class="contact__social-link label">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="contact__right">
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="contact-form__fields">
+            <div class="form-field">
+              <label for="f-name">Nome</label>
+              <input type="text" id="f-name" name="name" placeholder="Seu nome completo" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="f-email">E-mail</label>
+              <input type="email" id="f-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="f-service">Serviço</label>
+              <div class="select-wrap">
+                <select id="f-service" name="service" required>
+                  <option value="" disabled selected>Selecione um serviço</option>
+                  <option value="site">Criação de Sites</option>
+                  <option value="consultoria">Consultoria de TI</option>
+                  <option value="sistema">Sistemas Web</option>
+                  <option value="design">UI/UX Design</option>
+                  <option value="manutencao">Manutenção &amp; Suporte</option>
+                </select>
+                <span class="select-arrow">↓</span>
+              </div>
+            </div>
+            <div class="form-field form-field--full">
+              <label for="f-message">Mensagem</label>
+              <textarea id="f-message" name="message" placeholder="Conte sobre seu projeto..." rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--submit" id="btn-submit">
+              <span class="btn-text">Enviar Mensagem</span>
+              <span class="btn-spinner" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </form>
+
+        <div class="contact-success" id="contact-success" aria-live="polite">
+          <svg class="success-check" viewBox="0 0 52 52" fill="none">
+            <circle cx="26" cy="26" r="24" stroke="var(--accent)" stroke-width="2" />
+            <path class="success-check__path" d="M14 26 L22 34 L38 18" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3>Mensagem enviada!</h3>
+          <p>Obrigado pelo contato. Retornaremos em breve.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">
+        <svg viewBox="0 0 56 56" fill="none" width="28" height="28">
+          <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
+            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>HN Services</span>
+      </div>
+      <p class="footer__copy">© 2026 HN Services. Todos os direitos reservados.</p>
+      <p class="footer__love">Feito com ♥ no Brasil</p>
+    </div>
+  </footer>
+
+  <!-- Text-particle canvas: direct body child so z-index is in root stacking context -->
+  <canvas id="text-particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Local Libraries (Resilient to CDN network drops) -->
+  <script src="js/libs/three.min.js"></script>
+  <script src="js/libs/gsap.min.js"></script>
+  <script src="js/libs/ScrollTrigger.min.js"></script>
+  <script src="js/libs/ScrollToPlugin.min.js"></script>
+  <!-- App Scripts -->
+  <script src="js/text-particles.js"></script>
+  <script src="js/three-scene.js"></script>
+  <script src="js/lightning.js"></script>
+  <script src="js/process-canvas.js"></script>
+  <script src="js/services-v3.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/manifesto-shader.js"></script>
+  <script src="js/portfolio-shader.js"></script>
+  <script src="js/cta-shader.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* Scroll progress bar + section tracker live update */
+    (function () {
+      var bar = document.getElementById('scroll-progress');
+      var items = document.querySelectorAll('.section-tracker__item');
+      var secs = Array.from(document.querySelectorAll('section[id]'));
+      function onScroll() {
+        var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        if (bar) bar.style.transform = 'scaleX(' + Math.min(1, pct) + ')';
+        var sy = window.scrollY + window.innerHeight * 0.4;
+        var active = null;
+        secs.forEach(function (s) { if (sy >= s.offsetTop) active = s.id; });
+        
+        // Robust bottom check: if scroll is at the very bottom, force active to the last section
+        if ((window.scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 50)) {
+          if (secs.length > 0) active = secs[secs.length - 1].id;
+        }
+        
+        items.forEach(function (it) { it.classList.toggle('is-active', it.dataset.section === active); });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }());
+  </script>
+</body>
+
+</html>

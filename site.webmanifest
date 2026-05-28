@@ -1,0 +1,18 @@
+{
+  "name": "HN Services",
+  "short_name": "HN Services",
+  "description": "Criação de sites, consultoria de TI e sistemas web que transformam negócios.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#C9F31D",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

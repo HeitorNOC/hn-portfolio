@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Claude internal (private skill files)
+.claude/
+
+# Test artifacts
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Build output
+dist/
+build/
+
+# Editor
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

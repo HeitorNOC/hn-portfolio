@@ -1,0 +1,24 @@
+/* HN Services — Animations CSS */
+.char{display:inline-block}.word{display:inline-block}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes blobMorph{0%,100%{border-radius:40% 60% 55% 45%/50% 45% 55% 50%;transform:translateY(-50%) scale(1)}33%{border-radius:60% 40% 45% 55%/45% 60% 40% 55%;transform:translateY(-50%) scale(1.05)}66%{border-radius:45% 55% 60% 40%/55% 40% 60% 45%;transform:translateY(-50%) scale(.97)}}
+@keyframes spinOnce{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes scrollBounce{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
+@keyframes pulseRing{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.7}}
+@keyframes badgeSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes glowPulse{0%,100%{opacity:.65;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+
+.hero__scroll-line{animation:scrollBounce 1.6s ease-in-out infinite}
+.cursor-ring.in-hero{animation:pulseRing 2s ease-in-out infinite}
+.hero__badge-ring{animation:badgeSpin 10s linear infinite;transform-origin:center}
+.about__deco-square{animation:rotateSlow 12s linear infinite}
+.contact__blob{animation:blobMorph 8s ease-in-out infinite}
+.btn-spinner svg{animation:spinOnce 1s linear infinite}
+
+.js-reveal{opacity:0}.js-reveal-up{opacity:0;transform:translateY(40px)}.js-reveal-left{opacity:0;transform:translateX(-30px)}.js-reveal-scale{opacity:0;transform:scale(.9)}
+
+@media(prefers-reduced-motion:reduce){
+  .hero__scroll-line,.about__deco-square,.contact__blob,.cursor-ring.in-hero,.btn-spinner svg,.hero__badge-ring,.ticker__track{animation:none}
+  .hero__word,.hero__eyebrow,.hero__sub,.hero__ctas .btn,.hero__scroll-hint,.hero__badge{opacity:1!important;transform:none!important}
+}
