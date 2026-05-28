@@ -1972,6 +1972,14 @@ body::after {
   padding: 12px 32px;
 }
 
+.form-error {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: #ff6b6b;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
 .btn--submit:hover {
   background: var(--accent);
   color: var(--bg);

@@ -1,21 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
   <defs>
-    <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="logo-grad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#C9F31D"/>
       <stop offset="100%" stop-color="#7A9610"/>
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="6" fill="#080808"/>
-  <g stroke="url(#fg)" stroke-width="2.2" stroke-linecap="round" fill="none">
-    <!-- H: left pillar -->
-    <line x1="5.5" y1="5" x2="5.5" y2="27"/>
-    <!-- H: center pillar (shared with N) -->
-    <line x1="16" y1="5" x2="16" y2="27"/>
-    <!-- H: crossbar -->
-    <line x1="5.5" y1="16" x2="16" y2="16"/>
-    <!-- N: right pillar -->
-    <line x1="26.5" y1="5" x2="26.5" y2="27"/>
-    <!-- N: diagonal -->
-    <line x1="16" y1="5" x2="26.5" y2="27"/>
-  </g>
+  <rect width="56" height="56" rx="10" fill="#080808"/>
+  <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50"
+        stroke="url(#logo-grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 </svg>

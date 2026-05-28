@@ -114,12 +114,14 @@
         }
       });
       if (!valid) return;
+
       btn.disabled = true;
       if (window.gsap) {
         gsap.to(btnText,    { opacity: 0, y: -8, duration: 0.18 });
         gsap.to(btnSpinner, { opacity: 1, duration: 0.2, delay: 0.15 });
       }
-      setTimeout(function () {
+
+      function onSuccess() {
         var finish = function () {
           form.style.display = 'none';
           success.style.display = 'flex';
@@ -133,7 +135,42 @@
         } else {
           finish();
         }
-      }, 1800);
+      }
+
+      function onError(msg) {
+        btn.disabled = false;
+        if (window.gsap) {
+          gsap.to(btnSpinner, { opacity: 0, duration: 0.18 });
+          gsap.to(btnText,    { opacity: 1, y: 0, duration: 0.2, delay: 0.15 });
+        }
+        var errEl = form.querySelector('.form-error');
+        if (!errEl) {
+          errEl = document.createElement('p');
+          errEl.className = 'form-error';
+          btn.parentNode.insertBefore(errEl, btn.nextSibling);
+        }
+        errEl.textContent = msg;
+        if (window.gsap) gsap.from(errEl, { opacity: 0, y: -6, duration: 0.3 });
+      }
+
+      fetch('/api/send-email', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    form.elements['name'].value.trim(),
+          email:   form.elements['email'].value.trim(),
+          service: form.elements['service'].value,
+          message: form.elements['message'].value.trim()
+        })
+      })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.error) onError(data.error);
+        else            onSuccess();
+      })
+      .catch(function () {
+        onError('Erro de conexão. Verifique sua internet e tente novamente.');
+      });
     });
   }
 
