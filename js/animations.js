@@ -501,7 +501,7 @@
     fullText.split('').forEach(function (ch) {
       var span = document.createElement('span');
       span.className = 'cta-char';
-      span.textContent = ch === ' ' ? ' ' : ch;
+      span.textContent = ch;
       title.appendChild(span);
       chars.push(span);
     });

@@ -2947,6 +2947,9 @@ body::after {
     transform: scale(0.55) translateY(3vh) !important;
     transform-origin: center center !important;
   }
+  .port-card {
+    --card-w: clamp(200px, 60vw, 260px) !important;
+  }
   .port-stage {
     background: radial-gradient(circle at 50% 50%, rgba(201, 243, 29, 0.06) 0%, #080808 75%) !important;
   }
@@ -2956,6 +2959,9 @@ body::after {
   .port-scene {
     transform: scale(0.48) translateY(2vh) !important;
     transform-origin: center center !important;
+  }
+  .port-card {
+    --card-w: clamp(180px, 62vw, 240px) !important;
   }
 }
 
