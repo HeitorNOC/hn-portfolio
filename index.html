@@ -397,323 +397,195 @@
   </section>
 
 
-  <!-- ══════════════════ SERVIÇOS v3 — Stacked Immersive Panels ════════ -->
-  <section id="servicos" class="svc3-root" aria-label="Nossos Serviços">
+  <!-- ══════════════════ SERVIÇOS v3 — Carmed Immersive Slides ════════ -->
+  <section id="servicos" class="carmed-root" aria-label="Nossos Serviços">
+    <!-- Discrete top navigation overlay -->
+    <div class="carmed-top-nav" aria-hidden="true">
+      <span class="carmed-top-nav__logo">HN</span>
+      <span class="carmed-top-nav__label">// IMERSÃO GLOBAL EM SERVIÇOS</span>
+    </div>
 
-    <!-- ── Pinned stage: holds all stacked panels ── -->
-    <div class="svc3-stage" id="svc3-stage">
+    <!-- Lateral dots progress indicators -->
+    <div class="carmed-nav" aria-label="Navegar pelos serviços">
+      <button class="carmed-nav__dot is-active" data-target="0" aria-label="Ir para Criação de Sites">
+        <span class="carmed-nav__dot-text">Criação de Sites</span>
+        <span class="carmed-nav__dot-circle"></span>
+      </button>
+      <button class="carmed-nav__dot" data-target="1" aria-label="Ir para Consultoria de TI">
+        <span class="carmed-nav__dot-text">Consultoria de TI</span>
+        <span class="carmed-nav__dot-circle"></span>
+      </button>
+      <button class="carmed-nav__dot" data-target="2" aria-label="Ir para Sistemas Web">
+        <span class="carmed-nav__dot-text">Sistemas Web</span>
+        <span class="carmed-nav__dot-circle"></span>
+      </button>
+      <button class="carmed-nav__dot" data-target="3" aria-label="Ir para UI/UX Design">
+        <span class="carmed-nav__dot-text">UI/UX Design</span>
+        <span class="carmed-nav__dot-circle"></span>
+      </button>
+      <button class="carmed-nav__dot" data-target="4" aria-label="Ir para Manutenção e Suporte">
+        <span class="carmed-nav__dot-text">Manutenção &amp; Suporte</span>
+        <span class="carmed-nav__dot-circle"></span>
+      </button>
+    </div>
 
-      <!-- ═══ PANEL 01 — Criação de Sites ═══ -->
-      <article class="svc3-panel" data-idx="0"
-               data-bg="#080808" data-accent="#C9F31D"
-               aria-label="Criação de Sites">
+    <!-- Pinned stage: holds scroll snap slides -->
+    <div class="carmed-stage" id="carmed-stage">
 
-        <div class="svc3-blob" aria-hidden="true"></div>
-
-        <div class="svc3-panel__inner">
-          <div class="svc3-panel__left">
-            <div class="svc3-panel__top-row">
-              <span class="svc3-cat label">Web · Design</span>
-              <span class="svc3-num-small label">01 / 05</span>
-            </div>
-
-            <h2 class="svc3-title">
-              <span class="svc3-title__line svc3-title__line--fill" data-text="Criação">Criação</span>
-              <span class="svc3-title__line svc3-title__line--stroke" data-text="de Sites">de Sites</span>
-            </h2>
-
-            <p class="svc3-desc">
-              Sites modernos, rápidos e focados em conversão. Do landing page estratégico ao portal
-              corporativo completo — cada pixel é projetado para gerar resultado. Performance acima de
-              90 no Lighthouse, SEO técnico e design que comunica antes de uma palavra ser lida.
-            </p>
-
-            <ul class="svc3-tags">
-              <li>Landing Pages</li><li>Portais</li><li>E-commerce</li><li>SEO</li>
-            </ul>
-
-            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+      <!-- ═══ SLIDE 01 — Criação de Sites ═══ -->
+      <article class="carmed-slide" data-idx="0" data-bg="#0a0a0a" aria-label="Criação de Sites">
+        <div class="carmed-slide__num">01 / 05</div>
+        <div class="carmed-slide__bg-text">SITES</div>
+        <div class="carmed-slide__floater">
+          <div class="carmed-slide__floater-inner">
+            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="15" y="35" width="170" height="130" rx="10" stroke="currentColor" stroke-width="3" />
+              <line x1="15" y1="65" x2="185" y2="65" stroke="currentColor" stroke-width="2" />
+              <circle cx="35" cy="50" r="5" fill="currentColor" />
+              <circle cx="50" cy="50" r="5" fill="currentColor" />
+              <circle cx="65" cy="50" r="5" fill="currentColor" />
+              <rect x="35" y="85" width="130" height="10" rx="4" fill="currentColor" fill-opacity="0.2" />
+              <rect x="35" y="105" width="90" height="8" rx="4" fill="currentColor" fill-opacity="0.2" />
+              <rect x="35" y="123" width="110" height="8" rx="4" fill="currentColor" fill-opacity="0.3" />
+            </svg>
           </div>
-
-          <div class="svc3-panel__right">
-            <div class="svc3-icon-wrap">
-              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
-                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="20" y="40" width="160" height="120" rx="12" class="svc3-icon__stroke"/>
-                <line x1="20" y1="70" x2="180" y2="70" class="svc3-icon__stroke"/>
-                <circle cx="42" cy="55" r="6" class="svc3-icon__dot"/>
-                <circle cx="62" cy="55" r="6" class="svc3-icon__dot"/>
-                <circle cx="82" cy="55" r="6" class="svc3-icon__dot"/>
-                <rect x="40" y="90" width="120" height="10" rx="5" class="svc3-icon__fill svc3-icon__fill--1"/>
-                <rect x="40" y="110" width="80" height="8" rx="4" class="svc3-icon__fill svc3-icon__fill--2"/>
-                <rect x="40" y="128" width="100" height="8" rx="4" class="svc3-icon__fill svc3-icon__fill--3"/>
-              </svg>
-              <div class="svc3-icon-ring" aria-hidden="true"></div>
-              <div class="svc3-icon-glow" aria-hidden="true"></div>
-            </div>
-            <div class="svc3-bg-num" aria-hidden="true">01</div>
+        </div>
+        <div class="carmed-slide__content">
+          <h2 class="carmed-slide__title carmed-slide__text-fade">Criação de Sites</h2>
+          <ul class="carmed-slide__bullets carmed-slide__text-fade">
+            <li><span class="carmed-slide__bullet-dot"></span>Landing Pages</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Portais Corporativos</li>
+            <li><span class="carmed-slide__bullet-dot"></span>E-commerce</li>
+            <li><span class="carmed-slide__bullet-dot"></span>SEO Técnico</li>
+          </ul>
+          <div class="carmed-slide__cta-fade">
+            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
           </div>
         </div>
       </article>
 
-      <!-- ═══ PANEL 02 — Consultoria de TI ═══ -->
-      <article class="svc3-panel" data-idx="1"
-               data-bg="#060c08" data-accent="#9ABB11"
-               aria-label="Consultoria de TI">
-
-        <div class="svc3-blob" aria-hidden="true"></div>
-
-        <div class="svc3-panel__inner">
-          <div class="svc3-panel__left">
-            <div class="svc3-panel__top-row">
-              <span class="svc3-cat label">Tech · Strategy</span>
-              <span class="svc3-num-small label">02 / 05</span>
-            </div>
-
-            <h2 class="svc3-title">
-              <span class="svc3-title__line svc3-title__line--fill" data-text="Consultoria">Consultoria</span>
-              <span class="svc3-title__line svc3-title__line--stroke" data-text="de TI">de TI</span>
-            </h2>
-
-            <p class="svc3-desc">
-              Diagnóstico completo do stack tecnológico, mapeamento de gargalos e um roadmap claro com
-              prioridades reais e ROI calculado. Trabalhamos lado a lado com o seu time para garantir
-              que cada decisão tecnológica impulsione o negócio — não apenas resolva problemas pontuais.
-            </p>
-
-            <ul class="svc3-tags">
-              <li>Diagnóstico</li><li>Arquitetura</li><li>Roadmap</li><li>Implementação</li>
-            </ul>
-
-            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+      <!-- ═══ SLIDE 02 — Consultoria de TI ═══ -->
+      <article class="carmed-slide" data-idx="1" data-bg="#0d1f0d" aria-label="Consultoria de TI">
+        <div class="carmed-slide__num">02 / 05</div>
+        <div class="carmed-slide__bg-text">CONSULTORIA</div>
+        <div class="carmed-slide__floater">
+          <div class="carmed-slide__floater-inner">
+            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="55" r="18" stroke="currentColor" stroke-width="3" />
+              <circle cx="55" cy="135" r="18" stroke="currentColor" stroke-width="3" />
+              <circle cx="145" cy="135" r="18" stroke="currentColor" stroke-width="3" />
+              <line x1="90" y1="70" x2="65" y2="120" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 4" />
+              <line x1="110" y1="70" x2="135" y2="120" stroke="currentColor" stroke-width="2.5" />
+              <line x1="73" y1="135" x2="127" y2="135" stroke="currentColor" stroke-width="2.5" />
+              <circle cx="100" cy="55" r="6" fill="currentColor" />
+              <circle cx="55" cy="135" r="6" fill="currentColor" />
+              <circle cx="145" cy="135" r="6" fill="currentColor" />
+            </svg>
           </div>
-
-          <div class="svc3-panel__right">
-            <div class="svc3-icon-wrap">
-              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
-                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="100" cy="100" r="40" class="svc3-icon__stroke"/>
-                <circle cx="100" cy="100" r="18" class="svc3-icon__stroke"/>
-                <line x1="100" y1="20" x2="100" y2="60" class="svc3-icon__stroke"/>
-                <line x1="100" y1="140" x2="100" y2="180" class="svc3-icon__stroke"/>
-                <line x1="20" y1="100" x2="60" y2="100" class="svc3-icon__stroke"/>
-                <line x1="140" y1="100" x2="180" y2="100" class="svc3-icon__stroke"/>
-                <line x1="43" y1="43" x2="72" y2="72" class="svc3-icon__stroke"/>
-                <line x1="128" y1="128" x2="157" y2="157" class="svc3-icon__stroke"/>
-                <circle cx="100" cy="100" r="7" class="svc3-icon__dot"/>
-              </svg>
-              <div class="svc3-icon-ring" aria-hidden="true"></div>
-              <div class="svc3-icon-glow" aria-hidden="true"></div>
-            </div>
-            <div class="svc3-bg-num" aria-hidden="true">02</div>
+        </div>
+        <div class="carmed-slide__content">
+          <h2 class="carmed-slide__title carmed-slide__text-fade">Consultoria de TI</h2>
+          <ul class="carmed-slide__bullets carmed-slide__text-fade">
+            <li><span class="carmed-slide__bullet-dot"></span>Diagnóstico de Stack</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Arquitetura Cloud</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Segurança &amp; Auditoria</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Roadmap de ROI</li>
+          </ul>
+          <div class="carmed-slide__cta-fade">
+            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
           </div>
         </div>
       </article>
 
-      <!-- ═══ PANEL 03 — Sistemas Web ═══ -->
-      <article class="svc3-panel" data-idx="2"
-               data-bg="#060808" data-accent="#C9F31D"
-               aria-label="Sistemas Web">
-
-        <div class="svc3-blob" aria-hidden="true"></div>
-
-        <div class="svc3-panel__inner">
-          <div class="svc3-panel__left">
-            <div class="svc3-panel__top-row">
-              <span class="svc3-cat label">Dev · Cloud</span>
-              <span class="svc3-num-small label">03 / 05</span>
-            </div>
-
-            <h2 class="svc3-title">
-              <span class="svc3-title__line svc3-title__line--fill" data-text="Sistemas">Sistemas</span>
-              <span class="svc3-title__line svc3-title__line--stroke" data-text="Web">Web</span>
-            </h2>
-
-            <p class="svc3-desc">
-              Plataformas robustas e aplicações customizadas que escalam com o negócio. De ERPs internos
-              a marketplaces completos — arquitetura cloud-native, APIs documentadas e código que resiste
-              ao tempo. Projetamos para 100 ou para 1 milhão de usuários simultâneos.
-            </p>
-
-            <ul class="svc3-tags">
-              <li>SaaS</li><li>ERP</li><li>API REST</li><li>Microserviços</li>
-            </ul>
-
-            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+      <!-- ═══ SLIDE 03 — Sistemas Web ═══ -->
+      <article class="carmed-slide" data-idx="2" data-bg="#0a0f1a" aria-label="Sistemas Web">
+        <div class="carmed-slide__num">03 / 05</div>
+        <div class="carmed-slide__bg-text">SISTEMAS</div>
+        <div class="carmed-slide__floater">
+          <div class="carmed-slide__floater-inner">
+            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="30" width="160" height="140" rx="8" stroke="currentColor" stroke-width="3" />
+              <rect x="20" y="30" width="160" height="25" fill="currentColor" fill-opacity="0.1" />
+              <circle cx="35" cy="42" r="4" fill="currentColor" />
+              <circle cx="47" cy="42" r="4" fill="currentColor" />
+              <circle cx="59" cy="42" r="4" fill="currentColor" />
+              <path d="M40 80L55 90L40 100" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              <line x1="65" y1="100" x2="95" y2="100" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+              <rect x="40" y="125" width="120" height="6" rx="3" fill="currentColor" fill-opacity="0.2" />
+            </svg>
           </div>
-
-          <div class="svc3-panel__right">
-            <div class="svc3-icon-wrap">
-              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
-                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="20" y="30" width="160" height="60" rx="10" class="svc3-icon__stroke"/>
-                <rect x="20" y="110" width="160" height="60" rx="10" class="svc3-icon__stroke"/>
-                <circle cx="42" cy="60" r="7" class="svc3-icon__dot"/>
-                <circle cx="42" cy="140" r="7" class="svc3-icon__dot"/>
-                <line x1="65" y1="52" x2="160" y2="52" class="svc3-icon__fill svc3-icon__fill--1"
-                      style="stroke-width:8; stroke-linecap:round;"/>
-                <line x1="65" y1="68" x2="120" y2="68" class="svc3-icon__fill svc3-icon__fill--2"
-                      style="stroke-width:8; stroke-linecap:round;"/>
-                <line x1="65" y1="132" x2="155" y2="132" class="svc3-icon__fill svc3-icon__fill--1"
-                      style="stroke-width:8; stroke-linecap:round;"/>
-                <line x1="65" y1="148" x2="100" y2="148" class="svc3-icon__fill svc3-icon__fill--2"
-                      style="stroke-width:8; stroke-linecap:round;"/>
-              </svg>
-              <div class="svc3-icon-ring" aria-hidden="true"></div>
-              <div class="svc3-icon-glow" aria-hidden="true"></div>
-            </div>
-            <div class="svc3-bg-num" aria-hidden="true">03</div>
+        </div>
+        <div class="carmed-slide__content">
+          <h2 class="carmed-slide__title carmed-slide__text-fade">Sistemas Web</h2>
+          <ul class="carmed-slide__bullets carmed-slide__text-fade">
+            <li><span class="carmed-slide__bullet-dot"></span>Aplicações Customizadas</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Integração de APIs</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Bancos de Dados</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Dashboards Administrativos</li>
+          </ul>
+          <div class="carmed-slide__cta-fade">
+            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
           </div>
         </div>
       </article>
 
-      <!-- ═══ PANEL 04 — UI/UX Design ═══ -->
-      <article class="svc3-panel" data-idx="3"
-               data-bg="#080608" data-accent="#E8FF60"
-               aria-label="UI/UX Design">
-
-        <div class="svc3-blob" aria-hidden="true"></div>
-
-        <div class="svc3-panel__inner">
-          <div class="svc3-panel__left">
-            <div class="svc3-panel__top-row">
-              <span class="svc3-cat label">Design · UX</span>
-              <span class="svc3-num-small label">04 / 05</span>
-            </div>
-
-            <h2 class="svc3-title">
-              <span class="svc3-title__line svc3-title__line--fill" data-text="UI/UX">UI/UX</span>
-              <span class="svc3-title__line svc3-title__line--stroke" data-text="Design">Design</span>
-            </h2>
-
-            <p class="svc3-desc">
-              Interfaces que encantam, engajam e convertem. Cada projeto começa com pesquisa real de
-              usuários, avança por prototipagem iterativa e é validado antes de uma única linha de código.
-              Design System escalável e documentado, pronto para implementação, incluso em cada projeto.
-            </p>
-
-            <ul class="svc3-tags">
-              <li>Pesquisa UX</li><li>Prototipagem</li><li>Design System</li><li>Testes A/B</li>
-            </ul>
-
-            <a href="#contato" class="svc3-cta btn btn--outline">Solicitar orçamento <span>→</span></a>
+      <!-- ═══ SLIDE 04 — UI/UX Design ═══ -->
+      <article class="carmed-slide" data-idx="3" data-bg="#1a0a1a" aria-label="UI/UX Design">
+        <div class="carmed-slide__num">04 / 05</div>
+        <div class="carmed-slide__bg-text">DESIGN</div>
+        <div class="carmed-slide__floater">
+          <div class="carmed-slide__floater-inner">
+            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="25" width="150" height="150" rx="16" stroke="currentColor" stroke-width="3" />
+              <circle cx="100" cy="85" r="30" stroke="currentColor" stroke-width="2.5" />
+              <line x1="79" y1="64" x2="121" y2="106" stroke="currentColor" stroke-width="1.5" />
+              <line x1="121" y1="64" x2="79" y2="106" stroke="currentColor" stroke-width="1.5" />
+              <rect x="50" y="135" width="100" height="12" rx="6" fill="currentColor" fill-opacity="0.25" />
+              <line x1="25" y1="100" x2="175" y2="100" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 5" />
+            </svg>
           </div>
-
-          <div class="svc3-panel__right">
-            <div class="svc3-icon-wrap">
-              <!-- Design/Cursor icon -->
-              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
-                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <polygon points="40,20 40,140 80,100 110,170 130,160 100,88 150,88"
-                         class="svc3-icon__stroke"/>
-                <circle cx="148" cy="150" r="30" class="svc3-icon__stroke"/>
-                <circle cx="148" cy="150" r="12" class="svc3-icon__dot"/>
-              </svg>
-              <div class="svc3-icon-ring" aria-hidden="true"></div>
-              <div class="svc3-icon-glow" aria-hidden="true"></div>
-            </div>
-            <div class="svc3-bg-num" aria-hidden="true">04</div>
+        </div>
+        <div class="carmed-slide__content">
+          <h2 class="carmed-slide__title carmed-slide__text-fade">UI/UX Design</h2>
+          <ul class="carmed-slide__bullets carmed-slide__text-fade">
+            <li><span class="carmed-slide__bullet-dot"></span>Design de Interface</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Pesquisa de Usuário</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Wireframes &amp; Mockups</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Protótipos Interativos</li>
+          </ul>
+          <div class="carmed-slide__cta-fade">
+            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
           </div>
         </div>
       </article>
 
-      <!-- ═══ PANEL 05 — Manutenção & Suporte ═══ -->
-      <article class="svc3-panel" data-idx="4"
-               data-bg="#070708" data-accent="#9ABB11"
-               aria-label="Manutenção e Suporte">
-
-        <div class="svc3-blob" aria-hidden="true"></div>
-
-        <div class="svc3-panel__inner">
-          <div class="svc3-panel__left">
-            <div class="svc3-panel__top-row">
-              <span class="svc3-cat label">Support · SLA</span>
-              <span class="svc3-num-small label">05 / 05</span>
-            </div>
-
-            <h2 class="svc3-title">
-              <span class="svc3-title__line svc3-title__line--fill" data-text="Manutenção">Manutenção</span>
-              <span class="svc3-title__line svc3-title__line--stroke" data-text="& Suporte">&amp; Suporte</span>
-            </h2>
-
-            <p class="svc3-desc">
-              Sua presença digital sempre atualizada, segura e com performance máxima. SLA com tempo
-              de resposta garantido por contrato, monitoramento proativo 24/7 e atualizações regulares
-              de segurança. Você foca no negócio — nós garantimos que a tecnologia nunca te deixa na mão.
-            </p>
-
-            <ul class="svc3-tags">
-              <li>SLA Garantido</li><li>Monitoramento</li><li>Segurança</li><li>Updates</li>
-            </ul>
-
-            <a href="#contato" class="svc3-cta btn btn--outline">Iniciar projeto <span>→</span></a>
+      <!-- ═══ SLIDE 05 — Manutenção & Suporte ═══ -->
+      <article class="carmed-slide" data-idx="4" data-bg="#1a0a0a" aria-label="Manutenção e Suporte">
+        <div class="carmed-slide__num">05 / 05</div>
+        <div class="carmed-slide__bg-text">SUPORTE</div>
+        <div class="carmed-slide__floater">
+          <div class="carmed-slide__floater-inner">
+            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 25C135 32 165 32 165 32V90C165 135 135 165 100 178C65 165 35 135 35 90V32C35 32 65 32 100 25Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+              <path d="M60 100H85L95 80L105 120L115 90L125 100H140" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </div>
-
-          <div class="svc3-panel__right">
-            <div class="svc3-icon-wrap">
-              <!-- Shield/Support icon -->
-              <svg class="svc3-icon" viewBox="0 0 200 200" fill="none"
-                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M100 20 L170 50 L170 110 C170 150 100 180 100 180 C100 180 30 150 30 110 L30 50 Z"
-                      class="svc3-icon__stroke"/>
-                <path d="M70 100 L90 120 L130 80" class="svc3-icon__stroke" style="stroke-width:6;stroke-linecap:round;stroke-linejoin:round;"/>
-              </svg>
-              <div class="svc3-icon-ring" aria-hidden="true"></div>
-              <div class="svc3-icon-glow" aria-hidden="true"></div>
-            </div>
-            <div class="svc3-bg-num" aria-hidden="true">05</div>
+        </div>
+        <div class="carmed-slide__content">
+          <h2 class="carmed-slide__title carmed-slide__text-fade">Manutenção &amp; Suporte</h2>
+          <ul class="carmed-slide__bullets carmed-slide__text-fade">
+            <li><span class="carmed-slide__bullet-dot"></span>Hospedagem &amp; Servidores</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Updates de Segurança</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Correção de Bugs</li>
+            <li><span class="carmed-slide__bullet-dot"></span>Monitoramento 24/7</li>
+          </ul>
+          <div class="carmed-slide__cta-fade">
+            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
           </div>
         </div>
       </article>
 
-      <!-- Persistent overlay UI (always on top, z:100) -->
-      <div class="svc3-ui" aria-hidden="true">
-        <span class="svc3-ui__label label">// 004 — Serviços</span>
-        <div class="svc3-ui__counter">
-          <div class="svc3-ui__counter-inner" id="svc3-cur-wrap">
-            <span id="svc3-cur">01</span>
-          </div>
-          <span class="svc3-ui__sep">/</span>
-          <span class="svc3-ui__tot">05</span>
-        </div>
-      </div>
-
-      <!-- Scroll progress line — right edge -->
-      <div class="svc3-prog-rail" aria-hidden="true">
-        <div class="svc3-prog-fill" id="svc3-prog"></div>
-      </div>
-
-      <!-- ══ Bottom connected navigation bar ══ -->
-      <nav class="svc3-bottom-nav" aria-label="Navegar pelos serviços">
-        <div class="svc3-bottom-nav__progress-bar">
-          <div class="svc3-bottom-nav__progress-fill" id="svc3-bottom-prog"></div>
-        </div>
-        <div class="svc3-bottom-nav__items">
-          <button class="svc3-bottom-nav__item is-active" data-target="0">
-            <span class="svc3-bottom-nav__dot"></span>
-            <span class="svc3-bottom-nav__name">Criação de Sites</span>
-          </button>
-          <button class="svc3-bottom-nav__item" data-target="1">
-            <span class="svc3-bottom-nav__dot"></span>
-            <span class="svc3-bottom-nav__name">Consultoria de TI</span>
-          </button>
-          <button class="svc3-bottom-nav__item" data-target="2">
-            <span class="svc3-bottom-nav__dot"></span>
-            <span class="svc3-bottom-nav__name">Sistemas Web</span>
-          </button>
-          <button class="svc3-bottom-nav__item" data-target="3">
-            <span class="svc3-bottom-nav__dot"></span>
-            <span class="svc3-bottom-nav__name">UI/UX Design</span>
-          </button>
-          <button class="svc3-bottom-nav__item" data-target="4">
-            <span class="svc3-bottom-nav__dot"></span>
-            <span class="svc3-bottom-nav__name">Manutenção &amp; Suporte</span>
-          </button>
-        </div>
-      </nav>
-
-    </div><!-- /.svc3-stage -->
-
+    </div><!-- /.carmed-stage -->
   </section>
 
 

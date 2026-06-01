@@ -109,7 +109,7 @@
     }, { passive: true });
 
     /* ── Particle data ────────────────────────────────────── */
-    var N     = 5000;
+    var N     = window.innerWidth <= 768 ? 2000 : 5000;
     var posA  = new Float32Array(N * 3);   /* atmospheric cloud    */
     var posB  = new Float32Array(N * 3);   /* globe surface + grid */
     var sizes = new Float32Array(N);
@@ -214,8 +214,11 @@
     geo.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1));
     geo.setAttribute('aSeed',    new THREE.BufferAttribute(seeds, 1));
 
+    var isMobile = window.innerWidth <= 768;
+    var cloudY = isMobile ? -14 : 0;
+
     var cloud = new THREE.Points(geo, pMat);
-    cloud.position.set(0, 0, -4);
+    cloud.position.set(0, cloudY, -4);
     scene.add(cloud);
 
     /* ── Deep-field background stars ─────────────────────── */
@@ -242,11 +245,16 @@
       ringMat
     );
     ring.rotation.x = 1.08;
-    ring.position.set(0, 0, -30);
+    ring.position.set(0, cloudY, -30);
     scene.add(ring);
 
     /* ── Resize ───────────────────────────────────────────── */
     window.addEventListener('resize', function () {
+      var isMobileNow = window.innerWidth <= 768;
+      var cloudYNow = isMobileNow ? -14 : 0;
+      cloud.position.y = cloudYNow;
+      ring.position.y = cloudYNow;
+
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();

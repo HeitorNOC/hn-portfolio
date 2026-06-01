@@ -9,18 +9,13 @@
     var canvas = document.getElementById('manifesto-canvas');
     if (!canvas || !window.WebGLRenderingContext) return;
 
-    if (window.innerWidth <= 767) {
-      canvas.style.display = 'none';
-      return;
-    }
-
     var gl = canvas.getContext('webgl', {
       alpha: true, antialias: true, powerPreference: 'high-performance'
     });
     if (!gl) { canvas.style.visibility = 'hidden'; return; }
 
     function resize() {
-      var dpr = Math.min(2.0, window.devicePixelRatio || 1.0);
+      var dpr = window.innerWidth <= 768 ? 0.6 : Math.min(2.0, window.devicePixelRatio || 1.0);
       var rect = canvas.getBoundingClientRect();
       var w = Math.round(rect.width * dpr);
       var h = Math.round(rect.height * dpr);

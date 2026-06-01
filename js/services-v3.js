@@ -1,462 +1,421 @@
 /* ═══════════════════════════════════════════════════════════
-   HN Services — Serviços v3: Stacked Immersive Panels
+   HN Services — Serviços v3: Carmed-style Fullscreen Pinning Slides
    ─────────────────────────────────────────────────────────
    Architecture:
-   • .svc3-root height is tall (N + 0.5 × 100vh) — provides scroll room
-   • .svc3-stage is position: sticky top: 0 height: 100vh (CSS)
-   • Panels are position: absolute overlapping each other
-   • GSAP Timeline scrubs the vertical clip-path reveal per panel
-   • Active panel triggers content entry: character-by-character title,
-     SVG stroke drawing, expanding divider, and content fades
-   • 3D mouse tracking tilt on SVG icon wraps
-   • Color shifts interpolated smoothly across scroll segment
+   • On Desktop: Stage pins via sticky viewport container inside a 500vh Tall stage.
+     A GSAP ScrollTrigger monitors page scroll progress and maps it to slide horizontal transitions.
+     Slides slide in and out horizontally (right-to-left when scrolling down, left-to-right when scrolling up)
+     with gorgeous parallax effects on the SVGs and ambient background texts.
+   • On Mobile: Pinning is completely disabled. Slides stack vertically in a natural flow,
+     eliminating any touch freeze or heavy scroll hijacking issues.
+   • Side dots indicators are preserved on both viewports: position is set to fixed,
+     and they fade in dynamically via ScrollTrigger/Window-scroll when entering the services section.
+     Clicking smoothly scrolls to the respective slide index position.
    ═══════════════════════════════════════════════════════════ */
 
 window.initServicesV3 = function () {
   'use strict';
 
-  var root       = document.querySelector('.svc3-root');
-  var stage      = document.getElementById('svc3-stage');
-  var panels     = gsap.utils.toArray('.svc3-panel');
-  var curEl      = document.getElementById('svc3-cur');
-  var progEl     = document.getElementById('svc3-prog');
-  var bottomProg = document.getElementById('svc3-bottom-prog');
-  var navItems   = document.querySelectorAll('.svc3-bottom-nav__item');
+  var root   = document.querySelector('.carmed-root');
+  var stage  = document.getElementById('carmed-stage');
+  var slides = gsap.utils.toArray('.carmed-slide');
+  var dots   = document.querySelectorAll('.carmed-nav__dot');
 
-  if (!root || !stage || panels.length < 2) return;
+  if (!root || !stage || slides.length === 0) return;
 
-  var isMobile = window.innerWidth <= 991;
-
-  if (isMobile) {
-    // On mobile, just activate all panels and ensure SVG strokes are drawn
-    panels.forEach(function (p) {
-      p.classList.add('is-active');
-      var iconStrokes = p.querySelectorAll('.svc3-icon__stroke, .svc3-icon__fill');
-      iconStrokes.forEach(function (stroke) {
-        stroke.style.strokeDashoffset = 0;
-      });
-    });
-    return;
-  }
-
-  if (!window.gsap || !window.ScrollTrigger) return;
-
-  var N       = panels.length;
+  var activeIndex = -1;
+  var isMobile = window.innerWidth <= 768;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scrollTriggerInstance = null;
+  var visibilityTriggerInstance = null;
+  var mobileScrollHandler = null;
 
-  // Set root height for scroll space
-  root.style.height = (N + 0.5) * 100 + 'vh';
+  /* ── 1. Set Initial Visual States ── */
+  function setInitialStates() {
+    slides.forEach(function (slide, idx) {
+      var bgText = slide.querySelector('.carmed-slide__bg-text');
+      var floater = slide.querySelector('.carmed-slide__floater');
+      var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
+      var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
 
-  // Panels background color interpolation target states (HN palette)
-  var colors = [
-    { r: 8, g: 8, b: 8 },      // #080808 (Web)
-    { r: 6, g: 12, b: 8 },     // #060c08 (TI)
-    { r: 6, g: 8, b: 8 },      // #060808 (Sistemas)
-    { r: 8, g: 6, b: 8 },      // #080608 (UI/UX)
-    { r: 7, g: 7, b: 8 }       // #070708 (Suporte)
-  ];
+      // Set elegant starting transitions
+      // Critical: use xPercent/yPercent to prevent GSAP from wiping CSS centering translates
+      if (bgText) {
+        gsap.set(bgText, {
+          xPercent: -50,
+          yPercent: -50,
+          scale: 1.25,
+          opacity: 0,
+          transformOrigin: 'center'
+        });
+      }
+      if (floater) gsap.set(floater, { y: 60, opacity: 0 });
+      if (textFade.length) gsap.set(textFade, { y: 24, opacity: 0 });
+      if (ctaFade) gsap.set(ctaFade, { scale: 0.95, opacity: 0 });
 
-  /* ── 1. Split Titles into Characters and Setup Solid Backgrounds ── */
-  panels.forEach(function (panel) {
-    var bg = panel.getAttribute('data-bg');
-    if (bg) panel.style.backgroundColor = bg;
+      // Apply background color directly to slide for mobile view stack fallback
+      var bg = slide.getAttribute('data-bg') || '#0a0a0a';
+      slide.style.backgroundColor = bg;
+    });
+  }
 
-    var titles = panel.querySelectorAll('.svc3-title__line');
-    titles.forEach(function (line) {
-      var text = line.getAttribute('data-text') || line.textContent.trim();
-      line.innerHTML = '';
-      var chars = text.split('');
-      chars.forEach(function (char) {
-        var span = document.createElement('span');
-        span.className = 'char-span';
-        span.innerHTML = char === ' ' ? '&nbsp;' : char;
-        line.appendChild(span);
+  setInitialStates();
+
+  /* ── 2. Continuous Floating Loop (Nested Inner Wrapper) ── */
+  if (!reduced) {
+    var floatersInner = gsap.utils.toArray('.carmed-slide__floater-inner');
+    floatersInner.forEach(function (el, idx) {
+      gsap.fromTo(el,
+        { y: -10 },
+        {
+          y: 10,
+          duration: 2.8 + (idx * 0.15),
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: idx * 0.2
+        }
+      );
+    });
+  }
+
+  /* ── 3. Cinematic Entrance & Exit Transitions (Desktop Right-to-Left Sliding) ── */
+  function transitionSlide(prevIdx, nextIdx) {
+    if (nextIdx === prevIdx) return;
+
+    var nextSlide = slides[nextIdx];
+    var nextBg = nextSlide.getAttribute('data-bg') || '#0a0a0a';
+
+    // Highlight the active dot
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle('is-active', i === nextIdx);
+    });
+
+    if (isMobile) {
+      // Mobile does not use horizontal sliding, but we ensure full visibility of active content
+      slides.forEach(function (slide) {
+        gsap.set(slide, { x: '0%', opacity: 1, pointerEvents: 'auto', visibility: 'visible' });
+        var bgText = slide.querySelector('.carmed-slide__bg-text');
+        var floater = slide.querySelector('.carmed-slide__floater');
+        var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
+        var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
+        gsap.set([bgText, floater, textFade, ctaFade].filter(Boolean), { opacity: 1, scale: 1, x: 0, y: 0 });
+        if (bgText) {
+          gsap.set(bgText, { xPercent: -50, yPercent: -50 });
+        }
       });
-    });
-  });
-
-  /* ── 2. Setup Initial States ── */
-  panels.forEach(function (p, idx) {
-    if (reduced) return;
-
-    // Set initial clip paths and scale explicitly to avoid conflicting fromTo tweens
-    if (idx === 0) {
-      gsap.set(p, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1 });
-    } else {
-      gsap.set(p, { clipPath: 'inset(0% 0% 100% 0%)', scale: 1 });
+      return;
     }
 
-    // Inside panel elements hidden
-    gsap.set(p.querySelectorAll('.char-span'), { yPercent: 110, rotateX: -40, opacity: 0 });
-    if (p.querySelector('.svc3-divider span')) {
-      gsap.set(p.querySelector('.svc3-divider span'), { scaleX: 0 });
+    // Determine direction of travel: 1 = scrolling down (right-to-left), -1 = scrolling up (left-to-right)
+    var direction = 1;
+    if (prevIdx !== undefined && nextIdx < prevIdx) {
+      direction = -1;
     }
-    gsap.set([
-      p.querySelector('.svc3-desc'),
-      p.querySelector('.svc3-cta'),
-      p.querySelector('.svc3-cat')
-    ].filter(Boolean), { opacity: 0, y: 22 });
 
-    // Correctly hide ALL li elements and highlights span elements initially
-    gsap.set(p.querySelectorAll('.svc3-highlights span'), { opacity: 0, y: 16 });
-    gsap.set(p.querySelectorAll('.svc3-tags li'), { opacity: 0, y: 16 });
-
-    var bgNum = p.querySelector('.svc3-bg-num');
-    if (bgNum) gsap.set(bgNum, { y: 60, opacity: 0, scale: 0.8 });
-
-    // Prepare SVG icons for draw animation
-    var iconStrokes = p.querySelectorAll('.svc3-icon__stroke, .svc3-icon__fill');
-    iconStrokes.forEach(function (stroke) {
-      var length = stroke.getTotalLength ? stroke.getTotalLength() : 800;
-      stroke.style.strokeDasharray = length;
-      stroke.style.strokeDashoffset = length;
+    // Toggle active slide visibility classes
+    slides.forEach(function (slide, idx) {
+      slide.classList.toggle('is-active', idx === nextIdx);
     });
 
-    var dots = p.querySelectorAll('.svc3-icon__dot');
-    if (dots.length) gsap.set(dots, { scale: 0, transformOrigin: 'center' });
-  });
+    // Crossfade stage background color
+    gsap.to(stage, {
+      backgroundColor: nextBg,
+      duration: 0.85,
+      ease: 'power2.out'
+    });
 
-  /* ── 3. Color Interpolation Helpers ── */
-  function lerpColor(c1, c2, t) {
-    var r = Math.round(c1.r + (c2.r - c1.r) * t);
-    var g = Math.round(c1.g + (c2.g - c1.g) * t);
-    var b = Math.round(c1.b + (c2.b - c1.b) * t);
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
-  }
+    // Exiting Slide Animations
+    if (prevIdx !== undefined && prevIdx >= 0 && prevIdx < slides.length) {
+      var prevSlide = slides[prevIdx];
+      var prevBgText = prevSlide.querySelector('.carmed-slide__bg-text');
+      var prevFloater = prevSlide.querySelector('.carmed-slide__floater');
+      var prevTexts = prevSlide.querySelectorAll('.carmed-slide__text-fade');
+      var prevCta = prevSlide.querySelector('.carmed-slide__cta-fade');
 
-  function updateBgColor(progress) {
-    var segment = progress * (N - 1);
-    var idx = Math.floor(segment);
-    var fract = segment - idx;
-    if (idx >= N - 1) {
-      root.style.backgroundColor = 'rgb(' + colors[N-1].r + ',' + colors[N-1].g + ',' + colors[N-1].b + ')';
-    } else {
-      var rgb = lerpColor(colors[idx], colors[idx+1], fract);
-      root.style.backgroundColor = rgb;
+      if (prevSlide.timeline) prevSlide.timeline.kill();
+
+      var exitTl = gsap.timeline({
+        onComplete: function () {
+          gsap.set(prevSlide, { visibility: 'hidden', pointerEvents: 'none' });
+        }
+      });
+
+      // Slide out main panel to left/right
+      exitTl.to(prevSlide, {
+        x: (-direction * 100) + '%',
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.inOut'
+      }, 0);
+
+      // Slide out floater with parallax lag
+      if (prevFloater) {
+        exitTl.to(prevFloater, {
+          x: -direction * 150,
+          opacity: 0,
+          duration: 0.85,
+          ease: 'power2.inOut'
+        }, 0);
+      }
+
+      // Ambient text opposite direction slide out
+      if (prevBgText) {
+        exitTl.to(prevBgText, {
+          xPercent: -50,
+          yPercent: -50,
+          x: direction * 150,
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0);
+      }
+
+      // Exit text contents
+      if (prevTexts.length || prevCta) {
+        exitTl.to([prevTexts, prevCta].filter(Boolean), {
+          opacity: 0,
+          y: -20,
+          duration: 0.45,
+          stagger: 0.05
+        }, 0);
+      }
+
+      prevSlide.timeline = exitTl;
     }
-  }
 
-  /* ── 4. Content Reveal Animation (Active panel) ── */
-  function enterPanel(panel) {
-    panel.classList.add('is-active');
-    if (reduced) return;
+    // Entering Slide Animations
+    var activeBgText = nextSlide.querySelector('.carmed-slide__bg-text');
+    var activeFloater = nextSlide.querySelector('.carmed-slide__floater');
+    var activeTexts = nextSlide.querySelectorAll('.carmed-slide__text-fade');
+    var activeCta = nextSlide.querySelector('.carmed-slide__cta-fade');
 
-    var chars = panel.querySelectorAll('.char-span');
-    var divider = panel.querySelector('.svc3-divider span');
-    var desc = panel.querySelector('.svc3-desc');
-    var highlights = panel.querySelectorAll('.svc3-highlights span');
-    var tags = panel.querySelectorAll('.svc3-tags li');
-    var cta = panel.querySelector('.svc3-cta');
-    var cat = panel.querySelector('.svc3-cat');
-    var bgNum = panel.querySelector('.svc3-bg-num');
-    var iconStrokes = panel.querySelectorAll('.svc3-icon__stroke, .svc3-icon__fill');
-    var dots = panel.querySelectorAll('.svc3-icon__dot');
+    if (nextSlide.timeline) nextSlide.timeline.kill();
 
-    // Kill any running timeline on this panel to avoid concurrency conflicts
-    if (panel.currentTimeline) {
-      panel.currentTimeline.kill();
+    var enterTl = gsap.timeline();
+
+    // Prepare entrance state
+    gsap.set(nextSlide, {
+      x: (direction * 100) + '%',
+      opacity: 0,
+      visibility: 'visible',
+      pointerEvents: 'auto'
+    });
+    if (activeFloater) gsap.set(activeFloater, { x: direction * 200, opacity: 0 });
+    if (activeBgText) {
+      gsap.set(activeBgText, {
+        xPercent: -50,
+        yPercent: -50,
+        x: -direction * 150,
+        scale: 1.25,
+        opacity: 0
+      });
     }
+    if (activeTexts.length) gsap.set(activeTexts, { y: 30, opacity: 0 });
+    if (activeCta) gsap.set(activeCta, { scale: 0.94, opacity: 0 });
 
-    // Overwrite any running exit animations synchronously and cleanly
-    var tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-    panel.currentTimeline = tl;
+    // Animate in main slide panel
+    enterTl.to(nextSlide, {
+      x: '0%',
+      opacity: 1,
+      duration: 0.95,
+      ease: 'power3.inOut'
+    }, 0);
 
-    if (cat) tl.to(cat, { opacity: 1, y: 0, duration: 0.4 }, 0);
-
-    if (chars.length) {
-      tl.to(chars, {
-        yPercent: 0,
-        rotateX: 0,
+    // Parallax entering floater (SVG)
+    if (activeFloater) {
+      enterTl.to(activeFloater, {
+        x: 0,
         opacity: 1,
-        stagger: 0.015,
-        duration: 0.8,
-        ease: 'back.out(1.6)'
+        duration: 1.15,
+        ease: 'power2.out'
       }, 0.05);
     }
 
-    if (divider) tl.to(divider, { scaleX: 1, duration: 0.7 }, 0.2);
-    if (desc) tl.to(desc, { opacity: 1, y: 0, duration: 0.6 }, 0.35);
-
-    if (highlights.length) {
-      tl.to(highlights, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.04,
-        duration: 0.5
-      }, 0.38);
-    }
-
-    if (tags.length) {
-      tl.to(tags, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.03,
-        duration: 0.45
-      }, 0.42);
-    }
-
-    if (cta) tl.to(cta, { opacity: 1, y: 0, duration: 0.5 }, 0.5);
-    if (bgNum) tl.to(bgNum, { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'expo.out' }, 0.05);
-
-    // SVG icon draw
-    if (iconStrokes.length) {
-      tl.to(iconStrokes, {
-        strokeDashoffset: 0,
-        duration: 1.3,
-        stagger: 0.07,
-        ease: 'power2.out'
-      }, 0.1);
-    }
-
-    if (dots.length) {
-      tl.to(dots, {
+    // Parallax entering ambient bg text
+    if (activeBgText) {
+      enterTl.to(activeBgText, {
+        x: 0,
         scale: 1,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'back.out(1.8)'
-      }, 0.55);
+        opacity: 0.1,
+        duration: 1.2,
+        ease: 'power2.out'
+      }, 0.02);
     }
+
+    // Stagger entering text contents
+    if (activeTexts.length) {
+      enterTl.to(activeTexts, {
+        y: 0,
+        opacity: 1,
+        duration: 0.75,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, 0.35);
+    }
+
+    // Scale entering CTA
+    if (activeCta) {
+      enterTl.to(activeCta, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'back.out(1.7)'
+      }, 0.65);
+    }
+
+    nextSlide.timeline = enterTl;
   }
 
-  /* ── 5. Content Hide Animation (Exit panel) ── */
-  function exitPanel(panel, goingForward) {
-    panel.classList.remove('is-active');
-    if (reduced) return;
-
-    var chars = panel.querySelectorAll('.char-span');
-    var divider = panel.querySelector('.svc3-divider span');
-    var desc = panel.querySelector('.svc3-desc');
-    var highlights = panel.querySelectorAll('.svc3-highlights span');
-    var tags = panel.querySelectorAll('.svc3-tags li');
-    var cta = panel.querySelector('.svc3-cta');
-    var cat = panel.querySelector('.svc3-cat');
-    var bgNum = panel.querySelector('.svc3-bg-num');
-    var iconStrokes = panel.querySelectorAll('.svc3-icon__stroke, .svc3-icon__fill');
-    var dots = panel.querySelectorAll('.svc3-icon__dot');
-
-    var exitY = goingForward ? -20 : 20;
-    var exitCharY = goingForward ? -110 : 110;
-
-    // Kill any running timeline on this panel to avoid concurrency conflicts
-    if (panel.currentTimeline) {
-      panel.currentTimeline.kill();
+  /* ── 4. ScrollTrigger Pinning Setup ── */
+  function initScrollTrigger() {
+    // Kill existing desktop instances
+    if (scrollTriggerInstance) {
+      scrollTriggerInstance.kill();
+      scrollTriggerInstance = null;
+    }
+    if (visibilityTriggerInstance) {
+      visibilityTriggerInstance.kill();
+      visibilityTriggerInstance = null;
+    }
+    // Remove mobile window scroll handler if exists
+    if (mobileScrollHandler) {
+      window.removeEventListener('scroll', mobileScrollHandler);
+      mobileScrollHandler = null;
     }
 
-    // Overwrite any running enter animations and animate exit synchronously and cleanly
-    var tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
-    panel.currentTimeline = tl;
+    if (isMobile) {
+      // Mobile Cleanup: Force stack, reset layouts and inline overrides
+      gsap.set(stage, { clearProps: 'backgroundColor' });
+      slides.forEach(function (slide) {
+        slide.classList.remove('is-active');
+        gsap.set(slide, { x: '0%', opacity: 1, pointerEvents: 'auto', visibility: 'visible' });
+        var bgText = slide.querySelector('.carmed-slide__bg-text');
+        var floater = slide.querySelector('.carmed-slide__floater');
+        var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
+        var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
+        gsap.set([bgText, floater, textFade, ctaFade].filter(Boolean), { opacity: 1, scale: 1, x: 0, y: 0 });
+        if (bgText) {
+          gsap.set(bgText, { xPercent: -50, yPercent: -50 });
+        }
+      });
 
-    tl.to([desc, cta, cat].filter(Boolean), {
-      opacity: 0,
-      y: exitY,
-      duration: 0.3,
-      ease: 'power2.in'
-    }, 0);
+      // Add window scroll handler to update sidebar dot highlight + fade in/out on Mobile
+      mobileScrollHandler = function () {
+        var sy = window.scrollY;
+        var rootTop = root.offsetTop;
+        var rootBottom = rootTop + root.offsetHeight;
+        
+        // Hide/Show lateral dots bar based on scroll bounds
+        var inBounds = (sy + window.innerHeight * 0.45 >= rootTop) && (sy + window.innerHeight * 0.45 <= rootBottom);
+        gsap.to('.carmed-nav', { autoAlpha: inBounds ? 1 : 0, duration: 0.3, overwrite: 'auto' });
 
-    if (highlights.length) {
-      tl.to(highlights, {
-        opacity: 0,
-        y: exitY,
-        duration: 0.25,
-        ease: 'power2.in'
-      }, 0);
+        var syCenter = window.scrollY + window.innerHeight * 0.45;
+        var highlightIdx = 0;
+        slides.forEach(function (slide, idx) {
+          if (syCenter >= slide.offsetTop) {
+            highlightIdx = idx;
+          }
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('is-active', i === highlightIdx);
+        });
+      };
+      window.addEventListener('scroll', mobileScrollHandler, { passive: true });
+      mobileScrollHandler();
+      return;
     }
 
-    if (tags.length) {
-      tl.to(tags, {
-        opacity: 0,
-        y: exitY,
-        duration: 0.25,
-        ease: 'power2.in'
-      }, 0);
-    }
-
-    if (divider) tl.to(divider, { scaleX: 0, duration: 0.3, ease: 'power2.in' }, 0);
-
-    if (chars.length) {
-      tl.to(chars, {
-        yPercent: exitCharY,
-        opacity: 0,
-        duration: 0.35,
-        stagger: 0.005,
-        ease: 'power2.in'
-      }, 0);
-    }
-
-    if (bgNum) {
-      tl.to(bgNum, {
-        opacity: 0,
-        scale: 0.8,
-        y: exitY * 1.5,
-        duration: 0.35,
-        ease: 'power2.in'
-      }, 0);
-    }
-
-    iconStrokes.forEach(function (stroke) {
-      var length = stroke.getTotalLength ? stroke.getTotalLength() : 800;
-      tl.to(stroke, {
-        strokeDashoffset: length,
-        duration: 0.35,
-        ease: 'power2.in'
-      }, 0);
-    });
-
-    if (dots.length) tl.to(dots, { scale: 0, duration: 0.3, ease: 'power2.in' }, 0);
-  }
-
-  /* ── 6. Counter Machine Flip ── */
-  function updateCounter(idx) {
-    if (!curEl) return;
-    var next = String(idx + 1).padStart(2, '0');
-    if (reduced) { curEl.textContent = next; return; }
-
-    gsap.to(curEl, {
-      yPercent: -120,
-      opacity: 0,
-      duration: 0.2,
-      ease: 'power2.in',
-      onComplete: function () {
-        curEl.textContent = next;
-        gsap.fromTo(curEl,
-          { yPercent: 120, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.24, ease: 'power2.out' }
-        );
+    // Desktop Setup
+    gsap.set(stage, { backgroundColor: slides[0].getAttribute('data-bg') || '#0a0a0a' });
+    slides.forEach(function (slide, idx) {
+      slide.classList.toggle('is-active', idx === 0);
+      gsap.set(slide, { x: idx === 0 ? '0%' : '100%', opacity: idx === 0 ? 1 : 0 });
+      var bgText = slide.querySelector('.carmed-slide__bg-text');
+      if (bgText) {
+        gsap.set(bgText, { xPercent: -50, yPercent: -50 });
       }
     });
-  }
 
-  /* ── 7. Bottom Navigation Link Active Sync ── */
-  function updateBottomNav(idx) {
-    navItems.forEach(function (btn, i) {
-      btn.classList.toggle('is-active', i === idx);
-    });
-  }
-
-  /* ── 8. Timeline setup for Scrubbed Clip-Path Reveals ── */
-  var curIdx = -1;
-
-  var tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: root,
+    // Pinned slides progress manager
+    scrollTriggerInstance = ScrollTrigger.create({
+      trigger: '.carmed-root',
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 1.0,
-      invalidateOnRefresh: true,
+      scrub: true,
       onUpdate: function (self) {
-        // Use the timeline's eased progress to eliminate any scrub lag mismatch!
-        var progress = tl.progress();
+        var progress = self.progress;
+        var numSlides = slides.length;
+        var idx = Math.floor(progress * numSlides);
+        if (idx >= numSlides) idx = numSlides - 1;
 
-        // Progress lines (raw scroll progress for UI rails)
-        if (progEl) progEl.style.height = (self.progress * 100) + '%';
-        if (bottomProg) bottomProg.style.width = (self.progress * 100) + '%';
-
-        // Background color shifts (eased for smooth organic transition)
-        updateBgColor(progress);
-
-        // Get actual eased timeline playhead time t
-        var t = progress * tl.duration();
-        var snapIdx = Math.min(N - 1, Math.max(0, Math.round(t)));
-
-        if (snapIdx !== curIdx) {
-          var goingForward = snapIdx > curIdx;
-          if (curIdx >= 0 && panels[curIdx]) exitPanel(panels[curIdx], goingForward);
-          curIdx = snapIdx;
-          if (panels[curIdx]) enterPanel(panels[curIdx]);
-          updateCounter(curIdx);
-          updateBottomNav(curIdx);
+        if (idx !== activeIndex) {
+          transitionSlide(activeIndex, idx);
+          activeIndex = idx;
         }
       }
-    }
-  });
+    });
 
-  // Both panels clip top-to-bottom, synchronized:
-  // • New panel: bottom-inset shrinks 100%→0% (title reveals first, at top)
-  // • Old panel: top-inset grows 0%→100% (title disappears first, at top)
-  // At any scroll position t, new panel covers 0–t% of viewport from top
-  // and old panel shows t–100% from top — zero overlap guaranteed.
-  // We offset the transition start to (i - 1) + 0.35 and duration to 0.3.
-  // This leaves 35% of the segment flat at the start and 35% flat at the end,
-  // providing 70% massive stable readable regions where the panels are 100% visible
-  // and preventing overlay clipping during reading states.
-  for (var i = 1; i < N; i++) {
-    var startT = (i - 1) + 0.35;
-    var dur    = 0.3;
-    
-    tl.to(panels[i],
-      { clipPath: 'inset(0% 0% 0% 0%)', duration: dur, ease: 'power2.inOut' },
-      startT
-    );
-    tl.to(panels[i - 1],
-      { clipPath: 'inset(100% 0% 0% 0%)', scale: 0.96, duration: dur, ease: 'power2.inOut' },
-      startT
-    );
+    // Elegant show/hide driver for .carmed-nav when entering/leaving Services
+    visibilityTriggerInstance = ScrollTrigger.create({
+      trigger: '.carmed-root',
+      start: 'top center',
+      end: 'bottom center',
+      onToggle: function (self) {
+        gsap.to('.carmed-nav', { autoAlpha: self.isActive ? 1 : 0, duration: 0.35, overwrite: 'auto' });
+      }
+    });
+
+    activeIndex = 0;
+    transitionSlide(undefined, 0);
   }
 
-  // Extend timeline duration symmetrically so the last panel has a stable reading region at the end
-  tl.set({}, {}, N - 1);
+  // Initial trigger setup
+  initScrollTrigger();
 
-  /* ── 9. Bottom Nav Click Interactions ── */
-  navItems.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var targetIdx = parseInt(btn.getAttribute('data-target'), 10);
+  /* ── 5. Navigation Dots Clicking ── */
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      var targetIdx = parseInt(dot.getAttribute('data-target'), 10);
       if (isNaN(targetIdx)) return;
 
-      var startScroll = root.offsetTop;
-      var totalScroll = root.offsetHeight - window.innerHeight;
-      var targetScroll = startScroll + (targetIdx / (N - 1)) * totalScroll;
+      if (isMobile) {
+        var targetSlide = slides[targetIdx];
+        if (targetSlide) {
+          gsap.to(window, {
+            scrollTo: { y: targetSlide, offsetY: 70 },
+            duration: 0.95,
+            ease: 'power2.out'
+          });
+        }
+        return;
+      }
 
-      gsap.to(window, {
-        scrollTo: targetScroll,
-        duration: 1.3,
-        ease: 'power3.inOut'
-      });
+      // Desktop: Scroll main window scrollbar to slide trigger offset
+      var st = scrollTriggerInstance;
+      if (st) {
+        var start = st.start;
+        var end = st.end;
+        var totalDist = end - start;
+        var targetScroll = start + (targetIdx / (slides.length - 1)) * totalDist;
+
+        gsap.to(window, {
+          scrollTo: { y: targetScroll },
+          duration: 0.95,
+          ease: 'power2.out'
+        });
+      }
     });
   });
 
-  /* ── 10. Bootstrap Entrance for First Panel ── */
-  setTimeout(function () {
-    if (curIdx === -1) {
-      curIdx = 0;
-      enterPanel(panels[0]);
-      updateCounter(0);
-      updateBottomNav(0);
-      if (progEl) progEl.style.height = '0%';
-      if (bottomProg) bottomProg.style.width = '0%';
+  // Re-synchronize dimensions on resize
+  window.addEventListener('resize', function () {
+    var checkMobile = window.innerWidth <= 768;
+    if (checkMobile !== isMobile) {
+      isMobile = checkMobile;
+      initScrollTrigger();
     }
-  }, 600);
+  }, { passive: true });
 
-  /* ── 11. 3D Parallax Mouse Tilt (Desktop only) ── */
-  if (!reduced && window.matchMedia('(pointer: fine)').matches) {
-    panels.forEach(function (panel) {
-      var iconWrap = panel.querySelector('.svc3-icon-wrap');
-      if (!iconWrap) return;
-
-      panel.addEventListener('mousemove', function (e) {
-        if (!panel.classList.contains('is-active')) return;
-        var r = panel.getBoundingClientRect();
-        var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-        var dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-
-        gsap.to(iconWrap, {
-          rotateX: -dy * 16,
-          rotateY: dx * 16,
-          transformPerspective: 1000,
-          z: 32,
-          duration: 0.4,
-          ease: 'power2.out'
-        });
-      });
-
-      panel.addEventListener('mouseleave', function () {
-        gsap.to(iconWrap, {
-          rotateX: 0,
-          rotateY: 0,
-          z: 0,
-          duration: 0.8,
-          ease: 'elastic.out(1, 0.4)'
-        });
-      });
-    });
-  }
 };

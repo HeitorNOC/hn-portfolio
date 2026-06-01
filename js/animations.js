@@ -461,20 +461,26 @@
 
     /* ── Mobile: simple scroll-triggered reveal, no pin ──────── */
     mm.add('(max-width: 767px)', function () {
-      lines.forEach(function (line, i) {
-        gsap.to(line, {
-          scrollTrigger: { trigger: line.parentElement, start: 'top 88%', once: true },
-          yPercent:  0,
-          duration:  0.85,
-          ease:      'expo.out',
-          delay:     i * 0.08
-        });
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          once: true
+        }
+      });
+      tl.to(lines, {
+        yPercent: 0,
+        duration: 0.85,
+        ease: 'expo.out',
+        stagger: 0.12
       });
       if (sub) {
-        gsap.to(sub, {
-          scrollTrigger: { trigger: sub, start: 'top 90%', once: true },
-          opacity: 1, y: 0, duration: 0.7, ease: 'power3.out'
-        });
+        tl.to(sub, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out'
+        }, '-=0.4');
       }
     });
   };

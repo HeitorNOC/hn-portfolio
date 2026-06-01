@@ -14,6 +14,10 @@
 window.initPortfolio3D = function () {
   'use strict';
 
+  if (window.innerWidth < 768) {
+    return;
+  }
+
   var root       = document.querySelector('.port-root');
   var stage      = document.getElementById('port-stage');
   var ring       = document.getElementById('port-ring');
