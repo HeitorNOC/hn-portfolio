@@ -429,7 +429,7 @@
     var mm = gsap.matchMedia();
 
     /* ── Desktop: section pins, lines reveal as user scrolls ── */
-    mm.add('(min-width: 768px)', function () {
+    mm.add('(min-width: 769px)', function () {
       var tl = gsap.timeline({
         scrollTrigger: {
           trigger:           section,
@@ -460,7 +460,7 @@
     });
 
     /* ── Mobile: simple scroll-triggered reveal, no pin ──────── */
-    mm.add('(max-width: 767px)', function () {
+    mm.add('(max-width: 768px)', function () {
       var tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,

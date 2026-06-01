@@ -99,10 +99,11 @@ window.initServicesV3 = function () {
         var floater = slide.querySelector('.carmed-slide__floater');
         var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
         var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
-        gsap.set([bgText, floater, textFade, ctaFade].filter(Boolean), { opacity: 1, scale: 1, x: 0, y: 0 });
-        if (bgText) {
-          gsap.set(bgText, { xPercent: -50, yPercent: -50 });
-        }
+        
+        if (bgText) gsap.set(bgText, { opacity: 1, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
+        if (floater) gsap.set(floater, { opacity: 1, scale: 1, x: 0, y: 0 });
+        if (ctaFade) gsap.set(ctaFade, { opacity: 1, scale: 1, x: 0, y: 0 });
+        if (textFade.length) gsap.set(textFade, { opacity: 1, scale: 1, x: 0, y: 0 });
       });
       return;
     }
@@ -295,10 +296,11 @@ window.initServicesV3 = function () {
         var floater = slide.querySelector('.carmed-slide__floater');
         var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
         var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
-        gsap.set([bgText, floater, textFade, ctaFade].filter(Boolean), { opacity: 1, scale: 1, x: 0, y: 0 });
-        if (bgText) {
-          gsap.set(bgText, { xPercent: -50, yPercent: -50 });
-        }
+        
+        if (bgText) gsap.set(bgText, { opacity: 1, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
+        if (floater) gsap.set(floater, { opacity: 1, scale: 1, x: 0, y: 0 });
+        if (ctaFade) gsap.set(ctaFade, { opacity: 1, scale: 1, x: 0, y: 0 });
+        textFade.forEach(function(el) { gsap.set(el, { opacity: 1, scale: 1, x: 0, y: 0 }); });
       });
 
       // Add window scroll handler to update sidebar dot highlight + fade in/out on Mobile

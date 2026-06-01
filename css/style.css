@@ -1237,7 +1237,7 @@ body::after {
   }
 
   .carmed-slide__bg-text {
-    font-size: 18vw !important;
+    font-size: clamp(2rem, 15vw, 5.5rem) !important;
   }
 
   .carmed-slide__floater {
@@ -1986,6 +1986,7 @@ body::after {
 
   .nav {
     padding: var(--space-4) var(--space-5);
+    justify-content: space-between !important;
   }
 
   .nav__links,
@@ -2727,8 +2728,13 @@ body::after {
     top: auto !important;
     height: auto !important;
     min-height: auto !important;
-    padding: clamp(3.5rem, 8vh, 6rem) 1.5rem !important;
+    padding: clamp(3rem, 7vh, 5rem) 0 !important;
     background: #080808 !important;
+    overflow: hidden !important;
+  }
+
+  .port-header {
+    padding: 0 1.5rem !important;
   }
 
   .port-scene {
@@ -2744,23 +2750,37 @@ body::after {
     width: 100% !important;
     height: auto !important;
     display: flex !important;
-    flex-direction: column !important;
-    gap: 2.2rem !important;
+    flex-direction: row !important;
+    gap: 1.25rem !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
     transform: none !important;
     position: relative !important;
     transform-style: flat !important;
-    padding: var(--space-6) 0 !important;
+    padding: 1.5rem 1.5rem 3rem 1.5rem !important;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .port-ring::-webkit-scrollbar {
+    display: none !important;
+  }
+  .port-ring {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
 
   .port-card {
     position: relative !important;
     top: auto !important;
     left: auto !important;
-    width: 100% !important;
-    max-width: 460px !important;
-    height: auto !important;
-    margin: 0 auto !important;
+    flex: 0 0 82% !important;
+    width: 82% !important;
+    max-width: 320px !important;
+    height: 420px !important;
+    margin: 0 !important;
     transform: none !important;
+    scroll-snap-align: center !important;
     backface-visibility: visible !important;
     -webkit-backface-visibility: visible !important;
     transform-style: flat !important;
@@ -2770,37 +2790,44 @@ body::after {
   }
 
   .port-card__inner {
-    display: flex !important;
-    flex-direction: column !important;
-    height: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
     position: relative !important;
     background: #0d0d0d !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: var(--radius-md) !important;
+    border-radius: 20px !important;
     transform: none !important;
   }
 
-  /* Expose portfolio images as a clean top block on each card */
+  /* Image covers the entire background of the card */
   .port-card__img {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: 200px !important;
-    filter: none !important;
+    height: 100% !important;
+    filter: brightness(0.65) !important;
     background-size: cover !important;
-    background-position: top center !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-position: center center !important;
+    border-bottom: none !important;
   }
 
+  /* Linear dark gradient overlay for high contrast text readability */
   .port-card__inner::before {
-    display: none !important; /* Remove ambient fade since text is below, not on top */
+    display: block !important;
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(to top, rgba(8, 8, 8, 0.95) 0%, rgba(8, 8, 8, 0.5) 50%, rgba(8, 8, 8, 0.1) 100%) !important;
+    z-index: 1 !important;
   }
 
-  /* Make case description and metadata fully exposed and legible */
+  /* Expose case content at the bottom of the card, overlaying the background */
   .port-card__body {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     padding: var(--space-5) !important;
     opacity: 1 !important;
     transform: none !important;
@@ -2808,38 +2835,54 @@ body::after {
     display: flex !important;
     flex-direction: column !important;
     gap: var(--space-2) !important;
+    z-index: 2 !important;
   }
 
+  /* Styled categories as Option Tags/Pills at the top-left of each card */
   .port-card__cat {
-    font-size: var(--text-xs) !important;
-    color: var(--accent) !important;
+    position: absolute !important;
+    top: 1.25rem !important;
+    left: 1.25rem !important;
+    z-index: 3 !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.65rem !important;
+    color: var(--white) !important;
+    background: rgba(201, 243, 29, 0.18) !important;
+    border: 1px solid rgba(201, 243, 29, 0.4) !important;
+    padding: 4px 10px !important;
+    border-radius: var(--radius-full) !important;
     letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
   }
 
   .port-card__name {
-    font-size: clamp(1.2rem, 4vw, 1.4rem) !important;
-    font-weight: 700 !important;
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
     color: var(--white) !important;
-    margin: 4px 0 !important;
+    margin-top: 1.5rem !important;
+    letter-spacing: -0.02em !important;
   }
 
   .port-card__desc {
-    font-size: var(--text-sm) !important;
-    color: rgba(245, 240, 232, 0.75) !important;
-    line-height: 1.55 !important;
+    font-size: var(--text-xs) !important;
+    color: rgba(245, 240, 232, 0.72) !important;
+    line-height: 1.5 !important;
     margin-bottom: var(--space-2) !important;
-    display: block !important;
-    -webkit-line-clamp: none !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   .port-card__link {
     display: inline-flex !important;
     align-items: center !important;
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-xs) !important;
     color: var(--accent) !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
-    margin-top: 4px !important;
+    font-weight: 700 !important;
+    margin-top: var(--space-2) !important;
   }
 
   .port-card:hover .port-card__inner {
@@ -2847,7 +2890,7 @@ body::after {
     box-shadow: 0 10px 20px rgba(0,0,0,0.4) !important;
   }
 
-  /* Disable non-hover blurring that makes everything blurry on touch */
+  /* Disable non-hover blurring on touch swipe */
   .port-ring.is-focusing .port-card:not(.is-hovered) .port-card__inner {
     filter: none !important;
   }

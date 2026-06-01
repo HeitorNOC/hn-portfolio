@@ -258,6 +258,11 @@
       window.removeEventListener('touchmove', preventScroll);
       window.removeEventListener('keydown', preventKeyScroll);
       if (safetyTimer) clearTimeout(safetyTimer);
+      if (window.ScrollTrigger) {
+        setTimeout(function () {
+          ScrollTrigger.refresh();
+        }, 120);
+      }
     }
 
     // Expose unlockPage globally so it can be invoked by animations.js
