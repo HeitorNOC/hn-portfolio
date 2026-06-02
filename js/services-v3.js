@@ -38,7 +38,17 @@ window.initServicesV3 = function () {
       var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
       var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
 
-      // Set elegant starting transitions
+      // Apply background color directly to slide for mobile view stack fallback
+      var bg = slide.getAttribute('data-bg') || '#0a0a0a';
+      slide.style.backgroundColor = bg;
+
+      // On mobile: slides are stacked vertically, all visible — do NOT hide elements
+      if (isMobile) {
+        if (bgText) gsap.set(bgText, { xPercent: -50, yPercent: -50, scale: 1, opacity: 0.08, transformOrigin: 'center' });
+        return;
+      }
+
+      // Desktop: Set elegant starting transitions
       // Critical: use xPercent/yPercent to prevent GSAP from wiping CSS centering translates
       if (bgText) {
         gsap.set(bgText, {
@@ -52,10 +62,6 @@ window.initServicesV3 = function () {
       if (floater) gsap.set(floater, { y: 60, opacity: 0 });
       if (textFade.length) gsap.set(textFade, { y: 24, opacity: 0 });
       if (ctaFade) gsap.set(ctaFade, { scale: 0.95, opacity: 0 });
-
-      // Apply background color directly to slide for mobile view stack fallback
-      var bg = slide.getAttribute('data-bg') || '#0a0a0a';
-      slide.style.backgroundColor = bg;
     });
   }
 
@@ -91,6 +97,12 @@ window.initServicesV3 = function () {
       dot.classList.toggle('is-active', i === nextIdx);
     });
 
+    // Advance the progress bar
+    var progressFill = document.querySelector('.carmed-progress__fill');
+    if (progressFill) {
+      progressFill.style.width = ((nextIdx + 1) / slides.length * 100) + '%';
+    }
+
     if (isMobile) {
       // Mobile does not use horizontal sliding, but we ensure full visibility of active content
       slides.forEach(function (slide) {
@@ -100,7 +112,7 @@ window.initServicesV3 = function () {
         var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
         var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
         
-        if (bgText) gsap.set(bgText, { opacity: 1, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
+        if (bgText) gsap.set(bgText, { opacity: 0.08, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
         if (floater) gsap.set(floater, { opacity: 1, scale: 1, x: 0, y: 0 });
         if (ctaFade) gsap.set(ctaFade, { opacity: 1, scale: 1, x: 0, y: 0 });
         if (textFade.length) gsap.set(textFade, { opacity: 1, scale: 1, x: 0, y: 0 });
@@ -297,7 +309,7 @@ window.initServicesV3 = function () {
         var textFade = slide.querySelectorAll('.carmed-slide__text-fade');
         var ctaFade = slide.querySelector('.carmed-slide__cta-fade');
         
-        if (bgText) gsap.set(bgText, { opacity: 1, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
+        if (bgText) gsap.set(bgText, { opacity: 0.08, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
         if (floater) gsap.set(floater, { opacity: 1, scale: 1, x: 0, y: 0 });
         if (ctaFade) gsap.set(ctaFade, { opacity: 1, scale: 1, x: 0, y: 0 });
         textFade.forEach(function(el) { gsap.set(el, { opacity: 1, scale: 1, x: 0, y: 0 }); });

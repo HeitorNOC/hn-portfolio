@@ -14,8 +14,51 @@
 window.initPortfolio3D = function () {
   'use strict';
 
-  if (window.innerWidth < 768) {
-    return;
+  var isMobilePort = window.innerWidth <= 768;
+
+  /* ── Mobile: pure CSS horizontal swipe carousel ──────────────
+     No 3D ring. CSS media queries handle layout; we just
+     ensure the port-root height is auto and port-stage is not
+     sticky, then exit without registering GSAP scroll triggers.
+  ────────────────────────────────────────────────────────────── */
+  if (isMobilePort) {
+    var mRoot  = document.querySelector('.port-root');
+    var mStage = document.getElementById('port-stage');
+    var mRing  = document.getElementById('port-ring');
+    var mCards = document.querySelectorAll('.port-card');
+    var mIndicator = document.querySelector('.port-indicator');
+
+    // Ensure no sticky height from a previous desktop session
+    if (mRoot)  { mRoot.style.height = 'auto'; }
+    if (mStage) { mStage.style.position = 'relative'; mStage.style.height = 'auto'; }
+
+    // Make sure every card body is visible without hover
+    mCards.forEach(function (card) {
+      var body = card.querySelector('.port-card__body');
+      if (body) {
+        body.style.opacity = '1';
+        body.style.transform = 'translateY(0)';
+      }
+    });
+
+    if (mIndicator) mIndicator.style.display = 'none';
+
+    // Swipe dots: track which card is centered in the horizontal carousel
+    var dotEls = document.querySelectorAll('.port-swipe-dot');
+    if (mRing && mCards.length > 0 && dotEls.length > 0 && 'IntersectionObserver' in window) {
+      var dotObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var idx = Array.prototype.indexOf.call(mCards, entry.target);
+            dotEls.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+          }
+        });
+      }, { root: mRing, threshold: 0.55 });
+
+      mCards.forEach(function (card) { dotObserver.observe(card); });
+    }
+
+    return; // No GSAP ScrollTrigger needed on mobile
   }
 
   var root       = document.querySelector('.port-root');

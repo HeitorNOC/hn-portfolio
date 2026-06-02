@@ -281,7 +281,7 @@
 
   <!-- ═══════════════════════ SOBRE ═══════════════════════ -->
   <section id="sobre" class="section about">
-    <div class="container about__grid">
+    <div class="container about__grid" data-skew>
 
       <div class="about__left">
         <span class="label about__label">// 002 — Sobre nós</span>
@@ -585,6 +585,9 @@
         </div>
       </article>
 
+      <div class="carmed-progress" aria-hidden="true">
+        <div class="carmed-progress__fill"></div>
+      </div>
     </div><!-- /.carmed-stage -->
   </section>
 
@@ -649,6 +652,13 @@
         </div><!-- #port-ring -->
       </div><!-- .port-scene -->
 
+      <div class="port-swipe-dots" aria-hidden="true">
+        <span class="port-swipe-dot is-active"></span>
+        <span class="port-swipe-dot"></span>
+        <span class="port-swipe-dot"></span>
+        <span class="port-swipe-dot"></span>
+      </div>
+
       <header class="port-header">
         <span class="label port-header__label">// 005 — Cases</span>
         <h2 class="port-header__title">Portfólio</h2>
@@ -684,7 +694,7 @@
   <!-- ═══════════════════════ CONTATO ══════════════════════ -->
   <section id="contato" class="section contact">
     <div class="contact__blob" aria-hidden="true"></div>
-    <div class="container contact__grid">
+    <div class="container contact__grid" data-skew>
 
       <div class="contact__left">
         <span class="label contact__label">// 006 — Contato</span>
@@ -721,12 +731,12 @@
         <form class="contact-form" id="contact-form" novalidate>
           <div class="contact-form__fields">
             <div class="form-field">
+              <input type="text" id="f-name" name="name" placeholder=" " autocomplete="name" required>
               <label for="f-name">Nome</label>
-              <input type="text" id="f-name" name="name" placeholder="Seu nome completo" autocomplete="name" required>
             </div>
             <div class="form-field">
+              <input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" required>
               <label for="f-email">E-mail</label>
-              <input type="email" id="f-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
             </div>
             <div class="form-field">
               <label for="f-service">Serviço</label>
@@ -743,8 +753,8 @@
               </div>
             </div>
             <div class="form-field form-field--full">
+              <textarea id="f-message" name="message" placeholder=" " rows="4" required></textarea>
               <label for="f-message">Mensagem</label>
-              <textarea id="f-message" name="message" placeholder="Conte sobre seu projeto..." rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn--submit" id="btn-submit">
               <span class="btn-text">Enviar Mensagem</span>

@@ -530,14 +530,6 @@ body::after {
   padding-top: clamp(5rem, 10vh, 7rem); /* accounts for fixed nav + breathing room */
 }
 
-.hero__canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .hero__noise {
   position: absolute;
   inset: 0;
@@ -1193,16 +1185,9 @@ body::after {
     display: none;
   }
   
+  /* Hide the fixed side-dots on mobile — they overlap other sections */
   .carmed-nav {
-    position: fixed !important;
-    right: 1.25rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    gap: 0.85rem !important;
-  }
-  
-  .carmed-nav__dot-text {
-    display: none;
+    display: none !important;
   }
 
   .carmed-root {
@@ -1233,6 +1218,7 @@ body::after {
     opacity: 1 !important;
     pointer-events: auto !important;
     visibility: visible !important;
+    overflow: hidden !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
   }
 
@@ -1256,6 +1242,15 @@ body::after {
     flex-direction: column !important;
     gap: 0.75rem !important;
     margin-bottom: 1.5rem !important;
+  }
+
+  .carmed-slide__bullets li {
+    white-space: normal !important;
+  }
+
+  .carmed-slide__content {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 }
 
@@ -2057,6 +2052,21 @@ body::after {
   .service-item__header {
     gap: var(--space-4);
   }
+
+  .carmed-slide__title {
+    font-size: clamp(1.5rem, 6.5vw, 2rem) !important;
+  }
+
+  .carmed-slide__floater {
+    width: clamp(100px, 20vh, 160px) !important;
+    height: clamp(100px, 20vh, 160px) !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .port-card__name {
+    margin-top: 1rem !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2684,11 +2694,6 @@ body::after {
   .hero__sub br {
     display: none !important;
   }
-  .hero__canvas {
-    opacity: 0.25 !important;
-    transform: scale(0.78) translateY(10vh) !important;
-    transform-origin: center center !important;
-  }
   .hero__ctas {
     width: 100% !important;
   }
@@ -2698,23 +2703,37 @@ body::after {
   }
 }
 
-/* 3. Manifesto Mobile Overrides: nowrap single-line titles & glowing CSS gradient fallback */
+/* 3. Manifesto Mobile Overrides */
 @media (max-width: 768px) {
   .manifesto__line {
-    font-size: clamp(1.5rem, 7.5vw, 2.8rem) !important;
-    white-space: nowrap !important;
-    word-break: normal !important;
+    font-size: clamp(1.8rem, 8.5vw, 3rem) !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.1 !important;
   }
+
   .manifesto-section {
-    background: radial-gradient(circle at 20% 50%, rgba(201, 243, 29, 0.05) 0%, #080808 80%) !important;
+    min-height: auto !important;
+  }
+
+  .manifesto-section::before {
+    background:
+      linear-gradient(to bottom, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%);
   }
 }
 
 /* 4. Portfolio Mobile Overrides: flat-card vertical feed layout (resembles custom mockup) */
 @media (min-width: 769px) and (max-width: 991px) {
+  .port-stage {
+    perspective: 1000px;
+  }
+
+  .port-card {
+    --card-w: clamp(160px, 21vw, 220px);
+  }
+
   .port-scene {
-    transform: scale(0.72) translateY(4vh) !important;
-    transform-origin: center center !important;
+    transform: translateY(3vh);
   }
 }
 
@@ -2728,22 +2747,37 @@ body::after {
     top: auto !important;
     height: auto !important;
     min-height: auto !important;
-    padding: clamp(3rem, 7vh, 5rem) 0 !important;
+    padding: clamp(3rem, 7vh, 5rem) 0 clamp(2rem, 4vh, 3rem) !important;
     background: #080808 !important;
     overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    perspective: none !important;
   }
 
+  /* Move header above the scroll ring using flexbox order */
   .port-header {
-    padding: 0 1.5rem !important;
+    order: -1 !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    padding: 0 1.5rem 2rem !important;
+    pointer-events: auto !important;
   }
 
   .port-scene {
+    position: relative !important;
     width: 100% !important;
     height: auto !important;
     perspective: none !important;
     transform: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    inset: auto !important;
+    display: block !important;
+    align-items: unset !important;
+    justify-content: unset !important;
   }
 
   .port-ring {
@@ -2758,7 +2792,7 @@ body::after {
     transform: none !important;
     position: relative !important;
     transform-style: flat !important;
-    padding: 1.5rem 1.5rem 3rem 1.5rem !important;
+    padding: 1.5rem 9% 3rem !important;
   }
 
   /* Hide scrollbar but keep functionality */
@@ -2777,7 +2811,7 @@ body::after {
     flex: 0 0 82% !important;
     width: 82% !important;
     max-width: 320px !important;
-    height: 420px !important;
+    height: clamp(280px, 62vh, 420px) !important;
     margin: 0 !important;
     transform: none !important;
     scroll-snap-align: center !important;
@@ -2920,15 +2954,182 @@ body::after {
     gap: var(--space-5) !important; /* Breathable spacing between tap targets */
   }
 
-  /* Comfortable touch height for form inputs */
+  /* Touch-comfortable padding — preserve floating label space for inputs */
   .form-field input,
-  .form-field textarea,
+  .form-field textarea {
+    padding: 26px 20px 10px !important;
+  }
+
   .form-field select {
-    padding: 16px 20px !important; /* More breathable typing zone */
+    padding: 16px 20px !important;
   }
 
   /* Tighten headings line-height to prevent typographic collision */
   h1, h2, h3, .about__heading, .process-header h2, .contact__heading {
     line-height: 1.1 !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AWWWARDS POLISH LAYER — micro-interactions & craft details
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Text selection ─────────────────────────────────────── */
+::selection {
+  background: rgba(201, 243, 29, 0.22);
+  color: var(--white);
+}
+
+/* ─── Keyboard focus ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+/* ─── Button press state ─────────────────────────────────── */
+.btn:active {
+  transform: translateY(1px) scale(0.975) !important;
+  transition-duration: 0.06s !important;
+}
+
+/* ─── Nav CTA — more prominent once page is scrolled ────── */
+.nav.is-scrolled .nav__cta {
+  background: rgba(201, 243, 29, 0.07);
+  border-color: rgba(201, 243, 29, 0.55);
+}
+
+/* ─── Process step number — editorial accent line ────────── */
+.process-step__num {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.process-step__num::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ─── Scroll-skew: transform-origin anchors elements bottom-centre */
+[data-skew] {
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+/* ─── Services: progress bar ─────────────────────────────── */
+.carmed-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.07);
+  z-index: 25;
+  overflow: hidden;
+}
+
+.carmed-progress__fill {
+  height: 100%;
+  width: 20%;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  box-shadow: 0 0 12px rgba(201, 243, 29, 0.5);
+  transition: width 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 768px) {
+  .carmed-progress {
+    display: none;
+  }
+}
+
+/* ─── Floating labels (contact form) ─────────────────────── */
+.form-field {
+  position: relative;
+}
+
+/* When label is a sibling AFTER the input/textarea → floating */
+.form-field input + label,
+.form-field textarea + label {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  margin-bottom: 0;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(245, 240, 232, 0.38);
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  transition:
+    top      0.22s var(--ease-out),
+    font-size 0.22s var(--ease-out),
+    letter-spacing 0.22s,
+    color    0.22s,
+    font-family 0.22s;
+}
+
+/* Floated state: focused or filled */
+.form-field input:focus + label,
+.form-field input:not(:placeholder-shown) + label,
+.form-field textarea:focus + label,
+.form-field textarea:not(:placeholder-shown) + label {
+  top: 7px;
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Taller padding so floating label has room */
+.form-field input,
+.form-field textarea {
+  padding-top: 22px;
+  padding-bottom: 8px;
+}
+
+/* Input border accent on focus — reinforces the floating label */
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: rgba(201, 243, 29, 0.5);
+  box-shadow: 0 0 0 3px rgba(201, 243, 29, 0.06);
+}
+
+/* ─── Portfolio: mobile swipe dots ───────────────────────── */
+.port-swipe-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 1.25rem 0 0.5rem;
+  pointer-events: none;
+}
+
+.port-swipe-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.18);
+  transition: width 0.35s var(--ease-out), background 0.35s, box-shadow 0.35s;
+  flex-shrink: 0;
+}
+
+.port-swipe-dot.is-active {
+  width: 20px;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(201, 243, 29, 0.5);
+}
+
+@media (max-width: 768px) {
+  .port-swipe-dots {
+    display: flex;
   }
 }

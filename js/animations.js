@@ -675,6 +675,35 @@
     });
   }
 
+  /* ── Scroll velocity skew ───────────────────────────────────
+     Sections tilt subtly when the user scrolls fast, then
+     spring back. Gives the page a physical, alive quality.
+     Only fires on fine-pointer devices; skips reduced-motion.
+  ──────────────────────────────────────────────────────────── */
+  function initScrollSkew() {
+    if (reduced) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    var skewSetter = gsap.quickSetter('[data-skew]', 'skewY', 'deg');
+    var clamp      = gsap.utils.clamp(-2.2, 2.2);
+    var current    = 0;
+
+    ScrollTrigger.create({
+      onUpdate: function (self) {
+        var raw = self.getVelocity() / 380;
+        if (Math.abs(raw) > Math.abs(current)) {
+          current = clamp(raw);
+          gsap.to({ val: current }, {
+            val: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            onUpdate: function () { skewSetter(this.targets()[0].val); }
+          });
+        }
+      }
+    });
+  }
+
   /* ── initAllAnimations — called after loader completes ─────  */
   window.initAllAnimations = function (threeObjects) {
 
@@ -717,6 +746,7 @@
     try { initCursorTrail(); }       catch (e) {}
     try { initMagnetic(); }          catch (e) {}
     try { initTicker(); }            catch (e) {}
+    try { initScrollSkew(); }        catch (e) {}
 
     // 10. Nav and Section Tracker (Runs last after all layout is completely locked)
     try { initSectionTracker(); }    catch (e) {}
