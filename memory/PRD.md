@@ -42,3 +42,38 @@ Adicionar micro CTA "Ver Preview do Seu Site em 48h" com formulário de 3 campos
 - `/app/js/enhancements.js` (+ initLazyVideos)  
 - `/app/css/reveal-scene.css` (+ slam glow, showreel, process video)
 - `/app/index.html` (+ Showreel section, + 3 video tags, + data-slam attrs)
+
+## Iteração 3 (10/Jan/2026)
+### Laptop 3D realista (v3)
+- **Base + Lid**: `ExtrudeGeometry` com `Shape` de rounded rect (raio 0.14 base, 0.10 lid) + bevel de 6 segmentos → cantos suaves reais
+- **Materiais PBR**: `MeshStandardMaterial` com metalness 0.88 / roughness 0.32 no alumínio + `envMapIntensity: 1.2`
+- **Environment map procedural**: `PMREMGenerator` de um `Scene` interno com gradiente vertical (lime top / dark bottom) + 3 point lights (lime + white + blue accent) — dá reflexão de estúdio real na carcaça
+- **Teclado**: 14×5 = 70 teclas individuais (BoxGeometry 0.16³) em grid com gap 0.023 → parece MacBook real
+- **Trackpad**: rounded rect extruído (1.1 × 0.7) com material metalness 0.6 + edge line
+- **Bezel de tela**: Shape com hole (rect com bordas arredondadas dentro) → moldura de tela com espessura real
+- **Screen glow**: plane emissivo lime atrás da tela com AdditiveBlending, opacidade ramps 0→0.22 durante fase design/live
+- **Logo**: círculo lime emissive nas costas do lid (rotação 180°)
+- **Renderer**: sRGB encoding + ACESFilmicToneMapping + exposure 1.1 → cores mais ricas
+- **3-point + fill lighting rig**: key (lime), rim (white), fill (soft lime)
+
+### Hook GLTF (extensível)
+- Setar `window.HN_LAPTOP_MODEL_URL = 'https://.../laptop.glb'` ANTES do reveal-scene.js carregar
+- Carrega via `GLTFLoader` + `DRACOLoader` (CDN jsdelivr r128), oculta partes procedurais e adiciona modelo
+- Fallback automático para procedural se falha o load
+
+### Slam Cinematográfico (v3)
+- **Entrada**: `translateY(-80px) scale(2.2) rotate(-3deg)` + `blur(28px)` + `brightness(1.6)` — cai do topo da tela com motion blur
+- **Impacto (0.35s)**: 
+  - Text shake ±5px × 4 keyframes (translate + rotate wobble)
+  - `.slam-burst` DOM injetado com JS: 3 anéis concêntricos expandindo (scale 0.1→6, opacity 1→0) com delays 0.35/0.42/0.50s
+  - 8 partículas radiais em ângulos 45° com jitter, cada uma voa `--dx/--dy` a distância 60-100px
+  - `.slam-bar` horizontal (lightning line gradient lime→white→lime) atravessa o elemento
+  - Camera shake no `.parentElement` (± 4px por 420ms com cubic-bezier explosivo)
+- **Chromatic aberration**: pseudo `::after` clona o texto (via `content: attr(data-text)`) em vermelho + azul cyan com blend mode screen → estilo hit RGB flash
+- **Afterglow**: pseudo `::before` gera aura radial lime (blur 18px) que cresce scale 0→1.3 durante 2.2s
+
+### Files touched
+- `/app/js/reveal-scene.js` (rewrite v3 — 380+ linhas com laptop realista completo)
+- `/app/js/enhancements.js` (initSlam v2 com injectBurst)
+- `/app/css/reveal-scene.css` (slam CINEMATIC: rings, particles, bar, chromatic, camera shake keyframes)
+- `/app/index.html` (+ GLTFLoader + DRACOLoader script tags)

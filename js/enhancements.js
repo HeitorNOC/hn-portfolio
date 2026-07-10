@@ -54,22 +54,84 @@
     });
   }
 
-  /* ── Slam-in effect ──────────────────────────────────── */
+  /* ── Slam-in CINEMATIC effect ──────────────────────────
+     On hit, inject a .slam-burst child with 3 shockwave rings
+     + 8 radially-directed particles + a horizontal impact bar.
+     Also mirrors the text into a data-text attr so the CSS
+     chromatic aberration layer can use it via ::after content. */
+  function injectBurst(el) {
+    if (el.querySelector('.slam-burst')) return;
+    var burst = document.createElement('span');
+    burst.className = 'slam-burst';
+    burst.setAttribute('aria-hidden', 'true');
+
+    // 3 shockwave rings
+    for (var i = 1; i <= 3; i++) {
+      var r = document.createElement('span');
+      r.className = 'slam-ring slam-ring--' + i;
+      burst.appendChild(r);
+    }
+
+    // 8 radial particles at 45° increments (± jitter)
+    for (var k = 0; k < 8; k++) {
+      var p = document.createElement('span');
+      p.className = 'slam-particle';
+      var baseAngle = (k / 8) * Math.PI * 2;
+      var jitter = (Math.random() - 0.5) * 0.4;
+      var angle = baseAngle + jitter;
+      var dist = 60 + Math.random() * 40;
+      p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      p.style.animationDelay = (0.4 + Math.random() * 0.08) + 's';
+      burst.appendChild(p);
+    }
+
+    // Horizontal impact bar
+    var bar = document.createElement('span');
+    bar.className = 'slam-bar';
+    burst.appendChild(bar);
+
+    el.appendChild(burst);
+
+    // Camera shake on parent container
+    var parent = el.parentElement;
+    if (parent && !parent.classList.contains('slam-shake-parent')) {
+      parent.classList.add('slam-shake-parent');
+      parent.style.animation = 'slam-shake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.35s';
+      setTimeout(function () {
+        parent.style.animation = '';
+        parent.classList.remove('slam-shake-parent');
+      }, 900);
+    }
+
+    // Cleanup burst after animations complete (~2.5s)
+    setTimeout(function () { if (burst && burst.parentNode) burst.parentNode.removeChild(burst); }, 2600);
+  }
+
   function initSlam() {
     var els = document.querySelectorAll('[data-slam]');
     if (!els.length) return;
 
-    els.forEach(function (el) { el.classList.add('slam-in'); });
+    // Copy text content into data-text for chromatic aberration layer
+    els.forEach(function (el) {
+      el.classList.add('slam-in');
+      if (!el.hasAttribute('data-text')) {
+        el.setAttribute('data-text', el.textContent.trim());
+      }
+    });
 
     if (!('IntersectionObserver' in window)) {
-      els.forEach(function (el) { el.classList.add('is-hit'); });
+      els.forEach(function (el) { el.classList.add('is-hit'); injectBurst(el); });
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-hit');
-          io.unobserve(entry.target);
+          var el = entry.target;
+          el.classList.add('is-hit');
+          // Delay burst injection to match text impact frame (~350ms)
+          setTimeout(function () { injectBurst(el); }, 340);
+          io.unobserve(el);
         }
       });
     }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
