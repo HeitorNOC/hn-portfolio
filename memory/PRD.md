@@ -77,3 +77,26 @@ Adicionar micro CTA "Ver Preview do Seu Site em 48h" com formulário de 3 campos
 - `/app/js/enhancements.js` (initSlam v2 com injectBurst)
 - `/app/css/reveal-scene.css` (slam CINEMATIC: rings, particles, bar, chromatic, camera shake keyframes)
 - `/app/index.html` (+ GLTFLoader + DRACOLoader script tags)
+
+## Iteração 4 (10/Jan/2026)
+### Escopo dos ajustes
+- **Slam restringido**: `data-slam` removido de About, Process (3 etapas), Portfolio. Mantido APENAS em "Cada frame é um projeto lançado." (showreel).
+- **Showreel refeito como scroll-scrubbed (Awwwards-style)**:
+  - Section agora ocupa `height: 320vh` (3 fases × 1 viewport de scroll travel)
+  - `.showreel-sticky` fullscreen `height: 100vh` sticky
+  - Vídeo NÃO usa autoplay/loop — `initShowreelScrub` no `/app/js/enhancements.js` seta `video.currentTime = scrollProgress × video.duration` em cada scroll event
+  - Câmera cinematográfica: `scale(1.18 → 1.02)`, `translateX(±1.5%)` sway, `brightness(0.55 → 0.75)`, `saturate(0.7 → 1.05)`, `blur(1.5px → 0)` no primeiro 15%
+  - 3 copy stages (Ideia · Execução · Entrega) com crossfade em thresholds [0-0.42, 0.28-0.72, 0.58-1.0]
+  - HUD superior: badge com pulse-dot + timecode ao vivo formatando `MM:SS / MM:SS`
+  - Progress bar inferior com 3 stops iluminando conforme fases
+  - Vignette radial + scanlines CRT + tint lime overlay
+  - Scroll hint "SCROLL" com line pulsando
+
+### Responsividade
+- Media queries adicionadas para 900px e 600px: HUD stack vertical no mobile, título escala 2rem→3.5rem, sub escala 0.95rem, padding reduzido
+- Site inteiro já era responsivo (nav hamburguer, port-card horizontal scroll no mobile, process step vertical, etc.)
+
+### Files touched
+- `/app/index.html` — Showreel section refeita, `data-slam` removido de About/Process/Portfolio
+- `/app/js/enhancements.js` — `initShowreelScrub()` + `initLazyVideos` limitado a `.process-step__video`
+- `/app/css/reveal-scene.css` — Showreel refeito (scroll-scrubbed, cinema transforms, HUD, progress, stages, responsive)

@@ -161,9 +161,141 @@
     update();
   }
 
-  /* ── Lazy-load & autoplay videos (process steps + showreel) ── */
+  /* ── Showreel scroll-scrubbing (Awwwards-style) ───────
+     Fullscreen sticky section. Scroll progress drives:
+     • video.currentTime (frame scrub)
+     • cinema transforms (zoom, blur, tint opacity)
+     • 3 copy stages fade through
+     • timecode display + progress bar */
+  function initShowreelScrub() {
+    var root = document.getElementById('showreel');
+    if (!root) return;
+    var video = root.querySelector('.showreel__video');
+    var tint = root.querySelector('.showreel__tint');
+    var stages = root.querySelectorAll('.showreel-stage');
+    var progressFill = root.querySelector('#showreel-fill');
+    var stops = root.querySelectorAll('.showreel__progress-stops span');
+    var tc = root.querySelector('#showreel-tc');
+    if (!video) return;
+
+    // Load the video src from data-src (was excluded from lazy-load autoplay)
+    if (!video.src && video.dataset.src) {
+      video.src = video.dataset.src;
+      video.load();
+    }
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Prevent autoplay — we manually scrub currentTime
+    video.pause();
+    video.autoplay = false;
+    video.loop = false;
+    video.muted = true;
+
+    // Wait for metadata to know duration; some mobile browsers need play() to enable seek
+    var duration = 0;
+    function onMeta() {
+      duration = video.duration || 0;
+      updateFromScroll();
+    }
+    if (video.readyState >= 1) onMeta();
+    else video.addEventListener('loadedmetadata', onMeta);
+
+    function fmtTime(t) {
+      if (!isFinite(t) || t < 0) t = 0;
+      var m = Math.floor(t / 60);
+      var s = Math.floor(t % 60);
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function clamp01(t) { return Math.max(0, Math.min(1, t)); }
+
+    var pendingSeek = null;
+    function safeSeek(target) {
+      if (!isFinite(target) || target < 0) return;
+      pendingSeek = target;
+      try {
+        video.currentTime = target;
+      } catch (e) { /* seeking may throw during buffering */ }
+    }
+
+    var lastProgress = -1;
+    function updateFromScroll() {
+      var r = root.getBoundingClientRect();
+      var travel = r.height - window.innerHeight;
+      if (travel <= 0) return;
+      var scrolled = Math.min(Math.max(-r.top, 0), travel);
+      var p = clamp01(scrolled / travel);
+
+      if (Math.abs(p - lastProgress) < 0.001) return;
+      lastProgress = p;
+
+      // Video scrub (throttled seeks)
+      if (duration > 0 && !reduced) {
+        safeSeek(p * duration);
+      }
+
+      // Cinema camera transforms — synced to progress
+      // Zoom OUT from 1.15 → 1.0, sway left/right, brightness ramps
+      var zoom = lerp(1.18, 1.02, p);
+      var swayX = Math.sin(p * Math.PI * 2) * 1.5;  // % translate
+      var brightness = lerp(0.55, 0.75, p);
+      var saturate = lerp(0.7, 1.05, p);
+      var blur = lerp(1.5, 0, clamp01(p / 0.15)); // blur clears in first 15%
+      video.style.transform = 'scale(' + zoom + ') translateX(' + swayX + '%)';
+      video.style.filter = 'contrast(1.1) saturate(' + saturate + ') brightness(' + brightness + ') blur(' + blur + 'px)';
+
+      // Tint fades out as user goes deeper (video becomes cleaner)
+      if (tint) tint.style.opacity = lerp(1, 0.35, p);
+
+      // Stage crossfade at thresholds [0, 0.33, 0.66]
+      var thresholds = [[0, 0.42], [0.28, 0.72], [0.58, 1.0]];
+      stages.forEach(function (el, i) {
+        var range = thresholds[i] || [0, 0];
+        var inRange = p >= range[0] && p < range[1];
+        if (inRange) {
+          var local = (p - range[0]) / (range[1] - range[0]);
+          var opac = Math.min(1, local * 4) - Math.max(0, (local - 0.75) * 4);
+          var y = lerp(30, -30, local);
+          el.style.opacity = Math.max(0, opac);
+          el.style.transform = 'translateY(' + y + 'px)';
+        } else {
+          el.style.opacity = 0;
+        }
+      });
+
+      // Progress bar
+      if (progressFill) progressFill.style.width = (p * 100) + '%';
+      if (stops.length) {
+        stops.forEach(function (s, i) {
+          var t = i / (stops.length - 1);
+          s.classList.toggle('is-hit', p >= t - 0.02);
+        });
+      }
+
+      // Timecode
+      if (tc && duration > 0) {
+        tc.textContent = fmtTime(p * duration) + ' / ' + fmtTime(duration);
+      }
+    }
+
+    window.addEventListener('scroll', updateFromScroll, { passive: true });
+    window.addEventListener('resize', updateFromScroll);
+    updateFromScroll();
+
+    // Some iOS/Safari need a tap to allow seek — try play/pause once on first scroll
+    var unlocked = false;
+    function unlock() {
+      if (unlocked) return;
+      unlocked = true;
+      var p = video.play();
+      if (p && p.then) p.then(function () { video.pause(); }).catch(function () {});
+    }
+    window.addEventListener('scroll', unlock, { once: true, passive: true });
+    window.addEventListener('touchstart', unlock, { once: true, passive: true });
+  }
   function initLazyVideos() {
-    var videos = document.querySelectorAll('video[data-src]');
+    var videos = document.querySelectorAll('.process-step__video[data-src]');
     if (!videos.length) return;
 
     function loadVideo(v) {
@@ -211,6 +343,7 @@
     initSlam();
     initRevealProgress();
     initLazyVideos();
+    initShowreelScrub();
   }
 
   if (document.readyState === 'loading') {

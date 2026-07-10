@@ -357,7 +357,7 @@
 
       <div class="about__left">
         <span class="label about__label">// 002 — Sobre nós</span>
-        <h2 class="about__heading" data-slam>
+        <h2 class="about__heading">
           <span class="reveal-line"><span>Agilidade real,</span></span>
           <span class="reveal-line"><span>código de</span></span>
           <span class="reveal-line about__heading-accent"><span>elite.</span></span>
@@ -420,7 +420,7 @@
         </div>
         <div class="process-step__body">
           <span class="label process-step__num">Etapa 01</span>
-        <h3 class="process-step__title" data-slam>Descoberta</h3>
+        <h3 class="process-step__title">Descoberta</h3>
           <p class="process-step__text">Mergulhamos no seu negócio. Mapeamos desafios, objetivos e oportunidades digitais para construir uma estratégia sólida e personalizada.</p>
           <ul class="process-step__tags">
             <li>Diagnóstico</li>
@@ -439,7 +439,7 @@
         </div>
         <div class="process-step__body">
           <span class="label process-step__num">Etapa 02</span>
-          <h3 class="process-step__title" data-slam>Construção</h3>
+          <h3 class="process-step__title">Construção</h3>
           <p class="process-step__text">Desenvolvimento ágil e iterativo. Design e código em paralelo, com entregas incrementais, testes constantes e feedback que molda o resultado.</p>
           <ul class="process-step__tags">
             <li>Design System</li>
@@ -458,7 +458,7 @@
         </div>
         <div class="process-step__body">
           <span class="label process-step__num">Etapa 03</span>
-          <h3 class="process-step__title" data-slam>Lançamento</h3>
+          <h3 class="process-step__title">Lançamento</h3>
           <p class="process-step__text">Deploy com qualidade, monitoramento em tempo real e suporte contínuo para garantir que a solução cresce junto com o negócio.</p>
           <ul class="process-step__tags">
             <li>CI/CD</li>
@@ -668,18 +668,56 @@
 
 
 
-  <!-- ═══════════════════════ SHOWREEL ═══════════════════════ -->
-  <section class="showreel" aria-label="Reel de trabalhos">
-    <video class="showreel__video" muted loop playsinline autoplay preload="metadata"
-      poster="assets/images/jd.png"
-      data-src="https://videos.pexels.com/video-files/6963744/6963744-hd_1920_1080_25fps.mp4"></video>
-    <div class="showreel__overlay" aria-hidden="true"></div>
-    <div class="showreel__scanlines" aria-hidden="true"></div>
-    <div class="showreel__inner">
-      <span class="showreel__badge">Ao vivo · Produção 2026</span>
-      <h2 class="showreel__title" data-slam>Cada frame é um <em>projeto lançado.</em></h2>
-      <p class="showreel__sub">Do briefing ao deploy — vídeo real do nosso fluxo de trabalho. Nada de mockup. Nada de vitrine falsa.</p>
-      <span class="showreel__label">// Rolar para ver os cases</span>
+  <!-- ═══════════════════════ SHOWREEL (scroll-scrubbed) ═══════════════════════ -->
+  <section id="showreel" class="showreel-root" aria-label="Showreel de produção">
+    <div class="showreel-sticky">
+      <video class="showreel__video" muted playsinline preload="auto"
+        poster="assets/images/heitor.png"
+        data-src="https://videos.pexels.com/video-files/6963744/6963744-hd_1920_1080_25fps.mp4"></video>
+      <div class="showreel__vignette" aria-hidden="true"></div>
+      <div class="showreel__scanlines" aria-hidden="true"></div>
+      <div class="showreel__tint" aria-hidden="true"></div>
+
+      <!-- Fixed HUD elements -->
+      <div class="showreel__hud-top">
+        <span class="showreel__badge">
+          <span class="showreel__badge-dot"></span>
+          Ao vivo · Produção 2026
+        </span>
+        <span class="showreel__timecode" id="showreel-tc">00:00 / 00:00</span>
+      </div>
+
+      <!-- Progress bar bottom -->
+      <div class="showreel__progress" aria-hidden="true">
+        <div class="showreel__progress-fill" id="showreel-fill"></div>
+        <div class="showreel__progress-stops">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- Scroll-scrubbed copy stages -->
+      <div class="showreel-copy">
+        <div class="showreel-stage" data-stage="0">
+          <span class="showreel__label">// Fase 01 · Ideia</span>
+          <h2 class="showreel__title" data-slam>Cada frame é um <em>projeto lançado.</em></h2>
+          <p class="showreel__sub">Do briefing ao deploy — vídeo real do nosso fluxo. Nada de mockup. Nada de vitrine falsa. Faça scroll para ver o filme.</p>
+        </div>
+        <div class="showreel-stage" data-stage="1">
+          <span class="showreel__label">// Fase 02 · Execução</span>
+          <h2 class="showreel__title-alt">Código que <em>vira valor</em>.</h2>
+          <p class="showreel__sub">Todo commit é uma decisão de produto. Cada linha vive em produção resolvendo um problema real do cliente.</p>
+        </div>
+        <div class="showreel-stage" data-stage="2">
+          <span class="showreel__label">// Fase 03 · Entrega</span>
+          <h2 class="showreel__title-alt">Prazo é <em>promessa</em>.</h2>
+          <p class="showreel__sub">Ao vivo, monitorado, escalável. Você não recebe um arquivo — recebe um negócio digital funcionando.</p>
+        </div>
+      </div>
+
+      <div class="showreel__scroll-hint" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="showreel__scroll-line"></span>
+      </div>
     </div>
   </section>
 
@@ -751,7 +789,7 @@
 
       <header class="port-header">
         <span class="label port-header__label">// 005 — Cases</span>
-        <h2 class="port-header__title" data-slam>Portfólio</h2>
+        <h2 class="port-header__title">Portfólio</h2>
         <p class="port-header__sub">Projetos reais. Resultados mensuráveis.</p>
       </header>
 
