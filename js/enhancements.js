@@ -54,88 +54,90 @@
     });
   }
 
-  /* ── Slam-in CINEMATIC effect ──────────────────────────
-     On hit, inject a .slam-burst child with 3 shockwave rings
-     + 8 radially-directed particles + a horizontal impact bar.
-     Also mirrors the text into a data-text attr so the CSS
-     chromatic aberration layer can use it via ::after content. */
-  function injectBurst(el) {
-    if (el.querySelector('.slam-burst')) return;
-    var burst = document.createElement('span');
-    burst.className = 'slam-burst';
-    burst.setAttribute('aria-hidden', 'true');
+  /* ── Slam ELEGANT — char-by-char mask reveal (v4) ─────
+     Wraps each character in .slam-char > span so CSS can drive
+     a staggered translateY(110%)→0 reveal. Underline + soft
+     glow appear after the last character lands. */
+  function wrapChars(el) {
+    if (el.dataset.charsWrapped) return;
+    el.dataset.charsWrapped = '1';
 
-    // 3 shockwave rings
-    for (var i = 1; i <= 3; i++) {
-      var r = document.createElement('span');
-      r.className = 'slam-ring slam-ring--' + i;
-      burst.appendChild(r);
+    // Preserve child HTML (e.g. <em>) but wrap chars inside all text nodes
+    var idx = 0;
+    function process(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var text = node.nodeValue;
+        var frag = document.createDocumentFragment();
+        for (var i = 0; i < text.length; i++) {
+          var ch = text[i];
+          if (ch === ' ') {
+            var s = document.createElement('span');
+            s.className = 'slam-space';
+            frag.appendChild(s);
+          } else {
+            var wrap = document.createElement('span');
+            wrap.className = 'slam-char';
+            wrap.style.setProperty('--i', idx);
+            var inner = document.createElement('span');
+            inner.textContent = ch;
+            wrap.appendChild(inner);
+            frag.appendChild(wrap);
+            idx++;
+          }
+        }
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // Recurse into element children (like <em>)
+        Array.prototype.slice.call(node.childNodes).forEach(process);
+      }
     }
-
-    // 8 radial particles at 45° increments (± jitter)
-    for (var k = 0; k < 8; k++) {
-      var p = document.createElement('span');
-      p.className = 'slam-particle';
-      var baseAngle = (k / 8) * Math.PI * 2;
-      var jitter = (Math.random() - 0.5) * 0.4;
-      var angle = baseAngle + jitter;
-      var dist = 60 + Math.random() * 40;
-      p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-      p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-      p.style.animationDelay = (0.4 + Math.random() * 0.08) + 's';
-      burst.appendChild(p);
-    }
-
-    // Horizontal impact bar
-    var bar = document.createElement('span');
-    bar.className = 'slam-bar';
-    burst.appendChild(bar);
-
-    el.appendChild(burst);
-
-    // Camera shake on parent container
-    var parent = el.parentElement;
-    if (parent && !parent.classList.contains('slam-shake-parent')) {
-      parent.classList.add('slam-shake-parent');
-      parent.style.animation = 'slam-shake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.35s';
-      setTimeout(function () {
-        parent.style.animation = '';
-        parent.classList.remove('slam-shake-parent');
-      }, 900);
-    }
-
-    // Cleanup burst after animations complete (~2.5s)
-    setTimeout(function () { if (burst && burst.parentNode) burst.parentNode.removeChild(burst); }, 2600);
+    Array.prototype.slice.call(el.childNodes).forEach(process);
   }
 
   function initSlam() {
     var els = document.querySelectorAll('[data-slam]');
     if (!els.length) return;
 
-    // Copy text content into data-text for chromatic aberration layer
     els.forEach(function (el) {
       el.classList.add('slam-in');
-      if (!el.hasAttribute('data-text')) {
-        el.setAttribute('data-text', el.textContent.trim());
-      }
+      wrapChars(el);
     });
 
     if (!('IntersectionObserver' in window)) {
-      els.forEach(function (el) { el.classList.add('is-hit'); injectBurst(el); });
+      els.forEach(function (el) { el.classList.add('is-hit'); });
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          var el = entry.target;
-          el.classList.add('is-hit');
-          // Delay burst injection to match text impact frame (~350ms)
-          setTimeout(function () { injectBurst(el); }, 340);
-          io.unobserve(el);
+          entry.target.classList.add('is-hit');
+          io.unobserve(entry.target);
         }
       });
     }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ── Process section simple entrance ──────────────────
+     Each .process-step slides up + fades when it enters viewport,
+     staggered by intersection order. */
+  function initProcessEntrance() {
+    var steps = document.querySelectorAll('.process-step');
+    if (!steps.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      steps.forEach(function (s) { s.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+    steps.forEach(function (s) { io.observe(s); });
   }
 
   /* ── Reveal-scene progress fill ─────────────────────── */
@@ -344,6 +346,7 @@
     initRevealProgress();
     initLazyVideos();
     initShowreelScrub();
+    initProcessEntrance();
   }
 
   if (document.readyState === 'loading') {

@@ -100,3 +100,29 @@ Adicionar micro CTA "Ver Preview do Seu Site em 48h" com formulário de 3 campos
 - `/app/index.html` — Showreel section refeita, `data-slam` removido de About/Process/Portfolio
 - `/app/js/enhancements.js` — `initShowreelScrub()` + `initLazyVideos` limitado a `.process-step__video`
 - `/app/css/reveal-scene.css` — Showreel refeito (scroll-scrubbed, cinema transforms, HUD, progress, stages, responsive)
+
+## Iteração 5 (10/Jan/2026)
+### Vídeo showreel mais cinematográfico
+- Trocado de `6963744` (hand typing) → `2887463` (Pexels — código SendGrid em editor com foco cinematográfico + linhas de código animadas) → mais alinhado com contexto de infra/dev
+
+### Slam refinado (v5 — ELEGANT)
+- Removido: 3 anéis de choque, 8 partículas radiais, camera shake, chromatic aberration, impact bar — considerado caótico pelo usuário
+- Substituído por **char-by-char mask reveal**:
+  - `wrapChars()` no `initSlam` envolve cada caractere em `<span class="slam-char"><span>char</span></span>` com `--i` sequencial
+  - CSS: cada char inicia `translateY(110%)` dentro do `overflow: hidden`, revela para 0 com `transition-delay: calc(--i × 22ms)` — stagger elegante da esquerda para direita
+  - **Underline lime L→R** draws após 0.55s via `::after` com `scaleX(0→1)` e drop-shadow lime
+  - **Soft persistent glow** por trás do texto via `::before` (radial gradient ellipse, blur 24px, scale 0.6→1) com delay 0.7s
+  - Recurse dentro de `<em>` para wrap chars mantendo styling gradient lime
+  - Total ~800ms para reveal completo do título — refinado, premium, não chaotic
+
+### Processo — entrada simples
+- `initProcessEntrance()` no `enhancements.js` observer para `.process-step`
+- Cada step slides up 48px + fade-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) ao entrar viewport
+- `.process-step__bg-num` (número gigante ao fundo) escala 0.7→1 com delay 0.15s
+- Divider line lime (`::before`) desenha L→R com `width: 0→100%` e delay 0.35s (menos no primeiro step)
+- Reduced-motion respeitado
+
+### Files touched
+- `/app/index.html` — URL vídeo showreel atualizada
+- `/app/js/enhancements.js` — `initSlam` v4 com `wrapChars()`, novo `initProcessEntrance()`
+- `/app/css/reveal-scene.css` — slam refeito (`.slam-char > span` char reveal + underline draw + soft glow), estilo simple para `.process-step` entrance
