@@ -36,3 +36,9 @@ build/
 *.ntvs*
 *.njsproj
 *.sln
+.env.*
+*.env
+credentials.json
+*.pem
+*.key
+.credentials
