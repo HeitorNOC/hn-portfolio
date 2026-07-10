@@ -75,6 +75,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/reveal-scene.css">
 </head>
 
 <body>
@@ -279,13 +280,84 @@
     </div>
   </div>
 
+  <!-- ══════════════════════ TRUST BAR ══════════════════════ -->
+  <section class="trust-bar" aria-label="Números de credibilidade">
+    <div class="container">
+      <div class="trust-bar__grid">
+        <div class="trust-item">
+          <span class="trust-item__num" data-target="98" data-suffix="%">0%</span>
+          <span class="trust-item__label">Core Web Vitals</span>
+          <span class="trust-item__desc">Sites que passam o Google no primeiro deploy.</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__num" data-target="15" data-suffix=" dias">0</span>
+          <span class="trust-item__label">Prazo Médio</span>
+          <span class="trust-item__desc">Da descoberta ao lançamento — sem enrolação.</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__num" data-target="99.9" data-suffix="%" data-decimals="1">0%</span>
+          <span class="trust-item__label">Uptime Garantido</span>
+          <span class="trust-item__desc">Infra monitorada 24/7, autoescala e failover.</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__num" data-target="120" data-suffix="+">0+</span>
+          <span class="trust-item__label">Projetos Entregues</span>
+          <span class="trust-item__desc">Landing pages, sistemas web e portais premium.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ REVEAL SCENE ══════════════════════ -->
+  <section id="reveal-scene" class="reveal-root" aria-label="Do rascunho ao lançamento">
+    <div class="reveal-stage-wrap">
+      <div class="reveal-copy">
+        <span class="reveal-copy__label">// 002.5 — Como um site nasce aqui</span>
+        <div class="reveal-stages">
+          <div class="reveal-stage" data-stage="0">
+            <span class="reveal-stage__step">FASE 01 · DESCOBERTA</span>
+            <h2 class="reveal-stage__title">Todo projeto começa <em>coberto</em>.</h2>
+            <p class="reveal-stage__text">Antes do design existir, existe o negócio. Estudamos seu público, seus concorrentes e o objetivo real por trás do clique. Nada é decidido no achismo.</p>
+          </div>
+          <div class="reveal-stage" data-stage="1">
+            <span class="reveal-stage__step">FASE 02 · WIREFRAME</span>
+            <h2 class="reveal-stage__title">A capa sai. Surge a <em>estrutura</em>.</h2>
+            <p class="reveal-stage__text">Cada bloco tem propósito de conversão. Layout, hierarquia e CTAs mapeados antes do primeiro pixel de design. Zero desperdício.</p>
+          </div>
+          <div class="reveal-stage" data-stage="2">
+            <span class="reveal-stage__step">FASE 03 · DESIGN</span>
+            <h2 class="reveal-stage__title">A identidade <em>ganha vida</em>.</h2>
+            <p class="reveal-stage__text">Tipografia com personalidade, paleta que passa credibilidade, micro-interações que encantam. Cada detalhe reforça a marca e conduz o visitante à ação.</p>
+          </div>
+          <div class="reveal-stage" data-stage="3">
+            <span class="reveal-stage__step">FASE 04 · PRODUÇÃO</span>
+            <h2 class="reveal-stage__title">No ar. <em>Vendendo.</em></h2>
+            <p class="reveal-stage__text">Deploy contínuo, Core Web Vitals A+, monitoramento 24/7 e SEO técnico. Seu site não é entregue — é lançado.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-canvas-wrap">
+        <canvas id="reveal-canvas" aria-hidden="true"></canvas>
+      </div>
+
+      <div class="reveal-progress" aria-hidden="true">
+        <div class="reveal-progress__fill"></div>
+        <div class="reveal-progress__stops">
+          <span class="is-hit"></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ═══════════════════════ SOBRE ═══════════════════════ -->
   <section id="sobre" class="section about">
     <div class="container about__grid" data-skew>
 
       <div class="about__left">
         <span class="label about__label">// 002 — Sobre nós</span>
-        <h2 class="about__heading">
+        <h2 class="about__heading" data-slam>
           <span class="reveal-line"><span>Agilidade real,</span></span>
           <span class="reveal-line"><span>código de</span></span>
           <span class="reveal-line about__heading-accent"><span>elite.</span></span>
@@ -342,12 +414,13 @@
       <!-- Step 01 -->
       <div class="process-step" data-step="01">
         <div class="process-step__aside">
+          <video class="process-step__video" muted loop playsinline preload="metadata" data-src="https://videos.pexels.com/video-files/6774213/6774213-hd_1920_1080_30fps.mp4" aria-hidden="true"></video>
           <canvas class="process-step__canvas" id="process-canvas-1" aria-hidden="true"></canvas>
           <span class="process-step__bg-num" aria-hidden="true">01</span>
         </div>
         <div class="process-step__body">
           <span class="label process-step__num">Etapa 01</span>
-          <h3 class="process-step__title">Descoberta</h3>
+        <h3 class="process-step__title" data-slam>Descoberta</h3>
           <p class="process-step__text">Mergulhamos no seu negócio. Mapeamos desafios, objetivos e oportunidades digitais para construir uma estratégia sólida e personalizada.</p>
           <ul class="process-step__tags">
             <li>Diagnóstico</li>
@@ -360,12 +433,13 @@
       <!-- Step 02 -->
       <div class="process-step" data-step="02">
         <div class="process-step__aside">
+          <video class="process-step__video" muted loop playsinline preload="metadata" data-src="https://videos.pexels.com/video-files/3255275/3255275-hd_1920_1080_25fps.mp4" aria-hidden="true"></video>
           <canvas class="process-step__canvas" id="process-canvas-2" aria-hidden="true"></canvas>
           <span class="process-step__bg-num" aria-hidden="true">02</span>
         </div>
         <div class="process-step__body">
           <span class="label process-step__num">Etapa 02</span>
-          <h3 class="process-step__title">Construção</h3>
+          <h3 class="process-step__title" data-slam>Construção</h3>
           <p class="process-step__text">Desenvolvimento ágil e iterativo. Design e código em paralelo, com entregas incrementais, testes constantes e feedback que molda o resultado.</p>
           <ul class="process-step__tags">
             <li>Design System</li>
@@ -378,12 +452,13 @@
       <!-- Step 03 -->
       <div class="process-step" data-step="03">
         <div class="process-step__aside">
+          <video class="process-step__video" muted loop playsinline preload="metadata" data-src="https://videos.pexels.com/video-files/7947453/7947453-hd_1920_1080_30fps.mp4" aria-hidden="true"></video>
           <canvas class="process-step__canvas" id="process-canvas-3" aria-hidden="true"></canvas>
           <span class="process-step__bg-num" aria-hidden="true">03</span>
         </div>
         <div class="process-step__body">
           <span class="label process-step__num">Etapa 03</span>
-          <h3 class="process-step__title">Lançamento</h3>
+          <h3 class="process-step__title" data-slam>Lançamento</h3>
           <p class="process-step__text">Deploy com qualidade, monitoramento em tempo real e suporte contínuo para garantir que a solução cresce junto com o negócio.</p>
           <ul class="process-step__tags">
             <li>CI/CD</li>
@@ -593,6 +668,21 @@
 
 
 
+  <!-- ═══════════════════════ SHOWREEL ═══════════════════════ -->
+  <section class="showreel" aria-label="Reel de trabalhos">
+    <video class="showreel__video" muted loop playsinline autoplay preload="metadata"
+      poster="assets/images/jd.png"
+      data-src="https://videos.pexels.com/video-files/6963744/6963744-hd_1920_1080_25fps.mp4"></video>
+    <div class="showreel__overlay" aria-hidden="true"></div>
+    <div class="showreel__scanlines" aria-hidden="true"></div>
+    <div class="showreel__inner">
+      <span class="showreel__badge">Ao vivo · Produção 2026</span>
+      <h2 class="showreel__title" data-slam>Cada frame é um <em>projeto lançado.</em></h2>
+      <p class="showreel__sub">Do briefing ao deploy — vídeo real do nosso fluxo de trabalho. Nada de mockup. Nada de vitrine falsa.</p>
+      <span class="showreel__label">// Rolar para ver os cases</span>
+    </div>
+  </section>
+
   <!-- ═══════════════════════ PORTFÓLIO ═══════════════════════ -->
   <section id="portfolio" class="port-root">
     <div id="port-stage" class="port-stage">
@@ -661,7 +751,7 @@
 
       <header class="port-header">
         <span class="label port-header__label">// 005 — Cases</span>
-        <h2 class="port-header__title">Portfólio</h2>
+        <h2 class="port-header__title" data-slam>Portfólio</h2>
         <p class="port-header__sub">Projetos reais. Resultados mensuráveis.</p>
       </header>
 
@@ -815,6 +905,8 @@
   <script src="js/manifesto-shader.js"></script>
   <script src="js/portfolio-shader.js"></script>
   <script src="js/cta-shader.js"></script>
+  <script src="js/reveal-scene.js"></script>
+  <script src="js/enhancements.js"></script>
   <script src="js/main.js"></script>
   <!-- Vercel Analytics — ativar em: vercel.com/dashboard → projeto → Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -845,3 +937,4 @@
 </body>
 
 </html>
+ml>

@@ -285,6 +285,9 @@
     initContactForm();
     if (window.initManifestoShader) initManifestoShader();
     if (window.initPortfolioShader) initPortfolioShader();
+    if (window.initRevealScene) {
+      try { initRevealScene(); } catch (e) { console.warn('reveal-scene:', e); }
+    }
 
     var threeObj = window.initThreeScene ? initThreeScene() : null;
     if (window.initLightning) initLightning();

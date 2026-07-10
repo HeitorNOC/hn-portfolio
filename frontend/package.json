@@ -1,0 +1,8 @@
+{
+  "name": "hn-static-serve",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve /app -l tcp://0.0.0.0:3000 --no-clipboard --no-request-logging"
+  },
+  "dependencies": { "serve": "14.2.4" }
+}
