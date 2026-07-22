@@ -726,11 +726,11 @@
     // 3. Manifesto (Manifesto)
     try { if (window.initManifestoAnimations) initManifestoAnimations(); } catch (e) {}
 
-    // 4. Serviços (Services)
-    try { if (window.initServicesV3) initServicesV3(); } catch (e) {}
+    // 4. Serviços (Services) — índice interativo (era o carrossel pinado v3)
+    try { if (window.initServicos) initServicos(); } catch (e) {}
 
     // 5. Portfólio (Portfolio)
-    try { if (window.initPortfolio3D) initPortfolio3D(); } catch (e) {}
+    try { if (window.initPortfolio) initPortfolio(); } catch (e) {}
 
     // 6. CTA Bridge
     try { if (window.initCtaShader) window.initCtaShader(); } catch (e) {}
@@ -746,7 +746,9 @@
     try { initCursorTrail(); }       catch (e) {}
     try { initMagnetic(); }          catch (e) {}
     try { initTicker(); }            catch (e) {}
-    try { initScrollSkew(); }        catch (e) {}
+    /* initScrollSkew() removido a pedido: inclinava (skewY) as seções Sobre e
+       Contato conforme a velocidade do scroll — "texto caindo para o lado".
+       A função segue definida acima caso se queira reativar. */
 
     // 10. Nav and Section Tracker (Runs last after all layout is completely locked)
     try { initSectionTracker(); }    catch (e) {}

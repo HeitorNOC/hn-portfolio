@@ -1,0 +1,166 @@
+/* ═══════════════════════════════════════════════════════════
+   HN Services — Serviços: jogo de objetos
+   ─────────────────────────────────────────────────────────
+   Referência: grids.obys.agency — blocos geométricos sólidos de
+   proporções variadas, alguns em diagonal, linhas de grade finas,
+   micro-label rotacionado, número grande e tipografia que sangra.
+
+   Cada serviço tem SUA composição de blocos; trocar recoreografa
+   todos eles (posição, proporção e rotação) ao mesmo tempo.
+   ═══════════════════════════════════════════════════════════ */
+
+.obj-root {
+  position: relative;
+  width: 100%;
+  padding: var(--space-10) 0;
+  background: var(--bg);
+  overflow: hidden;          /* deixa o nome sangrar para fora */
+  z-index: 10;
+}
+
+/* ── Linhas de grade (vocabulário Obys) ─────────────────── */
+.obj-rules {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.obj-rules i { border-left: 1px solid rgba(255, 255, 255, 0.06); }
+.obj-rules i:last-child { border-right: 1px solid rgba(255, 255, 255, 0.06); }
+
+.obj-inner { position: relative; z-index: 4; width: min(1280px, 92vw); margin: 0 auto; }
+
+.obj-head { margin-bottom: var(--space-8); }
+.obj-head__label { color: var(--accent); display: block; margin-bottom: var(--space-4); }
+.obj-head__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  letter-spacing: -0.03em;
+  padding-right: 0.25em;
+  color: var(--white);
+}
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: minmax(210px, 280px) 1fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+/* ── Índice ─────────────────────────────────────────────── */
+.obj-idx { list-style: none; }
+.obj-idx li { position: relative; border-top: 1px solid var(--border); }
+.obj-idx li:last-child { border-bottom: 1px solid var(--border); }
+.obj-idx__item {
+  display: flex; align-items: baseline; gap: var(--space-3);
+  width: 100%; padding: var(--space-4) 0;
+  background: none; border: 0; cursor: pointer; text-align: left;
+  color: rgba(245, 240, 232, 0.45);
+  transition: color 0.3s var(--ease-out), padding-left 0.3s var(--ease-out);
+}
+.obj-idx__item:hover { color: rgba(245, 240, 232, 0.8); }
+.obj-idx__item.is-active { color: var(--white); padding-left: var(--space-3); }
+.obj-idx__item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.obj-idx__num {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: rgba(245, 240, 232, 0.3);
+  transition: color 0.3s var(--ease-out);
+}
+.obj-idx__item.is-active .obj-idx__num { color: var(--accent); }
+.obj-idx__name { font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: -0.02em; }
+
+.obj-tags {
+  list-style: none; margin-top: var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.obj-tags li {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: rgba(245, 240, 232, 0.55);
+  padding-left: 14px; position: relative;
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.obj-tags li::before {
+  content: ''; position: absolute; left: 0; top: 0.5em;
+  width: 5px; height: 5px; background: var(--accent);
+}
+.obj-tags.is-swapping li { opacity: 0; transform: translateX(-6px); }
+
+/* ── Palco dos objetos ──────────────────────────────────── */
+.obj-stage {
+  position: relative;
+  height: clamp(300px, 46vh, 460px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.obj-stage__label {
+  position: absolute; left: -22px; top: 50%;
+  transform: rotate(-90deg) translateX(50%);
+  transform-origin: right center;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.3);
+}
+.obj-stage__num {
+  position: absolute; right: var(--space-4); top: var(--space-3); z-index: 6;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: rgba(245, 240, 232, 0.35);
+}
+
+.obj-blocks { position: absolute; inset: 0; z-index: 2; }
+
+/* Base 100×100: o JS anima só transform (x/y/scale/rotate) — sem layout. */
+.obj-block {
+  position: absolute; top: 0; left: 0;
+  width: 100px; height: 100px;
+  will-change: transform;
+}
+.obj-block--fill  { background: var(--accent); }
+.obj-block--light { background: var(--white); }
+.obj-block--dim   { background: rgba(245, 240, 232, 0.14); }
+
+/* ── Nome do serviço: sangra para fora, como na referência ── */
+.obj-name {
+  position: absolute;
+  left: var(--space-5); bottom: var(--space-5);
+  z-index: 5;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5.4vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;                 /* máscara para o reveal */
+  pointer-events: none;
+  /* Sem mix-blend-mode: sobre o lime ele virava azul. Os blocos ficam na
+     faixa de cima (ver BAND no JS) e o nome tem a faixa de baixo só para ele. */
+  text-shadow: 0 2px 30px rgba(8, 8, 8, 0.9);
+}
+.obj-name span { display: block; }
+
+/* véu na base do palco: garante o nome legível se um bloco encostar */
+.obj-stage::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0; height: 42%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--bg) 12%, rgba(8, 8, 8, 0.75) 45%, transparent 100%);
+}
+
+/* ── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .obj-grid { grid-template-columns: 1fr; }
+  .obj-stage { height: clamp(220px, 34vh, 300px); order: -1; }
+  .obj-rules { display: none; }
+  .obj-name { font-size: clamp(1.6rem, 8vw, 2.6rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obj-block { transition: none !important; }
+  .obj-tags li { transition: none; }
+}

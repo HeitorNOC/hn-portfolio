@@ -75,6 +75,9 @@
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/servicos.css">
+  <link rel="stylesheet" href="css/interacao.css">
+  <link rel="stylesheet" href="css/portfolio.css">
 </head>
 
 <body>
@@ -281,7 +284,7 @@
 
   <!-- ═══════════════════════ SOBRE ═══════════════════════ -->
   <section id="sobre" class="section about">
-    <div class="container about__grid" data-skew>
+    <div class="container about__grid">
 
       <div class="about__left">
         <span class="label about__label">// 002 — Sobre nós</span>
@@ -398,280 +401,410 @@
 
 
   <!-- ══════════════════ SERVIÇOS v3 — Carmed Immersive Slides ════════ -->
-  <section id="servicos" class="carmed-root" aria-label="Nossos Serviços">
-    <!-- Discrete top navigation overlay -->
-    <div class="carmed-top-nav" aria-hidden="true">
-      <span class="carmed-top-nav__logo">HN</span>
-      <span class="carmed-top-nav__label">// IMERSÃO GLOBAL EM SERVIÇOS</span>
-    </div>
+  <!-- ═══════════════════════ SERVIÇOS ════════════════════════
+       Índice interativo (antes: carrossel pinado de 500vh — um serviço
+       por tela). Serviços é o CARDÁPIO: tem de ser escaneável de relance.
+       Passar o mouse acende a linha, revela os itens e traz o ícone até o
+       cursor. Referência: o prog-list do estudo "baseline" (linhas
+       numeradas + seta em mola) + preview seguindo o cursor.            -->
+  <!-- ═══════════════════════ SERVIÇOS ════════════════════════
+       O nome do serviço se forma em PARTÍCULAS (motor próprio, reaproveitando
+       a técnica de amostragem de pixels do text-particles do hero). Trocar de
+       serviço desmonta e remonta as partículas no próximo nome. Antes: carrossel
+       pinado de 500vh (um serviço por tela). Nível Awwwards: tipografia gigante,
+       escuro, interativo, numa tela só.                                        -->
+  <!-- ═══════════════════════ SERVIÇOS ════════════════════════
+       Jogo de objetos, no espírito do grids.obys.agency: blocos geométricos
+       de proporções variadas (quadrado, barra, faixa), alguns em diagonal,
+       linhas de grade finas, micro-label rotacionado e número grande.
+       Cada serviço tem SUA composição — trocar recoreografa os blocos, que
+       voam, giram e mudam de proporção até o novo arranjo.                 -->
+  <section id="servicos" class="obj-root" aria-label="Nossos Serviços">
+    <!-- linhas de grade (vocabulário Obys) -->
+    <div class="obj-rules" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
-    <!-- Lateral dots progress indicators -->
-    <div class="carmed-nav" aria-label="Navegar pelos serviços">
-      <button class="carmed-nav__dot is-active" data-target="0" aria-label="Ir para Criação de Sites">
-        <span class="carmed-nav__dot-text">Criação de Sites</span>
-        <span class="carmed-nav__dot-circle"></span>
-      </button>
-      <button class="carmed-nav__dot" data-target="1" aria-label="Ir para Consultoria de TI">
-        <span class="carmed-nav__dot-text">Consultoria de TI</span>
-        <span class="carmed-nav__dot-circle"></span>
-      </button>
-      <button class="carmed-nav__dot" data-target="2" aria-label="Ir para Sistemas Web">
-        <span class="carmed-nav__dot-text">Sistemas Web</span>
-        <span class="carmed-nav__dot-circle"></span>
-      </button>
-      <button class="carmed-nav__dot" data-target="3" aria-label="Ir para UI/UX Design">
-        <span class="carmed-nav__dot-text">UI/UX Design</span>
-        <span class="carmed-nav__dot-circle"></span>
-      </button>
-      <button class="carmed-nav__dot" data-target="4" aria-label="Ir para Manutenção e Suporte">
-        <span class="carmed-nav__dot-text">Manutenção &amp; Suporte</span>
-        <span class="carmed-nav__dot-circle"></span>
-      </button>
-    </div>
+    <div class="obj-inner">
+      <header class="obj-head">
+        <span class="label obj-head__label">// 004 — Serviços</span>
+        <h2 class="obj-head__title">O que fazemos</h2>
+      </header>
 
-    <!-- Pinned stage: holds scroll snap slides -->
-    <div class="carmed-stage" id="carmed-stage">
+      <div class="obj-grid">
+        <div class="obj-side">
+          <ol class="obj-idx" id="obj-idx">
+            <li>
+              <button type="button" class="obj-idx__item is-active" data-i="0"
+                      data-tags="Landing Pages|Portais Corporativos|E-commerce|SEO Técnico">
+                <span class="obj-idx__num">01</span>
+                <span class="obj-idx__name">Criação de Sites</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="obj-idx__item" data-i="1"
+                      data-tags="Diagnóstico de Stack|Arquitetura Cloud|Roadmap de ROI">
+                <span class="obj-idx__num">02</span>
+                <span class="obj-idx__name">Consultoria de TI</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="obj-idx__item" data-i="2"
+                      data-tags="Aplicações Customizadas|Integração de APIs|Bancos de Dados|Dashboards Administrativos">
+                <span class="obj-idx__num">03</span>
+                <span class="obj-idx__name">Sistemas Web</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="obj-idx__item" data-i="3"
+                      data-tags="Design de Interface|Pesquisa de Usuário|Protótipos Interativos">
+                <span class="obj-idx__num">04</span>
+                <span class="obj-idx__name">UI/UX Design</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="obj-idx__item" data-i="4"
+                      data-tags="Updates de Segurança|Correção de Bugs|Monitoramento 24/7">
+                <span class="obj-idx__num">05</span>
+                <span class="obj-idx__name">Manutenção &amp; Suporte</span>
+              </button>
+            </li>
+          </ol>
+          <ul class="obj-tags" id="obj-tags"><li>Landing Pages</li><li>Portais Corporativos</li><li>E-commerce</li><li>SEO Técnico</li></ul>
+        </div>
 
-      <!-- ═══ SLIDE 01 — Criação de Sites ═══ -->
-      <article class="carmed-slide" data-idx="0" data-bg="#0a0a0a" aria-label="Criação de Sites">
-        <div class="carmed-slide__num">01 / 05</div>
-        <div class="carmed-slide__bg-text">SITES</div>
-        <div class="carmed-slide__floater">
-          <div class="carmed-slide__floater-inner">
-            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="15" y="35" width="170" height="130" rx="10" stroke="currentColor" stroke-width="3" />
-              <line x1="15" y1="65" x2="185" y2="65" stroke="currentColor" stroke-width="2" />
-              <circle cx="35" cy="50" r="5" fill="currentColor" />
-              <circle cx="50" cy="50" r="5" fill="currentColor" />
-              <circle cx="65" cy="50" r="5" fill="currentColor" />
-              <rect x="35" y="85" width="130" height="10" rx="4" fill="currentColor" fill-opacity="0.2" />
-              <rect x="35" y="105" width="90" height="8" rx="4" fill="currentColor" fill-opacity="0.2" />
-              <rect x="35" y="123" width="110" height="8" rx="4" fill="currentColor" fill-opacity="0.3" />
-            </svg>
+        <div class="obj-stage" id="obj-stage">
+          <span class="obj-stage__label" aria-hidden="true">Serviço</span>
+          <span class="obj-stage__num" id="obj-num" aria-hidden="true">01</span>
+          <div class="obj-blocks" id="obj-blocks" aria-hidden="true">
+          <div class="obj-block obj-block--fill" data-b="0"></div>
+          <div class="obj-block obj-block--light" data-b="1"></div>
+          <div class="obj-block obj-block--dim" data-b="2"></div>
+          <div class="obj-block obj-block--fill" data-b="3"></div>
+          <div class="obj-block obj-block--light" data-b="4"></div>
+          <div class="obj-block obj-block--dim" data-b="5"></div>
           </div>
+          <h3 class="obj-name" id="obj-name"><span>Criação de Sites</span></h3>
         </div>
-        <div class="carmed-slide__content">
-          <h2 class="carmed-slide__title carmed-slide__text-fade">Criação de Sites</h2>
-          <ul class="carmed-slide__bullets carmed-slide__text-fade">
-            <li><span class="carmed-slide__bullet-dot"></span>Landing Pages</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Portais Corporativos</li>
-            <li><span class="carmed-slide__bullet-dot"></span>E-commerce</li>
-            <li><span class="carmed-slide__bullet-dot"></span>SEO Técnico</li>
-          </ul>
-          <div class="carmed-slide__cta-fade">
-            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ═══ SLIDE 02 — Consultoria de TI ═══ -->
-      <article class="carmed-slide" data-idx="1" data-bg="#0d1f0d" aria-label="Consultoria de TI">
-        <div class="carmed-slide__num">02 / 05</div>
-        <div class="carmed-slide__bg-text">CONSULTORIA</div>
-        <div class="carmed-slide__floater">
-          <div class="carmed-slide__floater-inner">
-            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="100" cy="55" r="18" stroke="currentColor" stroke-width="3" />
-              <circle cx="55" cy="135" r="18" stroke="currentColor" stroke-width="3" />
-              <circle cx="145" cy="135" r="18" stroke="currentColor" stroke-width="3" />
-              <line x1="90" y1="70" x2="65" y2="120" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 4" />
-              <line x1="110" y1="70" x2="135" y2="120" stroke="currentColor" stroke-width="2.5" />
-              <line x1="73" y1="135" x2="127" y2="135" stroke="currentColor" stroke-width="2.5" />
-              <circle cx="100" cy="55" r="6" fill="currentColor" />
-              <circle cx="55" cy="135" r="6" fill="currentColor" />
-              <circle cx="145" cy="135" r="6" fill="currentColor" />
-            </svg>
-          </div>
-        </div>
-        <div class="carmed-slide__content">
-          <h2 class="carmed-slide__title carmed-slide__text-fade">Consultoria de TI</h2>
-          <ul class="carmed-slide__bullets carmed-slide__text-fade">
-            <li><span class="carmed-slide__bullet-dot"></span>Diagnóstico de Stack</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Arquitetura Cloud</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Segurança &amp; Auditoria</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Roadmap de ROI</li>
-          </ul>
-          <div class="carmed-slide__cta-fade">
-            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ═══ SLIDE 03 — Sistemas Web ═══ -->
-      <article class="carmed-slide" data-idx="2" data-bg="#0a0f1a" aria-label="Sistemas Web">
-        <div class="carmed-slide__num">03 / 05</div>
-        <div class="carmed-slide__bg-text">SISTEMAS</div>
-        <div class="carmed-slide__floater">
-          <div class="carmed-slide__floater-inner">
-            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="20" y="30" width="160" height="140" rx="8" stroke="currentColor" stroke-width="3" />
-              <rect x="20" y="30" width="160" height="25" fill="currentColor" fill-opacity="0.1" />
-              <circle cx="35" cy="42" r="4" fill="currentColor" />
-              <circle cx="47" cy="42" r="4" fill="currentColor" />
-              <circle cx="59" cy="42" r="4" fill="currentColor" />
-              <path d="M40 80L55 90L40 100" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-              <line x1="65" y1="100" x2="95" y2="100" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-              <rect x="40" y="125" width="120" height="6" rx="3" fill="currentColor" fill-opacity="0.2" />
-            </svg>
-          </div>
-        </div>
-        <div class="carmed-slide__content">
-          <h2 class="carmed-slide__title carmed-slide__text-fade">Sistemas Web</h2>
-          <ul class="carmed-slide__bullets carmed-slide__text-fade">
-            <li><span class="carmed-slide__bullet-dot"></span>Aplicações Customizadas</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Integração de APIs</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Bancos de Dados</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Dashboards Administrativos</li>
-          </ul>
-          <div class="carmed-slide__cta-fade">
-            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ═══ SLIDE 04 — UI/UX Design ═══ -->
-      <article class="carmed-slide" data-idx="3" data-bg="#1a0a1a" aria-label="UI/UX Design">
-        <div class="carmed-slide__num">04 / 05</div>
-        <div class="carmed-slide__bg-text">DESIGN</div>
-        <div class="carmed-slide__floater">
-          <div class="carmed-slide__floater-inner">
-            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="25" y="25" width="150" height="150" rx="16" stroke="currentColor" stroke-width="3" />
-              <circle cx="100" cy="85" r="30" stroke="currentColor" stroke-width="2.5" />
-              <line x1="79" y1="64" x2="121" y2="106" stroke="currentColor" stroke-width="1.5" />
-              <line x1="121" y1="64" x2="79" y2="106" stroke="currentColor" stroke-width="1.5" />
-              <rect x="50" y="135" width="100" height="12" rx="6" fill="currentColor" fill-opacity="0.25" />
-              <line x1="25" y1="100" x2="175" y2="100" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 5" />
-            </svg>
-          </div>
-        </div>
-        <div class="carmed-slide__content">
-          <h2 class="carmed-slide__title carmed-slide__text-fade">UI/UX Design</h2>
-          <ul class="carmed-slide__bullets carmed-slide__text-fade">
-            <li><span class="carmed-slide__bullet-dot"></span>Design de Interface</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Pesquisa de Usuário</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Wireframes &amp; Mockups</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Protótipos Interativos</li>
-          </ul>
-          <div class="carmed-slide__cta-fade">
-            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ═══ SLIDE 05 — Manutenção & Suporte ═══ -->
-      <article class="carmed-slide" data-idx="4" data-bg="#1a0a0a" aria-label="Manutenção e Suporte">
-        <div class="carmed-slide__num">05 / 05</div>
-        <div class="carmed-slide__bg-text">SUPORTE</div>
-        <div class="carmed-slide__floater">
-          <div class="carmed-slide__floater-inner">
-            <svg class="carmed-slide__svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M100 25C135 32 165 32 165 32V90C165 135 135 165 100 178C65 165 35 135 35 90V32C35 32 65 32 100 25Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
-              <path d="M60 100H85L95 80L105 120L115 90L125 100H140" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </div>
-        </div>
-        <div class="carmed-slide__content">
-          <h2 class="carmed-slide__title carmed-slide__text-fade">Manutenção &amp; Suporte</h2>
-          <ul class="carmed-slide__bullets carmed-slide__text-fade">
-            <li><span class="carmed-slide__bullet-dot"></span>Hospedagem &amp; Servidores</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Updates de Segurança</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Correção de Bugs</li>
-            <li><span class="carmed-slide__bullet-dot"></span>Monitoramento 24/7</li>
-          </ul>
-          <div class="carmed-slide__cta-fade">
-            <a href="#contato" class="carmed-slide__cta">Solicitar orçamento →</a>
-          </div>
-        </div>
-      </article>
-
-      <div class="carmed-progress" aria-hidden="true">
-        <div class="carmed-progress__fill"></div>
       </div>
-    </div><!-- /.carmed-stage -->
+    </div>
   </section>
 
+
+
+  <!-- ═══════════════════ INTERLÚDIO — FLOW WAVE ══════════════════
+       Puro visual, como o estudo flow-wave: só a onda. Sem texto e sem
+       "informações" — a câmera atravessa a onda conforme você rola e as
+       partículas fogem do cursor. Interlúdio decorativo: aria-hidden.  -->
+  <section id="interacao" class="flow-root" aria-hidden="true">
+    <div class="flow__sticky">
+      <canvas id="flow-canvas" class="flow__canvas"></canvas>
+      <span class="flow__hint">scroll &darr;</span>
+      <!-- Slam: entra no fim da travessia da onda -->
+      <div class="flow__slam" id="flow-slam" aria-hidden="true">
+        <span class="flow__slam-word">HN Services</span>
+      </div>
+    </div>
+  </section>
 
 
   <!-- ═══════════════════════ PORTFÓLIO ═══════════════════════ -->
-  <section id="portfolio" class="port-root">
-    <div id="port-stage" class="port-stage">
-      <canvas id="portfolio-canvas" class="port-bg-canvas" aria-hidden="true"></canvas>
-
-      <div class="port-scene">
-        <div id="port-ring" class="port-ring">
-
-          <article class="port-card" tabindex="0">
-            <div class="port-card__inner">
-              <div class="port-card__img" style="background-image:url('assets/images/jd.png')"></div>
-              <div class="port-card__body">
-                <span class="label port-card__cat">Web · Serviços</span>
-                <h3 class="port-card__name">JD Flooring & Cleaning</h3>
-                <p class="port-card__desc">Plataforma de alta conversão para serviços de pisos e limpeza profissional na Flórida. Otimização de SEO local extrema e interface premium.</p>
-                <a href="https://www.jdfcs.com" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="port-card" tabindex="0">
-            <div class="port-card__inner">
-              <div class="port-card__img" style="background-image:url('assets/images/heitor.png')"></div>
-              <div class="port-card__body">
-                <span class="label port-card__cat">Design · Portfólio</span>
-                <h3 class="port-card__name">Heitor Negromonte</h3>
-                <p class="port-card__desc">Portfólio interativo de Engenharia de Software. Foco em arquiteturas de alto desempenho, Next.js, Node.js e interfaces táteis imersivas.</p>
-                <a href="https://www.heitor-negromonte.com.br" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="port-card" tabindex="0">
-            <div class="port-card__inner">
-              <div class="port-card__img" style="background-image:url('assets/images/jofer.png')"></div>
-              <div class="port-card__body">
-                <span class="label port-card__cat">Web · Literatura</span>
-                <h3 class="port-card__name">Jofer Poeta</h3>
-                <p class="port-card__desc">Portal lírico do escritor e palestrante João Ferreira. Divulgação da tradicional literatura de cordel espírita da Série Reluz e venda de livros autorais.</p>
-                <a href="https://www.jofer-poeta.com.br" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="port-card" tabindex="0">
-            <div class="port-card__inner">
-              <div class="port-card__img" style="background-image:url('assets/images/marim.png')"></div>
-              <div class="port-card__body">
-                <span class="label port-card__cat">Dev · Frevo e Cultura</span>
-                <h3 class="port-card__name">Marim dos Caetés</h3>
-                <p class="port-card__desc">Portal oficial da histórica agremiação carnavalesca de Olinda. Preservação do Frevo (patrimônio UNESCO), memória e projetos educacionais.</p>
-                <a href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener" class="port-card__link">Ver Site ↗</a>
-              </div>
-            </div>
-          </article>
-
-        </div><!-- #port-ring -->
-      </div><!-- .port-scene -->
-
-      <div class="port-swipe-dots" aria-hidden="true">
-        <span class="port-swipe-dot is-active"></span>
-        <span class="port-swipe-dot"></span>
-        <span class="port-swipe-dot"></span>
-        <span class="port-swipe-dot"></span>
+  <section id="portfolio" class="pf-root">
+    <div class="pf-stage">
+      <!-- Ato 1: a serpentina — 9 projetos, 9 cards (1 card = 1 projeto). -->
+      <div class="pf-constel" id="pf-constel">
+        <span class="pf-constel__word pf-constel__word--top">Portfólio</span>
+        <div class="pf-ribbon" id="pf-ribbon">
+          <figure class="pf-chip" data-i="0"
+                  style="--x:0px; --y:-190px; --r:0.0deg; --s:0.820; --z:0; --accent:#7c5cff">
+            <img src="assets/video/jofer.jpg" alt="Jofer Poeta" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="1"
+                  style="--x:76px; --y:-142px; --r:3.5deg; --s:0.889; --z:1; --accent:#c56a3f">
+            <img src="assets/video/baseline.jpg" alt="Baseline" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="2"
+                  style="--x:131px; --y:-95px; --r:6.1deg; --s:0.947; --z:2; --accent:#c8a96e">
+            <img src="assets/video/marim.jpg" alt="Marim dos Caetés" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="3"
+                  style="--x:150px; --y:-47px; --r:7.0deg; --s:0.986; --z:3; --accent:#a0c4e8">
+            <img src="assets/video/jd.jpg" alt="JD Flooring &amp; Cleaning" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="4"
+                  style="--x:128px; --y:0px; --r:6.0deg; --s:1.000; --z:4; --accent:#7fb2d6">
+            <img src="assets/video/glacius.jpg" alt="Glacius" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="5"
+                  style="--x:71px; --y:48px; --r:3.3deg; --s:0.986; --z:5; --accent:#e0537a">
+            <img src="assets/video/arkkhe.jpg" alt="Arkkhe" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="6"
+                  style="--x:-6px; --y:95px; --r:-0.3deg; --s:0.947; --z:6; --accent:#22b07d">
+            <img src="assets/video/diet-soda.jpg" alt="Diet Soda" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="7"
+                  style="--x:-81px; --y:143px; --r:-3.8deg; --s:0.889; --z:7; --accent:#b87333">
+            <img src="assets/video/laocoon.jpg" alt="Laocoön" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="8"
+                  style="--x:-134px; --y:190px; --r:-6.2deg; --s:0.820; --z:8; --accent:#C9F31D">
+            <img src="assets/video/heitor.jpg" alt="Heitor Negromonte" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="8"
+                  style="--x:-134px; --y:190px; --r:-6.2deg; --s:0.820; --z:8; --accent:#C9F31D">
+            <img src="assets/video/heitor.jpg" alt="Heitor Negromonte" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <span class="pf-constel__word pf-constel__word--bot">Alguns de nossos projetos</span>
+        <span class="pf-constel__hint">↓ role</span>
       </div>
 
-      <header class="port-header">
-        <span class="label port-header__label">// 005 — Cases</span>
-        <h2 class="port-header__title">Portfólio</h2>
-        <p class="port-header__sub">Projetos reais. Resultados mensuráveis.</p>
-      </header>
-
-      <div class="port-indicator" aria-hidden="true">
-        <span class="port-indicator__line"></span>
-        <span class="port-indicator__text">SCROLL</span>
+      <!-- Ato 3: solo — vídeo do site scrubbado pelo scroll, dentro de uma
+           moldura de browser: em tela cheia o print do site virava borrão. -->
+      <div class="pf-solo" id="pf-solo">
+       <div class="pf-solo__browser">
+        <div class="pf-solo__bar">
+          <span class="pf-solo__tl"></span><span class="pf-solo__tl"></span><span class="pf-solo__tl"></span>
+          <span class="pf-solo__url" id="pf-solo-url"></span>
+        </div>
+        <div class="pf-solo__view">
+          <video class="pf-solo__video" data-i="0" data-src="assets/video/m4.mp4"
+                 poster="assets/video/m4.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="1" data-src="assets/video/baseline.mp4"
+                 poster="assets/video/baseline.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="2" data-src="assets/video/laocoon.mp4"
+                 poster="assets/video/laocoon.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="3" data-src="assets/video/jd.mp4"
+                 poster="assets/video/jd.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="4" data-src="assets/video/ferre.mp4"
+                 poster="assets/video/ferre.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="5" data-src="assets/video/glacius.mp4"
+                 poster="assets/video/glacius.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="6" data-src="assets/video/arkkhe.mp4"
+                 poster="assets/video/arkkhe.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="7" data-src="assets/video/marim.mp4"
+                 poster="assets/video/marim.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="8" data-src="assets/video/diet-soda.mp4"
+                 poster="assets/video/diet-soda.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="9" data-src="assets/video/jofer.mp4"
+                 poster="assets/video/jofer.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+          <video class="pf-solo__video" data-i="10" data-src="assets/video/heitor.mp4"
+                 poster="assets/video/heitor.jpg" muted playsinline preload="none"
+                 aria-hidden="true" tabindex="-1"></video>
+        </div><!-- .pf-solo__view -->
+       </div><!-- .pf-solo__browser -->
       </div>
+    </div>
 
-    </div><!-- #port-stage -->
+    <div class="pf-scroll">
+      <div class="pf-intro-space" id="pf-intro-space"></div>
+
+      <article class="pf-step" data-i="0" style="--accent:#F27B57">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">01</span>
+            <span class="pf-card__tier">Estudo</span>
+          </div>
+          <h3 class="pf-card__name">M4</h3>
+          <span class="label pf-card__cat">Motion · Web</span>
+          <p class="pf-card__desc">Peça visual de ritmo seco e contraste forte, pensada para leitura rápida e impacto imediato.</p>
+          <ul class="pf-tags"><li>Motion</li><li>Web</li><li>Loop</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="assets/video/m4.mp4" data-name="M4">Ver vídeo →</button>
+            <a class="btn btn--outline" href="assets/video/m4.mp4" target="_blank" rel="noopener">m4.mp4 ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="1" style="--accent:#c56a3f">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">02</span>
+            <span class="pf-card__tier">Essencial</span>
+          </div>
+          <h3 class="pf-card__name">Baseline</h3>
+          <span class="label pf-card__cat">Landing · Esporte</span>
+          <p class="pf-card__desc">Elegância e ritmo com o mínimo: física de mola coesa, revelações no scroll e zero excesso.</p>
+          <ul class="pf-tags"><li>UI/UX</li><li>Motion</li><li>Lenis</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://baseline-plum-five.vercel.app/" data-name="Baseline">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://baseline-plum-five.vercel.app/" target="_blank" rel="noopener">baseline-plum-five.vercel.app ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="2" style="--accent:#b87333">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">03</span>
+            <span class="pf-card__tier">Complexo</span>
+          </div>
+          <h3 class="pf-card__name">Laocoön</h3>
+          <span class="label pf-card__cat">Experiência · WebGL</span>
+          <p class="pf-card__desc">Cena Three.js dirigida por scroll: shaders, partículas e câmera em órbita. O nosso limite superior.</p>
+          <ul class="pf-tags"><li>Three.js</li><li>Shaders</li><li>WebGL</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://laocoon-delta.vercel.app/" data-name="Laocoön">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener">laocoon-delta.vercel.app ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="3" style="--accent:#a0c4e8">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">04</span>
+            <span class="pf-card__tier">Conversão</span>
+          </div>
+          <h3 class="pf-card__name">JD Flooring &amp; Cleaning</h3>
+          <span class="label pf-card__cat">Web · Serviços</span>
+          <p class="pf-card__desc">A tela se divide e revela os dois serviços conforme o cursor caminha. Alta conversão e SEO local na Flórida.</p>
+          <ul class="pf-tags"><li>Conversão</li><li>SEO Local</li><li>Interação</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://www.jdfcs.com" data-name="JD Flooring &amp; Cleaning">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://www.jdfcs.com" target="_blank" rel="noopener">jdfcs.com ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="4" style="--accent:#D9A15B">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">05</span>
+            <span class="pf-card__tier">Case</span>
+          </div>
+          <h3 class="pf-card__name">Ferre</h3>
+          <span class="label pf-card__cat">Web · Editorial</span>
+          <p class="pf-card__desc">Interface limpa com foco em contraste, composição e navegação precisa.</p>
+          <ul class="pf-tags"><li>UI</li><li>Layout</li><li>Scroll</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="assets/video/ferre.mp4" data-name="Ferre">Ver vídeo →</button>
+            <a class="btn btn--outline" href="assets/video/ferre.mp4" target="_blank" rel="noopener">ferre.mp4 ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="5" style="--accent:#7fb2d6">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">06</span>
+            <span class="pf-card__tier">Imersivo</span>
+          </div>
+          <h3 class="pf-card__name">Glacius</h3>
+          <span class="label pf-card__cat">Landing · Imersiva</span>
+          <p class="pf-card__desc">Parallax por camadas, neve em movimento e reveals cinematográficos — profundidade sem peso.</p>
+          <ul class="pf-tags"><li>React</li><li>Parallax</li><li>GSAP</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://glacius-frost.vercel.app/" data-name="Glacius">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener">glacius-frost.vercel.app ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="6" style="--accent:#e0537a">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">07</span>
+            <span class="pf-card__tier">Avançado</span>
+          </div>
+          <h3 class="pf-card__name">Arkkhe</h3>
+          <span class="label pf-card__cat">Hero · Automotivo</span>
+          <p class="pf-card__desc">Vídeo controlado pelo scroll, intro cinematográfica e transições de troca — fidelidade total ao design.</p>
+          <ul class="pf-tags"><li>React</li><li>Vídeo</li><li>Scroll-scrub</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://arkkhe-hero.vercel.app/" data-name="Arkkhe">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener">arkkhe-hero.vercel.app ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="7" style="--accent:#c8a96e">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">08</span>
+            <span class="pf-card__tier">Institucional</span>
+          </div>
+          <h3 class="pf-card__name">Marim dos Caetés</h3>
+          <span class="label pf-card__cat">Dev · Frevo e Cultura</span>
+          <p class="pf-card__desc">Portal oficial da histórica agremiação de Olinda. Preservação do Frevo — patrimônio UNESCO — e memória.</p>
+          <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>CMS</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://www.marim-dos-caetes.com.br" data-name="Marim dos Caetés">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener">marim-dos-caetes.com.br ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="8" style="--accent:#22b07d">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">09</span>
+            <span class="pf-card__tier">Avançado</span>
+          </div>
+          <h3 class="pf-card__name">Diet Soda</h3>
+          <span class="label pf-card__cat">Produto · 3D</span>
+          <p class="pf-card__desc">Produto 3D interativo com troca de sabor em tempo real, blur de movimento e atmosfera viva.</p>
+          <ul class="pf-tags"><li>3D</li><li>model-viewer</li><li>GSAP</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://diet-soda-nine.vercel.app/" data-name="Diet Soda">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://diet-soda-nine.vercel.app/" target="_blank" rel="noopener">diet-soda-nine.vercel.app ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="9" style="--accent:#7c5cff">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">10</span>
+            <span class="pf-card__tier">Essencial</span>
+          </div>
+          <h3 class="pf-card__name">Jofer Poeta</h3>
+          <span class="label pf-card__cat">Web · Literatura</span>
+          <p class="pf-card__desc">Portal lírico do escritor João Ferreira: cordéis espíritas da Série Reluz, livros autorais e agenda de palestras.</p>
+          <ul class="pf-tags"><li>Web</li><li>SEO</li><li>Editorial</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://jofer.vercel.app/" data-name="Jofer Poeta">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://jofer.vercel.app/" target="_blank" rel="noopener">jofer.vercel.app ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pf-step" data-i="10" style="--accent:#C9F31D">
+        <div class="pf-card">
+          <div class="pf-card__top">
+            <span class="pf-card__idx label">11</span>
+            <span class="pf-card__tier">Interativo</span>
+          </div>
+          <h3 class="pf-card__name">Heitor Negromonte</h3>
+          <span class="label pf-card__cat">Design · Portfólio</span>
+          <p class="pf-card__desc">Portfólio interativo de engenharia de software. Arquiteturas de alto desempenho e interfaces táteis.</p>
+          <ul class="pf-tags"><li>Next.js</li><li>Node.js</li><li>Interativo</li></ul>
+          <div class="pf-card__actions">
+            <button type="button" class="btn btn--primary pf-open" data-live="https://www.heitor-negromonte.com.br" data-name="Heitor Negromonte">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://www.heitor-negromonte.com.br" target="_blank" rel="noopener">heitor-negromonte.com.br ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Cauda: o palco sticky desgruda 100vh antes do fim da seção. Sem isto
+           o ÚLTIMO projeto perde a janela inteira (o palco sai junto com ele). -->
+      <div class="pf-tail" aria-hidden="true"></div>
+    </div>
+
+    <div class="pf-progress" aria-hidden="true"><span class="pf-progress__fill" id="pf-progress-fill"></span></div>
   </section>
+
+  <!-- Lightbox de projeto (preenchido por js/portfolio.js) -->
+  <div class="pf-lb" id="pf-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Projeto ao vivo"></div>
 
   <!-- ═══════════════════════ BRIDGE CTA ══════════════════════ -->
   <div class="cta-root">
@@ -694,7 +827,7 @@
   <!-- ═══════════════════════ CONTATO ══════════════════════ -->
   <section id="contato" class="section contact">
     <div class="contact__blob" aria-hidden="true"></div>
-    <div class="container contact__grid" data-skew>
+    <div class="container contact__grid">
 
       <div class="contact__left">
         <span class="label contact__label">// 006 — Contato</span>
@@ -809,7 +942,19 @@
   <script src="js/three-scene.js"></script>
   <script src="js/lightning.js"></script>
   <script src="js/process-canvas.js"></script>
-  <script src="js/services-v3.js"></script>
+  <script src="js/servicos.js"></script>
+  <!-- FlowWave: porte fiel do estudo flow-wave. ES module que usa os addons de
+       pós-processamento (bloom seletivo). O importmap resolve "three" para a
+       cópia LOCAL vendorizada — offline-first, nenhum CDN (§5 do guia). -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/js/libs/three/three.module.js",
+      "three/addons/": "/js/libs/three/addons/"
+    }
+  }
+  </script>
+  <script type="module" src="js/flow-wave.js"></script>
   <script src="js/portfolio.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/manifesto-shader.js"></script>

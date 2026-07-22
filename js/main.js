@@ -284,7 +284,8 @@
     initNav();
     initContactForm();
     if (window.initManifestoShader) initManifestoShader();
-    if (window.initPortfolioShader) initPortfolioShader();
+    // O FlowWave (interlúdio "Interação") é um ES module e se auto-inicializa
+    // — não é chamado daqui. Ver js/flow-wave.js.
 
     var threeObj = window.initThreeScene ? initThreeScene() : null;
     if (window.initLightning) initLightning();

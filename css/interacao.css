@@ -1,0 +1,125 @@
+/* ═══════════════════════════════════════════════════════════
+   HN Services — Interlúdio "Flow Wave"
+   ─────────────────────────────────────────────────────────
+   Puro visual, como o estudo flow-wave: só a onda, sem texto e
+   sem "informações". A câmera atravessa a onda conforme se rola
+   (é isso que dá a fluidez) e as partículas fogem do cursor.
+
+   O original usa 620vh de scroll-host; aqui é comprimido para
+   ~220vh — a viagem completa acontece, sem alongar o site.
+   A cena WebGL é opaca e ocupa a tela: não precisa de vinheta.
+
+   Camadas (§4B): WebGL 0 · hint 4
+   ═══════════════════════════════════════════════════════════ */
+
+.flow-root {
+  position: relative;
+  width: 100%;
+  /* 300vh: a travessia ocupa ~56% e sobram ~130vh de tela para apreciar o
+     final — onda horizontal correndo + o slam "HN Services" aceso. */
+  height: 300vh;
+  background: #000;            /* a cena é preta; evita flash antes do 1º frame */
+}
+
+/* O palco fica presente por 1 tela enquanto a seção rola sob ele */
+.flow__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.flow__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  visibility: hidden;          /* o JS revela ao entrar em cena (§3A) */
+}
+
+/* Mesmo hint discreto do estudo original */
+.flow__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 4;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(180, 255, 210, 0.35);
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);   /* sai quando o slam entra */
+}
+
+/* ── Slam: "HN Services" no fim da travessia ──────────────
+   Entra grande e desfocado, aterrissa duro (scale) e pulsa o glow.
+   Disparado pela classe .is-slam (o JS liga no fim do scroll da seção). */
+.flow__slam {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+}
+.flow__slam-word {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  padding-right: 0.25em;           /* anti-clipping (§4A) */
+  color: var(--white);
+  transform: scale(2.4);
+  filter: blur(18px);
+  opacity: 0;
+  will-change: transform, filter, opacity;
+}
+
+.flow__slam.is-slam { opacity: 1; }
+.flow__slam.is-slam .flow__slam-word {
+  animation: flow-slam 620ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes flow-slam {
+  0% {
+    transform: scale(2.4);
+    filter: blur(18px);
+    opacity: 0;
+    text-shadow: none;
+  }
+  62% {
+    transform: scale(0.94);
+    filter: blur(0);
+    opacity: 1;
+    /* impacto: glow estoura na aterrissagem */
+    text-shadow: 0 0 6px rgba(122, 255, 191, 0.9),
+                 0 0 34px rgba(52, 232, 154, 0.85),
+                 0 0 90px rgba(10, 255, 127, 0.6);
+  }
+  78% { transform: scale(1.04); }
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+    opacity: 1;
+    /* glow assenta, sem apagar */
+    text-shadow: 0 0 4px rgba(122, 255, 191, 0.55),
+                 0 0 26px rgba(52, 232, 154, 0.45),
+                 0 0 70px rgba(10, 255, 127, 0.28);
+  }
+}
+
+/* Mobile: o WebGL não roda (custo) e não há cursor para reagir.
+   Sem a onda não sobra nada — o interlúdio é decorativo, então sai. */
+@media (max-width: 767px) {
+  .flow-root { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-root { display: none; }
+}

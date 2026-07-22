@@ -1,0 +1,393 @@
+/* ═══════════════════════════════════════════════════════════
+   HN Services — Portfólio v6
+   ─────────────────────────────────────────────────────────
+   Ato 1  .pf-constel — 9 pôsteres numa serpentina densa,
+                        emoldurada pela tipografia (nunca por cima).
+   Ato 2  scroll       — os cards se esvaem EM ORDEM ao longo da curva.
+   Ato 3  .pf-solo     — um projeto por vez; o vídeo gravado do site
+                         é scrubbado pelo scroll (~50vh por projeto).
+
+   Performance (lições da v5, que ficou pesada):
+   • ZERO backdrop-filter e ZERO mix-blend-mode.
+   • O FlowWave (WebGL) só roda nos atos 1–2 e para no solo:
+     nunca WebGL + vídeo scrubbando ao mesmo tempo.
+   • Só o vídeo ativo tem src; os demais nem carregam.
+
+   Camadas (§4B do guia): WebGL 0 · palco 1 · scrim 2–3 · texto 4–10 · lightbox 1000+
+   ═══════════════════════════════════════════════════════════ */
+
+.pf-root {
+  position: relative;
+  width: 100%;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+/* O FlowWave saiu daqui: virava mancha atrás da fita e disputava GPU
+   com os vídeos scrubbando. Agora vive no interlúdio #interacao,
+   onde ele é o próprio argumento. Ver css/interacao.css. */
+
+/* ── Palco fixo ─────────────────────────────────────────── */
+.pf-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  margin-bottom: -100vh;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── Ato 1: serpentina ──────────────────────────────────── */
+.pf-constel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.4vh, 14px);
+}
+.pf-constel__word {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.4vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  padding-right: 0.25em;           /* anti-clipping (§4A) */
+  color: var(--white);
+  z-index: 4;
+}
+/* Frase, não palavra: precisa de escala menor para não estourar a linha
+   (o topo continua sendo o display grande). */
+.pf-constel__word--bot {
+  color: var(--accent);
+  font-size: clamp(1.1rem, 2.4vw, 2.1rem);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.pf-constel__hint {
+  position: absolute;
+  bottom: clamp(16px, 4vh, 40px);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45);
+  z-index: 4;
+}
+
+/* A fita: cards posicionados por CSS vars vindas do HTML */
+.pf-ribbon {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 46vh, 440px);
+  perspective: 1200px;
+}
+.pf-chip {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(150px, 15vw, 220px);
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--surface);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+  z-index: var(--z);
+  transform:
+    translate(-50%, -50%)
+    translate(var(--x), var(--y))
+    rotate(var(--r))
+    scale(var(--s));
+  will-change: transform, opacity;
+}
+.pf-chip img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+}
+.pf-chip::after {                  /* fio na cor do projeto */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* ── Ato 3: solo ────────────────────────────────────────────
+   O vídeo NÃO é mais full-bleed: um print de site esticado na tela
+   inteira virava borrão lavado (e sem o scrim o texto não lia).
+   Agora ele vive numa moldura de browser, à direita — lê como
+   "um site", e o card ocupa a esquerda sem disputar espaço.      */
+.pf-solo {
+  position: absolute;
+  inset: 0;
+  opacity: 0;                      /* GSAP revela após a fita se esvair */
+}
+
+.pf-solo__browser {
+  position: absolute;
+  top: 50%;
+  right: clamp(16px, 4vw, 64px);
+  transform: translateY(-50%);
+  width: clamp(420px, 52vw, 760px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.95);
+}
+.pf-solo__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 var(--space-4);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.pf-solo__tl { width: 9px; height: 9px; border-radius: var(--radius-full); background: rgba(255, 255, 255, 0.16); }
+.pf-solo__url {
+  margin-left: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(245, 240, 232, 0.4);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pf-solo__view {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0b0b0b;
+}
+.pf-solo__video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out);
+}
+.pf-solo__video.is-active { opacity: 1; }
+
+/* Véu suave só atrás do card (esquerda) — a moldura já resolve o resto */
+.pf-solo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(8, 8, 8, 0.92) 0%, rgba(8, 8, 8, 0.5) 34%, rgba(8, 8, 8, 0) 60%);
+}
+
+/* ── Conteúdo que rola ──────────────────────────────────── */
+.pf-scroll { position: relative; z-index: 4; }
+
+/* Ato 1 (segura) + Ato 2 (dispersão) — enxuto para compensar o tempo extra
+   que cada projeto ganhou abaixo. */
+.pf-intro-space { height: 120vh; pointer-events: none; }
+
+/* 60vh por projeto. Com o vídeo em loop (e não mais scrubbado), o step não
+   precisa reservar scroll para a animação acontecer — ela roda sozinha.
+   Isso devolveu ~2,7 telas de scroll ao site. */
+.pf-step {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  width: min(1240px, 90vw);
+  margin: 0 auto;
+  pointer-events: none;
+}
+.pf-card {
+  pointer-events: auto;
+  width: min(480px, 100%);
+  padding: clamp(18px, 2vw, 26px);
+  border-radius: var(--radius-lg);
+  background: rgba(10, 10, 10, 0.82);   /* sólido: sem backdrop-filter */
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 70px -28px rgba(0, 0, 0, 0.95);
+  will-change: transform, opacity;
+}
+.pf-card__top { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3); }
+.pf-card__idx { color: var(--accent); font-family: var(--font-mono); }
+.pf-card__tier {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.7);
+  padding: 3px var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+}
+.pf-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.05; letter-spacing: -0.03em;
+  padding-right: 0.25em;
+  color: var(--white);
+  margin-bottom: var(--space-2);
+}
+.pf-card__cat { display: block; color: var(--accent); margin-bottom: var(--space-3); }
+.pf-card__desc { color: rgba(245, 240, 232, 0.72); line-height: 1.6; margin-bottom: var(--space-4); font-size: var(--text-sm); }
+.pf-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin-bottom: var(--space-5); }
+.pf-tags li {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: rgba(245, 240, 232, 0.75);
+  padding: 3px var(--space-3);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.pf-card__actions { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+
+/* O palco sticky (100vh + margin-bottom:-100vh) desgruda 100vh ANTES do fim da
+   seção. A janela do último projeto ('center 75%'→'center 25%') gasta ~50vh, então
+   a cauda precisa cobrir os dois — senão o último item sai da tela pela metade. */
+.pf-tail { height: 160vh; pointer-events: none; }
+
+.pf-progress {
+  position: sticky; bottom: 0; z-index: 5;
+  height: 2px; width: 100%;
+  background: rgba(255, 255, 255, 0.07);
+}
+.pf-progress__fill {
+  display: block; height: 100%; width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ── Mobile: sem palco, sem vídeo — lista com pôster ────── */
+@media (max-width: 767px) {
+  .pf-stage { display: none; }
+  .pf-intro-space, .pf-tail { height: 0; }   /* sem palco sticky, sem cauda */
+  .pf-scroll::before {
+    content: 'Portfólio';
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 12vw, 4rem);
+    letter-spacing: -0.03em;
+    color: var(--white);
+    width: 90vw; margin: 0 auto var(--space-6);
+  }
+  .pf-step {
+    min-height: 0;
+    margin-bottom: var(--space-8);
+    flex-direction: column;
+  }
+  .pf-step::before {
+    content: '';
+    display: block; width: 100%;
+    aspect-ratio: 16 / 10;
+    margin-bottom: var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background-image: var(--poster);
+    background-size: cover; background-position: top center;
+  }
+  .pf-card { width: 100%; background: var(--surface); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-solo { opacity: 1; }
+  .pf-solo__video { transition: none; }
+}
+
+/* ═══════════ Lightbox (site AO VIVO) — z-index 1000+ ═══════════ */
+   Lightbox (site AO VIVO) — z-index 1000+
+   ===================================================== */
+.pf-lb {
+  position: fixed; inset: 0; z-index: 1200;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: clamp(0.5rem, 3vw, 2rem);
+  background: rgba(5, 5, 5, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+}
+.pf-lb.is-mounted { display: flex; }
+.pf-lb.is-in { opacity: 1; }
+
+.pf-lb__panel {
+  display: flex; flex-direction: column;
+  width: min(1400px, 100%); height: min(88vh, 100%);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.32s var(--ease-out), transform 0.32s var(--ease-out);
+}
+.pf-lb.is-in .pf-lb__panel { opacity: 1; transform: none; }
+
+.pf-lb__bar {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  height: 50px; padding: 0 var(--space-3) 0 var(--space-5);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.pf-lb__left { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
+.pf-lb__dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); box-shadow: 0 0 10px var(--glow); flex-shrink: 0; }
+.pf-lb__name { font-family: var(--font-display); color: var(--white); font-size: var(--text-base); }
+.pf-lb__url { font-family: var(--font-mono); font-size: var(--text-xs); color: rgba(245, 240, 232, 0.35); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pf-lb__right { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+
+.pf-lb__seg { display: flex; gap: 2px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); padding: 3px; }
+.pf-lb__seg button {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  padding: 4px var(--space-3);
+  color: rgba(245, 240, 232, 0.5);
+  background: none; border: 0; border-radius: var(--radius-sm); cursor: pointer;
+}
+.pf-lb__seg button.is-active { background: rgba(255, 255, 255, 0.12); color: var(--white); }
+
+.pf-lb__open {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: var(--white); text-decoration: none;
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-sm);
+  transition: background 0.3s var(--ease-out);
+}
+.pf-lb__open:hover { background: rgba(255, 255, 255, 0.16); }
+.pf-lb__close {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  color: rgba(245, 240, 232, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+  border: 0; border-radius: var(--radius-sm); cursor: pointer;
+  font-size: 18px; line-height: 1;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+.pf-lb__close:hover { background: rgba(255, 80, 80, 0.25); color: var(--white); }
+
+.pf-lb__stage {
+  position: relative; flex: 1; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #0b0b0b;
+}
+.pf-lb__loading {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: var(--text-sm);
+  color: rgba(245, 240, 232, 0.5);
+}
+.pf-lb__wrap {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: max-width 0.45s var(--ease-out);
+}
+.pf-lb.is-mobile .pf-lb__wrap { max-width: 400px; padding: var(--space-4) 0; }
+.pf-lb__frame { width: 100%; height: 100%; border: 0; background: #fff; }
+.pf-lb.is-mobile .pf-lb__frame { border-radius: var(--radius-lg); border: 8px solid var(--surface-2); }
+
+@media (max-width: 767px) {
+  .pf-lb { padding: 0; }
+  .pf-lb__panel { height: 100%; border-radius: 0; }
+  .pf-lb__url, .pf-lb__seg { display: none; }
+}
