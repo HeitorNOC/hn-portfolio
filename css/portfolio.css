@@ -275,15 +275,15 @@
     margin-bottom: var(--space-8);
     flex-direction: column;
   }
-  .pf-step::before {
-    content: '';
+  /* vídeo real por card (injetado pelo JS), tocando em loop ao entrar na tela */
+  .pf-mob-video {
     display: block; width: 100%;
     aspect-ratio: 16 / 10;
     margin-bottom: var(--space-4);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
-    background-image: var(--poster);
-    background-size: cover; background-position: top center;
+    object-fit: cover; object-position: top center;
+    background: #0b0b0b;
   }
   .pf-card { width: 100%; background: var(--surface); }
 }

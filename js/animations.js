@@ -726,11 +726,11 @@
     // 3. Manifesto (Manifesto)
     try { if (window.initManifestoAnimations) initManifestoAnimations(); } catch (e) {}
 
-    // 4. Serviços (Services) — índice interativo (era o carrossel pinado v3)
-    try { if (window.initServicos) initServicos(); } catch (e) {}
-
-    // 5. Portfólio (Portfolio)
+    // 4. Portfólio (Portfolio)
     try { if (window.initPortfolio) initPortfolio(); } catch (e) {}
+
+    // 5. Serviços / Preços — agora DEPOIS do portfólio (init na ordem física do DOM, §2A)
+    try { if (window.initPrecos) initPrecos(); } catch (e) {}
 
     // 6. CTA Bridge
     try { if (window.initCtaShader) window.initCtaShader(); } catch (e) {}

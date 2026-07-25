@@ -1,0 +1,142 @@
+/* ═══════════════════════════════════════════════════════════
+   HN Services — Serviços / Preços
+   ─────────────────────────────────────────────────────────
+   Vem depois do portfólio. Foco: dev de sites e sistemas, com
+   preço na mesa. Mesmo DNA do site: obsidian, lime, grade fina,
+   Syne + Space Mono.
+   ═══════════════════════════════════════════════════════════ */
+
+.pr-root {
+  position: relative;
+  width: 100%;
+  padding: var(--space-11) 0 var(--space-10);
+  background: var(--bg);
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* linhas de grade (vocabulário do site) */
+.pr-rules {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  width: min(1240px, 92vw); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.pr-rules i { border-left: 1px solid rgba(255, 255, 255, 0.05); }
+.pr-rules i:last-child { border-right: 1px solid rgba(255, 255, 255, 0.05); }
+
+.pr-inner { position: relative; z-index: 4; width: min(1240px, 92vw); margin: 0 auto; }
+
+/* ── Cabeçalho ──────────────────────────────────────────── */
+.pr-head { max-width: 760px; margin-bottom: var(--space-9); }
+.pr-head__label { color: var(--accent); display: block; margin-bottom: var(--space-4); }
+.pr-head__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  padding-right: 0.25em;
+  color: var(--white);
+  margin-bottom: var(--space-4);
+}
+.pr-head__title em { font-style: normal; color: var(--accent); }
+.pr-head__sub { color: rgba(245, 240, 232, 0.6); font-size: var(--text-lg); line-height: 1.6; }
+
+/* ── Grade de cards ─────────────────────────────────────── */
+.pr-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 1.4vw, 20px);
+}
+
+.pr-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 1.8vw, 28px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+.pr-card:hover { transform: translateY(-6px); border-color: rgba(255, 255, 255, 0.16); }
+
+.pr-card.is-featured {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 0 60px -26px var(--accent);
+}
+
+.pr-card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.pr-card__num { font-family: var(--font-mono); font-size: var(--text-xs); color: rgba(245, 240, 232, 0.35); }
+.pr-card__flag {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bg); background: var(--accent);
+  padding: 3px 8px; border-radius: var(--radius-full);
+}
+
+.pr-card__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: var(--space-3);
+  min-height: 2.4em;
+}
+.pr-card__desc {
+  font-size: 0.9rem; line-height: 1.55;
+  color: rgba(245, 240, 232, 0.58);
+  margin-bottom: var(--space-4);
+}
+
+.pr-card__feats { list-style: none; margin-bottom: var(--space-5); display: flex; flex-direction: column; gap: 8px; }
+.pr-card__feats li {
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: rgba(245, 240, 232, 0.72);
+  padding-left: 18px; position: relative;
+}
+.pr-card__feats li::before {
+  content: ''; position: absolute; left: 0; top: 0.35em;
+  width: 8px; height: 8px;
+  border: 1px solid var(--accent);
+}
+
+.pr-card__price { margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--border); }
+.pr-card__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+.pr-card.is-featured .pr-card__value { color: var(--accent); }
+
+.pr-card__bonus {
+  margin-top: var(--space-3);
+  font-size: 0.78rem; line-height: 1.4;
+  color: var(--accent);
+}
+
+.pr-card__cta { margin-top: var(--space-5); justify-content: center; width: 100%; }
+
+/* ── Rodapé ─────────────────────────────────────────────── */
+.pr-foot {
+  margin-top: var(--space-8);
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: rgba(245, 240, 232, 0.45);
+  max-width: 640px;
+}
+.pr-foot a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .pr-grid { grid-template-columns: repeat(2, 1fr); }
+  .pr-rules { display: none; }
+  .pr-card__name { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .pr-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-card { transition: none; }
+}

@@ -75,7 +75,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/servicos.css">
+  <link rel="stylesheet" href="css/precos.css">
   <link rel="stylesheet" href="css/interacao.css">
   <link rel="stylesheet" href="css/portfolio.css">
 </head>
@@ -123,12 +123,12 @@
       <span class="section-tracker__label">Processo</span>
       <span class="section-tracker__line"></span>
     </a>
-    <a href="#servicos" class="section-tracker__item" data-section="servicos">
-      <span class="section-tracker__label">Serviços</span>
-      <span class="section-tracker__line"></span>
-    </a>
     <a href="#portfolio" class="section-tracker__item" data-section="portfolio">
       <span class="section-tracker__label">Portfólio</span>
+      <span class="section-tracker__line"></span>
+    </a>
+    <a href="#servicos" class="section-tracker__item" data-section="servicos">
+      <span class="section-tracker__label">Serviços</span>
       <span class="section-tracker__line"></span>
     </a>
     <a href="#contato" class="section-tracker__item" data-section="contato">
@@ -165,8 +165,8 @@
     <div class="nav__links" id="nav-links">
       <a href="#sobre" class="nav__link">Sobre</a>
       <a href="#processo" class="nav__link">Processo</a>
-      <a href="#servicos" class="nav__link">Serviços</a>
       <a href="#portfolio" class="nav__link">Portfólio</a>
+      <a href="#servicos" class="nav__link">Serviços</a>
       <a href="#contato" class="nav__link">Contato</a>
     </div>
     <a href="#contato" class="btn btn--outline nav__cta">Iniciar Projeto</a>
@@ -418,75 +418,6 @@
        de proporções variadas (quadrado, barra, faixa), alguns em diagonal,
        linhas de grade finas, micro-label rotacionado e número grande.
        Cada serviço tem SUA composição — trocar recoreografa os blocos, que
-       voam, giram e mudam de proporção até o novo arranjo.                 -->
-  <section id="servicos" class="obj-root" aria-label="Nossos Serviços">
-    <!-- linhas de grade (vocabulário Obys) -->
-    <div class="obj-rules" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-
-    <div class="obj-inner">
-      <header class="obj-head">
-        <span class="label obj-head__label">// 004 — Serviços</span>
-        <h2 class="obj-head__title">O que fazemos</h2>
-      </header>
-
-      <div class="obj-grid">
-        <div class="obj-side">
-          <ol class="obj-idx" id="obj-idx">
-            <li>
-              <button type="button" class="obj-idx__item is-active" data-i="0"
-                      data-tags="Landing Pages|Portais Corporativos|E-commerce|SEO Técnico">
-                <span class="obj-idx__num">01</span>
-                <span class="obj-idx__name">Criação de Sites</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="obj-idx__item" data-i="1"
-                      data-tags="Diagnóstico de Stack|Arquitetura Cloud|Roadmap de ROI">
-                <span class="obj-idx__num">02</span>
-                <span class="obj-idx__name">Consultoria de TI</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="obj-idx__item" data-i="2"
-                      data-tags="Aplicações Customizadas|Integração de APIs|Bancos de Dados|Dashboards Administrativos">
-                <span class="obj-idx__num">03</span>
-                <span class="obj-idx__name">Sistemas Web</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="obj-idx__item" data-i="3"
-                      data-tags="Design de Interface|Pesquisa de Usuário|Protótipos Interativos">
-                <span class="obj-idx__num">04</span>
-                <span class="obj-idx__name">UI/UX Design</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="obj-idx__item" data-i="4"
-                      data-tags="Updates de Segurança|Correção de Bugs|Monitoramento 24/7">
-                <span class="obj-idx__num">05</span>
-                <span class="obj-idx__name">Manutenção &amp; Suporte</span>
-              </button>
-            </li>
-          </ol>
-          <ul class="obj-tags" id="obj-tags"><li>Landing Pages</li><li>Portais Corporativos</li><li>E-commerce</li><li>SEO Técnico</li></ul>
-        </div>
-
-        <div class="obj-stage" id="obj-stage">
-          <span class="obj-stage__label" aria-hidden="true">Serviço</span>
-          <span class="obj-stage__num" id="obj-num" aria-hidden="true">01</span>
-          <div class="obj-blocks" id="obj-blocks" aria-hidden="true">
-          <div class="obj-block obj-block--fill" data-b="0"></div>
-          <div class="obj-block obj-block--light" data-b="1"></div>
-          <div class="obj-block obj-block--dim" data-b="2"></div>
-          <div class="obj-block obj-block--fill" data-b="3"></div>
-          <div class="obj-block obj-block--light" data-b="4"></div>
-          <div class="obj-block obj-block--dim" data-b="5"></div>
-          </div>
-          <h3 class="obj-name" id="obj-name"><span>Criação de Sites</span></h3>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
 
@@ -518,39 +449,43 @@
             <img src="assets/video/jofer.jpg" alt="Jofer Poeta" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="1"
-                  style="--x:76px; --y:-142px; --r:3.5deg; --s:0.889; --z:1; --accent:#c56a3f">
+                  style="--x:62px; --y:-152px; --r:2.9deg; --s:0.876; --z:1; --accent:#c56a3f">
             <img src="assets/video/baseline.jpg" alt="Baseline" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="2"
-                  style="--x:131px; --y:-95px; --r:6.1deg; --s:0.947; --z:2; --accent:#c8a96e">
+                  style="--x:113px; --y:-114px; --r:5.3deg; --s:0.926; --z:2; --accent:#c8a96e">
             <img src="assets/video/marim.jpg" alt="Marim dos Caetés" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="3"
-                  style="--x:150px; --y:-47px; --r:7.0deg; --s:0.986; --z:3; --accent:#a0c4e8">
+                  style="--x:143px; --y:-76px; --r:6.7deg; --s:0.966; --z:3; --accent:#a0c4e8">
             <img src="assets/video/jd.jpg" alt="JD Flooring &amp; Cleaning" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="4"
-                  style="--x:128px; --y:0px; --r:6.0deg; --s:1.000; --z:4; --accent:#7fb2d6">
-            <img src="assets/video/glacius.jpg" alt="Glacius" loading="lazy" decoding="async">
+                  style="--x:149px; --y:-38px; --r:6.9deg; --s:0.991; --z:4; --accent:#c9a227">
+            <img src="assets/video/ferre.jpg" alt="Studio Ferré 97" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="5"
-                  style="--x:71px; --y:48px; --r:3.3deg; --s:0.986; --z:5; --accent:#e0537a">
-            <img src="assets/video/arkkhe.jpg" alt="Arkkhe" loading="lazy" decoding="async">
+                  style="--x:128px; --y:0px; --r:6.0deg; --s:1.000; --z:5; --accent:#7fb2d6">
+            <img src="assets/video/glacius.jpg" alt="Glacius" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="6"
-                  style="--x:-6px; --y:95px; --r:-0.3deg; --s:0.947; --z:6; --accent:#22b07d">
-            <img src="assets/video/diet-soda.jpg" alt="Diet Soda" loading="lazy" decoding="async">
+                  style="--x:84px; --y:38px; --r:3.9deg; --s:0.991; --z:6; --accent:#e0537a">
+            <img src="assets/video/arkkhe.jpg" alt="Arkkhe" loading="lazy" decoding="async">
           </figure>
           <figure class="pf-chip" data-i="7"
-                  style="--x:-81px; --y:143px; --r:-3.8deg; --s:0.889; --z:7; --accent:#b87333">
+                  style="--x:26px; --y:76px; --r:1.2deg; --s:0.966; --z:7; --accent:#c8ccd0">
+            <img src="assets/video/m4.jpg" alt="M4 Competition" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="8"
+                  style="--x:-37px; --y:114px; --r:-1.7deg; --s:0.926; --z:8; --accent:#22b07d">
+            <img src="assets/video/diet-soda.jpg" alt="Diet Soda" loading="lazy" decoding="async">
+          </figure>
+          <figure class="pf-chip" data-i="9"
+                  style="--x:-94px; --y:152px; --r:-4.4deg; --s:0.876; --z:9; --accent:#b87333">
             <img src="assets/video/laocoon.jpg" alt="Laocoön" loading="lazy" decoding="async">
           </figure>
-          <figure class="pf-chip" data-i="8"
-                  style="--x:-134px; --y:190px; --r:-6.2deg; --s:0.820; --z:8; --accent:#C9F31D">
-            <img src="assets/video/heitor.jpg" alt="Heitor Negromonte" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="8"
-                  style="--x:-134px; --y:190px; --r:-6.2deg; --s:0.820; --z:8; --accent:#C9F31D">
+          <figure class="pf-chip" data-i="10"
+                  style="--x:-134px; --y:190px; --r:-6.2deg; --s:0.820; --z:10; --accent:#C9F31D">
             <img src="assets/video/heitor.jpg" alt="Heitor Negromonte" loading="lazy" decoding="async">
           </figure>
         </div>
@@ -567,14 +502,14 @@
           <span class="pf-solo__url" id="pf-solo-url"></span>
         </div>
         <div class="pf-solo__view">
-          <video class="pf-solo__video" data-i="0" data-src="assets/video/m4.mp4"
-                 poster="assets/video/m4.jpg" muted playsinline preload="none"
+          <video class="pf-solo__video" data-i="0" data-src="assets/video/jofer.mp4"
+                 poster="assets/video/jofer.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
           <video class="pf-solo__video" data-i="1" data-src="assets/video/baseline.mp4"
                  poster="assets/video/baseline.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="2" data-src="assets/video/laocoon.mp4"
-                 poster="assets/video/laocoon.jpg" muted playsinline preload="none"
+          <video class="pf-solo__video" data-i="2" data-src="assets/video/marim.mp4"
+                 poster="assets/video/marim.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
           <video class="pf-solo__video" data-i="3" data-src="assets/video/jd.mp4"
                  poster="assets/video/jd.jpg" muted playsinline preload="none"
@@ -588,14 +523,14 @@
           <video class="pf-solo__video" data-i="6" data-src="assets/video/arkkhe.mp4"
                  poster="assets/video/arkkhe.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="7" data-src="assets/video/marim.mp4"
-                 poster="assets/video/marim.jpg" muted playsinline preload="none"
+          <video class="pf-solo__video" data-i="7" data-src="assets/video/m4.mp4"
+                 poster="assets/video/m4.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
           <video class="pf-solo__video" data-i="8" data-src="assets/video/diet-soda.mp4"
                  poster="assets/video/diet-soda.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="9" data-src="assets/video/jofer.mp4"
-                 poster="assets/video/jofer.jpg" muted playsinline preload="none"
+          <video class="pf-solo__video" data-i="9" data-src="assets/video/laocoon.mp4"
+                 poster="assets/video/laocoon.jpg" muted playsinline preload="none"
                  aria-hidden="true" tabindex="-1"></video>
           <video class="pf-solo__video" data-i="10" data-src="assets/video/heitor.mp4"
                  poster="assets/video/heitor.jpg" muted playsinline preload="none"
@@ -608,23 +543,22 @@
     <div class="pf-scroll">
       <div class="pf-intro-space" id="pf-intro-space"></div>
 
-      <article class="pf-step" data-i="0" style="--accent:#F27B57">
+      <article class="pf-step" data-i="0" style="--accent:#7c5cff">
         <div class="pf-card">
           <div class="pf-card__top">
             <span class="pf-card__idx label">01</span>
-            <span class="pf-card__tier">Estudo</span>
+            <span class="pf-card__tier">Essencial</span>
           </div>
-          <h3 class="pf-card__name">M4</h3>
-          <span class="label pf-card__cat">Motion · Web</span>
-          <p class="pf-card__desc">Peça visual de ritmo seco e contraste forte, pensada para leitura rápida e impacto imediato.</p>
-          <ul class="pf-tags"><li>Motion</li><li>Web</li><li>Loop</li></ul>
+          <h3 class="pf-card__name">Jofer Poeta</h3>
+          <span class="label pf-card__cat">Web · Literatura</span>
+          <p class="pf-card__desc">Portal lírico do escritor João Ferreira: cordéis espíritas da Série Reluz, livros autorais e agenda de palestras.</p>
+          <ul class="pf-tags"><li>Web</li><li>SEO</li><li>Editorial</li></ul>
           <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="assets/video/m4.mp4" data-name="M4">Ver vídeo →</button>
-            <a class="btn btn--outline" href="assets/video/m4.mp4" target="_blank" rel="noopener">m4.mp4 ↗</a>
+            <button type="button" class="btn btn--primary pf-open" data-live="https://jofer.vercel.app/" data-name="Jofer Poeta">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://jofer.vercel.app/" target="_blank" rel="noopener">jofer.vercel.app ↗</a>
           </div>
         </div>
       </article>
-
       <article class="pf-step" data-i="1" style="--accent:#c56a3f">
         <div class="pf-card">
           <div class="pf-card__top">
@@ -641,24 +575,22 @@
           </div>
         </div>
       </article>
-
-      <article class="pf-step" data-i="2" style="--accent:#b87333">
+      <article class="pf-step" data-i="2" style="--accent:#c8a96e">
         <div class="pf-card">
           <div class="pf-card__top">
             <span class="pf-card__idx label">03</span>
-            <span class="pf-card__tier">Complexo</span>
+            <span class="pf-card__tier">Institucional</span>
           </div>
-          <h3 class="pf-card__name">Laocoön</h3>
-          <span class="label pf-card__cat">Experiência · WebGL</span>
-          <p class="pf-card__desc">Cena Three.js dirigida por scroll: shaders, partículas e câmera em órbita. O nosso limite superior.</p>
-          <ul class="pf-tags"><li>Three.js</li><li>Shaders</li><li>WebGL</li></ul>
+          <h3 class="pf-card__name">Marim dos Caetés</h3>
+          <span class="label pf-card__cat">Dev · Frevo e Cultura</span>
+          <p class="pf-card__desc">Portal oficial da histórica agremiação de Olinda. Preservação do Frevo — patrimônio UNESCO — e memória.</p>
+          <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>CMS</li></ul>
           <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://laocoon-delta.vercel.app/" data-name="Laocoön">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener">laocoon-delta.vercel.app ↗</a>
+            <button type="button" class="btn btn--primary pf-open" data-live="https://www.marim-dos-caetes.com.br" data-name="Marim dos Caetés">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener">marim-dos-caetes.com.br ↗</a>
           </div>
         </div>
       </article>
-
       <article class="pf-step" data-i="3" style="--accent:#a0c4e8">
         <div class="pf-card">
           <div class="pf-card__top">
@@ -675,24 +607,22 @@
           </div>
         </div>
       </article>
-
-      <article class="pf-step" data-i="4" style="--accent:#D9A15B">
+      <article class="pf-step" data-i="4" style="--accent:#c9a227">
         <div class="pf-card">
           <div class="pf-card__top">
             <span class="pf-card__idx label">05</span>
-            <span class="pf-card__tier">Case</span>
+            <span class="pf-card__tier">Premium</span>
           </div>
-          <h3 class="pf-card__name">Ferre</h3>
-          <span class="label pf-card__cat">Web · Editorial</span>
-          <p class="pf-card__desc">Interface limpa com foco em contraste, composição e navegação precisa.</p>
-          <ul class="pf-tags"><li>UI</li><li>Layout</li><li>Scroll</li></ul>
+          <h3 class="pf-card__name">Studio Ferré 97</h3>
+          <span class="label pf-card__cat">Landing · Barbearia</span>
+          <p class="pf-card__desc">Barbearia premium de Olinda: tipografia imponente, agendamento e um editorial escuro e dourado à altura da marca.</p>
+          <ul class="pf-tags"><li>Next.js</li><li>Editorial</li><li>Agendamento</li></ul>
           <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="assets/video/ferre.mp4" data-name="Ferre">Ver vídeo →</button>
-            <a class="btn btn--outline" href="assets/video/ferre.mp4" target="_blank" rel="noopener">ferre.mp4 ↗</a>
+            <button type="button" class="btn btn--primary pf-open" data-live="https://studio-ferre-97.vercel.app/" data-name="Studio Ferré 97">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener">studio-ferre-97.vercel.app ↗</a>
           </div>
         </div>
       </article>
-
       <article class="pf-step" data-i="5" style="--accent:#7fb2d6">
         <div class="pf-card">
           <div class="pf-card__top">
@@ -709,7 +639,6 @@
           </div>
         </div>
       </article>
-
       <article class="pf-step" data-i="6" style="--accent:#e0537a">
         <div class="pf-card">
           <div class="pf-card__top">
@@ -726,24 +655,22 @@
           </div>
         </div>
       </article>
-
-      <article class="pf-step" data-i="7" style="--accent:#c8a96e">
+      <article class="pf-step" data-i="7" style="--accent:#c8ccd0">
         <div class="pf-card">
           <div class="pf-card__top">
             <span class="pf-card__idx label">08</span>
-            <span class="pf-card__tier">Institucional</span>
+            <span class="pf-card__tier">Cinematográfico</span>
           </div>
-          <h3 class="pf-card__name">Marim dos Caetés</h3>
-          <span class="label pf-card__cat">Dev · Frevo e Cultura</span>
-          <p class="pf-card__desc">Portal oficial da histórica agremiação de Olinda. Preservação do Frevo — patrimônio UNESCO — e memória.</p>
-          <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>CMS</li></ul>
+          <h3 class="pf-card__name">M4 Competition</h3>
+          <span class="label pf-card__cat">Hero · Automotivo</span>
+          <p class="pf-card__desc">Hero em vídeo 1080p dirigido pelo scroll: o BMW M4 gira em cena com specs animadas. Produção cinematográfica.</p>
+          <ul class="pf-tags"><li>Vídeo 1080p</li><li>Scroll-scrub</li><li>GSAP</li></ul>
           <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://www.marim-dos-caetes.com.br" data-name="Marim dos Caetés">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener">marim-dos-caetes.com.br ↗</a>
+            <button type="button" class="btn btn--primary pf-open" data-live="https://m4-competition.vercel.app/" data-name="M4 Competition">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener">m4-competition.vercel.app ↗</a>
           </div>
         </div>
       </article>
-
       <article class="pf-step" data-i="8" style="--accent:#22b07d">
         <div class="pf-card">
           <div class="pf-card__top">
@@ -760,24 +687,22 @@
           </div>
         </div>
       </article>
-
-      <article class="pf-step" data-i="9" style="--accent:#7c5cff">
+      <article class="pf-step" data-i="9" style="--accent:#b87333">
         <div class="pf-card">
           <div class="pf-card__top">
             <span class="pf-card__idx label">10</span>
-            <span class="pf-card__tier">Essencial</span>
+            <span class="pf-card__tier">Complexo</span>
           </div>
-          <h3 class="pf-card__name">Jofer Poeta</h3>
-          <span class="label pf-card__cat">Web · Literatura</span>
-          <p class="pf-card__desc">Portal lírico do escritor João Ferreira: cordéis espíritas da Série Reluz, livros autorais e agenda de palestras.</p>
-          <ul class="pf-tags"><li>Web</li><li>SEO</li><li>Editorial</li></ul>
+          <h3 class="pf-card__name">Laocoön</h3>
+          <span class="label pf-card__cat">Experiência · WebGL</span>
+          <p class="pf-card__desc">Cena Three.js dirigida por scroll: shaders, partículas e câmera em órbita. O nosso limite superior.</p>
+          <ul class="pf-tags"><li>Three.js</li><li>Shaders</li><li>WebGL</li></ul>
           <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://jofer.vercel.app/" data-name="Jofer Poeta">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://jofer.vercel.app/" target="_blank" rel="noopener">jofer.vercel.app ↗</a>
+            <button type="button" class="btn btn--primary pf-open" data-live="https://laocoon-delta.vercel.app/" data-name="Laocoön">Explorar ao vivo →</button>
+            <a class="btn btn--outline" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener">laocoon-delta.vercel.app ↗</a>
           </div>
         </div>
       </article>
-
       <article class="pf-step" data-i="10" style="--accent:#C9F31D">
         <div class="pf-card">
           <div class="pf-card__top">
@@ -805,6 +730,96 @@
 
   <!-- Lightbox de projeto (preenchido por js/portfolio.js) -->
   <div class="pf-lb" id="pf-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Projeto ao vivo"></div>
+
+  <!-- ═══════════════════════ SERVIÇOS / PREÇOS ═══════════════════
+       Após o portfólio: agora que o visitante viu os cases, mostramos
+       quanto custa. Foco em desenvolvimento de sites e sistemas.        -->
+  <section id="servicos" class="pr-root" aria-label="Serviços e Preços">
+    <div class="pr-rules" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="pr-inner">
+      <header class="pr-head">
+        <span class="label pr-head__label">// 006 — Serviços</span>
+        <h2 class="pr-head__title">Sites &amp; sistemas,<br><em>preço na mesa.</em></h2>
+        <p class="pr-head__sub">Do site de uma página ao sistema sob medida. Transparência desde o primeiro contato.</p>
+      </header>
+      <div class="pr-grid">
+        <article class="pr-card is-featured" data-reveal>
+          <div class="pr-card__top">
+            <span class="pr-card__num label">01</span>
+            <span class="pr-card__flag">Mais pedido</span>
+          </div>
+          <h3 class="pr-card__name">Landing Page Simples</h3>
+          <p class="pr-card__desc">Uma página feita para converter. Responsiva, veloz e otimizada para SEO.</p>
+          <ul class="pr-card__feats">
+            <li>Design sob medida</li>
+            <li>Responsivo e rápido</li>
+            <li>Publicação inclusa</li>
+          </ul>
+          <div class="pr-card__price">
+            <span class="pr-card__value">R$ 400</span>
+          </div>
+          <p class="pr-card__bonus">★ Manutenção e alterações grátis por 3 meses</p>
+          <a href="#contato" class="btn btn--primary pr-card__cta" data-scroll>Começar →</a>
+        </article>
+        <article class="pr-card" data-reveal>
+          <div class="pr-card__top">
+            <span class="pr-card__num label">02</span>
+            
+          </div>
+          <h3 class="pr-card__name">Landing Page Completa</h3>
+          <p class="pr-card__desc">Múltiplas seções, mais recursos e integrações — para contar uma história maior.</p>
+          <ul class="pr-card__feats">
+            <li>Várias seções</li>
+            <li>Formulários e integrações</li>
+            <li>SEO técnico</li>
+          </ul>
+          <div class="pr-card__price">
+            <span class="pr-card__value">R$ 600</span>
+          </div>
+          
+          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Começar →</a>
+        </article>
+        <article class="pr-card" data-reveal>
+          <div class="pr-card__top">
+            <span class="pr-card__num label">03</span>
+            
+          </div>
+          <h3 class="pr-card__name">Landing com Vídeos &amp; Animações</h3>
+          <p class="pr-card__desc">Vídeos, WebGL, scroll-scrub e interações sob medida — como os cases acima.</p>
+          <ul class="pr-card__feats">
+            <li>Animações personalizadas</li>
+            <li>Vídeo / 3D / WebGL</li>
+            <li>Experiência premium</li>
+          </ul>
+          <div class="pr-card__price">
+            <span class="pr-card__value">Sob consulta</span>
+          </div>
+          
+          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Consultar →</a>
+        </article>
+        <article class="pr-card" data-reveal>
+          <div class="pr-card__top">
+            <span class="pr-card__num label">04</span>
+            
+          </div>
+          <h3 class="pr-card__name">Sistema Web para seu Negócio</h3>
+          <p class="pr-card__desc">Aplicações, dashboards e integrações para a operação do seu negócio — do frontend ao banco.</p>
+          <ul class="pr-card__feats">
+            <li>Sob medida</li>
+            <li>Painéis e automações</li>
+            <li>Suporte contínuo</li>
+          </ul>
+          <div class="pr-card__price">
+            <span class="pr-card__value">Sob consulta</span>
+          </div>
+          
+          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Consultar →</a>
+        </article>
+      </div>
+      <p class="pr-foot">Valores de referência para landing pages. Projetos maiores e sistemas são orçados sob medida — <a href="#contato" data-scroll>fale com a gente</a>.</p>
+    </div>
+  </section>
+
 
   <!-- ═══════════════════════ BRIDGE CTA ══════════════════════ -->
   <div class="cta-root">
@@ -942,7 +957,7 @@
   <script src="js/three-scene.js"></script>
   <script src="js/lightning.js"></script>
   <script src="js/process-canvas.js"></script>
-  <script src="js/servicos.js"></script>
+  <script src="js/precos.js"></script>
   <!-- FlowWave: porte fiel do estudo flow-wave. ES module que usa os addons de
        pós-processamento (bloom seletivo). O importmap resolve "three" para a
        cópia LOCAL vendorizada — offline-first, nenhum CDN (§5 do guia). -->

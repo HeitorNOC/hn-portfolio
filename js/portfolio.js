@@ -37,14 +37,43 @@ window.initPortfolio = function () {
   var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth <= 767;
 
-  /* Pôster por projeto → usado pelo CSS no mobile (.pf-step::before) */
-  steps.forEach(function (s, i) {
-    if (videos[i]) s.style.setProperty('--poster', 'url(' + videos[i].getAttribute('poster') + ')');
-  });
-
   initLightbox();
 
-  if (isMobile || !hasGSAP || reduced) return;
+  /* ── MOBILE: vídeo real tocando em cada card ────────────────
+     No mobile o palco sticky de scrub não roda; antes eu mostrava só o
+     pôster estático (por isso "não aparecia vídeo"). Agora cada card ganha
+     um <video> mudo em loop, carregado e tocado só quando entra na tela
+     (IntersectionObserver) — um por vez, sem decodificar 11 de uma vez. */
+  if (isMobile || !hasGSAP || reduced) {
+    buildMobileVideos();
+    return;
+  }
+
+  function buildMobileVideos() {
+    var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) {
+          if (!v.__loaded) { v.src = v.getAttribute('data-src'); v.__loaded = true; }
+          v.play().catch(function () { /* autoplay barrado → fica no pôster */ });
+        } else { v.pause(); }
+      });
+    }, { threshold: 0.35 }) : null;
+
+    steps.forEach(function (step, i) {
+      var vd = videos[i];
+      if (!vd) return;
+      var v = document.createElement('video');
+      v.className = 'pf-mob-video';
+      v.muted = true; v.loop = true; v.playsInline = true;
+      v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+      v.preload = 'none'; v.setAttribute('aria-hidden', 'true'); v.tabIndex = -1;
+      v.setAttribute('poster', vd.getAttribute('poster'));
+      v.setAttribute('data-src', vd.getAttribute('data-src'));
+      step.insertBefore(v, step.firstChild);
+      if (io) io.observe(v); else { v.src = v.getAttribute('data-src'); v.play().catch(function () {}); }
+    });
+  }
 
   /* ── Vídeos sob demanda ─────────────────────────────────── */
   function loadVideo(i) {
