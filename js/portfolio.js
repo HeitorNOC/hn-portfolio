@@ -60,15 +60,22 @@ window.initPortfolio = function () {
 
   function pauseAll() { videos.forEach(function (v) { if (!v.paused) v.pause(); }); }
 
-  /* ── MOBILE / sem GSAP: empilhado + IntersectionObserver ─── */
+  /* ── MOBILE / sem GSAP: carrossel horizontal NATIVO ───────
+     O swipe é 100% CSS (track com overflow-x + scroll-snap). Aqui só
+     tocamos o vídeo do painel visível e sincronizamos o contador 01/12. */
   if (!horizontal) {
     var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         var idx = videos.indexOf(e.target);
-        if (e.isIntersecting) { loadVideo(idx); playVideo(e.target); }
-        else e.target.pause();
+        if (e.isIntersecting) {
+          loadVideo(idx);
+          playVideo(e.target);
+          if (countEl) countEl.textContent = String(idx + 1).padStart(2, '0');
+        } else {
+          e.target.pause();
+        }
       });
-    }, { threshold: 0.4 }) : null;
+    }, { threshold: 0.55 }) : null;   // >0.5 → só 1 painel "vence" por vez no snap
 
     videos.forEach(function (v, i) {
       if (io) io.observe(v);
