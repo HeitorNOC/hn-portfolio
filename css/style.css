@@ -275,7 +275,7 @@ body::after {
 .cursor-ring {
   width: 30px;
   height: 30px;
-  border: 1px solid rgba(245, 240, 232, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out),
     border-color 0.2s, background 0.2s;
 }
@@ -374,7 +374,7 @@ body::after {
 
 .nav__link {
   font-size: var(--text-sm);
-  color: rgba(245, 240, 232, 0.6);
+  color: rgba(245, 240, 232, 0.82);
   position: relative;
   transition: color 0.2s;
 }
@@ -593,7 +593,7 @@ body::after {
 
 .hero__sub {
   font-size: var(--text-lg);
-  color: rgba(245, 240, 232, 0.55);
+  color: rgba(245, 240, 232, 0.78);
   max-width: 480px;
   line-height: 1.6;
   margin-bottom: var(--space-8);
@@ -731,7 +731,7 @@ body::after {
   font-size: var(--text-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(245, 240, 232, 0.45);
+  color: rgba(245, 240, 232, 0.68);
   white-space: nowrap;
 }
 
@@ -778,7 +778,7 @@ body::after {
 }
 
 .about__text {
-  color: rgba(245, 240, 232, 0.6);
+  color: rgba(245, 240, 232, 0.82);
   line-height: 1.75;
   margin-bottom: var(--space-5);
 }
@@ -1365,7 +1365,7 @@ body::after {
 }
 
 .process-step__text {
-  color: rgba(245, 240, 232, 0.55);
+  color: rgba(245, 240, 232, 0.78);
   line-height: 1.75;
   max-width: 440px;
   margin-bottom: var(--space-6);
@@ -1479,7 +1479,7 @@ body::after {
 
 .manifesto__line--stroke {
   color: transparent;
-  -webkit-text-stroke: 2px rgba(245, 240, 232, 0.35);
+  -webkit-text-stroke: 2px rgba(245, 240, 232, 0.62);
 }
 
 .manifesto__line--lime {
@@ -1490,7 +1490,7 @@ body::after {
   max-width: 480px;
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   line-height: 1.8;
-  color: rgba(245, 240, 232, 0.55);
+  color: rgba(245, 240, 232, 0.78);
 }
 
 @media (max-width: 768px) {
@@ -1578,7 +1578,7 @@ body::after {
 }
 
 .contact__sub {
-  color: rgba(245, 240, 232, 0.55);
+  color: rgba(245, 240, 232, 0.78);
   line-height: 1.7;
   margin-bottom: var(--space-5);
   max-width: 480px;
@@ -1622,7 +1622,7 @@ body::after {
   align-items: center;
   gap: var(--space-4);
   font-size: var(--text-sm);
-  color: rgba(245, 240, 232, 0.6);
+  color: rgba(245, 240, 232, 0.82);
 }
 
 .contact__info-icon {
@@ -2333,7 +2333,7 @@ body::after {
 }
 
 .port-header__sub {
-  color: rgba(245, 240, 232, 0.45);
+  color: rgba(245, 240, 232, 0.68);
   font-size: var(--text-sm);
   line-height: 1.5;
 }
@@ -2513,7 +2513,7 @@ body::after {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.18em;
-  color: rgba(245, 240, 232, 0.35);
+  color: rgba(245, 240, 232, 0.62);
   writing-mode: horizontal-tb;
 }
 
@@ -3064,7 +3064,7 @@ body::after {
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
-  color: rgba(245, 240, 232, 0.38);
+  color: rgba(245, 240, 232, 0.62);
   pointer-events: none;
   z-index: 1;
   white-space: nowrap;

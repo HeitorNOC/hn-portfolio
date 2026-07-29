@@ -247,7 +247,7 @@
           <span class="manifesto__line" aria-hidden="true">Não criamos</span>
         </div>
         <div class="manifesto__line-wrap">
-          <span class="manifesto__line manifesto__line--stroke" aria-hidden="true">sites.</span>
+          <span class="manifesto__line manifesto__line--stroke" aria-hidden="true">Apenas sites.</span>
         </div>
         <div class="manifesto__line-wrap">
           <span class="manifesto__line" aria-hidden="true">Criamos</span>
@@ -438,294 +438,373 @@
 
 
   <!-- ═══════════════════════ PORTFÓLIO ═══════════════════════ -->
-  <section id="portfolio" class="pf-root">
-    <div class="pf-stage">
-      <!-- Ato 1: a serpentina — 9 projetos, 9 cards (1 card = 1 projeto). -->
-      <div class="pf-constel" id="pf-constel">
-        <span class="pf-constel__word pf-constel__word--top">Portfólio</span>
-        <div class="pf-ribbon" id="pf-ribbon">
-          <figure class="pf-chip" data-i="0"
-                  style="--x:0px; --y:-190px; --r:0.0deg; --s:0.820; --z:0; --accent:#7c5cff">
-            <img src="assets/video/jofer.jpg" alt="Jofer Poeta" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="1"
-                  style="--x:62px; --y:-152px; --r:2.9deg; --s:0.876; --z:1; --accent:#c56a3f">
-            <img src="assets/video/baseline.jpg" alt="Baseline" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="2"
-                  style="--x:113px; --y:-114px; --r:5.3deg; --s:0.926; --z:2; --accent:#c8a96e">
-            <img src="assets/video/marim.jpg" alt="Marim dos Caetés" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="3"
-                  style="--x:143px; --y:-76px; --r:6.7deg; --s:0.966; --z:3; --accent:#a0c4e8">
-            <img src="assets/video/jd.jpg" alt="JD Flooring &amp; Cleaning" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="4"
-                  style="--x:149px; --y:-38px; --r:6.9deg; --s:0.991; --z:4; --accent:#c9a227">
-            <img src="assets/video/ferre.jpg" alt="Studio Ferré 97" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="5"
-                  style="--x:128px; --y:0px; --r:6.0deg; --s:1.000; --z:5; --accent:#7fb2d6">
-            <img src="assets/video/glacius.jpg" alt="Glacius" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="6"
-              style="--x:84px; --y:38px; --r:3.9deg; --s:0.991; --z:6; --accent:#c8ccd0">
-            <img src="assets/video/m4.jpg" alt="M4 Competition" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="7"
-              style="--x:26px; --y:76px; --r:1.2deg; --s:0.966; --z:7; --accent:#e0537a">
-            <img src="assets/video/arkkhe.jpg" alt="Arkkhe" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="8"
-                  style="--x:-37px; --y:114px; --r:-1.7deg; --s:0.926; --z:8; --accent:#22b07d">
-            <img src="assets/video/diet-soda.jpg" alt="Diet Soda" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="9"
-                  style="--x:-94px; --y:152px; --r:-4.4deg; --s:0.876; --z:9; --accent:#b87333">
-            <img src="assets/video/laocoon.jpg" alt="Laocoön" loading="lazy" decoding="async">
-          </figure>
-          <figure class="pf-chip" data-i="10"
-                  style="--x:-134px; --y:190px; --r:-6.2deg; --s:0.820; --z:10; --accent:#C9F31D">
-            <img src="assets/video/heitor.jpg" alt="Heitor Negromonte" loading="lazy" decoding="async">
-          </figure>
+  <!-- ═══════════════════════ PORTFÓLIO (horizontal) ═══════════════
+       Scroll vertical dirige a translação horizontal do track (GSAP pin).
+       1 painel = 1 projeto. Vídeo só toca no painel ativo. Mobile: empilha. -->
+  <section id="portfolio" class="pf-root" style="--pf-count:12">
+    <div class="pf-pin">
+      <div class="pf-head">
+        <div class="pf-head__left">
+          <span class="label pf-head__label">// 005 — Portfólio</span>
+          <h2 class="pf-head__title">Alguns de<br>nossos projetos</h2>
         </div>
-        <span class="pf-constel__word pf-constel__word--bot">Alguns de nossos projetos</span>
-        <span class="pf-constel__hint">↓ role</span>
+        <div class="pf-head__right">
+          <span class="pf-head__count"><i id="pf-count">01</i><b>/12</b></span>
+          <span class="pf-head__hint">role para o lado →</span>
+        </div>
       </div>
-
-      <!-- Ato 3: solo — vídeo do site scrubbado pelo scroll, dentro de uma
-           moldura de browser: em tela cheia o print do site virava borrão. -->
-      <div class="pf-solo" id="pf-solo">
-       <div class="pf-solo__browser">
-        <div class="pf-solo__bar">
-          <span class="pf-solo__tl"></span><span class="pf-solo__tl"></span><span class="pf-solo__tl"></span>
-          <span class="pf-solo__url" id="pf-solo-url"></span>
-        </div>
-        <div class="pf-solo__view">
-          <video class="pf-solo__video" data-i="0" data-src="assets/video/jofer.mp4"
-                 poster="assets/video/jofer.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="1" data-src="assets/video/baseline.mp4"
-                 poster="assets/video/baseline.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="2" data-src="assets/video/marim.mp4"
-                 poster="assets/video/marim.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="3" data-src="assets/video/jd.mp4"
-                 poster="assets/video/jd.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="4" data-src="assets/video/ferre.mp4"
-                 poster="assets/video/ferre.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="5" data-src="assets/video/glacius.mp4"
-                 poster="assets/video/glacius.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-             <video class="pf-solo__video" data-i="6" data-src="assets/video/m4.mp4"
-               poster="assets/video/m4.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-             <video class="pf-solo__video" data-i="7" data-src="assets/video/arkkhe.mp4"
-               poster="assets/video/arkkhe.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="8" data-src="assets/video/diet-soda.mp4"
-                 poster="assets/video/diet-soda.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="9" data-src="assets/video/laocoon.mp4"
-                 poster="assets/video/laocoon.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-          <video class="pf-solo__video" data-i="10" data-src="assets/video/heitor.mp4"
-                 poster="assets/video/heitor.jpg" muted playsinline preload="none"
-                 aria-hidden="true" tabindex="-1"></video>
-        </div><!-- .pf-solo__view -->
-       </div><!-- .pf-solo__browser -->
+      <div class="pf-track" id="pf-track">
+        <article class="pf-panel" data-i="0" style="--accent:#c8ccd0">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">01</span>
+                <span class="pf-info__tier">Cinematográfico</span>
+              </div>
+              <h3 class="pf-info__name">M4 Competition</h3>
+              <span class="label pf-info__cat">Hero · Automotivo</span>
+              <p class="pf-info__desc">Hero em vídeo 1080p dirigido pelo scroll: o BMW M4 gira em cena com specs animadas. Produção cinematográfica.</p>
+              <ul class="pf-tags"><li>Vídeo 1080p</li><li>Scroll-scrub</li><li>GSAP</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://m4-competition.vercel.app/" data-name="M4 Competition">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener">m4-competition.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">m4-competition.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="0" data-src="assets/video/m4.mp4"
+                       poster="assets/video/m4.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="1" style="--accent:#c8a96e">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">02</span>
+                <span class="pf-info__tier">Cinematográfico</span>
+              </div>
+              <h3 class="pf-info__name">HN Arquitetura</h3>
+              <span class="label pf-info__cat">Landing · Arquitetura</span>
+              <p class="pf-info__desc">Estúdio de arquitetura e construção: hero em vídeo dirigido pelo scroll, do primeiro traço à entrega das chaves.</p>
+              <ul class="pf-tags"><li>Vídeo</li><li>Scroll-scrub</li><li>Editorial</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://hn-construction.vercel.app/" data-name="HN Arquitetura">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://hn-construction.vercel.app/" target="_blank" rel="noopener">hn-construction.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">hn-construction.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="1" data-src="assets/video/hn-construction.mp4"
+                       poster="assets/video/hn-construction.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="2" style="--accent:#a0c4e8">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">03</span>
+                <span class="pf-info__tier">Conversão</span>
+              </div>
+              <h3 class="pf-info__name">JD Flooring &amp; Cleaning</h3>
+              <span class="label pf-info__cat">Web · Serviços</span>
+              <p class="pf-info__desc">A tela se divide e revela os dois serviços conforme o cursor caminha. Alta conversão e SEO local na Flórida.</p>
+              <ul class="pf-tags"><li>Conversão</li><li>SEO Local</li><li>Interação</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://www.jdfcs.com" data-name="JD Flooring &amp; Cleaning">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://www.jdfcs.com" target="_blank" rel="noopener">jdfcs.com ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">jdfcs.com</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="2" data-src="assets/video/jd.mp4"
+                       poster="assets/video/jd.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="3" style="--accent:#b87333">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">04</span>
+                <span class="pf-info__tier">Complexo</span>
+              </div>
+              <h3 class="pf-info__name">Laocoön</h3>
+              <span class="label pf-info__cat">Experiência · WebGL</span>
+              <p class="pf-info__desc">Cena Three.js dirigida por scroll: shaders, partículas e câmera em órbita. O nosso limite superior.</p>
+              <ul class="pf-tags"><li>Three.js</li><li>Shaders</li><li>WebGL</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://laocoon-delta.vercel.app/" data-name="Laocoön">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener">laocoon-delta.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">laocoon-delta.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="3" data-src="assets/video/laocoon.mp4"
+                       poster="assets/video/laocoon.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="4" style="--accent:#e0537a">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">05</span>
+                <span class="pf-info__tier">Avançado</span>
+              </div>
+              <h3 class="pf-info__name">Arkkhe</h3>
+              <span class="label pf-info__cat">Hero · Automotivo</span>
+              <p class="pf-info__desc">Vídeo controlado pelo scroll, intro cinematográfica e transições de troca — fidelidade total ao design.</p>
+              <ul class="pf-tags"><li>React</li><li>Vídeo</li><li>Scroll-scrub</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://arkkhe-hero.vercel.app/" data-name="Arkkhe">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener">arkkhe-hero.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">arkkhe-hero.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="4" data-src="assets/video/arkkhe.mp4"
+                       poster="assets/video/arkkhe.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="5" style="--accent:#7fb2d6">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">06</span>
+                <span class="pf-info__tier">Imersivo</span>
+              </div>
+              <h3 class="pf-info__name">Glacius</h3>
+              <span class="label pf-info__cat">Landing · Imersiva</span>
+              <p class="pf-info__desc">Parallax por camadas, neve em movimento e reveals cinematográficos — profundidade sem peso.</p>
+              <ul class="pf-tags"><li>React</li><li>Parallax</li><li>GSAP</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://glacius-frost.vercel.app/" data-name="Glacius">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener">glacius-frost.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">glacius-frost.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="5" data-src="assets/video/glacius.mp4"
+                       poster="assets/video/glacius.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="6" style="--accent:#c9a227">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">07</span>
+                <span class="pf-info__tier">Premium</span>
+              </div>
+              <h3 class="pf-info__name">Studio Ferré 97</h3>
+              <span class="label pf-info__cat">Landing · Barbearia</span>
+              <p class="pf-info__desc">Barbearia premium de Olinda: tipografia imponente, agendamento e um editorial escuro e dourado à altura da marca.</p>
+              <ul class="pf-tags"><li>Next.js</li><li>Editorial</li><li>Agendamento</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://studio-ferre-97.vercel.app/" data-name="Studio Ferré 97">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener">studio-ferre-97.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">studio-ferre-97.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="6" data-src="assets/video/ferre.mp4"
+                       poster="assets/video/ferre.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="7" style="--accent:#7c5cff">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">08</span>
+                <span class="pf-info__tier">Essencial</span>
+              </div>
+              <h3 class="pf-info__name">Jofer Poeta</h3>
+              <span class="label pf-info__cat">Web · Literatura</span>
+              <p class="pf-info__desc">Portal lírico do escritor João Ferreira: cordéis espíritas da Série Reluz, livros autorais e agenda de palestras.</p>
+              <ul class="pf-tags"><li>Web</li><li>SEO</li><li>Editorial</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://jofer.vercel.app/" data-name="Jofer Poeta">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://jofer.vercel.app/" target="_blank" rel="noopener">jofer.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">jofer.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="7" data-src="assets/video/jofer.mp4"
+                       poster="assets/video/jofer.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="8" style="--accent:#22b07d">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">09</span>
+                <span class="pf-info__tier">Avançado</span>
+              </div>
+              <h3 class="pf-info__name">Diet Soda</h3>
+              <span class="label pf-info__cat">Produto · 3D</span>
+              <p class="pf-info__desc">Produto 3D interativo com troca de sabor em tempo real, blur de movimento e atmosfera viva.</p>
+              <ul class="pf-tags"><li>3D</li><li>model-viewer</li><li>GSAP</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://diet-soda-nine.vercel.app/" data-name="Diet Soda">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://diet-soda-nine.vercel.app/" target="_blank" rel="noopener">diet-soda-nine.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">diet-soda-nine.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="8" data-src="assets/video/diet-soda.mp4"
+                       poster="assets/video/diet-soda.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="9" style="--accent:#c8a96e">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">10</span>
+                <span class="pf-info__tier">Institucional</span>
+              </div>
+              <h3 class="pf-info__name">Marim dos Caetés</h3>
+              <span class="label pf-info__cat">Dev · Frevo e Cultura</span>
+              <p class="pf-info__desc">Portal oficial da histórica agremiação de Olinda. Preservação do Frevo — patrimônio UNESCO — e memória.</p>
+              <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>CMS</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://www.marim-dos-caetes.com.br" data-name="Marim dos Caetés">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener">marim-dos-caetes.com.br ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">marim-dos-caetes.com.br</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="9" data-src="assets/video/marim.mp4"
+                       poster="assets/video/marim.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="10" style="--accent:#c56a3f">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">11</span>
+                <span class="pf-info__tier">Essencial</span>
+              </div>
+              <h3 class="pf-info__name">Baseline</h3>
+              <span class="label pf-info__cat">Landing · Esporte</span>
+              <p class="pf-info__desc">Elegância e ritmo com o mínimo: física de mola coesa, revelações no scroll e zero excesso.</p>
+              <ul class="pf-tags"><li>UI/UX</li><li>Motion</li><li>Lenis</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://baseline-plum-five.vercel.app/" data-name="Baseline">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://baseline-plum-five.vercel.app/" target="_blank" rel="noopener">baseline-plum-five.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">baseline-plum-five.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="10" data-src="assets/video/baseline.mp4"
+                       poster="assets/video/baseline.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="11" style="--accent:#C9F31D">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">12</span>
+                <span class="pf-info__tier">Interativo</span>
+              </div>
+              <h3 class="pf-info__name">Heitor Negromonte</h3>
+              <span class="label pf-info__cat">Design · Portfólio</span>
+              <p class="pf-info__desc">Portfólio interativo de engenharia de software. Arquiteturas de alto desempenho e interfaces táteis.</p>
+              <ul class="pf-tags"><li>Next.js</li><li>Node.js</li><li>Interativo</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://www.heitor-negromonte.com.br" data-name="Heitor Negromonte">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://www.heitor-negromonte.com.br" target="_blank" rel="noopener">heitor-negromonte.com.br ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">heitor-negromonte.com.br</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="11" data-src="assets/video/heitor.mp4"
+                       poster="assets/video/heitor.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
+      <div class="pf-progress" aria-hidden="true"><span class="pf-progress__fill" id="pf-progress-fill"></span></div>
     </div>
-
-    <div class="pf-scroll">
-      <div class="pf-intro-space" id="pf-intro-space"></div>
-
-      <article class="pf-step" data-i="0" style="--accent:#7c5cff">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">01</span>
-            <span class="pf-card__tier">Essencial</span>
-          </div>
-          <h3 class="pf-card__name">Jofer Poeta</h3>
-          <span class="label pf-card__cat">Web · Literatura</span>
-          <p class="pf-card__desc">Portal lírico do escritor João Ferreira: cordéis espíritas da Série Reluz, livros autorais e agenda de palestras.</p>
-          <ul class="pf-tags"><li>Web</li><li>SEO</li><li>Editorial</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://jofer.vercel.app/" data-name="Jofer Poeta">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://jofer.vercel.app/" target="_blank" rel="noopener">jofer.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="1" style="--accent:#c56a3f">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">02</span>
-            <span class="pf-card__tier">Essencial</span>
-          </div>
-          <h3 class="pf-card__name">Baseline</h3>
-          <span class="label pf-card__cat">Landing · Esporte</span>
-          <p class="pf-card__desc">Elegância e ritmo com o mínimo: física de mola coesa, revelações no scroll e zero excesso.</p>
-          <ul class="pf-tags"><li>UI/UX</li><li>Motion</li><li>Lenis</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://baseline-plum-five.vercel.app/" data-name="Baseline">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://baseline-plum-five.vercel.app/" target="_blank" rel="noopener">baseline-plum-five.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="2" style="--accent:#c8a96e">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">03</span>
-            <span class="pf-card__tier">Institucional</span>
-          </div>
-          <h3 class="pf-card__name">Marim dos Caetés</h3>
-          <span class="label pf-card__cat">Dev · Frevo e Cultura</span>
-          <p class="pf-card__desc">Portal oficial da histórica agremiação de Olinda. Preservação do Frevo — patrimônio UNESCO — e memória.</p>
-          <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>CMS</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://www.marim-dos-caetes.com.br" data-name="Marim dos Caetés">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener">marim-dos-caetes.com.br ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="3" style="--accent:#a0c4e8">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">04</span>
-            <span class="pf-card__tier">Conversão</span>
-          </div>
-          <h3 class="pf-card__name">JD Flooring &amp; Cleaning</h3>
-          <span class="label pf-card__cat">Web · Serviços</span>
-          <p class="pf-card__desc">A tela se divide e revela os dois serviços conforme o cursor caminha. Alta conversão e SEO local na Flórida.</p>
-          <ul class="pf-tags"><li>Conversão</li><li>SEO Local</li><li>Interação</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://www.jdfcs.com" data-name="JD Flooring &amp; Cleaning">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://www.jdfcs.com" target="_blank" rel="noopener">jdfcs.com ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="4" style="--accent:#c9a227">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">05</span>
-            <span class="pf-card__tier">Premium</span>
-          </div>
-          <h3 class="pf-card__name">Studio Ferré 97</h3>
-          <span class="label pf-card__cat">Landing · Barbearia</span>
-          <p class="pf-card__desc">Barbearia premium de Olinda: tipografia imponente, agendamento e um editorial escuro e dourado à altura da marca.</p>
-          <ul class="pf-tags"><li>Next.js</li><li>Editorial</li><li>Agendamento</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://studio-ferre-97.vercel.app/" data-name="Studio Ferré 97">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener">studio-ferre-97.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="5" style="--accent:#7fb2d6">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">06</span>
-            <span class="pf-card__tier">Imersivo</span>
-          </div>
-          <h3 class="pf-card__name">Glacius</h3>
-          <span class="label pf-card__cat">Landing · Imersiva</span>
-          <p class="pf-card__desc">Parallax por camadas, neve em movimento e reveals cinematográficos — profundidade sem peso.</p>
-          <ul class="pf-tags"><li>React</li><li>Parallax</li><li>GSAP</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://glacius-frost.vercel.app/" data-name="Glacius">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener">glacius-frost.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="6" style="--accent:#c8ccd0">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">07</span>
-            <span class="pf-card__tier">Cinematográfico</span>
-          </div>
-          <h3 class="pf-card__name">M4 Competition</h3>
-          <span class="label pf-card__cat">Hero · Automotivo</span>
-          <p class="pf-card__desc">Hero em vídeo 1080p dirigido pelo scroll: o BMW M4 gira em cena com specs animadas. Produção cinematográfica.</p>
-          <ul class="pf-tags"><li>Vídeo 1080p</li><li>Scroll-scrub</li><li>GSAP</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://m4-competition.vercel.app/" data-name="M4 Competition">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener">m4-competition.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="7" style="--accent:#e0537a">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">08</span>
-            <span class="pf-card__tier">Avançado</span>
-          </div>
-          <h3 class="pf-card__name">Arkkhe</h3>
-          <span class="label pf-card__cat">Hero · Automotivo</span>
-          <p class="pf-card__desc">Vídeo controlado pelo scroll, intro cinematográfica e transições de troca — fidelidade total ao design.</p>
-          <ul class="pf-tags"><li>React</li><li>Vídeo</li><li>Scroll-scrub</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://arkkhe-hero.vercel.app/" data-name="Arkkhe">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener">arkkhe-hero.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="8" style="--accent:#22b07d">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">09</span>
-            <span class="pf-card__tier">Avançado</span>
-          </div>
-          <h3 class="pf-card__name">Diet Soda</h3>
-          <span class="label pf-card__cat">Produto · 3D</span>
-          <p class="pf-card__desc">Produto 3D interativo com troca de sabor em tempo real, blur de movimento e atmosfera viva.</p>
-          <ul class="pf-tags"><li>3D</li><li>model-viewer</li><li>GSAP</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://diet-soda-nine.vercel.app/" data-name="Diet Soda">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://diet-soda-nine.vercel.app/" target="_blank" rel="noopener">diet-soda-nine.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="9" style="--accent:#b87333">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">10</span>
-            <span class="pf-card__tier">Complexo</span>
-          </div>
-          <h3 class="pf-card__name">Laocoön</h3>
-          <span class="label pf-card__cat">Experiência · WebGL</span>
-          <p class="pf-card__desc">Cena Three.js dirigida por scroll: shaders, partículas e câmera em órbita. O nosso limite superior.</p>
-          <ul class="pf-tags"><li>Three.js</li><li>Shaders</li><li>WebGL</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://laocoon-delta.vercel.app/" data-name="Laocoön">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener">laocoon-delta.vercel.app ↗</a>
-          </div>
-        </div>
-      </article>
-      <article class="pf-step" data-i="10" style="--accent:#C9F31D">
-        <div class="pf-card">
-          <div class="pf-card__top">
-            <span class="pf-card__idx label">11</span>
-            <span class="pf-card__tier">Interativo</span>
-          </div>
-          <h3 class="pf-card__name">Heitor Negromonte</h3>
-          <span class="label pf-card__cat">Design · Portfólio</span>
-          <p class="pf-card__desc">Portfólio interativo de engenharia de software. Arquiteturas de alto desempenho e interfaces táteis.</p>
-          <ul class="pf-tags"><li>Next.js</li><li>Node.js</li><li>Interativo</li></ul>
-          <div class="pf-card__actions">
-            <button type="button" class="btn btn--primary pf-open" data-live="https://www.heitor-negromonte.com.br" data-name="Heitor Negromonte">Explorar ao vivo →</button>
-            <a class="btn btn--outline" href="https://www.heitor-negromonte.com.br" target="_blank" rel="noopener">heitor-negromonte.com.br ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Cauda: o palco sticky desgruda 100vh antes do fim da seção. Sem isto
-           o ÚLTIMO projeto perde a janela inteira (o palco sai junto com ele). -->
-      <div class="pf-tail" aria-hidden="true"></div>
-    </div>
-
-    <div class="pf-progress" aria-hidden="true"><span class="pf-progress__fill" id="pf-progress-fill"></span></div>
   </section>
 
   <!-- Lightbox de projeto (preenchido por js/portfolio.js) -->
@@ -756,6 +835,7 @@
             <li>Publicação inclusa</li>
           </ul>
           <div class="pr-card__price">
+            <span class="pr-card__from">A partir de</span>
             <span class="pr-card__value">R$ 399</span>
           </div>
           <p class="pr-card__bonus">★ Manutenção e alterações grátis por 3 meses</p>
@@ -774,6 +854,7 @@
             <li>SEO técnico</li>
           </ul>
           <div class="pr-card__price">
+            <span class="pr-card__from">A partir de</span>
             <span class="pr-card__value">R$ 599</span>
           </div>
           <p class="pr-card__bonus">★ Manutenção e alterações grátis por 3 meses</p>

@@ -1,81 +1,40 @@
 /* ═══════════════════════════════════════════════════════════
-   HN Services — Portfólio v6
+   HN Services — Portfólio HORIZONTAL
    ─────────────────────────────────────────────────────────
-     Ato 1 — .pf-constel: 11 pôsteres numa serpentina, emoldurada
-       pela tipografia (Portfólio / Onze cases). 11 cards = 11
-           projetos: nada de inflar a fita com frames repetidos.
-   Ato 2 — a fita se esvai EM ORDEM ao longo da curva (não aleatório).
-   Ato 3 — .pf-solo: um projeto por vez; o vídeo gravado do site é
-           scrubbado pelo scroll (~50vh por projeto).
+   O scroll vertical dirige a translação horizontal do track
+   (GSAP pin + scrub). Cada painel é um projeto autocontido:
+   info + moldura de browser com o vídeo do site.
 
-   Performance (a v5 ficou pesada — lições aplicadas):
-   • FlowWave (WebGL) roda só nos atos 1–2; desligado no solo.
-   • Sem backdrop-filter / mix-blend-mode.
-   • Só o vídeo ativo (e o próximo) recebem src.
-   • Seek no gsap.ticker, 1x por frame.
+   Só o painel ATIVO toca vídeo (o resto fica no pôster) — nunca
+   12 vídeos decodificando de uma vez. Mobile (<=900px) ou sem
+   GSAP: os painéis empilham e cada vídeo toca ao entrar na tela.
 
-   Palco preso por CSS sticky (não pin:true) → sem pin-spacer,
-   sem deslocar os offsets das seções seguintes (§2A do guia).
+   Pin cria pin-spacer (empurra as seções seguintes) — por isso
+   initPortfolio roda ANTES de initPrecos no boot (ordem física, §2A).
    ═══════════════════════════════════════════════════════════ */
 
 window.initPortfolio = function () {
   'use strict';
 
-  var root   = document.querySelector('.pf-root');
-  var constel = document.getElementById('pf-constel');
-  var ribbon = document.getElementById('pf-ribbon');
-  var solo   = document.getElementById('pf-solo');
-  var intro  = document.getElementById('pf-intro-space');
-  var fill   = document.getElementById('pf-progress-fill');
+  var root = document.querySelector('.pf-root');
   if (!root) return;
 
-  var chips  = Array.prototype.slice.call(document.querySelectorAll('.pf-chip'));
-  var videos = Array.prototype.slice.call(document.querySelectorAll('.pf-solo__video'));
-  var steps  = Array.prototype.slice.call(document.querySelectorAll('.pf-step'));
+  var pin    = root.querySelector('.pf-pin');
+  var track  = document.getElementById('pf-track');
+  var fill   = document.getElementById('pf-progress-fill');
+  var countEl = document.getElementById('pf-count');
+  var panels = Array.prototype.slice.call(root.querySelectorAll('.pf-panel'));
+  var videos = Array.prototype.slice.call(root.querySelectorAll('.pf-video'));
+  var N = panels.length;
 
-  var hasGSAP  = !!(window.gsap && window.ScrollTrigger);
-  var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = window.innerWidth <= 767;
+  var hasGSAP    = !!(window.gsap && window.ScrollTrigger);
+  var reduced    = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var horizontal = window.innerWidth > 900 && hasGSAP && !reduced && !!track;
 
   initLightbox();
 
-  /* ── MOBILE: vídeo real tocando em cada card ────────────────
-     No mobile o palco sticky de scrub não roda; antes eu mostrava só o
-     pôster estático (por isso "não aparecia vídeo"). Agora cada card ganha
-     um <video> mudo em loop, carregado e tocado só quando entra na tela
-     (IntersectionObserver) — um por vez, sem decodificar 11 de uma vez. */
-  if (isMobile || !hasGSAP || reduced) {
-    buildMobileVideos();
-    return;
-  }
+  var PLAYBACK = 0.6;
 
-  function buildMobileVideos() {
-    var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        var v = e.target;
-        if (e.isIntersecting) {
-          if (!v.__loaded) { v.src = v.getAttribute('data-src'); v.__loaded = true; }
-          v.play().catch(function () { /* autoplay barrado → fica no pôster */ });
-        } else { v.pause(); }
-      });
-    }, { threshold: 0.35 }) : null;
-
-    steps.forEach(function (step, i) {
-      var vd = videos[i];
-      if (!vd) return;
-      var v = document.createElement('video');
-      v.className = 'pf-mob-video';
-      v.muted = true; v.loop = true; v.playsInline = true;
-      v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
-      v.preload = 'none'; v.setAttribute('aria-hidden', 'true'); v.tabIndex = -1;
-      v.setAttribute('poster', vd.getAttribute('poster'));
-      v.setAttribute('data-src', vd.getAttribute('data-src'));
-      step.insertBefore(v, step.firstChild);
-      if (io) io.observe(v); else { v.src = v.getAttribute('data-src'); v.play().catch(function () {}); }
-    });
-  }
-
-  /* ── Vídeos sob demanda ─────────────────────────────────── */
   function loadVideo(i) {
     var v = videos[i];
     if (!v || v.__loaded) return;
@@ -86,129 +45,77 @@ window.initPortfolio = function () {
     v.load();
   }
 
-  /* ── Loop lento (era scroll-scrub) ────────────────────────
-     O scrub amarrava a animação ao ritmo do scroll: para ver a hero acontecer
-     era preciso rolar "na velocidade certa", e isso custava ~90vh POR projeto.
-     Em loop, a animação roda no tempo em que foi feita — e a seção encolhe.
-     PLAYBACK abaixo de 1 deixa tudo mais lento e legível.                    */
-  var PLAYBACK = 0.6;
-  var active = -1;
-
-  var urlEl = document.getElementById('pf-solo-url');
-
-  function play(v) {
+  function playVideo(v) {
     if (!v) return;
     v.loop = true;
     var go = function () {
-      if (videos[active] !== v) return;      // já saiu de cena enquanto carregava
-      v.playbackRate = PLAYBACK;             // precisa ser reaplicado após load()
+      v.playbackRate = PLAYBACK;              // reaplicar após load()
       try { v.currentTime = 0; } catch (e) { /* sem metadata ainda */ }
-      var pr = v.play();
-      if (pr && pr.catch) pr.catch(function () { /* autoplay barrado: fica no poster */ });
+      var p = v.play();
+      if (p && p.catch) p.catch(function () { /* autoplay barrado → pôster */ });
     };
     if (v.readyState >= 2) go();
     else v.addEventListener('loadeddata', go, { once: true });
   }
 
-  function setActive(i) {
-    if (active === i) return;
-    // o anterior sai de cena e PARA — só o projeto visível consome decodificação
-    if (videos[active]) {
-      videos[active].classList.remove('is-active');
-      videos[active].pause();
-    }
-    active = i;
-    if (videos[active]) {
-      videos[active].classList.add('is-active');
-      loadVideo(active);
-      loadVideo(active + 1);
-      play(videos[active]);
-    }
-    // a barra da moldura mostra o domínio real do projeto em cena
-    if (urlEl && steps[i]) {
-      var btn = steps[i].querySelector('.pf-open');
-      var link = btn && btn.getAttribute('data-live');
-      if (link) {
-        try { urlEl.textContent = new URL(link).host.replace(/^www\./, ''); }
-        catch (e) { urlEl.textContent = link; }
-      }
-    }
-  }
-
-  /* ── Ato 2: a fita se esvai EM ORDEM ─────────────────────
-     Cada card sobe e sai seguindo a própria inclinação; o stagger
-     segue o índice (topo → base), então a fita "escoa" como um fio. */
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: intro,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 0.7
-    }
-  })
-    .to(chips, {
-      yPercent: -260,
-      xPercent: function (i) { return (i % 2 ? 1 : -1) * (8 + i * 2); },
-      rotate: function (i) { return (i % 2 ? 1 : -1) * (6 + i); },
-      opacity: 0,
-      ease: 'power2.in',
-      stagger: { each: 0.055, from: 'start' }      // ordem: topo → base
-    }, 0.18)
-    .to([constel.querySelector('.pf-constel__word--top'),
-         constel.querySelector('.pf-constel__word--bot'),
-         constel.querySelector('.pf-constel__hint')], {
-      opacity: 0, y: -30, ease: 'power2.in', duration: 0.5
-    }, 0.1)
-    .to(solo, { opacity: 1, ease: 'none', duration: 0.35 }, 0.72);
-
-  /* ── Ato 3: um projeto por vez ───────────────────────────
-     Uma ÚNICA janela por projeto, ancorada no CENTRO do step: de
-     'center 80%' a 'center 20%' — o centro percorre 60vh, exatamente a
-     altura do step. Assim as janelas ficam adjacentes: nunca dois cards
-     na tela (o bug da v6.0) e sem intervalo morto entre projetos.
-     Sem o scrub, a janela não precisa mais ser larga para dar tempo ao
-     vídeo — ele roda em loop no próprio ritmo.                        */
-  steps.forEach(function (step, i) {
-    var card = step.querySelector('.pf-card');
-
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: step,
-        start: 'center 80%',
-        end: 'center 20%',
-        scrub: 0.5,
-        onToggle: function (self) { if (self.isActive) setActive(i); }
-      }
-    });
-
-    if (card) {
-      tl.fromTo(card, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' })
-        .to(card, { duration: 0.6 })                                   // leitura
-        .to(card, { opacity: 0, y: -35, duration: 0.2, ease: 'power2.in' });
-    }
-  });
-
-  if (fill) {
-    gsap.to(fill, {
-      scaleX: 1, ease: 'none',
-      scrollTrigger: { trigger: root, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
-    });
-  }
-
-  /* Fora da seção (ou com a aba em segundo plano) nada deve decodificar. */
   function pauseAll() { videos.forEach(function (v) { if (!v.paused) v.pause(); }); }
-  ScrollTrigger.create({
-    trigger: root,
-    start: 'top bottom',
-    end: 'bottom top',
-    onToggle: function (self) {
-      if (self.isActive) { if (videos[active]) play(videos[active]); }
-      else pauseAll();
+
+  /* ── MOBILE / sem GSAP: empilhado + IntersectionObserver ─── */
+  if (!horizontal) {
+    var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var idx = videos.indexOf(e.target);
+        if (e.isIntersecting) { loadVideo(idx); playVideo(e.target); }
+        else e.target.pause();
+      });
+    }, { threshold: 0.4 }) : null;
+
+    videos.forEach(function (v, i) {
+      if (io) io.observe(v);
+      else { loadVideo(i); playVideo(v); }
+    });
+    return;
+  }
+
+  /* ── DESKTOP: scroll horizontal ─────────────────────────── */
+  var active = -1;
+
+  function setActive(i) {
+    if (i === active || i < 0 || i >= N) return;
+    if (videos[active]) videos[active].pause();
+    active = i;
+    loadVideo(i);
+    loadVideo(i + 1);
+    playVideo(videos[i]);
+    if (countEl) countEl.textContent = String(i + 1).padStart(2, '0');
+  }
+
+  function distance() { return Math.max(1, track.scrollWidth - window.innerWidth); }
+
+  gsap.to(track, {
+    x: function () { return -distance(); },
+    ease: 'none',
+    scrollTrigger: {
+      trigger: root,
+      start: 'top top',
+      end: function () { return '+=' + distance(); },
+      pin: pin,
+      scrub: 0.6,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: function (self) {
+        if (fill) fill.style.transform = 'scaleX(' + self.progress + ')';
+        setActive(Math.round(self.progress * (N - 1)));
+      }
     }
   });
+
+  setActive(0);
+
+  /* Aba em segundo plano → nada decodifica (o rAF congela na aba oculta). */
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState !== 'visible') pauseAll();
-    else if (videos[active]) play(videos[active]);
+    else if (videos[active]) playVideo(videos[active]);
   });
 
   /* ═══════════════ Lightbox: o site AO VIVO ═══════════════ */
