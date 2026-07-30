@@ -34,6 +34,7 @@ window.initPortfolio = function () {
   initLightbox();
 
   var PLAYBACK = 0.6;
+  var active = -1;                            // painel ativo (desktop). Mobile fica em -1.
 
   function loadVideo(i) {
     var v = videos[i];
@@ -49,6 +50,9 @@ window.initPortfolio = function () {
     if (!v) return;
     v.loop = true;
     var go = function () {
+      // Guard: no desktop, se o vídeo já saiu de cena enquanto carregava,
+      // NÃO toca (senão vários vídeos ficam tocando ao mesmo tempo).
+      if (horizontal && videos[active] !== v) return;
       v.playbackRate = PLAYBACK;              // reaplicar após load()
       try { v.currentTime = 0; } catch (e) { /* sem metadata ainda */ }
       var p = v.play();
@@ -85,12 +89,11 @@ window.initPortfolio = function () {
   }
 
   /* ── DESKTOP: scroll horizontal ─────────────────────────── */
-  var active = -1;
-
   function setActive(i) {
     if (i === active || i < 0 || i >= N) return;
-    if (videos[active]) videos[active].pause();
     active = i;
+    // pausa TODOS menos o ativo (defesa contra corridas de load rápido)
+    videos.forEach(function (v, k) { if (k !== i && !v.paused) v.pause(); });
     loadVideo(i);
     loadVideo(i + 1);
     playVideo(videos[i]);

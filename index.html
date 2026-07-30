@@ -441,7 +441,10 @@
   <!-- ═══════════════════════ PORTFÓLIO (horizontal) ═══════════════
        Scroll vertical dirige a translação horizontal do track (GSAP pin).
        1 painel = 1 projeto. Vídeo só toca no painel ativo. Mobile: empilha. -->
-  <section id="portfolio" class="pf-root" style="--pf-count:12">
+  <!-- ═══════════════════════ PORTFÓLIO (horizontal) ═══════════════
+       Scroll vertical dirige a translação horizontal do track (GSAP pin).
+       1 painel = 1 projeto. Vídeo só toca no painel ativo. Mobile: empilha. -->
+  <section id="portfolio" class="pf-root" style="--pf-count:13">
     <div class="pf-pin">
       <div class="pf-head">
         <div class="pf-head__left">
@@ -449,7 +452,7 @@
           <h2 class="pf-head__title">Alguns de<br>nossos projetos</h2>
         </div>
         <div class="pf-head__right">
-          <span class="pf-head__count"><i id="pf-count">01</i><b>/12</b></span>
+          <span class="pf-head__count"><i id="pf-count">01</i><b>/13</b></span>
           <span class="pf-head__hint">role para o lado →</span>
         </div>
       </div>
@@ -715,11 +718,40 @@
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="9" style="--accent:#c8a96e">
+        <article class="pf-panel" data-i="9" style="--accent:#ef5f8e">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
                 <span class="pf-info__idx label">10</span>
+                <span class="pf-info__tier">Conversão</span>
+              </div>
+              <h3 class="pf-info__name">Julia Miçangas</h3>
+              <span class="label pf-info__cat">E-commerce · Infantil</span>
+              <p class="pf-info__desc">Loja de joias de miçanga infantis feitas à mão: catálogo lúdico em tons pastel, personalização e pedido direto pelo WhatsApp.</p>
+              <ul class="pf-tags"><li>Loja</li><li>UI/UX</li><li>Motion</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://pulseiras-kappa.vercel.app/" data-name="Julia Miçangas">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://pulseiras-kappa.vercel.app/" target="_blank" rel="noopener">pulseiras-kappa.vercel.app ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">pulseiras-kappa.vercel.app</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="9" data-src="assets/video/pulseiras.mp4"
+                       poster="assets/video/pulseiras.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel" data-i="10" style="--accent:#c8a96e">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">11</span>
                 <span class="pf-info__tier">Institucional</span>
               </div>
               <h3 class="pf-info__name">Marim dos Caetés</h3>
@@ -737,18 +769,18 @@
                 <span class="pf-browser__url">marim-dos-caetes.com.br</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="9" data-src="assets/video/marim.mp4"
+                <video class="pf-video" data-i="10" data-src="assets/video/marim.mp4"
                        poster="assets/video/marim.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="10" style="--accent:#c56a3f">
+        <article class="pf-panel" data-i="11" style="--accent:#c56a3f">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">11</span>
+                <span class="pf-info__idx label">12</span>
                 <span class="pf-info__tier">Essencial</span>
               </div>
               <h3 class="pf-info__name">Baseline</h3>
@@ -766,18 +798,18 @@
                 <span class="pf-browser__url">baseline-plum-five.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="10" data-src="assets/video/baseline.mp4"
+                <video class="pf-video" data-i="11" data-src="assets/video/baseline.mp4"
                        poster="assets/video/baseline.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="11" style="--accent:#C9F31D">
+        <article class="pf-panel" data-i="12" style="--accent:#C9F31D">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">12</span>
+                <span class="pf-info__idx label">13</span>
                 <span class="pf-info__tier">Interativo</span>
               </div>
               <h3 class="pf-info__name">Heitor Negromonte</h3>
@@ -795,7 +827,7 @@
                 <span class="pf-browser__url">heitor-negromonte.com.br</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="11" data-src="assets/video/heitor.mp4"
+                <video class="pf-video" data-i="12" data-src="assets/video/heitor.mp4"
                        poster="assets/video/heitor.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
