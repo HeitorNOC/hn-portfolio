@@ -35,7 +35,7 @@
   pointer-events: none;
   width: min(1300px, 92vw);
   margin: 0 auto;
-  padding-top: clamp(88px, 13vh, 122px);
+  padding-top: clamp(84px, 12vh, 112px);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -44,7 +44,7 @@
 .pf-head__label { color: var(--accent); display: block; margin-bottom: var(--space-3); }
 .pf-head__title {
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+  font-size: clamp(1.6rem, 2.9vw, 2.4rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
   padding-right: 0.25em;
@@ -81,7 +81,9 @@
   height: 100%;
   display: grid;
   align-items: center;
-  padding: clamp(150px, 20vh, 210px) 0 clamp(72px, 9vh, 104px);
+  /* topo generoso: o conteúdo precisa começar ABAIXO do cabeçalho fixo
+     (label + título de 2 linhas), senão a moldura do vídeo encosta no título. */
+  padding: clamp(200px, 26vh, 280px) 0 clamp(48px, 6vh, 80px);
 }
 .pf-panel__inner {
   width: min(1300px, 90vw);
@@ -178,6 +180,18 @@
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: left center;
+}
+
+/* ── Telas baixas (notebooks): cabeçalho mais enxuto ────────
+   Em pouca altura o cabeçalho encolhe menos que o padding do painel,
+   então a moldura chegava a encostar no título. Aqui reduzimos o
+   cabeçalho e o espaço inferior para devolver folga no topo. */
+@media (min-width: 901px) and (max-height: 820px) {
+  .pf-head { padding-top: clamp(64px, 8vh, 84px); }
+  .pf-head__title { font-size: clamp(1.35rem, 2.2vw, 1.8rem); }
+  .pf-panel { padding-top: clamp(176px, 24vh, 200px); padding-bottom: clamp(28px, 4vh, 52px); }
+  .pf-info__desc { margin-bottom: var(--space-4); }
+  .pf-tags { margin-bottom: var(--space-4); }
 }
 
 /* ── Mobile / telas estreitas: carrossel horizontal NATIVO ──
