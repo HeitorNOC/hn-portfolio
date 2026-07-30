@@ -9,7 +9,7 @@
   --surface-2: #1a1a1a;
   --accent: #C9F31D;
   --accent-dim: #9ABB11;
-  --white: #F5F0E8;
+  --white: #FFFFFF;   /* branco forte para os textos destacarem (sobre 3D, fundo escuro) */
   --muted: #4a4a4a;
   --border: rgba(255, 255, 255, 0.07);
   --glow: rgba(201, 243, 29, 0.15);
@@ -18,7 +18,7 @@
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  --text-hero: clamp(3rem, 6.2vw, 6rem);
+  --text-hero: clamp(2.5rem, 5.2vw, 4.9rem);   /* menor: "que Transforma" não corta mais o "A" */
   --text-giant: clamp(7rem, 18vw, 18rem);
   --text-2xl: clamp(2.25rem, 5vw, 3.5rem);
   --text-xl: clamp(1.5rem, 3vw, 2rem);
@@ -572,7 +572,7 @@ body::after {
 .hero__word {
   opacity: 0;
   white-space: nowrap;
-  padding-right: 0.25em; /* Increased to 0.25em to prevent stroke/terminal clipping from overflow: hidden on wide display fonts */
+  padding-right: 0.4em; /* folga extra p/ o traço final do "A" (overflow:hidden na linha corta letras largas do display) */
 }
 
 .hero__word--fill {
@@ -593,7 +593,8 @@ body::after {
 
 .hero__sub {
   font-size: var(--text-lg);
-  color: rgba(245, 240, 232, 0.78);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);   /* legível sobre o 3D */
   max-width: 480px;
   line-height: 1.6;
   margin-bottom: var(--space-8);
@@ -2133,14 +2134,18 @@ body::after {
    show with -webkit-text-fill-color:transparent; use filter instead)
 ──────────────────────────────────────────────────────────── */
 .hero__word--fill {
-  background: linear-gradient(135deg, #F5F0E8 0%, #C9F31D 68%, #F5F0E8 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #C9F31D 68%, #FFFFFF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* text-shadow não aparece com fill transparente → sombra via filtro,
+     para a palavra descolar do objeto 3D atrás. */
+  filter: drop-shadow(0 3px 16px rgba(0, 0, 0, 0.6));
 }
 
-/* Stroke word: lime outline */
+/* Stroke word: contorno lime + halo escuro p/ ler sobre o globo 3D */
 .hero__word--stroke {
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.72), 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes gradient-shift {
