@@ -33,7 +33,7 @@ const flameColor    = '#0aff7f'   // corner-flame A
 const flameColor2   = '#aef0c0'   // corner-flame B
 const flameAmt      = 0.2         // corner-flame intensity
 const atmoColor     = '#7affbf'   // ambient motes color
-const atmoCount     = 300         // mote count
+const atmoCount     = 170         // mote count (era 300; specks ambiente, reduz sem perda perceptível)
 const atmoSize      = 24          // mote base size
 const atmoSpeed     = 1.0         // mote warp speed
 const colorLow      = '#02160c'   // points low color
@@ -206,7 +206,11 @@ const pointsMaterial = new THREE.ShaderMaterial({
   blending: THREE.AdditiveBlending
 })
 
-const pointsGeometry = new THREE.SphereGeometry(4.2, 200, 600)
+/* Densidade do point cloud: era 200×600 ≈ 120 mil pontos (additive → muito
+   overdraw/fill-rate por frame, a dpr 2). Reduzido para ~66 mil — ainda lê
+   como uma malha densa de pontos, mas quase metade do custo de preenchimento,
+   que é o que faltava para o scroll ficar fluido. */
+const pointsGeometry = new THREE.SphereGeometry(4.2, 150, 440)
 const points = new THREE.Points(pointsGeometry, pointsMaterial)
 points.frustumCulled = false
 points.layers.enable(LAYERS.ENTIRE_SCENE)
@@ -470,8 +474,15 @@ function resize() {
   renderer.setSize(w, h, false)
   camera.aspect = w / h
   camera.updateProjectionMatrix()
-  for (const c of [torusComposer, bloomComposer, finalComposer]) {
-    c.setPixelRatio(dpr)
+  // A cena visível (pontos nítidos) sai do finalComposer em resolução cheia.
+  finalComposer.setPixelRatio(dpr)
+  finalComposer.setSize(w, h)
+  // Os dois composers de BLOOM só alimentam texturas de glow (borradas): rodam
+  // a METADE da resolução → corta a passagem mais cara (UnrealBloomPass) sem
+  // perda visível. É o que devolve a fluidez ao scroll, independente do dpr.
+  const bloomDpr = dpr * 0.5
+  for (const c of [torusComposer, bloomComposer]) {
+    c.setPixelRatio(bloomDpr)
     c.setSize(w, h)
   }
   if (atmoMat) atmoMat.uniforms.uRes.value.set(w * dpr, h * dpr)

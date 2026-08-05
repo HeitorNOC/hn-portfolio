@@ -15,7 +15,9 @@
     if (!gl) { canvas.style.visibility = 'hidden'; return; }
 
     function resize() {
-      var dpr = window.innerWidth <= 768 ? 0.6 : Math.min(2.0, window.devicePixelRatio || 1.0);
+      /* smoke borrado/quase invisível → resolução alta é desperdício de GPU e
+         travava o scroll. Capado bem mais baixo: imperceptível, muito mais leve. */
+      var dpr = window.innerWidth <= 768 ? 0.6 : Math.min(1.0, window.devicePixelRatio || 1.0);
       var rect = canvas.getBoundingClientRect();
       var w = Math.round(rect.width * dpr);
       var h = Math.round(rect.height * dpr);
@@ -60,7 +62,7 @@
 
       'float fbm(vec2 p){',
       '  float v=0.0, a=0.5;',
-      '  for(int i=0;i<5;i++){',
+      '  for(int i=0;i<3;i++){',
       '    v += a*noise(p);',
       '    p  = p*2.0 + vec2(1.7,9.2);',
       '    a *= 0.5;',
