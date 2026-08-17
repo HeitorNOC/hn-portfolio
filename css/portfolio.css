@@ -185,6 +185,37 @@
   transform-origin: left center;
 }
 
+/* ── Exibir mais ────────────────────────────────────────── */
+.pf-panel.is-hidden { display: none; }
+.pf-more {
+  flex: 0 0 auto;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 0 clamp(48px, 8vw, 130px);
+}
+.pf-more.is-hidden { display: none; }
+.pf-more__btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: clamp(22px, 2.2vw, 34px) clamp(30px, 3.2vw, 50px);
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: var(--radius-lg);
+  color: var(--white);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.35s var(--ease-out), border-color 0.35s var(--ease-out), background 0.35s var(--ease-out);
+  box-shadow: 0 0 64px -30px var(--accent);
+}
+.pf-more__btn:hover { transform: translateY(-4px); border-color: var(--accent); background: var(--surface-2); }
+.pf-more__plus { font-family: var(--font-display); font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1; color: var(--accent); }
+.pf-more__label { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: -0.01em; }
+.pf-more__count { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 240, 232, 0.6); }
+
 /* ── Telas baixas (notebooks): cabeçalho mais enxuto ────────
    Em pouca altura o cabeçalho encolhe menos que o padding do painel,
    então a moldura chegava a encostar no título. Aqui reduzimos o
@@ -242,6 +273,8 @@
   .pf-browser { order: -1; }                     /* vídeo em cima, info embaixo */
   .pf-info__desc { max-width: none; }
   .pf-progress { display: none; }
+
+  .pf-more { flex: 0 0 auto; height: auto; padding: var(--space-6) 8vw; align-self: center; scroll-snap-align: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {

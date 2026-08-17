@@ -215,7 +215,7 @@
           <span class="hero__word hero__word--stroke" data-original="que Transforma">que Transforma</span>
         </span>
       </h1>
-      <p class="hero__sub">Criamos experiências digitais que conectam marcas ao futuro.<br>Design com impacto. Código
+      <p class="hero__sub">Criamos experiências digitais que conectam marcas ao futuro.<br> Design com impacto. Código
         com propósito.</p>
       <div class="hero__ctas">
         <a href="#processo" class="btn btn--primary">Como Trabalhamos</a>
@@ -453,7 +453,10 @@
   <!-- ═══════════════════════ PORTFÓLIO (horizontal) ═══════════════
        Scroll vertical dirige a translação horizontal do track (GSAP pin).
        1 painel = 1 projeto. Vídeo só toca no painel ativo. Mobile: empilha. -->
-  <section id="portfolio" class="pf-root" style="--pf-count:13">
+  <!-- ═══════════════════════ PORTFÓLIO (horizontal + exibir mais) ═════
+       Mostra 3 projetos; o botão revela +5 por vez. Scroll vertical
+       dirige a translação horizontal (GSAP pin). Mobile: carrossel por swipe. -->
+  <section id="portfolio" class="pf-root" style="--pf-count:14">
     <div class="pf-pin">
       <div class="pf-head">
         <div class="pf-head__left">
@@ -461,7 +464,7 @@
           <h2 class="pf-head__title">Alguns de<br>nossos projetos</h2>
         </div>
         <div class="pf-head__right">
-          <span class="pf-head__count"><i id="pf-count">01</i><b>/13</b></span>
+          <span class="pf-head__count"><i id="pf-count">01</i><b id="pf-total">/03</b></span>
           <span class="pf-head__hint">role para o lado →</span>
         </div>
       </div>
@@ -553,11 +556,40 @@
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="3" style="--accent:#b87333">
+        <article class="pf-panel is-hidden" data-i="3" style="--accent:#6d7fd8">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
                 <span class="pf-info__idx label">04</span>
+                <span class="pf-info__tier">Institucional</span>
+              </div>
+              <h3 class="pf-info__name">CEVIP · Vida Plena</h3>
+              <span class="label pf-info__cat">Web · Institucional</span>
+              <p class="pf-info__desc">Centro espiritualista e terreiro de Umbanda em Olinda: agenda de eventos, história da casa, loja e fotos reais.</p>
+              <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>Agenda</li></ul>
+              <div class="pf-info__actions">
+                <button type="button" class="btn btn--primary pf-open" data-live="https://www.cevidaplena.com" data-name="CEVIP · Vida Plena">Explorar ao vivo →</button>
+                <a class="btn btn--outline" href="https://www.cevidaplena.com" target="_blank" rel="noopener">cevidaplena.com ↗</a>
+              </div>
+            </div>
+            <div class="pf-browser">
+              <div class="pf-browser__bar">
+                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
+                <span class="pf-browser__url">cevidaplena.com</span>
+              </div>
+              <div class="pf-browser__view">
+                <video class="pf-video" data-i="3" data-src="assets/video/cevidaplena.mp4"
+                       poster="assets/video/cevidaplena.jpg" muted playsinline preload="none"
+                       aria-hidden="true" tabindex="-1"></video>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pf-panel is-hidden" data-i="4" style="--accent:#b87333">
+          <div class="pf-panel__inner">
+            <div class="pf-info">
+              <div class="pf-info__top">
+                <span class="pf-info__idx label">05</span>
                 <span class="pf-info__tier">Complexo</span>
               </div>
               <h3 class="pf-info__name">Laocoön</h3>
@@ -575,18 +607,18 @@
                 <span class="pf-browser__url">laocoon-delta.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="3" data-src="assets/video/laocoon.mp4"
+                <video class="pf-video" data-i="4" data-src="assets/video/laocoon.mp4"
                        poster="assets/video/laocoon.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="4" style="--accent:#e0537a">
+        <article class="pf-panel is-hidden" data-i="5" style="--accent:#e0537a">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">05</span>
+                <span class="pf-info__idx label">06</span>
                 <span class="pf-info__tier">Avançado</span>
               </div>
               <h3 class="pf-info__name">Arkkhe</h3>
@@ -604,18 +636,18 @@
                 <span class="pf-browser__url">arkkhe-hero.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="4" data-src="assets/video/arkkhe.mp4"
+                <video class="pf-video" data-i="5" data-src="assets/video/arkkhe.mp4"
                        poster="assets/video/arkkhe.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="5" style="--accent:#7fb2d6">
+        <article class="pf-panel is-hidden" data-i="6" style="--accent:#7fb2d6">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">06</span>
+                <span class="pf-info__idx label">07</span>
                 <span class="pf-info__tier">Imersivo</span>
               </div>
               <h3 class="pf-info__name">Glacius</h3>
@@ -633,18 +665,18 @@
                 <span class="pf-browser__url">glacius-frost.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="5" data-src="assets/video/glacius.mp4"
+                <video class="pf-video" data-i="6" data-src="assets/video/glacius.mp4"
                        poster="assets/video/glacius.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="6" style="--accent:#c9a227">
+        <article class="pf-panel is-hidden" data-i="7" style="--accent:#c9a227">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">07</span>
+                <span class="pf-info__idx label">08</span>
                 <span class="pf-info__tier">Premium</span>
               </div>
               <h3 class="pf-info__name">Studio Ferré 97</h3>
@@ -662,18 +694,18 @@
                 <span class="pf-browser__url">studio-ferre-97.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="6" data-src="assets/video/ferre.mp4"
+                <video class="pf-video" data-i="7" data-src="assets/video/ferre.mp4"
                        poster="assets/video/ferre.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="7" style="--accent:#7c5cff">
+        <article class="pf-panel is-hidden" data-i="8" style="--accent:#7c5cff">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">08</span>
+                <span class="pf-info__idx label">09</span>
                 <span class="pf-info__tier">Essencial</span>
               </div>
               <h3 class="pf-info__name">Jofer Poeta</h3>
@@ -691,18 +723,18 @@
                 <span class="pf-browser__url">jofer.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="7" data-src="assets/video/jofer.mp4"
+                <video class="pf-video" data-i="8" data-src="assets/video/jofer.mp4"
                        poster="assets/video/jofer.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="8" style="--accent:#22b07d">
+        <article class="pf-panel is-hidden" data-i="9" style="--accent:#22b07d">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">09</span>
+                <span class="pf-info__idx label">10</span>
                 <span class="pf-info__tier">Avançado</span>
               </div>
               <h3 class="pf-info__name">Diet Soda</h3>
@@ -720,18 +752,18 @@
                 <span class="pf-browser__url">diet-soda-nine.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="8" data-src="assets/video/diet-soda.mp4"
+                <video class="pf-video" data-i="9" data-src="assets/video/diet-soda.mp4"
                        poster="assets/video/diet-soda.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="9" style="--accent:#ef5f8e">
+        <article class="pf-panel is-hidden" data-i="10" style="--accent:#ef5f8e">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">10</span>
+                <span class="pf-info__idx label">11</span>
                 <span class="pf-info__tier">Conversão</span>
               </div>
               <h3 class="pf-info__name">Julia Miçangas</h3>
@@ -749,18 +781,18 @@
                 <span class="pf-browser__url">pulseiras-kappa.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="9" data-src="assets/video/pulseiras.mp4"
+                <video class="pf-video" data-i="10" data-src="assets/video/pulseiras.mp4"
                        poster="assets/video/pulseiras.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="10" style="--accent:#c8a96e">
+        <article class="pf-panel is-hidden" data-i="11" style="--accent:#c8a96e">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">11</span>
+                <span class="pf-info__idx label">12</span>
                 <span class="pf-info__tier">Institucional</span>
               </div>
               <h3 class="pf-info__name">Marim dos Caetés</h3>
@@ -778,18 +810,18 @@
                 <span class="pf-browser__url">marim-dos-caetes.com.br</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="10" data-src="assets/video/marim.mp4"
+                <video class="pf-video" data-i="11" data-src="assets/video/marim.mp4"
                        poster="assets/video/marim.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="11" style="--accent:#c56a3f">
+        <article class="pf-panel is-hidden" data-i="12" style="--accent:#c56a3f">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">12</span>
+                <span class="pf-info__idx label">13</span>
                 <span class="pf-info__tier">Essencial</span>
               </div>
               <h3 class="pf-info__name">Baseline</h3>
@@ -807,18 +839,18 @@
                 <span class="pf-browser__url">baseline-plum-five.vercel.app</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="11" data-src="assets/video/baseline.mp4"
+                <video class="pf-video" data-i="12" data-src="assets/video/baseline.mp4"
                        poster="assets/video/baseline.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
-        <article class="pf-panel" data-i="12" style="--accent:#C9F31D">
+        <article class="pf-panel is-hidden" data-i="13" style="--accent:#C9F31D">
           <div class="pf-panel__inner">
             <div class="pf-info">
               <div class="pf-info__top">
-                <span class="pf-info__idx label">13</span>
+                <span class="pf-info__idx label">14</span>
                 <span class="pf-info__tier">Interativo</span>
               </div>
               <h3 class="pf-info__name">Heitor Negromonte</h3>
@@ -836,13 +868,21 @@
                 <span class="pf-browser__url">heitor-negromonte.com.br</span>
               </div>
               <div class="pf-browser__view">
-                <video class="pf-video" data-i="12" data-src="assets/video/heitor.mp4"
+                <video class="pf-video" data-i="13" data-src="assets/video/heitor.mp4"
                        poster="assets/video/heitor.jpg" muted playsinline preload="none"
                        aria-hidden="true" tabindex="-1"></video>
               </div>
             </div>
           </div>
         </article>
+
+        <div class="pf-more" id="pf-more" data-initial="3" data-step="5" data-total="14">
+          <button type="button" class="pf-more__btn" id="pf-more-btn">
+            <span class="pf-more__plus">+</span>
+            <span class="pf-more__label">Exibir mais</span>
+            <span class="pf-more__count" id="pf-more-count">próximos 5</span>
+          </button>
+        </div>
       </div>
       <div class="pf-progress" aria-hidden="true"><span class="pf-progress__fill" id="pf-progress-fill"></span></div>
     </div>

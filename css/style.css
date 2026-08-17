@@ -62,6 +62,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Telas grandes (>1920): escala a base em rem para o conteúdo preencher
+   melhor monitores grandes (tudo em rem/clamp cresce junto; os clamp()
+   seguram os máximos, então nada dispara). Gentil de propósito. ── */
+@media (min-width: 2000px) { html { font-size: 17px; } }
+@media (min-width: 2560px) { html { font-size: 18px; } }
+@media (min-width: 3200px) { html { font-size: 19.5px; } }
+
 html.hero-loading, html.hero-loading body {
   overflow: hidden !important;
   height: 100% !important;
@@ -2693,7 +2700,9 @@ body::after {
 /* 2. Hero Mobile Overrides: anti-clipping titles & repositioned faded globe */
 @media (max-width: 768px) {
   .hero__heading {
-    font-size: clamp(1.6rem, 7.5vw, 2.7rem) !important;
+    /* "que Transforma" (a palavra mais larga) estourava a linha e o
+       overflow:hidden cortava o "a" final. Menor → cabe com folga. */
+    font-size: clamp(1.3rem, 6.6vw, 2.4rem) !important;
     line-height: 1.05 !important;
   }
   .hero__sub br {
