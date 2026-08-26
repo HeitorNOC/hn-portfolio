@@ -75,9 +75,18 @@
 
 @media (max-width: 768px) {
   .manifesto-alt__line {
-    font-size: clamp(2rem, 11vw, 4rem);
+    /* 10vw (não 11vw como no manifesto original): "demandas." e "modernos."
+       são palavras mais longas que as do texto original — 11vw as forçava
+       a quebrar no meio mesmo com overflow-wrap. Testado sem overflow em
+       320–480px. */
+    font-size: clamp(2rem, 10vw, 4rem);
     white-space: normal;
-    word-break: break-word;
+    /* overflow-wrap (não word-break): só quebra no meio de uma palavra
+       quando ela sozinha não cabe na linha — senão quebra no espaço.
+       word-break:break-word partia "demandas." em "demanda"+"s.". */
+    overflow-wrap: break-word;
+    word-break: normal;
   }
   .manifesto-alt__line--stroke { -webkit-text-stroke-width: 1.5px; }
+  .manifesto-alt__line-wrap { padding: 0.12em 0; }
 }

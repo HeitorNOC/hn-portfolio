@@ -1839,13 +1839,7 @@ body::after {
 .footer__copy {
   font-size: var(--text-sm);
   color: var(--muted);
-  margin-inline: auto;
-}
-
-.footer__love {
-  font-size: var(--text-sm);
-  color: var(--muted);
-  white-space: nowrap;
+  margin-left: auto;
 }
 
 /* ─── Scroll Progress Bar (Igloo-style) ─────────────────── */

@@ -549,26 +549,53 @@
 
     if (reduced) return;
 
-    /* Pre-hide: linhas deslizam de lados alternados (par: esquerda, ímpar: direita) */
-    lines.forEach(function (line, i) {
-      gsap.set(line, { xPercent: i % 2 === 0 ? -105 : 105, opacity: 0 });
-    });
-    if (sub) gsap.set(sub, { opacity: 0, y: 28 });
+    var mm = gsap.matchMedia();
 
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start:   'top 72%',
-        once:    true
+    /* ── Desktop: section pin + scrub, linhas deslizam de lados
+       alternados conforme o scroll (par: esquerda, ímpar: direita) ── */
+    mm.add('(min-width: 769px)', function () {
+      gsap.set(lines, { xPercent: function (i) { return i % 2 === 0 ? -105 : 105; }, opacity: 0 });
+      if (sub) gsap.set(sub, { opacity: 0, y: 28 });
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger:              section,
+          start:                'top top',
+          end:                  '+=120%',
+          pin:                  true,
+          scrub:                1.1,
+          anticipatePin:        1,
+          invalidateOnRefresh:  true
+        }
+      });
+
+      lines.forEach(function (line, i) {
+        tl.to(line, { xPercent: 0, opacity: 1, duration: 0.24, ease: 'power2.out' }, i * 0.21);
+      });
+      if (sub) {
+        tl.to(sub, { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' }, 0.86);
       }
     });
 
-    lines.forEach(function (line, i) {
-      tl.to(line, { xPercent: 0, opacity: 1, duration: 0.85, ease: 'expo.out' }, i * 0.16);
+    /* ── Mobile: sem pin/slide horizontal (evita clipping em texto
+       quebrado em várias linhas) — só um fade + leve subida, uma vez ── */
+    mm.add('(max-width: 768px)', function () {
+      gsap.set(lines, { opacity: 0, y: 24 });
+      if (sub) gsap.set(sub, { opacity: 0, y: 28 });
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start:   'top 80%',
+          once:    true
+        }
+      });
+
+      tl.to(lines, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.12 });
+      if (sub) {
+        tl.to(sub, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+      }
     });
-    if (sub) {
-      tl.to(sub, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.35');
-    }
   };
 
   /* ══════════════════════════════════════════════════════════

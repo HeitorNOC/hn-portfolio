@@ -60,15 +60,6 @@
 }
 .pf-head__count i { font-style: normal; color: var(--accent); }
 .pf-head__count b { font-weight: 400; color: rgba(245, 240, 232, 0.5); }
-.pf-head__hint {
-  display: block;
-  margin-top: var(--space-3);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(245, 240, 232, 0.62);
-}
 
 /* ── Track horizontal ───────────────────────────────────── */
 .pf-track {
@@ -247,7 +238,6 @@
     gap: var(--space-4);
   }
   .pf-head__title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
-  .pf-head__hint { display: none; }
 
   .pf-track {
     flex-direction: row;

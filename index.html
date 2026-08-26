@@ -641,7 +641,12 @@
   <section id="interacao" class="flow-root" aria-hidden="true">
     <div class="flow__sticky">
       <canvas id="flow-canvas" class="flow__canvas"></canvas>
-      <span class="flow__hint">scroll &darr;</span>
+      <div class="flow__hint">
+        <span class="flow__hint-label">Role para continuar</span>
+        <svg class="flow__hint-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 8 L12 16 L20 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <!-- Slam: entra no fim da travessia da onda -->
       <div class="flow__slam" id="flow-slam" aria-hidden="true">
         <span class="flow__slam-word"></span>
@@ -669,7 +674,6 @@
         </div>
         <div class="pf-head__right">
           <span class="pf-head__count"><i id="pf-count">01</i><b id="pf-total">/03</b></span>
-          <span class="pf-head__hint">role para o lado →</span>
         </div>
       </div>
       <div class="pf-track" id="pf-track">
@@ -1226,7 +1230,6 @@
         <span>HN Services</span>
       </div>
       <p class="footer__copy">© 2026 HN Services. Todos os direitos reservados.</p>
-      <p class="footer__love">Feito com ♥ no Brasil</p>
     </div>
   </footer>
 
