@@ -197,7 +197,7 @@
     });
 
     // Enterprise-grade section highlights based on robust individual ScrollTriggers
-    var sectionIds = ['hero', 'sobre', 'processo', 'servicos', 'portfolio', 'contato'];
+    var sectionIds = ['hero', 'sobre', 'processo', 'servicos', 'sistemas', 'portfolio', 'contato'];
 
     sectionIds.forEach(function (id) {
       var el = document.getElementById(id);
@@ -486,6 +486,92 @@
   };
 
   /* ══════════════════════════════════════════════════════════
+     MANIFESTO (Sistemas) — irmã do manifesto acima, entrada
+     diferente: linhas deslizam de lados alternados (sem pin),
+     reveal único ao entrar na tela.
+  ══════════════════════════════════════════════════════════ */
+  /* Fill each alt-manifesto line to the exact container width, mesmo
+     algoritmo de fitManifestoLines mas escopado às classes -alt para
+     não interferir na medição do manifesto original. */
+  function fitManifestoAltLines() {
+    var content = document.querySelector('.manifesto-alt__content');
+    var lines   = document.querySelectorAll('.manifesto-alt__line');
+    if (!content || !lines.length) return;
+
+    if (window.innerWidth <= 768) {
+      lines.forEach(function (line) { line.style.fontSize = ''; });
+      return;
+    }
+
+    /* offsetWidth é border-box e inclui o padding-inline de .container (§ herdado);
+       o texto (dentro do wrap, sem padding próprio) só tem a largura de conteúdo. */
+    var contentStyle = getComputedStyle(content);
+    var W = content.offsetWidth - parseFloat(contentStyle.paddingLeft) - parseFloat(contentStyle.paddingRight);
+    if (!W) return;
+
+    lines.forEach(function (line) { line.style.fontSize = '100px'; });
+
+    var longestLine = lines[0];
+    var maxScrollWidth = lines[0].scrollWidth;
+    lines.forEach(function (line) {
+      var sw = line.scrollWidth;
+      if (sw > maxScrollWidth) { maxScrollWidth = sw; longestLine = line; }
+    });
+
+    var lo = 12, hi = 240, mid;
+    var maxVerticalFs = window.innerHeight * 0.12;
+    if (hi > maxVerticalFs) hi = maxVerticalFs;
+    if (lo > hi) lo = hi / 2;
+
+    for (var i = 0; i < 16; i++) {
+      mid = (lo + hi) / 2;
+      longestLine.style.fontSize = mid + 'px';
+      if (longestLine.scrollWidth <= W) lo = mid; else hi = mid;
+    }
+
+    var finalFontSize = lo;
+    lines.forEach(function (line) { line.style.fontSize = finalFontSize + 'px'; });
+  }
+
+  window.initManifestoAltAnimations = function () {
+    var section = document.querySelector('.manifesto-alt');
+    if (!section) return;
+
+    fitManifestoAltLines();
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(fitManifestoAltLines, 180);
+    });
+
+    var lines = gsap.utils.toArray('.manifesto-alt__line', section);
+    var sub   = section.querySelector('.manifesto__sub');
+
+    if (reduced) return;
+
+    /* Pre-hide: linhas deslizam de lados alternados (par: esquerda, ímpar: direita) */
+    lines.forEach(function (line, i) {
+      gsap.set(line, { xPercent: i % 2 === 0 ? -105 : 105, opacity: 0 });
+    });
+    if (sub) gsap.set(sub, { opacity: 0, y: 28 });
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start:   'top 72%',
+        once:    true
+      }
+    });
+
+    lines.forEach(function (line, i) {
+      tl.to(line, { xPercent: 0, opacity: 1, duration: 0.85, ease: 'expo.out' }, i * 0.16);
+    });
+    if (sub) {
+      tl.to(sub, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.35');
+    }
+  };
+
+  /* ══════════════════════════════════════════════════════════
      CTA BRIDGE — 3D rotateX word reveal + actions fade
      Each word row hinges in from -70deg (facing upward) to 0deg.
      Staggered so words land one after another with momentum.
@@ -640,7 +726,7 @@
     var items = document.querySelectorAll('.section-tracker__item');
     if (!items.length) return;
 
-    var sectionIds = ['hero', 'sobre', 'processo', 'servicos', 'portfolio', 'contato'];
+    var sectionIds = ['hero', 'sobre', 'processo', 'servicos', 'sistemas', 'portfolio', 'contato'];
 
     function setActive(id) {
       items.forEach(function (item) {
@@ -723,26 +809,30 @@
     try { if (window.initProcessCanvases) initProcessCanvases(); } catch (e) {}
     try { initProcessAnimations(); } catch (e) {}
 
-    // 3. Manifesto (Manifesto)
+    // 3. Manifesto (Manifesto) + irmã "Sistemas" logo abaixo
     try { if (window.initManifestoAnimations) initManifestoAnimations(); } catch (e) {}
+    try { if (window.initManifestoAltAnimations) initManifestoAltAnimations(); } catch (e) {}
 
-    // 4. Portfólio (Portfolio)
-    try { if (window.initPortfolio) initPortfolio(); } catch (e) {}
-
-    // 5. Serviços / Preços — agora DEPOIS do portfólio (init na ordem física do DOM, §2A)
+    // 4. Serviços / Preços — agora ANTES do portfólio (init na ordem física do DOM, §2A)
     try { if (window.initPrecos) initPrecos(); } catch (e) {}
 
-    // 6. CTA Bridge
+    // 5. Sistemas Disponíveis (HN Finances + sob demanda)
+    try { if (window.initSistemas) initSistemas(); } catch (e) {}
+
+    // 6. Portfólio (Portfolio)
+    try { if (window.initPortfolio) initPortfolio(); } catch (e) {}
+
+    // 7. CTA Bridge
     try { if (window.initCtaShader) window.initCtaShader(); } catch (e) {}
     try { if (window.initCtaBridgeAnimation) window.initCtaBridgeAnimation(); } catch (e) {}
 
-    // 7. Contato (Contact)
+    // 8. Contato (Contact)
     try { initContactAnimations(); } catch (e) {}
 
-    // 8. Footer
+    // 9. Footer
     try { initFooterAnimations(); } catch (e) {}
 
-    // 9. Interactive UI Elements
+    // 10. Interactive UI Elements
     try { initCursorTrail(); }       catch (e) {}
     try { initMagnetic(); }          catch (e) {}
     try { initTicker(); }            catch (e) {}

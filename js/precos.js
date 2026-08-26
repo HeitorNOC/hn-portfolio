@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    HN Services — Serviços / Preços
    ─────────────────────────────────────────────────────────
-   Seção de preços (dev de sites e sistemas), agora depois do
+   Seção de preços (dev de sites e sistemas), agora antes do
    portfólio. Só um reveal em stagger dos cards — o conteúdo já
    nasce visível, então uma falha de trigger nunca esconde os preços.
    ═══════════════════════════════════════════════════════════ */
