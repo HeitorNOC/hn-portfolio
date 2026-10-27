@@ -34,10 +34,10 @@
 <meta name="twitter:description" content="Criação de sites e landing pages a partir de R$ 399, sistemas web sob medida e consultoria de TI em Recife.">
 <meta name="twitter:image" content="https://www.hnservices.com.br/og-image.jpg">
 
-<!-- performance: fonts used above the fold and the film manifest (frames stream after first paint) -->
+<!-- performance: fonts used above the fold and the hero poster -->
 <link rel="preload" href="/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/geist-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/pack/manifest.json" as="fetch" crossorigin>
+<link rel="preload" href="/fonts/geist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/media/hero-poster.jpg" as="image" fetchpriority="high">
 
 <script type="application/ld+json">
 {
@@ -82,153 +82,178 @@
 }
 </script>
 <style>
-/* Layout: one film, then four quiet sections in ink and paper — about, prices, a sideways project reel, contact.
-   The lime accent marks only actions and live states. */
+/* Layout: a stack of full-width panels that alternate ink and cream. Each panel sticks when its
+   bottom reaches the viewport and the next one slides up over it as a rounded sheet, while the
+   covered panel recedes. Lime marks actions only. Serif display, grotesk body, mono labels. */
 @font-face{font-family:"Instrument Serif";src:url(/fonts/instrument-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Instrument Serif";src:url(/fonts/instrument-serif-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
 @font-face{font-family:"Geist";src:url(/fonts/geist-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Geist";src:url(/fonts/geist-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Geist Mono";src:url(/fonts/geist-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Geist Mono";src:url(/fonts/geist-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
 :root{
-  --ink:#0E0D0B; --ink-2:#161512; --paper:#EDE8DF; --mute:rgba(237,232,223,.72); --faint:rgba(237,232,223,.58);
-  --line:rgba(237,232,223,.13); --line-2:rgba(237,232,223,.26); --lime:#C9F31D; --lime-ink:#1A1F04;
+  --ink:#0E0D0B; --ink-2:#171612; --ink-3:#22201B; --cream:#F1EDE5; --cream-2:#E6E0D4; --cream-3:#DAD2C3; --night:#16140F;
+  --lime:#C9F31D; --lime-ink:#1A1F04;
   --f-display:"Instrument Serif", "Times New Roman", Georgia, serif;
   --f-body:"Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono:"Geist Mono", ui-monospace, Menlo, monospace;
-  --hud:1; color-scheme:dark;
+  --radius:28px; --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
 }
+.tone-dark{--bg:var(--ink);--fg:#EDE8DF;--mute:rgba(237,232,223,.72);--faint:rgba(237,232,223,.56);--line:rgba(237,232,223,.14);--card:var(--ink-2);--card-2:var(--ink-3)}
+.tone-light{--bg:var(--cream);--fg:var(--night);--mute:rgba(22,20,15,.74);--faint:rgba(22,20,15,.58);--line:rgba(22,20,15,.14);--card:#FBF9F5;--card-2:var(--cream-2)}
 *{box-sizing:border-box}
 html{background:var(--ink)}
-body{margin:0;background:var(--ink);color:var(--paper);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--ink);color:#EDE8DF;font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img,video{max-width:100%;display:block}
 em{font-style:italic}
-:focus-visible{outline:1px solid var(--lime);outline-offset:3px}
+h1,h2,h3{font-weight:400;text-wrap:balance}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
 .mono{font:500 11px/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.eyebrow{display:flex;gap:12px;align-items:center;color:var(--lime)}
-.eyebrow::before{content:"";width:26px;height:1px;background:currentColor}
-.btn{display:inline-flex;align-items:center;gap:10px;font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
-  padding:14px 18px;border-radius:2px;border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
-.btn-primary{background:var(--lime);color:var(--lime-ink)}
-.btn-primary:hover{background:var(--paper)}
-.btn-ghost{border-color:var(--line-2);color:var(--paper);background:transparent}
-.btn-ghost:hover{border-color:var(--paper)}
-
-.skip{position:fixed;z-index:60;left:16px;top:-60px;background:var(--lime);color:var(--lime-ink);padding:10px 14px;font:500 12px/1 var(--f-mono);text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{display:inline-flex;gap:12px;align-items:center;color:var(--faint)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime)}
+.btn{display:inline-flex;align-items:center;gap:12px;font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  padding:16px 20px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.btn .arr{transition:transform .3s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-lime{background:var(--lime);color:var(--lime-ink)}
+.btn-lime:hover{background:#DBFF4A}
+.btn-line{border-color:var(--line);color:var(--fg)}
+.btn-line:hover{border-color:var(--fg)}
+.btn-ink{background:var(--night);color:var(--cream)}
+.btn-ink:hover{background:#000}
+.skip{position:fixed;z-index:90;left:16px;top:-60px;background:var(--lime);color:var(--lime-ink);padding:10px 14px;font:500 12px/1 var(--f-mono);text-decoration:none}
 .skip:focus{top:16px}
-/* header */
-.site-header{position:fixed;z-index:30;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:calc(14px + env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-right,0px)) 14px max(22px,env(safe-area-inset-left,0px));
-  border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
-body.past-hero .site-header{background:rgba(14,13,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--line)}
-.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
-.brand b{font:400 28px/1 var(--f-display)}
-.brand b i{color:var(--lime);font-style:normal}
-.brand span{font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-.nav{display:flex;gap:28px}
-.nav a{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
-.nav a:hover,.nav a.is-active{color:var(--paper);border-color:var(--lime)}
-.site-header .btn{padding:11px 14px}
 
-/* film */
-#film{position:fixed;inset:0;width:100%;height:100%;z-index:0}
-.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--hud);
-  background:linear-gradient(180deg,rgba(8,7,6,.5) 0%,rgba(8,7,6,0) 20%,rgba(8,7,6,0) 58%,rgba(8,7,6,.58) 100%),linear-gradient(90deg,rgba(8,7,6,.36) 0%,rgba(8,7,6,0) 46%)}
-#hero{position:relative;height:1000vh;z-index:2}
-.hud{position:fixed;z-index:5;opacity:var(--hud);pointer-events:none;color:var(--mute)}
-.hud-bottom{left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;
-  padding:16px max(22px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(22px,env(safe-area-inset-left,0px))}
-.hud-bottom em{font-style:normal;color:var(--paper)}
-.tc{font-variant-numeric:tabular-nums}
-.rail{right:max(22px,env(safe-area-inset-right,0px));top:50%;height:36vh;transform:translateY(-50%);width:1px;background:var(--line-2)}
-#rail-fill{position:absolute;inset:0;background:var(--lime);transform-origin:top;transform:scaleY(0)}
-.rail i{position:absolute;right:-3px;width:7px;height:1px;background:var(--mute)}
-.chap,#lockup{position:fixed;z-index:3;left:max(28px,env(safe-area-inset-left,0px));max-width:min(680px,86vw);pointer-events:none;
-  opacity:calc(var(--o,0) * var(--hud));transform:translateY(calc((1 - var(--o,0)) * 26px))}
-.chap::before,#lockup::before{content:"";position:absolute;z-index:-1;inset:-40% -30% -40% -40%;background:radial-gradient(closest-side,rgba(8,7,6,.58),rgba(8,7,6,0))}
-.chap .t{margin:16px 0 0;font:400 clamp(44px,6.8vw,100px)/.93 var(--f-display);letter-spacing:-.015em;text-wrap:balance}
-.chap .s,#lockup .s{margin:16px 0 0;max-width:40ch;color:rgba(237,232,223,.78);font-size:clamp(15px,1.25vw,18px);line-height:1.5;text-shadow:0 1px 2px rgba(0,0,0,.55),0 0 24px rgba(0,0,0,.45)}
-.low{bottom:clamp(84px,13vh,140px)}
-.high{top:clamp(100px,16vh,170px)}
-#lockup{max-width:min(900px,88vw);bottom:clamp(90px,14vh,150px)}
-#lockup.on{pointer-events:auto}
-#lockup h1{margin:16px 0 0;font:400 clamp(46px,7.2vw,112px)/.92 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
-#lockup .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-#intro{position:fixed;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:var(--o,1);pointer-events:none;color:var(--mute);width:min(560px,90vw)}
-#intro .cur{display:block;margin:0 auto 22px;width:14px;height:26px;background:var(--lime);box-shadow:0 0 24px rgba(201,243,29,.5);animation:blink 1.05s steps(1) infinite}
-#intro strong{display:block;margin-bottom:10px;color:var(--paper);font-weight:500}
-@keyframes blink{50%{opacity:0}}
+/* ---------- loader ---------- */
 html.is-loading,html.is-loading body{overflow:hidden}
-#loader{position:fixed;inset:0;z-index:50;background:var(--ink);display:grid;place-items:center;
-  transition:transform 1.05s cubic-bezier(.75,0,.2,1) .2s,visibility 0s 1.3s}
+#loader{position:fixed;inset:0;z-index:80;background:var(--ink);display:grid;place-items:center;transition:transform 1.05s cubic-bezier(.75,0,.2,1) .15s,visibility 0s 1.3s}
 #loader .box{width:min(420px,80vw);display:grid;gap:18px;transition:opacity .4s}
-#loader b{font:400 clamp(64px,10vw,96px)/.9 var(--f-display);color:var(--paper)}
-#loader b i{color:var(--lime);font-style:normal}
-.lbar{height:1px;background:var(--line-2);overflow:hidden}
+#loader b{font:400 clamp(64px,10vw,96px)/.9 var(--f-display);color:#EDE8DF}
+#loader b i,.brand b i{color:var(--lime);font-style:normal}
+.lbar{height:1px;background:rgba(237,232,223,.2);overflow:hidden}
 #loader-bar{display:block;height:100%;background:var(--lime);transform-origin:left;transform:scaleX(0);transition:transform .25s linear}
-.lrow{display:flex;justify-content:space-between;gap:16px;color:var(--mute)}
-#loader-pct{color:var(--paper);font-variant-numeric:tabular-nums}
+.lrow{display:flex;justify-content:space-between;color:rgba(237,232,223,.7)}
+#loader-pct{color:#EDE8DF;font-variant-numeric:tabular-nums}
 body.is-ready #loader{transform:translateY(-100%);visibility:hidden}
 body.is-ready #loader .box{opacity:0}
-@media (prefers-reduced-motion:reduce){#loader{transition:opacity .5s,visibility 0s .5s}body.is-ready #loader{transform:none;opacity:0}}
 
-/* entrance animation */
-.rv-wait{opacity:0;transform:translateY(28px)}
-.rv-in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform 1.1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+/* ---------- header ---------- */
+.site-header{position:fixed;z-index:60;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:calc(16px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) 16px max(24px,env(safe-area-inset-left,0px));
+  color:#EDE8DF;transition:background .4s,color .4s,border-color .4s,transform .5s var(--ease);border-bottom:1px solid transparent}
+.site-header.scrolled{background:rgba(14,13,11,.72);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-color:rgba(237,232,223,.1)}
+.site-header.on-light{color:var(--night)}
+.site-header.on-light.scrolled{background:rgba(241,237,229,.78);border-color:rgba(22,20,15,.1)}
+.site-header.hide{transform:translateY(-110%)}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font:400 30px/1 var(--f-display)}
+.brand span{font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.nav{display:flex;gap:30px}
+.nav a{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;opacity:.72;padding:6px 0;position:relative;transition:opacity .25s}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav a:hover,.nav a.is-active{opacity:1}
+.nav a:hover::after,.nav a.is-active::after{transform:scaleX(1);transform-origin:left}
+.site-header .btn{padding:12px 16px}
 
-/* sections */
-main{position:relative;z-index:10}
-section.block{background:var(--ink);padding-block:clamp(96px,12vw,160px)}
-section.block+section.block{border-top:1px solid var(--line)}
-.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 40px;margin-bottom:clamp(40px,6vw,64px)}
-h2.title{margin:18px 0 0;font:400 clamp(42px,5.6vw,80px)/.95 var(--f-display);letter-spacing:-.015em;text-wrap:balance;max-width:16ch}
-.head p{margin:0;color:var(--mute);max-width:40ch}
+/* ---------- stacked panels ---------- */
+.panel{position:sticky;top:0;background:var(--bg);color:var(--fg);isolation:isolate}
+.panel + .panel{border-radius:var(--radius) var(--radius) 0 0;margin-top:calc(var(--radius) * -1);box-shadow:0 -24px 60px rgba(0,0,0,.28)}
+.panel > .in{position:relative;transform-origin:50% 0;transform:scale(calc(1 - var(--cover,0) * .045)) translateY(calc(var(--cover,0) * -24px));will-change:transform}
+.panel::after{content:"";position:absolute;inset:0;background:#000;opacity:calc(var(--cover,0) * .5);pointer-events:none;border-radius:inherit;z-index:5}
+.block{padding-block:clamp(110px,13vw,170px) clamp(100px,12vw,160px)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px 48px;margin-bottom:clamp(44px,6vw,72px)}
+.title{margin:18px 0 0;font:400 clamp(44px,6vw,92px)/.95 var(--f-display);letter-spacing:-.02em;max-width:15ch}
+.head .lead{margin:0;color:var(--mute);max-width:42ch}
 
-/* sobre */
-.about{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,6vw,96px);align-items:end}
-.about .statement{font-weight:400;margin:18px 0 0;font:400 clamp(36px,4.4vw,62px)/1.02 var(--f-display);text-wrap:balance}
-.about .copy{display:grid;gap:14px;margin-top:0;color:var(--mute);max-width:52ch}
+/* ---------- hero ---------- */
+.hero{min-height:100svh}
+.hero-media{position:absolute;inset:0;overflow:hidden;z-index:-1;background:#0b0a09 url(/media/hero-poster.jpg) center/cover}
+.hero-media video{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 2.4s var(--ease),opacity 1s}
+body.is-ready .hero-media video{transform:scale(1)}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,9,8,.55) 0%,rgba(10,9,8,.15) 30%,rgba(10,9,8,.35) 60%,rgba(14,13,11,1) 100%),linear-gradient(90deg,rgba(10,9,8,.55),rgba(10,9,8,0) 60%)}
+.hero-top{min-height:min(calc(100svh - 150px),860px);display:flex;flex-direction:column;justify-content:flex-end;padding-top:140px;padding-bottom:clamp(40px,6vh,72px)}
+.hero h1{margin:22px 0 0;font:400 clamp(52px,8.6vw,138px)/.9 var(--f-display);letter-spacing:-.025em;max-width:13ch}
+.hero .sub{margin:26px 0 0;max-width:46ch;color:var(--mute);font-size:clamp(16px,1.3vw,19px)}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.vcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.vcard{position:relative;display:grid;gap:12px;align-content:start;padding:26px 24px 24px;background:rgba(23,22,18,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);text-decoration:none;transition:background .35s}
+.vcard::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.vcard:hover{background:rgba(34,32,27,.92)}
+.vcard:hover::before{transform:scaleX(1)}
+.vcard .n{color:var(--faint)}
+.vcard .vt{margin:0;font:400 28px/1.05 var(--f-display);color:var(--fg)}
+.vcard p{margin:0;color:var(--mute);font-size:14px}
+.vcard .more{margin-top:6px;color:var(--fg);display:inline-flex;gap:8px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(56px,7vw,88px);padding-bottom:clamp(56px,7vw,80px)}
+.stats div{display:grid;gap:8px;padding:6px 24px 0 0}
+.stats div+div{padding-left:24px;border-left:1px solid var(--line)}
+.stats b{font:400 clamp(46px,5.4vw,80px)/1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats div > span{color:var(--mute);font-size:14px;max-width:22ch}
+
+/* ---------- sobre ---------- */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,7vw,110px);align-items:center}
+.about .copy{display:grid;gap:16px;margin-top:30px;color:var(--mute);max-width:54ch;font-size:17px}
 .about .copy p{margin:0}
-.about .where{margin-top:28px;color:var(--faint);display:flex;flex-wrap:wrap;gap:8px 22px}
-.about .where b{color:var(--paper);font-weight:500}
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(64px,8vw,104px);border-top:1px solid var(--line-2)}
-.pillars div{padding:26px 26px 0 0;display:grid;gap:10px;align-content:start}
-.pillars div+div{padding-left:26px;border-left:1px solid var(--line)}
-.pillars h3{margin:0;font:400 30px/1.05 var(--f-display)}
-.pillars p{margin:0;color:var(--mute);font-size:15px}
+.steps{list-style:none;margin:40px 0 0;padding:0;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.steps li .mono{color:var(--faint);padding-top:4px}
+.steps b{display:block;font:400 26px/1.1 var(--f-display)}
+.steps span{color:var(--mute);font-size:15px}
+.about .actions{margin-top:36px}
+.photo{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:var(--cream-2)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo .tag{position:absolute;left:16px;bottom:16px;right:16px;display:flex;justify-content:space-between;gap:10px;align-items:center;
+  padding:14px 16px;border-radius:14px;background:rgba(241,237,229,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--night)}
+.photo .tag b{font:400 22px/1 var(--f-display)}
 
-/* preços */
-.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.plan{position:relative;display:grid;gap:18px;align-content:start;padding:30px;border:1px solid var(--line);background:var(--ink-2);transition:border-color .35s,transform .35s}
-.plan:hover{border-color:var(--line-2);transform:translateY(-3px)}
-.plan.featured{border-color:rgba(201,243,29,.5)}
-.plan .tag{position:absolute;top:-1px;right:24px;transform:translateY(-50%);background:var(--lime);color:var(--lime-ink);padding:6px 9px;font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+/* ---------- serviços (bento) ---------- */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.svc{grid-column:span 6;display:grid;grid-template-rows:auto 1fr;border-radius:22px;overflow:hidden;background:var(--card);border:1px solid var(--line);text-decoration:none;transition:border-color .4s,transform .5s var(--ease)}
+.svc:nth-child(1){grid-column:span 7}.svc:nth-child(2){grid-column:span 5}.svc:nth-child(3){grid-column:span 5}.svc:nth-child(4){grid-column:span 7}
+.svc:hover{border-color:rgba(201,243,29,.45);transform:translateY(-4px)}
+.svc .img{position:relative;aspect-ratio:16/9;overflow:hidden}
+.svc .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.svc:hover .img img{transform:scale(1.05)}
+.svc .img .n{position:absolute;left:16px;top:16px;padding:8px 10px;border-radius:999px;background:rgba(14,13,11,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#EDE8DF}
+.svc .body{padding:26px 26px 28px;display:grid;gap:12px;align-content:start}
+.svc h3{margin:0;font:400 clamp(30px,2.8vw,40px)/1 var(--f-display)}
+.svc p{margin:0;color:var(--mute);font-size:15px;max-width:48ch}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chips span{padding:7px 11px;border-radius:999px;border:1px solid var(--line);color:var(--mute);font:500 10px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- preços ---------- */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.plan{display:grid;gap:20px;align-content:start;padding:32px;border-radius:22px;background:var(--card);border:1px solid var(--line);transition:transform .5s var(--ease)}
+.plan:hover{transform:translateY(-4px)}
+.plan.featured{background:var(--night);color:#EDE8DF;border-color:var(--night);--mute:rgba(237,232,223,.72);--faint:rgba(237,232,223,.56);--line:rgba(237,232,223,.16)}
+.plan .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.plan .tag{padding:7px 10px;border-radius:999px;background:var(--lime);color:var(--lime-ink)}
 .plan h3{margin:0;font:400 32px/1.05 var(--f-display)}
 .plan > p{margin:0;color:var(--mute);font-size:15px;min-height:3.2em}
-.plan .price{display:grid;gap:6px;padding-block:18px;border-block:1px solid var(--line)}
+.plan .price{display:grid;gap:6px;padding-block:20px;border-block:1px solid var(--line)}
 .plan .price small{color:var(--faint)}
-.plan .price b{font:400 48px/1 var(--f-display);font-variant-numeric:tabular-nums}
-.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:15px}
+.plan .price b{font:400 52px/1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px}
 .plan li{display:flex;gap:12px;align-items:baseline}
-.plan li::before{content:"";flex:none;width:12px;height:1px;background:var(--lime);transform:translateY(-4px)}
+.plan li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--lime);transform:translateY(-2px)}
+.tone-light .plan:not(.featured) li::before{background:var(--night)}
 .plan .btn{justify-self:start;margin-top:6px}
-.plans-note{margin-top:22px;color:var(--faint);font-size:14px}
+.note{margin-top:22px;color:var(--faint);font-size:14px}
 
-/* projetos: optional sideways reel */
-.reel-head{display:flex;align-items:center;gap:14px;color:var(--faint)}
-.reel-head .arrows{display:flex;gap:8px}
-.reel-head button{width:44px;height:44px;border:1px solid var(--line-2);background:transparent;color:var(--paper);cursor:pointer;font:400 18px/1 var(--f-body);border-radius:50%}
-.reel-head button:hover{border-color:var(--lime);color:var(--lime)}
-#proj-count{color:var(--paper)}
-#track{display:grid;grid-auto-flow:column;grid-auto-columns:min(74vw,860px);column-gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;
-  overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;
-  padding-left:max(20px,calc((100vw - 1200px)/2 + 20px));padding-right:max(20px,calc((100vw - 1200px)/2 + 20px));scroll-padding-left:max(20px,calc((100vw - 1200px)/2 + 20px))}
+/* ---------- projetos ---------- */
+.reel-nav{display:flex;align-items:center;gap:14px;color:var(--faint)}
+.reel-nav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;font:400 18px/1 var(--f-body);transition:border-color .3s,color .3s}
+.reel-nav button:hover{border-color:var(--lime);color:var(--lime)}
+#proj-count{color:var(--fg)}
+#track{display:grid;grid-auto-flow:column;grid-auto-columns:min(72vw,820px);column-gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;
+  padding-left:max(20px,calc((100vw - 1240px)/2 + 20px));padding-right:max(20px,calc((100vw - 1240px)/2 + 20px));scroll-padding-left:max(20px,calc((100vw - 1240px)/2 + 20px))}
 #track::-webkit-scrollbar{display:none}
 #track.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
-.proj{scroll-snap-align:start;display:grid;gap:14px;text-decoration:none;min-width:0}
-.proj .media{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink-2);aspect-ratio:16/10}
+.proj{scroll-snap-align:start;display:grid;gap:16px;text-decoration:none;min-width:0}
+.proj .media{position:relative;overflow:hidden;border-radius:20px;background:var(--card);aspect-ratio:16/10;border:1px solid var(--line)}
 .proj .media img,.proj .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .proj .media video{opacity:0;transition:opacity .5s}
 .proj .media video[src]{opacity:1}
@@ -236,244 +261,427 @@ h2.title{margin:18px 0 0;font:400 clamp(42px,5.6vw,80px)/.95 var(--f-display);le
 .proj h3{margin:0;font:400 clamp(30px,3vw,42px)/1 var(--f-display)}
 .proj .kind{color:var(--faint)}
 .proj p{margin:0;color:var(--mute);font-size:15px;max-width:56ch}
-.proj .go{color:var(--paper)}
+.proj .go{color:var(--fg)}
 .proj:hover .go{color:var(--lime)}
-.reel-hint{margin-top:22px;color:var(--faint)}
+.reel-hint{margin-top:24px;color:var(--faint)}
 
-/* contato */
-.contact{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,88px);align-items:start}
-.contact .lead{margin:20px 0 0;color:var(--mute);max-width:40ch}
-.contact dl{margin:36px 0 0;display:grid;gap:18px}
-.contact dt{color:var(--faint)}
-.contact dd{margin:4px 0 0;font-size:18px;user-select:all}
-form.cform{display:grid;gap:18px;padding:clamp(24px,3vw,36px);border:1px solid var(--line);background:var(--ink-2)}
-.cform .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.cform label{display:grid;gap:8px;color:var(--mute);min-width:0}
-.cform input,.cform select,.cform textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);color:var(--paper);font:400 16px/1.4 var(--f-body);padding:10px 0;border-radius:0;outline:none}
-.cform select option{background:var(--ink-2)}
-.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--lime)}
+/* ---------- contato ---------- */
+.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,96px);align-items:start}
+.contact .lead{margin:22px 0 0;color:var(--mute);max-width:40ch;font-size:17px}
+.channels{display:grid;gap:12px;margin-top:36px}
+.channel{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.channel dt{color:var(--faint)}
+.channel dd{margin:0;font-size:17px;user-select:all;text-align:right}
+form.cform{display:grid;gap:20px;padding:clamp(26px,3vw,40px);border-radius:22px;background:var(--card);border:1px solid var(--line)}
+.cform .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cform label{display:grid;gap:8px;color:var(--faint);min-width:0}
+.cform input,.cform select,.cform textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--fg);font:400 16px/1.4 var(--f-body);padding:10px 0;border-radius:0;outline:none}
+.cform select option{background:#fff;color:#000}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--night)}
 .cform textarea{resize:vertical;min-height:110px}
 .cform .btn{justify-self:start}
-.cform .ok{display:none;margin:0;color:var(--lime)}
+.cform .ok{display:none;margin:0;color:#3B6A00;font-weight:500}
 .cform.is-sent .ok{display:block}
 .cform.is-sent button{display:none}
-.cform .err{margin:0;color:#ffb4a2}
+.cform .err{margin:0;color:#A3321B}
 .cform button[disabled]{opacity:.6;cursor:progress}
 
-/* footer */
-.site-footer{position:relative;background:var(--ink);border-top:1px solid var(--line);padding-block:clamp(56px,8vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
-.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px}
-.foot .big{font:400 clamp(64px,10vw,140px)/.85 var(--f-display);margin:0}
+/* ---------- footer ---------- */
+.foot-cta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:28px;padding-bottom:clamp(56px,8vw,96px);border-bottom:1px solid var(--line)}
+.foot-cta h2{margin:0;font:400 clamp(52px,8vw,128px)/.9 var(--f-display);letter-spacing:-.025em;max-width:12ch}
+.foot{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:32px;padding-top:56px}
+.foot .big{margin:0;font:400 clamp(72px,10vw,150px)/.8 var(--f-display)}
 .foot .big i{color:var(--lime);font-style:normal}
-.foot p{margin:14px 0 0;color:var(--mute);max-width:32ch}
+.foot p{margin:14px 0 0;color:var(--mute);max-width:30ch}
 .foot .fh{margin:0 0 14px;color:var(--faint)}
-.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.foot ul a{text-decoration:none;color:var(--paper)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.foot ul a{text-decoration:none}
 .foot ul a:hover{color:var(--lime)}
-.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:64px;padding-top:22px;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--faint)}
 
-@media (max-width:980px){
+/* ---------- tech strip ---------- */
+.tech{border-top:1px solid var(--line);padding-block:26px clamp(80px,10vw,120px);overflow:hidden;display:grid;gap:16px}
+.tech .mono{color:var(--faint)}
+.marquee{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marquee span{font:400 clamp(30px,3.6vw,52px)/1 var(--f-display);color:var(--mute);padding-right:56px;white-space:nowrap}
+.marquee span i{font-style:normal;color:var(--lime);padding-right:56px}
+@keyframes marq{to{transform:translateX(-50%)}}
+.tech-mask{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+
+/* ---------- faq ---------- */
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);margin-top:clamp(80px,10vw,130px);padding-top:clamp(48px,6vw,72px);border-top:1px solid var(--line)}
+.faq h3{margin:16px 0 0;font:400 clamp(36px,4vw,56px)/1 var(--f-display)}
+.faq .lead{color:var(--mute);margin:16px 0 0;max-width:34ch}
+.qa{border-bottom:1px solid var(--line)}
+.qa:first-child{border-top:1px solid var(--line)}
+.qa button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;cursor:pointer;font:400 clamp(21px,1.8vw,26px)/1.2 var(--f-display)}
+.qa button:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+.qa .ico{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .45s var(--ease),background .3s}
+.qa .ico::before,.qa .ico::after{content:"";grid-area:1/1;width:12px;height:1.5px;background:currentColor}
+.qa .ico::after{transform:rotate(90deg);transition:transform .45s var(--ease)}
+.qa.open .ico{transform:rotate(180deg);background:var(--night);color:var(--cream)}
+.qa.open .ico::after{transform:rotate(0)}
+.qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.qa.open .ans{grid-template-rows:1fr}
+.qa .ans > div{overflow:hidden}
+.qa .ans p{margin:0 0 24px;color:var(--mute);max-width:60ch}
+
+/* ---------- mobile menu ---------- */
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;place-items:center;opacity:.9}
+.menu-btn span{display:block;width:16px;height:1.5px;background:currentColor;box-shadow:0 5px 0 currentColor,0 -5px 0 currentColor;transition:box-shadow .3s,transform .3s}
+.menu-open .menu-btn span{box-shadow:none;transform:rotate(45deg)}
+.menu-open .menu-btn span::after{content:"";display:block;width:16px;height:1.5px;background:currentColor;transform:rotate(-90deg)}
+#menu{position:fixed;inset:0;z-index:55;background:var(--ink);color:#EDE8DF;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:110px max(24px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s cubic-bezier(.75,0,.2,1);visibility:hidden}
+.menu-open #menu{clip-path:inset(0 0 0 0);visibility:visible}
+#menu nav{display:grid;gap:4px}
+#menu nav a{font:400 clamp(44px,12vw,64px)/1.05 var(--f-display);text-decoration:none;opacity:0;transform:translateY(24px);transition:opacity .5s,transform .6s var(--ease)}
+.menu-open #menu nav a{opacity:1;transform:none;transition-delay:calc(.25s + var(--i) * 60ms)}
+#menu .foot-m{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(237,232,223,.16);color:rgba(237,232,223,.6)}
+.menu-open .site-header{color:#EDE8DF;background:transparent!important;border-color:transparent!important}
+.menu-open .site-header .btn{display:none}
+
+/* ---------- whatsapp ---------- */
+.wa{position:fixed;z-index:50;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;
+  padding:14px 18px 14px 14px;border-radius:999px;background:#EDE8DF;color:var(--night);text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.25);
+  transform:translateY(140%);transition:transform .6s var(--ease),background .3s}
+.wa.show{transform:none}
+.wa:hover{background:var(--lime)}
+.wa svg{width:22px;height:22px}
+
+/* ---------- motion ---------- */
+.rv-wait{opacity:0;transform:translateY(34px)}
+.rv-in{opacity:1;transform:none;transition:opacity 1s var(--ease) var(--d,0s),transform 1.1s var(--ease) var(--d,0s)}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.split .w > span{display:inline-block}
+.split.sp-wait .w > span{transform:translateY(105%)}
+.split.sp-in .w > span{transform:none;transition:transform 1.1s var(--ease) calc(var(--i) * 45ms + var(--d,0s))}
+.img-wait img{clip-path:inset(100% 0 0 0);transform:scale(1.18)}
+.img-in img{clip-path:inset(0 0 0 0);transform:scale(1);transition:clip-path 1.3s var(--ease),transform 1.6s var(--ease)}
+
+@media (max-width:1020px){
+  .faq{grid-template-columns:1fr}
+  .vcards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .about,.contact{grid-template-columns:1fr}
+  .photo{aspect-ratio:4/3;max-height:520px}
+  .svc,.svc:nth-child(n){grid-column:span 12}
   .plans{grid-template-columns:1fr;max-width:560px}
   .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}
 }
 @media (max-width:760px){
-  .nav,.hud-bottom .geo{display:none}
-  .chap,#lockup{left:20px;right:20px;max-width:none}
-  .pillars{grid-template-columns:1fr}
-  .pillars div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
-  .pillars div{padding:22px 0}
+  :root{--radius:22px}
+  .nav{display:none}
+  .menu-btn{display:grid}
+  .site-header .btn{display:none}
+  .wa span{display:none}.wa{padding:14px}
+  .faq{grid-template-columns:1fr}
+  .site-header .btn{padding:11px 14px;font-size:11px}
+  .vcards{grid-template-columns:1fr 1fr}
+  .vcard{padding:20px 18px}
+  .vcard .vt{font-size:23px}
+  .vcard p:not(.vt){display:none}
+  .stats{grid-template-columns:1fr 1fr;row-gap:28px}
+  .stats div:nth-child(3){padding-left:0;border-left:0}
   .cform .two{grid-template-columns:1fr}
   #track{grid-auto-columns:86vw;column-gap:14px}
-  .rail{right:12px}
+  .channel{flex-direction:column;align-items:flex-start}
+  .channel dd{text-align:left}
 }
-@media (prefers-reduced-motion:reduce){#intro .cur{animation:none}.chap,#lockup{transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .marquee{animation:none}
+  .panel > .in{transform:none!important}.panel::after{display:none}
+  .hero-media video{transform:none!important}
+}
 </style>
-<noscript><style>
-#hero{height:auto;min-height:100vh;background:#0E0D0B url(/og-image.jpg) center/cover}
-#lockup{position:absolute;top:auto;bottom:12vh;opacity:1;transform:none;pointer-events:auto}
-#intro,#loader,.hud,.chap,#film,.scrim{display:none}
-.rv-wait{opacity:1;transform:none}
-</style></noscript>
+<noscript><style>.rv-wait,.split.sp-wait .w > span,.img-wait img{opacity:1;transform:none;clip-path:none}#loader{display:none}html.is-loading,html.is-loading body{overflow:auto}</style></noscript>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Quanto tempo leva para o meu site ficar pronto?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O prazo médio de entrega de um site é de 10 dias. Projetos maiores, como sistemas e landings com vídeo e 3D, têm o prazo combinado antes de começar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O que está incluso numa landing page?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Design sob medida, versão responsiva para celular, otimização para busca e a publicação do site. Todas as landing pages incluem 3 meses de manutenção e alterações grátis."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Vocês atendem fora de Recife?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim. O estúdio fica em Recife, mas atendemos empresas de todo o Brasil e do exterior, com reuniões e acompanhamento online."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Vocês desenvolvem sistemas sob medida?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim. Construímos painéis, automações e produtos web do frontend ao banco de dados, como o HN Finances. Esses projetos são orçados sob consulta."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Como começo um projeto?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Envie o formulário ou fale pelo WhatsApp. Respondemos em até 24 horas para entender o que você precisa e apresentar o preço antes de começar."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
-
-
 <div id="loader"><div class="box">
   <b>HN<i>.</i></b>
   <div class="lbar" aria-hidden="true"><span id="loader-bar"></span></div>
-  <div class="lrow mono"><span id="loader-step" role="status">Carregando</span><span aria-hidden="true"><span id="loader-pct">000</span>%</span></div>
+  <div class="lrow mono"><span role="status">Carregando</span><span aria-hidden="true"><span id="loader-pct">000</span>%</span></div>
 </div></div>
-
 <a class="skip" href="#sobre">Pular para o conteúdo</a>
-<header class="site-header">
-  <a class="brand" href="#top" aria-label="HN Services, início"><b>HN<i>.</i></b><span>Services</span></a>
-  <nav class="nav" aria-label="Principal"><a href="#sobre">Sobre</a><a href="#precos">Preços</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a></nav>
-  <a class="btn btn-primary" href="#contato">Iniciar projeto</a>
+
+<header class="site-header" id="header">
+  <a class="brand" href="#topo" aria-label="HN Services, início"><b>HN<i>.</i></b><span>Services</span></a>
+  <nav class="nav" aria-label="Principal"><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#precos">Preços</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a></nav>
+  <a class="btn btn-lime" href="#contato" data-magnet>Iniciar projeto <span class="arr">→</span></a>
+  <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
 </header>
-
-<!-- ================= FILM ================= -->
-<canvas id="film" aria-hidden="true"></canvas>
-<div class="scrim"></div>
-<div class="hud hud-bottom mono" aria-hidden="true"><span id="hud-chapter">01 / 06 · Código</span><span class="geo">08°03′S · 34°52′W · Recife</span><span class="tc">F <em id="hud-frame">001</em> / 450</span></div>
-<div class="hud rail" aria-hidden="true"><span id="rail-fill"></span></div>
-<div id="intro" class="mono" aria-hidden="true"><span class="cur"></span><strong>HN Services · Sites, sistemas e TI</strong>Role para começar</div>
-
-<div class="chap low" id="c1" aria-hidden="true"><span class="eyebrow mono">01 · Código</span>
-  <p class="t">Tudo começa com <em>uma linha.</em></p>
-  <p class="s">Cada produto digital nasce de uma decisão simples, escrita com cuidado.</p></div>
-<div class="chap high" id="c2" aria-hidden="true"><span class="eyebrow mono">02 · Produto</span>
-  <p class="t">Nós projetamos. <em>Nós construímos.</em></p>
-  <p class="s">Sites e sistemas sob medida, do primeiro traço no papel ao deploy em produção.</p></div>
-<div class="chap low" id="c3" aria-hidden="true"><span class="eyebrow mono">03 · Infraestrutura</span>
-  <p class="t">E <em>sustentamos.</em></p>
-  <p class="s">Servidores, monitoramento e suporte para que tudo continue de pé depois do lançamento.</p></div>
-<div class="chap high" id="c4" aria-hidden="true"><span class="eyebrow mono">04 · Escala</span>
-  <p class="t">De Recife <em>para o mundo.</em></p>
-  <p class="s">Um time pernambucano atendendo empresas no Brasil e no exterior.</p></div>
-<div class="chap low" id="c5" aria-hidden="true"><span class="eyebrow mono">05 · Clientes</span>
-  <p class="t">O seu negócio, <em>funcionando.</em></p>
-  <p class="s">Do caixa ao estoque, tecnologia que organiza a rotina de quem atende o público.</p></div>
-<div class="chap low" id="c6" aria-hidden="true"><span class="eyebrow mono">06 · Juntos</span>
-  <p class="t">Vamos construir <em>juntos.</em></p>
-  <p class="s">Você fala direto com quem desenha e programa o seu projeto.</p></div>
-
-<div id="lockup">
-  <span class="eyebrow mono">HN Services · Recife</span>
-  <h1>Sites, sistemas e TI <em>para o seu negócio crescer.</em></h1>
-  <p class="s">Criação de sites, landing pages e sistemas web sob medida em Recife, para empresas de todo o Brasil. Preço na mesa desde o primeiro contato.</p>
-  <div class="actions"><a class="btn btn-primary" href="#contato">Iniciar projeto</a><a class="btn btn-ghost" href="#precos">Ver preços</a></div>
+<div id="menu" aria-hidden="true">
+  <nav aria-label="Menu"><a href="#sobre" style="--i:0">Sobre</a><a href="#servicos" style="--i:1">Serviços</a><a href="#precos" style="--i:2">Preços</a><a href="#projetos" style="--i:3">Projetos</a><a href="#contato" style="--i:4">Contato</a></nav>
+  <div class="foot-m mono"><span>contato@hnservices.com.br</span><span>+55 81 99621-3652</span></div>
 </div>
 
-<div id="hero"><span id="top"></span></div>
+<main id="stack">
+  <!-- ================= HERO ================= -->
+  <section class="panel tone-dark hero" id="topo">
+    <div class="in">
+      <div class="hero-media" aria-hidden="true">
+        <video id="hero-video" muted loop playsinline preload="none" poster="/media/hero-poster.jpg"></video>
+      </div>
+      <div class="wrap hero-top">
+        <span class="eyebrow mono" data-rv>Estúdio de tecnologia · Recife</span>
+        <h1 class="split" data-split>Sites, sistemas e TI <em>para o seu negócio crescer.</em></h1>
+        <p class="sub" data-rv style="--d:.25s">Criação de sites, landing pages e sistemas web sob medida, com infraestrutura e suporte depois da entrega. Para empresas de todo o Brasil.</p>
+        <div class="actions" data-rv style="--d:.35s"><a class="btn btn-lime" href="#contato" data-magnet>Iniciar projeto <span class="arr">→</span></a><a class="btn btn-line" href="#precos">Ver preços</a></div>
+      </div>
+      <div class="wrap">
+        <div class="vcards">
+          <a class="vcard" href="#servicos" data-rv style="--d:.1s"><span class="n mono">01</span><p class="vt">Sites e landing pages</p><p>Rápidos, responsivos e feitos para converter.</p><span class="more mono">Saiba mais <span class="arr">→</span></span></a>
+          <a class="vcard" href="#servicos" data-rv style="--d:.18s"><span class="n mono">02</span><p class="vt">Sistemas web</p><p>Painéis, automações e produtos sob medida.</p><span class="more mono">Saiba mais <span class="arr">→</span></span></a>
+          <a class="vcard" href="#servicos" data-rv style="--d:.26s"><span class="n mono">03</span><p class="vt">Infraestrutura</p><p>Deploy, servidores e monitoramento contínuo.</p><span class="more mono">Saiba mais <span class="arr">→</span></span></a>
+          <a class="vcard" href="#servicos" data-rv style="--d:.34s"><span class="n mono">04</span><p class="vt">Consultoria de TI</p><p>Decisões técnicas com clareza e segurança.</p><span class="more mono">Saiba mais <span class="arr">→</span></span></a>
+        </div>
+        <div class="stats">
+          <div data-rv><b><span data-count="10">10</span> dias</b><span>prazo médio de entrega de um site</span></div>
+          <div data-rv style="--d:.08s"><b><span data-count="24">24</span> h</b><span>para responder qualquer contato</span></div>
+          <div data-rv style="--d:.16s"><b><span data-count="3">3</span> meses</b><span>de manutenção grátis nas landing pages</span></div>
+          <div data-rv style="--d:.24s"><b>R$ <span data-count="399">399</span></b><span>para ter sua landing page no ar, já publicada</span></div>
+        </div>
+      </div>
+      <div class="tech">
+        <div class="wrap"><span class="mono">Tecnologias com que trabalhamos</span></div>
+        <div class="tech-mask" role="img" aria-label="Next.js, React, TypeScript, Node.js, Tailwind CSS, GSAP, Three.js, WebGL, Supabase, Vercel">
+          <div class="marquee" aria-hidden="true"><span>Next.js<i>·</i>React<i>·</i>TypeScript<i>·</i>Node.js<i>·</i>Tailwind CSS<i>·</i>GSAP<i>·</i>Three.js<i>·</i>WebGL<i>·</i>Supabase<i>·</i>Vercel<i>·</i></span><span>Next.js<i>·</i>React<i>·</i>TypeScript<i>·</i>Node.js<i>·</i>Tailwind CSS<i>·</i>GSAP<i>·</i>Three.js<i>·</i>WebGL<i>·</i>Supabase<i>·</i>Vercel<i>·</i></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ================= SITE ================= -->
-<main>
-  <section class="block" id="sobre">
-    <div class="wrap">
-      <div class="about">
+  <!-- ================= SOBRE ================= -->
+  <section class="panel tone-light" id="sobre">
+    <div class="in block">
+      <div class="wrap about">
         <div>
           <span class="eyebrow mono" data-rv>Sobre nós</span>
-          <h2 class="statement" data-rv style="--d:.08s">Um estúdio enxuto de Recife que une <em>design, código e infraestrutura.</em></h2>
-        </div>
-        <div>
-          <div class="copy" data-rv style="--d:.16s">
+          <h2 class="title split" data-split>Um estúdio enxuto que une <em>design, código e infraestrutura.</em></h2>
+          <div class="copy" data-rv>
             <p>A HN Services tira projetos digitais do papel sem burocracia. Cuidamos de tudo: da primeira conversa ao site no ar, e do sistema rodando ao suporte depois da entrega.</p>
-            <p>Trabalhamos com comunicação direta, prazos claros e preço combinado antes de começar. Você fala com quem constrói.</p>
+            <p>Comunicação direta, prazos claros e preço combinado antes de começar. Você fala com quem constrói.</p>
           </div>
-          <div class="where mono" data-rv style="--d:.24s"><span><b>10 dias</b> prazo médio de entrega</span><span><b>24 h</b> para responder</span><span><b>Recife</b> atendendo globalmente</span></div>
+          <ol class="steps">
+            <li data-rv><span class="mono">01</span><div><b>Descoberta</b><span>Entendemos o negócio, os objetivos e o que precisa ir ao ar.</span></div></li>
+            <li data-rv style="--d:.08s"><span class="mono">02</span><div><b>Construção</b><span>Design e código em paralelo, com entregas que você acompanha.</span></div></li>
+            <li data-rv style="--d:.16s"><span class="mono">03</span><div><b>Lançamento</b><span>Publicação, monitoramento e suporte para crescer junto.</span></div></li>
+          </ol>
+          <div class="actions" data-rv><a class="btn btn-ink" href="#servicos">Conheça os serviços <span class="arr">→</span></a></div>
+        </div>
+        <figure class="photo" data-reveal>
+          <img src="/media/sobre.webp" alt="Equipe de desenvolvimento revisando código em um escritório" width="1200" height="1500" loading="lazy">
+          <figcaption class="tag"><b>Recife, PE</b><span class="mono">Atendemos todo o Brasil</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVIÇOS ================= -->
+  <section class="panel tone-dark" id="servicos">
+    <div class="in block">
+      <div class="wrap">
+        <div class="head">
+          <div><span class="eyebrow mono" data-rv>Serviços</span><h2 class="title split" data-split>Como podemos <em>ajudar.</em></h2></div>
+          <p class="lead" data-rv>Quatro frentes, um time só. Do site que apresenta a sua empresa ao sistema que organiza a operação.</p>
+        </div>
+        <div class="bento">
+          <article class="svc" data-rv><div class="img" data-reveal><img src="/media/svc-sites.webp" alt="Desenvolvedor programando um site" width="1200" height="900" loading="lazy"><span class="n mono">01</span></div>
+            <div class="body"><h3>Criação de sites e landing pages</h3><p>Do institucional ao cinematográfico: páginas rápidas, responsivas e otimizadas para aparecer no Google e converter visitas em contatos.</p><div class="chips"><span>Design sob medida</span><span>SEO</span><span>Vídeo e animação</span></div></div></article>
+          <article class="svc" data-rv style="--d:.1s"><div class="img" data-reveal><img src="/media/svc-sistemas.webp" alt="Pagamento por aproximação em uma maquininha" width="1200" height="900" loading="lazy"><span class="n mono">02</span></div>
+            <div class="body"><h3>Sistemas web sob medida</h3><p>Painéis, automações e produtos para a rotina do seu negócio, como o HN Finances.</p><div class="chips"><span>Dashboards</span><span>Integrações</span><span>SaaS</span></div></div></article>
+          <article class="svc" data-rv><div class="img" data-reveal><img src="/media/svc-infra.webp" alt="Corredor de um data center com servidores" width="1200" height="900" loading="lazy"><span class="n mono">03</span></div>
+            <div class="body"><p class="vt">Infraestrutura</p><p>Deploy, servidores, domínio, e-mail e monitoramento, para que tudo continue de pé.</p><div class="chips"><span>Cloud</span><span>CI/CD</span><span>Suporte</span></div></div></article>
+          <article class="svc" data-rv style="--d:.1s"><div class="img" data-reveal><img src="/media/svc-consultoria.webp" alt="Esboço da arquitetura de um sistema desenhado no papel" width="1200" height="900" loading="lazy"><span class="n mono">04</span></div>
+            <div class="body"><p class="vt">Consultoria de TI</p><p>Diagnóstico, arquitetura e plano de ação para decidir a tecnologia certa antes de investir.</p><div class="chips"><span>Arquitetura</span><span>Auditoria técnica</span><span>Plano de ação</span></div></div></article>
         </div>
       </div>
-      <div class="pillars">
-        <div data-rv><h3>Criação de sites e landing pages</h3><p>Rápidos, responsivos e feitos para converter, do institucional ao cinematográfico.</p></div>
-        <div data-rv style="--d:.1s"><h3>Sistemas web sob medida</h3><p>Painéis, automações e produtos sob medida, como o nosso HN Finances.</p></div>
-        <div data-rv style="--d:.2s"><h3>Infraestrutura e consultoria de TI</h3><p>Deploy, monitoramento e decisões técnicas tomadas com segurança.</p></div>
-      </div>
     </div>
   </section>
 
-  <section class="block" id="precos">
-    <div class="wrap">
-      <div class="head">
-        <div><span class="eyebrow mono" data-rv>Preços</span><h2 class="title" data-rv style="--d:.08s">Preço na mesa, <em>desde o início.</em></h2></div>
-        <p data-rv style="--d:.16s">Valores de referência. Projetos maiores são orçados sob medida, sem surpresa no meio do caminho.</p>
-      </div>
-      <div class="plans">
-        <article class="plan featured" data-rv><span class="tag">Mais pedido</span>
-          <h3>Landing Page Simples</h3><p>Uma página feita para converter, rápida e otimizada para busca.</p>
-          <div class="price"><small class="mono">A partir de</small><b>R$ 399</b></div>
-          <ul><li>Design sob medida</li><li>Responsiva e rápida</li><li>Publicação inclusa</li></ul>
-          <a class="btn btn-primary" href="#contato" data-service="landing-simples">Começar</a></article>
-        <article class="plan" data-rv style="--d:.1s">
-          <h3>Landing Page Completa</h3><p>Várias seções, formulários e integrações para contar uma história maior.</p>
-          <div class="price"><small class="mono">A partir de</small><b>R$ 599</b></div>
-          <ul><li>Múltiplas seções</li><li>Formulários e integrações</li><li>SEO técnico</li></ul>
-          <a class="btn btn-ghost" href="#contato" data-service="landing-completa">Começar</a></article>
-        <article class="plan" data-rv style="--d:.2s">
-          <h3>Projeto sob medida</h3><p>Landings com vídeo e WebGL, sistemas web e consultoria de TI.</p>
-          <div class="price"><small class="mono">Investimento</small><b>Sob consulta</b></div>
-          <ul><li>Animações, vídeo e 3D</li><li>Sistemas e automações</li><li>Consultoria técnica</li></ul>
-          <a class="btn btn-ghost" href="#contato" data-service="sob-medida">Falar com a gente</a></article>
-      </div>
-      <p class="plans-note" data-rv>Landing pages incluem 3 meses de manutenção e alterações grátis.</p>
-    </div>
-  </section>
-
-  <section class="block" id="projetos" style="padding-bottom:clamp(80px,10vw,130px)">
-    <div class="wrap">
-      <div class="head">
-        <div><span class="eyebrow mono" data-rv>Projetos</span><h2 class="title" data-rv style="--d:.08s">Trabalhos <em>recentes.</em></h2></div>
-        <div class="reel-head mono" data-rv style="--d:.16s"><span><span id="proj-count">01</span> / 08</span>
-          <div class="arrows"><button id="proj-prev" type="button" aria-label="Projeto anterior">←</button><button id="proj-next" type="button" aria-label="Próximo projeto">→</button></div></div>
-      </div>
-    </div>
-    <div id="track" role="region" tabindex="0" data-rv style="--d:.2s" aria-label="Projetos, role para o lado para ver mais">
-      <a class="proj" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/m4.jpg" alt="Site M4 Competition" width="1200" height="750"><video muted loop playsinline preload="none" data-src="assets/video/m4.mp4"></video></div>
-        <div class="row"><h3>M4 Competition</h3><span class="kind mono">Cinematográfico · Automotivo</span></div><p>Hero em vídeo dirigido pelo scroll: o BMW M4 gira em cena com specs animadas.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://hn-construction.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/hn-construction.jpg" alt="Site HN Arquitetura" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/hn-construction.mp4"></video></div>
-        <div class="row"><h3>HN Arquitetura</h3><span class="kind mono">Cinematográfico · Arquitetura</span></div><p>Do primeiro traço à entrega das chaves, contado em vídeo pelo scroll.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://arquitetura-premium.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/arquitetura-premium.jpg" alt="Site Ferreira & Monteiro" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/arquitetura-premium.mp4"></video></div>
-        <div class="row"><h3>Ferreira &amp; Monteiro</h3><span class="kind mono">Premium · Arquitetura</span></div><p>Escritório autoral com editorial fotográfico e prova social: 700+ clientes em 18 estados.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/laocoon.jpg" alt="Site Laocoön" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/laocoon.mp4"></video></div>
-        <div class="row"><h3>Laocoön</h3><span class="kind mono">Experiência · WebGL</span></div><p>Cena Three.js dirigida por scroll, com shaders, partículas e câmera em órbita.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/arkkhe.jpg" alt="Site Arkkhe" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/arkkhe.mp4"></video></div>
-        <div class="row"><h3>Arkkhe</h3><span class="kind mono">Avançado · Automotivo</span></div><p>Intro cinematográfica, vídeo controlado pelo scroll e transições de troca.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/glacius.jpg" alt="Site Glacius" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/glacius.mp4"></video></div>
-        <div class="row"><h3>Glacius</h3><span class="kind mono">Imersivo · Landing</span></div><p>Parallax por camadas, neve em movimento e reveals cinematográficos.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/ferre.jpg" alt="Site Studio Ferré 97" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/ferre.mp4"></video></div>
-        <div class="row"><h3>Studio Ferré 97</h3><span class="kind mono">Premium · Barbearia</span></div><p>Barbearia de Olinda com tipografia imponente, agendamento e editorial escuro e dourado.</p><span class="go mono">Acessar projeto ↗</span></a>
-      <a class="proj" href="https://www.jdfcs.com/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/jd.jpg" alt="Site JD Flooring & Cleaning" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/jd.mp4"></video></div>
-        <div class="row"><h3>JD Flooring &amp; Cleaning</h3><span class="kind mono">Conversão · Serviços</span></div><p>A tela se divide e revela os dois serviços. Alta conversão e SEO local na Flórida.</p><span class="go mono">Acessar projeto ↗</span></a>
-    </div>
-    <div class="wrap"><p class="reel-hint mono">Arraste para o lado para ver mais, ou siga rolando</p></div>
-  </section>
-
-  <section class="block" id="contato">
-    <div class="wrap contact">
-      <div>
-        <span class="eyebrow mono" data-rv>Contato</span>
-        <h2 class="title" data-rv style="--d:.08s">Conte o que você <em>quer construir.</em></h2>
-        <p class="lead" data-rv style="--d:.16s">Respondemos em até 24 horas, por e-mail ou WhatsApp.</p>
-        <dl data-rv style="--d:.24s">
-          <div><dt class="mono">E-mail</dt><dd>contato@hnservices.com.br</dd></div>
-          <div><dt class="mono">WhatsApp</dt><dd>+55 81 99621-3652</dd></div>
-        </dl>
-      </div>
-      <form class="cform" id="contact-form" action="/api/send-email" method="post" aria-label="Iniciar um projeto" data-rv style="--d:.12s">
-        <div class="two">
-          <label class="mono" for="f-name">Nome<input id="f-name" name="name" autocomplete="name" required placeholder="Seu nome"></label>
-          <label class="mono" for="f-mail">E-mail<input id="f-mail" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com.br"></label>
+  <!-- ================= PREÇOS ================= -->
+  <section class="panel tone-light" id="precos">
+    <div class="in block">
+      <div class="wrap">
+        <div class="head">
+          <div><span class="eyebrow mono" data-rv>Preços</span><h2 class="title split" data-split>Preço na mesa, <em>desde o início.</em></h2></div>
+          <p class="lead" data-rv>Valores de referência. Projetos maiores são orçados sob medida, sem surpresa no meio do caminho.</p>
         </div>
-        <label class="mono" for="f-service">O que você precisa
-          <select id="f-service" name="service">
-            <option value="landing-simples">Landing Page Simples</option>
-            <option value="landing-completa">Landing Page Completa</option>
-            <option value="sob-medida">Projeto sob medida</option>
-            <option value="outro">Outro assunto</option>
-          </select></label>
-        <label class="mono" for="f-msg">Mensagem<textarea id="f-msg" name="message" required placeholder="Conte um pouco sobre o projeto"></textarea></label>
-        <button class="btn btn-primary" type="submit">Enviar mensagem</button>
-        <p class="ok" role="status" aria-live="polite">Mensagem recebida. Retornamos em até 24 horas.</p>
-        <p class="err" role="alert" hidden></p>
-      </form>
+        <div class="plans">
+          <article class="plan featured" data-rv><div class="top"><span class="mono">01</span><span class="tag mono">Mais pedido</span></div>
+            <h3>Landing Page Simples</h3><p>Uma página feita para converter, rápida e otimizada para busca.</p>
+            <div class="price"><small class="mono">A partir de</small><b>R$ 399</b></div>
+            <ul><li>Design sob medida</li><li>Responsiva e rápida</li><li>Publicação inclusa</li></ul>
+            <a class="btn btn-lime" href="#contato" data-service="landing-simples">Começar <span class="arr">→</span></a></article>
+          <article class="plan" data-rv style="--d:.1s"><div class="top"><span class="mono">02</span></div>
+            <h3>Landing Page Completa</h3><p>Várias seções, formulários e integrações para contar uma história maior.</p>
+            <div class="price"><small class="mono">A partir de</small><b>R$ 599</b></div>
+            <ul><li>Múltiplas seções</li><li>Formulários e integrações</li><li>SEO técnico</li></ul>
+            <a class="btn btn-ink" href="#contato" data-service="landing-completa">Começar <span class="arr">→</span></a></article>
+          <article class="plan" data-rv style="--d:.2s"><div class="top"><span class="mono">03</span></div>
+            <h3>Projeto sob medida</h3><p>Landings com vídeo e WebGL, sistemas web e consultoria de TI.</p>
+            <div class="price"><small class="mono">Investimento</small><b>Sob consulta</b></div>
+            <ul><li>Animações, vídeo e 3D</li><li>Sistemas e automações</li><li>Consultoria técnica</li></ul>
+            <a class="btn btn-ink" href="#contato" data-service="sob-medida">Falar com a gente <span class="arr">→</span></a></article>
+        </div>
+        <p class="note" data-rv>Landing pages incluem 3 meses de manutenção e alterações grátis.</p>
+        <div class="faq">
+          <div><span class="eyebrow mono" data-rv>Dúvidas</span><h3 data-rv>Perguntas <em>frequentes.</em></h3><p class="lead" data-rv>Não encontrou a sua? Fale com a gente pelo WhatsApp.</p></div>
+          <div data-rv>
+            <div class="qa"><button type="button" aria-expanded="false" aria-controls="qa0" id="qb0">Quanto tempo leva para o meu site ficar pronto?<span class="ico" aria-hidden="true"></span></button>
+              <div class="ans" id="qa0" role="region" aria-labelledby="qb0"><div><p>O prazo médio de entrega de um site é de 10 dias. Projetos maiores, como sistemas e landings com vídeo e 3D, têm o prazo combinado antes de começar.</p></div></div></div>
+            <div class="qa"><button type="button" aria-expanded="false" aria-controls="qa1" id="qb1">O que está incluso numa landing page?<span class="ico" aria-hidden="true"></span></button>
+              <div class="ans" id="qa1" role="region" aria-labelledby="qb1"><div><p>Design sob medida, versão responsiva para celular, otimização para busca e a publicação do site. Todas as landing pages incluem 3 meses de manutenção e alterações grátis.</p></div></div></div>
+            <div class="qa"><button type="button" aria-expanded="false" aria-controls="qa2" id="qb2">Vocês atendem fora de Recife?<span class="ico" aria-hidden="true"></span></button>
+              <div class="ans" id="qa2" role="region" aria-labelledby="qb2"><div><p>Sim. O estúdio fica em Recife, mas atendemos empresas de todo o Brasil e do exterior, com reuniões e acompanhamento online.</p></div></div></div>
+            <div class="qa"><button type="button" aria-expanded="false" aria-controls="qa3" id="qb3">Vocês desenvolvem sistemas sob medida?<span class="ico" aria-hidden="true"></span></button>
+              <div class="ans" id="qa3" role="region" aria-labelledby="qb3"><div><p>Sim. Construímos painéis, automações e produtos web do frontend ao banco de dados, como o HN Finances. Esses projetos são orçados sob consulta.</p></div></div></div>
+            <div class="qa"><button type="button" aria-expanded="false" aria-controls="qa4" id="qb4">Como começo um projeto?<span class="ico" aria-hidden="true"></span></button>
+              <div class="ans" id="qa4" role="region" aria-labelledby="qb4"><div><p>Envie o formulário ou fale pelo WhatsApp. Respondemos em até 24 horas para entender o que você precisa e apresentar o preço antes de começar.</p></div></div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- ================= PROJETOS ================= -->
+  <section class="panel tone-dark" id="projetos">
+    <div class="in block">
+      <div class="wrap">
+        <div class="head">
+          <div><span class="eyebrow mono" data-rv>Projetos</span><h2 class="title split" data-split>Trabalhos <em>recentes.</em></h2></div>
+          <div class="reel-nav mono" data-rv><span><span id="proj-count">01</span> / 08</span><button id="proj-prev" type="button" aria-label="Projeto anterior">←</button><button id="proj-next" type="button" aria-label="Próximo projeto">→</button></div>
+        </div>
+      </div>
+      <div id="track" role="region" tabindex="0" aria-label="Projetos, role para o lado para ver mais" data-rv>
+        <a class="proj" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/m4.jpg" alt="Site M4 Competition" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/m4.mp4"></video></div>
+          <div class="row"><h3>M4 Competition</h3><span class="kind mono">Cinematográfico · Automotivo</span></div><p>Hero em vídeo dirigido pelo scroll: o BMW M4 gira em cena com specs animadas.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://hn-construction.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/hn-construction.jpg" alt="Site HN Arquitetura" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/hn-construction.mp4"></video></div>
+          <div class="row"><h3>HN Arquitetura</h3><span class="kind mono">Cinematográfico · Arquitetura</span></div><p>Do primeiro traço à entrega das chaves, contado em vídeo pelo scroll.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://arquitetura-premium.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/arquitetura-premium.jpg" alt="Site Ferreira & Monteiro" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/arquitetura-premium.mp4"></video></div>
+          <div class="row"><h3>Ferreira &amp; Monteiro</h3><span class="kind mono">Premium · Arquitetura</span></div><p>Escritório autoral com editorial fotográfico e prova social: 700+ clientes em 18 estados.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/laocoon.jpg" alt="Site Laocoön" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/laocoon.mp4"></video></div>
+          <div class="row"><h3>Laocoön</h3><span class="kind mono">Experiência · WebGL</span></div><p>Cena Three.js dirigida por scroll, com shaders, partículas e câmera em órbita.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/arkkhe.jpg" alt="Site Arkkhe" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/arkkhe.mp4"></video></div>
+          <div class="row"><h3>Arkkhe</h3><span class="kind mono">Avançado · Automotivo</span></div><p>Intro cinematográfica, vídeo controlado pelo scroll e transições de troca.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/glacius.jpg" alt="Site Glacius" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/glacius.mp4"></video></div>
+          <div class="row"><h3>Glacius</h3><span class="kind mono">Imersivo · Landing</span></div><p>Parallax por camadas, neve em movimento e reveals cinematográficos.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/ferre.jpg" alt="Site Studio Ferré 97" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/ferre.mp4"></video></div>
+          <div class="row"><h3>Studio Ferré 97</h3><span class="kind mono">Premium · Barbearia</span></div><p>Barbearia de Olinda com tipografia imponente, agendamento e editorial escuro e dourado.</p><span class="go mono">Acessar projeto ↗</span></a>
+        <a class="proj" href="https://www.jdfcs.com/" target="_blank" rel="noopener"><div class="media"><img src="/assets/video/jd.jpg" alt="Site JD Flooring & Cleaning" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="/assets/video/jd.mp4"></video></div>
+          <div class="row"><h3>JD Flooring &amp; Cleaning</h3><span class="kind mono">Conversão · Serviços</span></div><p>A tela se divide e revela os dois serviços. Alta conversão e SEO local na Flórida.</p><span class="go mono">Acessar projeto ↗</span></a>
+      </div>
+      <div class="wrap"><p class="reel-hint mono">Arraste para o lado para ver mais, ou siga rolando</p></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO ================= -->
+  <section class="panel tone-light" id="contato">
+    <div class="in block">
+      <div class="wrap contact">
+        <div>
+          <span class="eyebrow mono" data-rv>Contato</span>
+          <h2 class="title split" data-split>Conte o que você <em>quer construir.</em></h2>
+          <p class="lead" data-rv>Respondemos em até 24 horas, por e-mail ou WhatsApp.</p>
+          <dl class="channels" data-rv>
+            <div class="channel"><dt class="mono">E-mail</dt><dd>contato@hnservices.com.br</dd></div>
+            <div class="channel"><dt class="mono">WhatsApp</dt><dd>+55 81 99621-3652</dd></div>
+          </dl>
+        </div>
+        <form class="cform" id="contact-form" action="/api/send-email" method="post" aria-label="Iniciar um projeto" data-rv>
+          <div class="two">
+            <label class="mono" for="f-name">Nome<input id="f-name" name="name" autocomplete="name" required placeholder="Seu nome"></label>
+            <label class="mono" for="f-mail">E-mail<input id="f-mail" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com.br"></label>
+          </div>
+          <label class="mono" for="f-service">O que você precisa
+            <select id="f-service" name="service">
+              <option value="landing-simples">Landing Page Simples</option>
+              <option value="landing-completa">Landing Page Completa</option>
+              <option value="sob-medida">Projeto sob medida</option>
+              <option value="outro">Outro assunto</option>
+            </select></label>
+          <label class="mono" for="f-msg">Mensagem<textarea id="f-msg" name="message" required placeholder="Conte um pouco sobre o projeto"></textarea></label>
+          <button class="btn btn-ink" type="submit">Enviar mensagem <span class="arr">→</span></button>
+          <p class="ok" role="status" aria-live="polite">Mensagem recebida. Retornamos em até 24 horas.</p>
+          <p class="err" role="alert" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="panel tone-dark">
+    <div class="in" style="padding-top:clamp(100px,12vw,150px)">
+      <div class="wrap">
+        <div class="foot-cta">
+          <h2 class="split" data-split>Vamos construir <em>juntos?</em></h2>
+          <a class="btn btn-lime" href="#contato" data-rv data-magnet>Iniciar projeto <span class="arr">→</span></a>
+        </div>
+        <div class="foot">
+          <div><p class="big">HN<i>.</i></p><p>Sites, sistemas e TI para o seu negócio crescer. Recife, Brasil.</p></div>
+          <div><p class="mono fh">Navegação</p><ul><li><a href="#sobre">Sobre</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#precos">Preços</a></li><li><a href="#projetos">Projetos</a></li></ul></div>
+          <div><p class="mono fh">Contato</p><ul><li><a href="#contato">Formulário</a></li><li>contato@hnservices.com.br</li><li>+55 81 99621-3652</li></ul></div>
+          <div><p class="mono fh">Redes</p><ul><li><a href="https://instagram.com/hnservices" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://linkedin.com/company/hn-services" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/hn-services" target="_blank" rel="noopener">GitHub ↗</a></li></ul></div>
+        </div>
+        <div class="legal mono"><span>© 2026 HN Services</span><span>Recife, PE · Brasil</span></div>
+      </div>
+    </div>
+  </footer>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot">
-      <div><p class="big">HN<i>.</i></p><p>Sites, sistemas e TI para o seu negócio crescer. Recife, Brasil.</p></div>
-      <div><p class="mono fh">Navegação</p><ul><li><a href="#sobre">Sobre</a></li><li><a href="#precos">Preços</a></li><li><a href="#projetos">Projetos</a></li><li><a href="#contato">Contato</a></li></ul></div>
-      <div><p class="mono fh">Redes</p><ul><li><a href="https://instagram.com/hnservices" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://linkedin.com/company/hn-services" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/hn-services" target="_blank" rel="noopener">GitHub ↗</a></li></ul></div>
-    </div>
-    <div class="legal mono"><span>© 2026 HN Services</span><span>contato@hnservices.com.br</span></div>
-  </div>
-</footer>
-
+<a class="wa" id="wa" href="https://wa.me/5581996213652" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+  <span class="mono">WhatsApp</span>
+</a>
 <script src="/vendor/lenis.min.js" defer></script>
-<script src="/hero.js" defer></script>
-<script src="/site.js" defer></script>
-
+<script src="/app.js" defer></script>
 </body>
 </html>
