@@ -22,29 +22,72 @@
   const rail = document.querySelector(".rail");
   CH.forEach(c => { const i = document.createElement("i"); i.style.top = (c.a * 100).toFixed(1) + "%"; rail.appendChild(i); });
 
-  /* loading: one pack per shot, in story order; the rest streams while the reader scrolls */
+  /* loader: preloads what the opening needs before the page opens — the first shots of the film
+     for this screen shape, the fonts and the project posters — and reports real downloaded bytes.
+     The rest of the film keeps streaming in the background after the page opens. */
+  const PRE = set_ === "m" ? 4 : 3;                         // shots ready before entering (the whole first chapter and more)
+  const DEC = 0.35;                                         // decoding weighs 35% of a shot's bytes in the progress bar
   const frames = Array.from({ length: S }, () => Array(N).fill(null));
-  const pct = document.getElementById("loader-pct");
-  let started = false, ready = 0;
+  const el = id => document.getElementById(id);
+  const ui = { bar: el("loader-bar"), pct: el("loader-pct"), step: el("loader-step") };
+  const loadState = { done: 0, total: 1 };
+  let started = false, shown = 0;
+  const paint = () => {
+    const p = Math.min(1, loadState.done / loadState.total);
+    const v = Math.max(shown, Math.floor(p * 100)); shown = v;           // never runs backwards
+    ui.pct.textContent = String(v).padStart(3, "0"); ui.bar.style.transform = `scaleX(${v / 100})`;
+  };
+  const step = t => { ui.step.textContent = t; };
+  document.documentElement.classList.add("is-loading");
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
   const decode = u => { const i = new Image(); i.src = u; return i.decode().then(() => i, () => null); };
-  async function loadShot(k, offs) {
-    const blob = await (await fetch(`/pack/${set_}/h${k + 1}.webp`)).blob();
-    // decode in small batches and yield between them, so streaming never blocks scrolling
-    for (let i = 0; i < offs.length; i += 6) {
-      (await Promise.all(offs.slice(i, i + 6).map(([o, l]) => decode(URL.createObjectURL(blob.slice(o, o + l, "image/webp"))))))
+  async function fetchBytes(url, onBytes) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(url);
+    if (!r.body || !r.body.getReader) { const b = await r.blob(); onBytes(b.size); return b; }
+    const rd = r.body.getReader(), parts = [];
+    for (;;) { const { done, value } = await rd.read(); if (done) break; parts.push(value); onBytes(value.length); }
+    return new Blob(parts);
+  }
+  async function loadShot(k, offs, counted) {
+    const blob = await fetchBytes(`/pack/${set_}/h${k + 1}.webp`, n => { if (counted) { loadState.done += n; paint(); } });
+    for (let i = 0; i < offs.length; i += 6) {                       // decode in small batches, yielding between them
+      const batch = offs.slice(i, i + 6);
+      (await Promise.all(batch.map(([o, l]) => decode(URL.createObjectURL(blob.slice(o, o + l, "image/webp"))))))
         .forEach((im, j) => frames[k][i + j] = im);
-      await new Promise(r => (window.requestIdleCallback || setTimeout)(r, { timeout: 120 }));
+      if (counted) { loadState.done += batch.reduce((a, [, l]) => a + l, 0) * DEC; paint(); }
+      if (!counted) await new Promise(r => (window.requestIdleCallback || setTimeout)(r, { timeout: 120 }));
     }
     dirty = true;
-    ready++; if (pct) pct.textContent = String(Math.round(Math.min(1, ready / 1) * 100)).padStart(3, "0");
-    if (ready >= 1) start();            /* first shot decoded: the film can begin */
   }
-  fetch("/pack/manifest.json").then(r => r.json()).then(man => {
-    const rest = async () => { for (let k = 1; k < S; k++) await loadShot(k, man.sets[set_][`h${k + 1}`]); };
-    const later = () => setTimeout(rest, 1200);
-    loadShot(0, man.sets[set_].h1).then(() => document.readyState === "complete" ? later() : addEventListener("load", later, { once: true }));
-  }).catch(start);
-  setTimeout(start, 6000);
+  const sizeOf = offs => { const [o, l] = offs[offs.length - 1]; return o + l; };
+
+  async function preload() {
+    const man = await (await fetch("/pack/manifest.json")).json();
+    const packs = man.sets[set_];
+    const posters = [...document.querySelectorAll("#track img")].map(i => i.currentSrc || i.src);
+    const FONT_W = 110000, POSTER_W = 80000;                          // byte weights for items without a known size
+    loadState.total = FONT_W + posters.length * POSTER_W;
+    for (let k = 0; k < PRE; k++) loadState.total += sizeOf(packs[`h${k + 1}`]) * (1 + DEC);
+
+    step("Fontes");
+    const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+    await Promise.race([fonts, new Promise(r => setTimeout(r, 2500))]);
+    loadState.done += FONT_W; paint();
+
+    for (let k = 0; k < PRE; k++) { step(`Filme · plano ${k + 1} de ${PRE}`); await loadShot(k, packs[`h${k + 1}`], true); }
+
+    step("Projetos");
+    await Promise.all(posters.map(u => decode(u).then(() => { loadState.done += POSTER_W; paint(); })));
+
+    loadState.done = loadState.total; paint(); step("Pronto");
+    await new Promise(r => setTimeout(r, 350));
+    start();
+    for (let k = PRE; k < S; k++) await loadShot(k, packs[`h${k + 1}`], false);
+  }
+  preload().catch(() => start());
+  setTimeout(() => start(), 20000);                                    // a slow network never locks the page
   const pick = (k, i) => { const r = frames[k]; if (!r) return null; if (r[i]) return r[i];
     for (let d = 1; d < N; d++) { if (r[i - d]) return r[i - d]; if (r[i + d]) return r[i + d]; } return null; };
 
@@ -144,7 +187,9 @@
     requestAnimationFrame(draw);
   }
   function start() {
-    if (started) return; started = true; document.body.classList.add("is-ready");
+    if (started) return; started = true;
+    scrollTo(0, 0);
+    document.documentElement.classList.remove("is-loading"); document.body.classList.add("is-ready");
     if (window.Lenis && !reduce) { const l = new Lenis({ lerp: .1, smoothWheel: true }); window.__lenis = l;
       const raf = t => { l.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
     requestAnimationFrame(draw);
