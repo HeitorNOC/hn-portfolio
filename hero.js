@@ -37,7 +37,7 @@
     const v = Math.max(shown, Math.floor(p * 100)); shown = v;           // never runs backwards
     ui.pct.textContent = String(v).padStart(3, "0"); ui.bar.style.transform = `scaleX(${v / 100})`;
   };
-  const step = t => { ui.step.textContent = t; };
+  const step = () => {};                                   // the label stays a plain "Carregando"
   document.documentElement.classList.add("is-loading");
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 

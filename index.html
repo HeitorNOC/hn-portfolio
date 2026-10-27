@@ -170,7 +170,6 @@ html.is-loading,html.is-loading body{overflow:hidden}
 #loader-bar{display:block;height:100%;background:var(--lime);transform-origin:left;transform:scaleX(0);transition:transform .25s linear}
 .lrow{display:flex;justify-content:space-between;gap:16px;color:var(--mute)}
 #loader-pct{color:var(--paper);font-variant-numeric:tabular-nums}
-.lnote{margin:0;color:var(--faint);font-size:10px}
 body.is-ready #loader{transform:translateY(-100%);visibility:hidden}
 body.is-ready #loader .box{opacity:0}
 @media (prefers-reduced-motion:reduce){#loader{transition:opacity .5s,visibility 0s .5s}body.is-ready #loader{transform:none;opacity:0}}
@@ -303,8 +302,7 @@ form.cform{display:grid;gap:18px;padding:clamp(24px,3vw,36px);border:1px solid v
 <div id="loader"><div class="box">
   <b>HN<i>.</i></b>
   <div class="lbar" aria-hidden="true"><span id="loader-bar"></span></div>
-  <div class="lrow mono"><span id="loader-step" role="status">Preparando</span><span aria-hidden="true"><span id="loader-pct">000</span>%</span></div>
-  <p class="lnote mono">Pré-carregando o filme para a rolagem não travar</p>
+  <div class="lrow mono"><span id="loader-step" role="status">Carregando</span><span aria-hidden="true"><span id="loader-pct">000</span>%</span></div>
 </div></div>
 
 <a class="skip" href="#sobre">Pular para o conteúdo</a>
