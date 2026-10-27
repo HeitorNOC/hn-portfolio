@@ -3,6 +3,10 @@ const { Resend } = require('resend');
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const SERVICE_LABELS = {
+  'landing-simples':  'Landing Page Simples',
+  'landing-completa': 'Landing Page Completa',
+  'sob-medida':       'Projeto sob medida',
+  outro:              'Outro assunto',
   site:        'Criação de Sites',
   consultoria: 'Consultoria de TI',
   sistema:     'Sistemas Web',

@@ -1,1297 +1,473 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HN Services | Criação de Sites, Landing Pages e Sistemas Web em Recife</title>
+<meta name="description" content="Criação de sites e landing pages a partir de R$ 399, sistemas web sob medida e consultoria de TI em Recife. Entrega média em 10 dias, atendimento em todo o Brasil.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://www.hnservices.com.br/">
+<meta name="theme-color" content="#0E0D0B">
+<meta name="author" content="HN Services">
+<meta name="geo.region" content="BR-PE">
+<meta name="geo.placename" content="Recife">
 
-  <!-- Primary Meta -->
-  <title>HN Services — Tecnologia que Transforma</title>
-  <meta name="description"
-    content="HN Services — Criação de sites, consultoria de TI e sistemas web que transformam negócios. Tecnologia com propósito, design com impacto.">
-  <meta name="keywords"
-    content="criação de sites, consultoria de TI, sistemas web, UI/UX design, desenvolvimento web, Recife, agência digital">
-  <meta name="author" content="HN Services">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#C9F31D">
-  <link rel="canonical" href="https://hnservices.com.br/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" href="/favicon.svg">
-  <link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="HN Services">
+<meta property="og:url" content="https://www.hnservices.com.br/">
+<meta property="og:title" content="HN Services | Sites, sistemas e TI para o seu negócio crescer">
+<meta property="og:description" content="Criação de sites e landing pages a partir de R$ 399, sistemas web sob medida e consultoria de TI. Estúdio em Recife, atendendo todo o Brasil.">
+<meta property="og:image" content="https://www.hnservices.com.br/og-image.jpg">
+<meta property="og:image:secure_url" content="https://www.hnservices.com.br/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="HN Services: sites, sistemas e TI para o seu negócio crescer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HN Services | Sites, sistemas e TI para o seu negócio crescer">
+<meta name="twitter:description" content="Criação de sites e landing pages a partir de R$ 399, sistemas web sob medida e consultoria de TI em Recife.">
+<meta name="twitter:image" content="https://www.hnservices.com.br/og-image.jpg">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://hnservices.com.br/">
-  <meta property="og:site_name" content="HN Services">
-  <meta property="og:title" content="HN Services — Tecnologia que Transforma">
-  <meta property="og:description"
-    content="Criação de sites, consultoria de TI e sistemas web que transformam negócios. Tecnologia com propósito, design com impacto.">
-  <meta property="og:locale" content="pt_BR">
-  <!-- Imagem do preview (WhatsApp/Facebook/LinkedIn). URL absoluta no domínio
-       que responde 200 direto (www); não-www faz 307 e alguns scrapers tropeçam. -->
-  <meta property="og:image" content="https://www.hnservices.com.br/og-image.jpg">
-  <meta property="og:image:secure_url" content="https://www.hnservices.com.br/og-image.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="HN Services — Tecnologia que Transforma">
+<!-- performance: fonts used above the fold and the film manifest (frames stream after first paint) -->
+<link rel="preload" href="/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geist-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pack/manifest.json" as="fetch" crossorigin>
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HN Services — Tecnologia que Transforma">
-  <meta name="twitter:description"
-    content="Criação de sites, consultoria de TI e sistemas web que transformam negócios.">
-  <meta name="twitter:image" content="https://www.hnservices.com.br/og-image.jpg">
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "HN Services",
-    "description": "Criação de sites, consultoria de TI, sistemas web e design de interfaces digitais para empresas que querem crescer.",
-    "url": "https://hnservices.com.br",
-    "email": "contato@hnservices.com.br",
-    "telephone": "+55-81-9-9999-9999",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Recife",
-      "addressRegion": "PE",
-      "addressCountry": "BR"
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.hnservices.com.br/#empresa",
+      "name": "HN Services",
+      "url": "https://www.hnservices.com.br/",
+      "logo": "https://www.hnservices.com.br/logo.png",
+      "image": "https://www.hnservices.com.br/og-image.jpg",
+      "description": "Estúdio de tecnologia em Recife: criação de sites e landing pages, sistemas web sob medida, infraestrutura e consultoria de TI.",
+      "email": "contato@hnservices.com.br",
+      "telephone": "+55-81-99621-3652",
+      "priceRange": "R$ 399 – sob consulta",
+      "address": { "@type": "PostalAddress", "addressLocality": "Recife", "addressRegion": "PE", "addressCountry": "BR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": -8.0476, "longitude": -34.877 },
+      "areaServed": [{ "@type": "Country", "name": "Brasil" }, { "@type": "City", "name": "Recife" }],
+      "knowsLanguage": ["pt-BR", "en"],
+      "sameAs": ["https://instagram.com/hnservices", "https://linkedin.com/company/hn-services", "https://github.com/hn-services"],
+      "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "email": "contato@hnservices.com.br", "telephone": "+55-81-99621-3652", "availableLanguage": ["Portuguese", "English"] },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Serviços HN Services",
+        "itemListElement": [
+          { "@type": "Offer", "name": "Landing Page Simples", "description": "Página única responsiva, otimizada para SEO, com publicação inclusa e 3 meses de manutenção.", "price": "399", "priceCurrency": "BRL", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "399", "priceCurrency": "BRL" }, "itemOffered": { "@type": "Service", "name": "Criação de landing page" } },
+          { "@type": "Offer", "name": "Landing Page Completa", "description": "Múltiplas seções, formulários, integrações e SEO técnico, com 3 meses de manutenção.", "price": "599", "priceCurrency": "BRL", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "599", "priceCurrency": "BRL" }, "itemOffered": { "@type": "Service", "name": "Criação de site" } },
+          { "@type": "Offer", "name": "Projeto sob medida", "description": "Landings com vídeo e WebGL, sistemas web e consultoria de TI, orçados sob consulta.", "itemOffered": { "@type": "Service", "name": "Sistemas web e consultoria de TI" } }
+        ]
+      }
     },
-    "areaServed": "BR",
-    "serviceType": [
-      "Criação de Sites",
-      "Consultoria de TI",
-      "Sistemas Web",
-      "UI/UX Design",
-      "Manutenção e Suporte"
-    ],
-    "sameAs": [
-      "https://instagram.com/hnservices",
-      "https://linkedin.com/company/hn-services",
-      "https://github.com/hn-services"
-    ]
-  }
-  </script>
+    {
+      "@type": "WebSite",
+      "@id": "https://www.hnservices.com.br/#site",
+      "url": "https://www.hnservices.com.br/",
+      "name": "HN Services",
+      "inLanguage": "pt-BR",
+      "publisher": { "@id": "https://www.hnservices.com.br/#empresa" }
+    }
+  ]
+}
+</script>
+<style>
+/* Layout: one film, then four quiet sections in ink and paper — about, prices, a sideways project reel, contact.
+   The lime accent marks only actions and live states. */
+@font-face{font-family:"Instrument Serif";src:url(/fonts/instrument-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(/fonts/instrument-serif-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Geist";src:url(/fonts/geist-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Geist";src:url(/fonts/geist-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(/fonts/geist-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(/fonts/geist-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+:root{
+  --ink:#0E0D0B; --ink-2:#161512; --paper:#EDE8DF; --mute:rgba(237,232,223,.72); --faint:rgba(237,232,223,.58);
+  --line:rgba(237,232,223,.13); --line-2:rgba(237,232,223,.26); --lime:#C9F31D; --lime-ink:#1A1F04;
+  --f-display:"Instrument Serif", "Times New Roman", Georgia, serif;
+  --f-body:"Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, Menlo, monospace;
+  --hud:1; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--paper);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{max-width:100%;display:block}
+em{font-style:italic}
+:focus-visible{outline:1px solid var(--lime);outline-offset:3px}
+.mono{font:500 11px/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{display:flex;gap:12px;align-items:center;color:var(--lime)}
+.eyebrow::before{content:"";width:26px;height:1px;background:currentColor}
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  padding:14px 18px;border-radius:2px;border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.btn-primary{background:var(--lime);color:var(--lime-ink)}
+.btn-primary:hover{background:var(--paper)}
+.btn-ghost{border-color:var(--line-2);color:var(--paper);background:transparent}
+.btn-ghost:hover{border-color:var(--paper)}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500&family=Space+Mono&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/manifesto-alt.css">
-  <link rel="stylesheet" href="css/precos.css">
-  <link rel="stylesheet" href="css/interacao.css">
-  <link rel="stylesheet" href="css/portfolio.css">
-  <link rel="stylesheet" href="css/sistemas.css">
+.skip{position:fixed;z-index:60;left:16px;top:-60px;background:var(--lime);color:var(--lime-ink);padding:10px 14px;font:500 12px/1 var(--f-mono);text-decoration:none}
+.skip:focus{top:16px}
+/* header */
+.site-header{position:fixed;z-index:30;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:calc(14px + env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-right,0px)) 14px max(22px,env(safe-area-inset-left,0px));
+  border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+body.past-hero .site-header{background:rgba(14,13,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--line)}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font:400 28px/1 var(--f-display)}
+.brand b i{color:var(--lime);font-style:normal}
+.brand span{font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.nav{display:flex;gap:28px}
+.nav a{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a.is-active{color:var(--paper);border-color:var(--lime)}
+.site-header .btn{padding:11px 14px}
+
+/* film */
+#film{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--hud);
+  background:linear-gradient(180deg,rgba(8,7,6,.5) 0%,rgba(8,7,6,0) 20%,rgba(8,7,6,0) 58%,rgba(8,7,6,.58) 100%),linear-gradient(90deg,rgba(8,7,6,.36) 0%,rgba(8,7,6,0) 46%)}
+#hero{position:relative;height:1000vh;z-index:2}
+.hud{position:fixed;z-index:5;opacity:var(--hud);pointer-events:none;color:var(--mute)}
+.hud-bottom{left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;
+  padding:16px max(22px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(22px,env(safe-area-inset-left,0px))}
+.hud-bottom em{font-style:normal;color:var(--paper)}
+.tc{font-variant-numeric:tabular-nums}
+.rail{right:max(22px,env(safe-area-inset-right,0px));top:50%;height:36vh;transform:translateY(-50%);width:1px;background:var(--line-2)}
+#rail-fill{position:absolute;inset:0;background:var(--lime);transform-origin:top;transform:scaleY(0)}
+.rail i{position:absolute;right:-3px;width:7px;height:1px;background:var(--mute)}
+.chap,#lockup{position:fixed;z-index:3;left:max(28px,env(safe-area-inset-left,0px));max-width:min(680px,86vw);pointer-events:none;
+  opacity:calc(var(--o,0) * var(--hud));transform:translateY(calc((1 - var(--o,0)) * 26px))}
+.chap::before,#lockup::before{content:"";position:absolute;z-index:-1;inset:-40% -30% -40% -40%;background:radial-gradient(closest-side,rgba(8,7,6,.58),rgba(8,7,6,0))}
+.chap .t{margin:16px 0 0;font:400 clamp(44px,6.8vw,100px)/.93 var(--f-display);letter-spacing:-.015em;text-wrap:balance}
+.chap .s,#lockup .s{margin:16px 0 0;max-width:40ch;color:rgba(237,232,223,.78);font-size:clamp(15px,1.25vw,18px);line-height:1.5;text-shadow:0 1px 2px rgba(0,0,0,.55),0 0 24px rgba(0,0,0,.45)}
+.low{bottom:clamp(84px,13vh,140px)}
+.high{top:clamp(100px,16vh,170px)}
+#lockup{max-width:min(900px,88vw);bottom:clamp(90px,14vh,150px)}
+#lockup.on{pointer-events:auto}
+#lockup h1{margin:16px 0 0;font:400 clamp(46px,7.2vw,112px)/.92 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+#lockup .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+#intro{position:fixed;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:var(--o,1);pointer-events:none;color:var(--mute);width:min(560px,90vw)}
+#intro .cur{display:block;margin:0 auto 22px;width:14px;height:26px;background:var(--lime);box-shadow:0 0 24px rgba(201,243,29,.5);animation:blink 1.05s steps(1) infinite}
+#intro strong{display:block;margin-bottom:10px;color:var(--paper);font-weight:500}
+@keyframes blink{50%{opacity:0}}
+#loader{position:fixed;z-index:4;left:50%;top:calc(50% + 74px);transform:translateX(-50%);pointer-events:none;transition:opacity .6s,visibility .6s}
+#loader div{display:grid;gap:14px;justify-items:center;color:var(--mute)}
+#loader b{display:none}
+#loader b i{color:var(--lime);font-style:normal}
+#loader-pct{color:var(--paper);font-variant-numeric:tabular-nums}
+body.is-ready #loader{opacity:0;visibility:hidden}
+
+/* entrance animation */
+.rv-wait{opacity:0;transform:translateY(28px)}
+.rv-in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform 1.1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+
+/* sections */
+main{position:relative;z-index:10}
+section.block{background:var(--ink);padding-block:clamp(96px,12vw,160px)}
+section.block+section.block{border-top:1px solid var(--line)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 40px;margin-bottom:clamp(40px,6vw,64px)}
+h2.title{margin:18px 0 0;font:400 clamp(42px,5.6vw,80px)/.95 var(--f-display);letter-spacing:-.015em;text-wrap:balance;max-width:16ch}
+.head p{margin:0;color:var(--mute);max-width:40ch}
+
+/* sobre */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,88px);align-items:center}
+.about .statement{font-weight:400;margin:18px 0 0;font:400 clamp(36px,4.4vw,62px)/1.02 var(--f-display);text-wrap:balance}
+.about .copy{display:grid;gap:14px;margin-top:28px;color:var(--mute);max-width:52ch}
+.about .copy p{margin:0}
+.about .where{margin-top:28px;color:var(--faint);display:flex;flex-wrap:wrap;gap:8px 22px}
+.about .where b{color:var(--paper);font-weight:500}
+.frame{margin:0;border:1px solid var(--line);background:var(--ink-2)}
+.frame video{width:100%;aspect-ratio:4/5;object-fit:cover}
+.frame figcaption{padding:12px 14px;color:var(--faint);border-top:1px solid var(--line)}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(64px,8vw,104px);border-top:1px solid var(--line-2)}
+.pillars div{padding:26px 26px 0 0;display:grid;gap:10px;align-content:start}
+.pillars div+div{padding-left:26px;border-left:1px solid var(--line)}
+.pillars h3{margin:0;font:400 30px/1.05 var(--f-display)}
+.pillars p{margin:0;color:var(--mute);font-size:15px}
+
+/* preços */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.plan{position:relative;display:grid;gap:18px;align-content:start;padding:30px;border:1px solid var(--line);background:var(--ink-2);transition:border-color .35s,transform .35s}
+.plan:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.plan.featured{border-color:rgba(201,243,29,.5)}
+.plan .tag{position:absolute;top:-1px;right:24px;transform:translateY(-50%);background:var(--lime);color:var(--lime-ink);padding:6px 9px;font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.plan h3{margin:0;font:400 32px/1.05 var(--f-display)}
+.plan > p{margin:0;color:var(--mute);font-size:15px;min-height:3.2em}
+.plan .price{display:grid;gap:6px;padding-block:18px;border-block:1px solid var(--line)}
+.plan .price small{color:var(--faint)}
+.plan .price b{font:400 48px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:15px}
+.plan li{display:flex;gap:12px;align-items:baseline}
+.plan li::before{content:"";flex:none;width:12px;height:1px;background:var(--lime);transform:translateY(-4px)}
+.plan .btn{justify-self:start;margin-top:6px}
+.plans-note{margin-top:22px;color:var(--faint);font-size:14px}
+
+/* projetos: optional sideways reel */
+.reel-head{display:flex;align-items:center;gap:14px;color:var(--faint)}
+.reel-head .arrows{display:flex;gap:8px}
+.reel-head button{width:44px;height:44px;border:1px solid var(--line-2);background:transparent;color:var(--paper);cursor:pointer;font:400 18px/1 var(--f-body);border-radius:50%}
+.reel-head button:hover{border-color:var(--lime);color:var(--lime)}
+#proj-count{color:var(--paper)}
+#track{display:grid;grid-auto-flow:column;grid-auto-columns:min(74vw,860px);column-gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;
+  padding-left:max(20px,calc((100vw - 1200px)/2 + 20px));padding-right:max(20px,calc((100vw - 1200px)/2 + 20px));scroll-padding-left:max(20px,calc((100vw - 1200px)/2 + 20px))}
+#track::-webkit-scrollbar{display:none}
+#track.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.proj{scroll-snap-align:start;display:grid;gap:14px;text-decoration:none;min-width:0}
+.proj .media{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink-2);aspect-ratio:16/10}
+.proj .media img,.proj .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.proj .media video{opacity:0;transition:opacity .5s}
+.proj .media video[src]{opacity:1}
+.proj .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.proj h3{margin:0;font:400 clamp(30px,3vw,42px)/1 var(--f-display)}
+.proj .kind{color:var(--faint)}
+.proj p{margin:0;color:var(--mute);font-size:15px;max-width:56ch}
+.proj .go{color:var(--paper)}
+.proj:hover .go{color:var(--lime)}
+.reel-hint{margin-top:22px;color:var(--faint)}
+
+/* contato */
+.contact{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,88px);align-items:start}
+.contact .lead{margin:20px 0 0;color:var(--mute);max-width:40ch}
+.contact dl{margin:36px 0 0;display:grid;gap:18px}
+.contact dt{color:var(--faint)}
+.contact dd{margin:4px 0 0;font-size:18px;user-select:all}
+form.cform{display:grid;gap:18px;padding:clamp(24px,3vw,36px);border:1px solid var(--line);background:var(--ink-2)}
+.cform .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cform label{display:grid;gap:8px;color:var(--mute);min-width:0}
+.cform input,.cform select,.cform textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);color:var(--paper);font:400 16px/1.4 var(--f-body);padding:10px 0;border-radius:0;outline:none}
+.cform select option{background:var(--ink-2)}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--lime)}
+.cform textarea{resize:vertical;min-height:110px}
+.cform .btn{justify-self:start}
+.cform .ok{display:none;margin:0;color:var(--lime)}
+.cform.is-sent .ok{display:block}
+.cform.is-sent button{display:none}
+.cform .err{margin:0;color:#ffb4a2}
+.cform button[disabled]{opacity:.6;cursor:progress}
+
+/* footer */
+.site-footer{position:relative;background:var(--ink);border-top:1px solid var(--line);padding-block:clamp(56px,8vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
+.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px}
+.foot .big{font:400 clamp(64px,10vw,140px)/.85 var(--f-display);margin:0}
+.foot .big i{color:var(--lime);font-style:normal}
+.foot p{margin:14px 0 0;color:var(--mute);max-width:32ch}
+.foot .fh{margin:0 0 14px;color:var(--faint)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot ul a{text-decoration:none;color:var(--paper)}
+.foot ul a:hover{color:var(--lime)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint)}
+
+@media (max-width:980px){
+  .about,.contact{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr;max-width:560px}
+  .frame video{aspect-ratio:16/10}
+  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}
+}
+@media (max-width:760px){
+  .nav,.hud-bottom .geo{display:none}
+  .chap,#lockup{left:20px;right:20px;max-width:none}
+  .pillars{grid-template-columns:1fr}
+  .pillars div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .pillars div{padding:22px 0}
+  .cform .two{grid-template-columns:1fr}
+  #track{grid-auto-columns:86vw;column-gap:14px}
+  .rail{right:12px}
+}
+@media (prefers-reduced-motion:reduce){#intro .cur{animation:none}.chap,#lockup{transform:none}}
+</style>
+<noscript><style>
+#hero{height:auto;min-height:100vh;background:#0E0D0B url(/og-image.jpg) center/cover}
+#lockup{position:absolute;top:auto;bottom:12vh;opacity:1;transform:none;pointer-events:auto}
+#intro,#loader,.hud,.chap,#film,.scrim{display:none}
+.rv-wait{opacity:1;transform:none}
+</style></noscript>
 </head>
-
 <body>
 
-  <!-- SVG shared defs: gradient + water displacement filter -->
-  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
-    <defs>
-      <linearGradient id="logo-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#C9F31D" />
-        <stop offset="100%" stop-color="#7A9610" />
-      </linearGradient>
-      <!-- Water surface displacement for showcase images -->
-      <filter id="showcase-water" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
-        <feTurbulence id="sw-turb" type="fractalNoise" baseFrequency="0.010 0.006" numOctaves="1" seed="8"
-          result="noise" />
-        <feDisplacementMap id="sw-disp" in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R"
-          yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
 
-  <!-- Global WebGL canvas (fixed, covers full page, z-index 0) -->
-  <canvas id="webgl-canvas" class="webgl-canvas" aria-hidden="true"></canvas>
+<div id="loader" aria-hidden="true"><div><b>HN<i>.</i></b><span class="mono">Carregando · <span id="loader-pct">000</span>%</span></div></div>
 
-  <!-- Custom Cursor -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
+<a class="skip" href="#sobre">Pular para o conteúdo</a>
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="HN Services, início"><b>HN<i>.</i></b><span>Services</span></a>
+  <nav class="nav" aria-label="Principal"><a href="#sobre">Sobre</a><a href="#precos">Preços</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a></nav>
+  <a class="btn btn-primary" href="#contato">Iniciar projeto</a>
+</header>
 
-  <!-- Scroll progress bar (Igloo/Orano-style) -->
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+<!-- ================= FILM ================= -->
+<canvas id="film" aria-hidden="true"></canvas>
+<div class="scrim"></div>
+<div class="hud hud-bottom mono" aria-hidden="true"><span id="hud-chapter">01 / 06 · Código</span><span class="geo">08°03′S · 34°52′W · Recife</span><span class="tc">F <em id="hud-frame">001</em> / 450</span></div>
+<div class="hud rail" aria-hidden="true"><span id="rail-fill"></span></div>
+<div id="intro" class="mono" aria-hidden="true"><span class="cur"></span><strong>HN Services · Sites, sistemas e TI</strong>Role para começar</div>
 
-  <!-- Section Tracker (fixed right side, Orano-style) -->
-  <nav class="section-tracker" id="section-tracker" aria-label="Navegação por seções">
-    <a href="#hero" class="section-tracker__item is-active" data-section="hero">
-      <span class="section-tracker__label">Início</span>
-      <span class="section-tracker__line"></span>
-    </a>
-    <a href="#sobre" class="section-tracker__item" data-section="sobre">
-      <span class="section-tracker__label">Sobre</span>
-      <span class="section-tracker__line"></span>
-    </a>
-    <a href="#processo" class="section-tracker__item" data-section="processo">
-      <span class="section-tracker__label">Processo</span>
-      <span class="section-tracker__line"></span>
-    </a>
-    <a href="#servicos" class="section-tracker__item" data-section="servicos">
-      <span class="section-tracker__label">Serviços</span>
-      <span class="section-tracker__line"></span>
-    </a>
-    <a href="#sistemas" class="section-tracker__item" data-section="sistemas">
-      <span class="section-tracker__label">Sistemas</span>
-      <span class="section-tracker__line"></span>
-    </a>
-    <a href="#portfolio" class="section-tracker__item" data-section="portfolio">
-      <span class="section-tracker__label">Portfólio</span>
-      <span class="section-tracker__line"></span>
-    </a>
-    <a href="#contato" class="section-tracker__item" data-section="contato">
-      <span class="section-tracker__label">Contato</span>
-      <span class="section-tracker__line"></span>
-    </a>
-  </nav>
+<div class="chap low" id="c1" aria-hidden="true"><span class="eyebrow mono">01 · Código</span>
+  <p class="t">Tudo começa com <em>uma linha.</em></p>
+  <p class="s">Cada produto digital nasce de uma decisão simples, escrita com cuidado.</p></div>
+<div class="chap high" id="c2" aria-hidden="true"><span class="eyebrow mono">02 · Produto</span>
+  <p class="t">Nós projetamos. <em>Nós construímos.</em></p>
+  <p class="s">Sites e sistemas sob medida, do primeiro traço no papel ao deploy em produção.</p></div>
+<div class="chap low" id="c3" aria-hidden="true"><span class="eyebrow mono">03 · Infraestrutura</span>
+  <p class="t">E <em>sustentamos.</em></p>
+  <p class="s">Servidores, monitoramento e suporte para que tudo continue de pé depois do lançamento.</p></div>
+<div class="chap high" id="c4" aria-hidden="true"><span class="eyebrow mono">04 · Escala</span>
+  <p class="t">De Recife <em>para o mundo.</em></p>
+  <p class="s">Um time pernambucano atendendo empresas no Brasil e no exterior.</p></div>
+<div class="chap low" id="c5" aria-hidden="true"><span class="eyebrow mono">05 · Clientes</span>
+  <p class="t">O seu negócio, <em>funcionando.</em></p>
+  <p class="s">Do caixa ao estoque, tecnologia que organiza a rotina de quem atende o público.</p></div>
+<div class="chap low" id="c6" aria-hidden="true"><span class="eyebrow mono">06 · Juntos</span>
+  <p class="t">Vamos construir <em>juntos.</em></p>
+  <p class="s">Você fala direto com quem desenha e programa o seu projeto.</p></div>
 
-  <!-- Loader -->
-  <div id="loader" class="loader">
-    <div class="loader__inner">
-      <div class="loader__logo">
-        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
-          <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
-            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+<div id="lockup">
+  <span class="eyebrow mono">HN Services · Recife</span>
+  <h1>Sites, sistemas e TI <em>para o seu negócio crescer.</em></h1>
+  <p class="s">Criação de sites, landing pages e sistemas web sob medida em Recife, para empresas de todo o Brasil. Preço na mesa desde o primeiro contato.</p>
+  <div class="actions"><a class="btn btn-primary" href="#contato">Iniciar projeto</a><a class="btn btn-ghost" href="#precos">Ver preços</a></div>
+</div>
+
+<div id="hero"><span id="top"></span></div>
+
+<!-- ================= SITE ================= -->
+<main>
+  <section class="block" id="sobre">
+    <div class="wrap">
+      <div class="about">
+        <div>
+          <span class="eyebrow mono" data-rv>Sobre nós</span>
+          <h2 class="statement" data-rv style="--d:.08s">Um estúdio enxuto de Recife que une <em>design, código e infraestrutura.</em></h2>
+          <div class="copy" data-rv style="--d:.16s">
+            <p>A HN Services tira projetos digitais do papel sem burocracia. Cuidamos de tudo: da primeira conversa ao site no ar, e do sistema rodando ao suporte depois da entrega.</p>
+            <p>Trabalhamos com comunicação direta, prazos claros e preço combinado antes de começar. Você fala com quem constrói.</p>
+          </div>
+          <div class="where mono" data-rv style="--d:.24s"><span><b>10 dias</b> prazo médio de entrega</span><span><b>24 h</b> para responder</span><span><b>Recife</b> atendendo globalmente</span></div>
+        </div>
+        <figure class="frame" data-rv style="--d:.12s">
+          <video data-ambient muted loop playsinline preload="none" poster="media/sobre.jpg" width="864" height="1080" src="media/sobre.mp4" aria-label="Mãos desenhando o esboço de um sistema no papel"></video>
+          <figcaption class="mono">Todo projeto começa no papel</figcaption>
+        </figure>
       </div>
-      <div class="loader__bar-wrap">
-        <div class="loader__bar" id="loader-bar"></div>
+      <div class="pillars">
+        <div data-rv><h3>Criação de sites e landing pages</h3><p>Rápidos, responsivos e feitos para converter, do institucional ao cinematográfico.</p></div>
+        <div data-rv style="--d:.1s"><h3>Sistemas web sob medida</h3><p>Painéis, automações e produtos sob medida, como o nosso HN Finances.</p></div>
+        <div data-rv style="--d:.2s"><h3>Infraestrutura e consultoria de TI</h3><p>Deploy, monitoramento e decisões técnicas tomadas com segurança.</p></div>
       </div>
-      <span class="loader__label label">Carregando...</span>
     </div>
+  </section>
+
+  <section class="block" id="precos">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="eyebrow mono" data-rv>Preços</span><h2 class="title" data-rv style="--d:.08s">Preço na mesa, <em>desde o início.</em></h2></div>
+        <p data-rv style="--d:.16s">Valores de referência. Projetos maiores são orçados sob medida, sem surpresa no meio do caminho.</p>
+      </div>
+      <div class="plans">
+        <article class="plan featured" data-rv><span class="tag">Mais pedido</span>
+          <h3>Landing Page Simples</h3><p>Uma página feita para converter, rápida e otimizada para busca.</p>
+          <div class="price"><small class="mono">A partir de</small><b>R$ 399</b></div>
+          <ul><li>Design sob medida</li><li>Responsiva e rápida</li><li>Publicação inclusa</li></ul>
+          <a class="btn btn-primary" href="#contato" data-service="landing-simples">Começar</a></article>
+        <article class="plan" data-rv style="--d:.1s">
+          <h3>Landing Page Completa</h3><p>Várias seções, formulários e integrações para contar uma história maior.</p>
+          <div class="price"><small class="mono">A partir de</small><b>R$ 599</b></div>
+          <ul><li>Múltiplas seções</li><li>Formulários e integrações</li><li>SEO técnico</li></ul>
+          <a class="btn btn-ghost" href="#contato" data-service="landing-completa">Começar</a></article>
+        <article class="plan" data-rv style="--d:.2s">
+          <h3>Projeto sob medida</h3><p>Landings com vídeo e WebGL, sistemas web e consultoria de TI.</p>
+          <div class="price"><small class="mono">Investimento</small><b>Sob consulta</b></div>
+          <ul><li>Animações, vídeo e 3D</li><li>Sistemas e automações</li><li>Consultoria técnica</li></ul>
+          <a class="btn btn-ghost" href="#contato" data-service="sob-medida">Falar com a gente</a></article>
+      </div>
+      <p class="plans-note" data-rv>Landing pages incluem 3 meses de manutenção e alterações grátis.</p>
+    </div>
+  </section>
+
+  <section class="block" id="projetos" style="padding-bottom:clamp(80px,10vw,130px)">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="eyebrow mono" data-rv>Projetos</span><h2 class="title" data-rv style="--d:.08s">Trabalhos <em>recentes.</em></h2></div>
+        <div class="reel-head mono" data-rv style="--d:.16s"><span><span id="proj-count">01</span> / 08</span>
+          <div class="arrows"><button id="proj-prev" type="button" aria-label="Projeto anterior">←</button><button id="proj-next" type="button" aria-label="Próximo projeto">→</button></div></div>
+      </div>
+    </div>
+    <div id="track" role="region" tabindex="0" data-rv style="--d:.2s" aria-label="Projetos, role para o lado para ver mais">
+      <a class="proj" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/m4.jpg" alt="Site M4 Competition" width="1200" height="750"><video muted loop playsinline preload="none" data-src="assets/video/m4.mp4"></video></div>
+        <div class="row"><h3>M4 Competition</h3><span class="kind mono">Cinematográfico · Automotivo</span></div><p>Hero em vídeo dirigido pelo scroll: o BMW M4 gira em cena com specs animadas.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://hn-construction.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/hn-construction.jpg" alt="Site HN Arquitetura" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/hn-construction.mp4"></video></div>
+        <div class="row"><h3>HN Arquitetura</h3><span class="kind mono">Cinematográfico · Arquitetura</span></div><p>Do primeiro traço à entrega das chaves, contado em vídeo pelo scroll.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://arquitetura-premium.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/arquitetura-premium.jpg" alt="Site Ferreira & Monteiro" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/arquitetura-premium.mp4"></video></div>
+        <div class="row"><h3>Ferreira &amp; Monteiro</h3><span class="kind mono">Premium · Arquitetura</span></div><p>Escritório autoral com editorial fotográfico e prova social: 700+ clientes em 18 estados.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/laocoon.jpg" alt="Site Laocoön" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/laocoon.mp4"></video></div>
+        <div class="row"><h3>Laocoön</h3><span class="kind mono">Experiência · WebGL</span></div><p>Cena Three.js dirigida por scroll, com shaders, partículas e câmera em órbita.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/arkkhe.jpg" alt="Site Arkkhe" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/arkkhe.mp4"></video></div>
+        <div class="row"><h3>Arkkhe</h3><span class="kind mono">Avançado · Automotivo</span></div><p>Intro cinematográfica, vídeo controlado pelo scroll e transições de troca.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/glacius.jpg" alt="Site Glacius" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/glacius.mp4"></video></div>
+        <div class="row"><h3>Glacius</h3><span class="kind mono">Imersivo · Landing</span></div><p>Parallax por camadas, neve em movimento e reveals cinematográficos.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/ferre.jpg" alt="Site Studio Ferré 97" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/ferre.mp4"></video></div>
+        <div class="row"><h3>Studio Ferré 97</h3><span class="kind mono">Premium · Barbearia</span></div><p>Barbearia de Olinda com tipografia imponente, agendamento e editorial escuro e dourado.</p><span class="go mono">Acessar projeto ↗</span></a>
+      <a class="proj" href="https://www.jdfcs.com/" target="_blank" rel="noopener"><div class="media"><img src="assets/video/jd.jpg" alt="Site JD Flooring & Cleaning" width="1200" height="750" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/video/jd.mp4"></video></div>
+        <div class="row"><h3>JD Flooring &amp; Cleaning</h3><span class="kind mono">Conversão · Serviços</span></div><p>A tela se divide e revela os dois serviços. Alta conversão e SEO local na Flórida.</p><span class="go mono">Acessar projeto ↗</span></a>
+    </div>
+    <div class="wrap"><p class="reel-hint mono">Arraste para o lado para ver mais, ou siga rolando</p></div>
+  </section>
+
+  <section class="block" id="contato">
+    <div class="wrap contact">
+      <div>
+        <span class="eyebrow mono" data-rv>Contato</span>
+        <h2 class="title" data-rv style="--d:.08s">Conte o que você <em>quer construir.</em></h2>
+        <p class="lead" data-rv style="--d:.16s">Respondemos em até 24 horas, por e-mail ou WhatsApp.</p>
+        <dl data-rv style="--d:.24s">
+          <div><dt class="mono">E-mail</dt><dd>contato@hnservices.com.br</dd></div>
+          <div><dt class="mono">WhatsApp</dt><dd>+55 81 99621-3652</dd></div>
+        </dl>
+      </div>
+      <form class="cform" id="contact-form" action="/api/send-email" method="post" aria-label="Iniciar um projeto" data-rv style="--d:.12s">
+        <div class="two">
+          <label class="mono" for="f-name">Nome<input id="f-name" name="name" autocomplete="name" required placeholder="Seu nome"></label>
+          <label class="mono" for="f-mail">E-mail<input id="f-mail" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com.br"></label>
+        </div>
+        <label class="mono" for="f-service">O que você precisa
+          <select id="f-service" name="service">
+            <option value="landing-simples">Landing Page Simples</option>
+            <option value="landing-completa">Landing Page Completa</option>
+            <option value="sob-medida">Projeto sob medida</option>
+            <option value="outro">Outro assunto</option>
+          </select></label>
+        <label class="mono" for="f-msg">Mensagem<textarea id="f-msg" name="message" required placeholder="Conte um pouco sobre o projeto"></textarea></label>
+        <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+        <p class="ok" role="status" aria-live="polite">Mensagem recebida. Retornamos em até 24 horas.</p>
+        <p class="err" role="alert" hidden></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <div><p class="big">HN<i>.</i></p><p>Sites, sistemas e TI para o seu negócio crescer. Recife, Brasil.</p></div>
+      <div><p class="mono fh">Navegação</p><ul><li><a href="#sobre">Sobre</a></li><li><a href="#precos">Preços</a></li><li><a href="#projetos">Projetos</a></li><li><a href="#contato">Contato</a></li></ul></div>
+      <div><p class="mono fh">Redes</p><ul><li><a href="https://instagram.com/hnservices" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://linkedin.com/company/hn-services" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/hn-services" target="_blank" rel="noopener">GitHub ↗</a></li></ul></div>
+    </div>
+    <div class="legal mono"><span>© 2026 HN Services</span><span>contato@hnservices.com.br</span></div>
   </div>
+</footer>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav__logo" aria-label="HN Services — início">
-      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-        <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
-          stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-      <span class="nav__wordmark">HN Services</span>
-    </a>
-    <div class="nav__links" id="nav-links">
-      <a href="#sobre" class="nav__link">Sobre</a>
-      <a href="#processo" class="nav__link">Processo</a>
-      <a href="#servicos" class="nav__link">Serviços</a>
-      <a href="#sistemas" class="nav__link">Sistemas</a>
-      <a href="#portfolio" class="nav__link">Portfólio</a>
-      <a href="#contato" class="nav__link">Contato</a>
-    </div>
-    <a href="#contato" class="btn btn--outline nav__cta">Iniciar Projeto</a>
-    <button class="nav__hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">
-      <span class="nav__ham-line"></span>
-      <span class="nav__ham-line"></span>
-    </button>
-  </nav>
+<script src="/vendor/lenis.min.js" defer></script>
+<script src="/hero.js" defer></script>
+<script src="/site.js" defer></script>
 
-  <!-- Mobile Overlay Menu -->
-  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
-    <div class="nav-overlay__links">
-      <a href="#sobre" class="nav-overlay__link" data-index="01">Sobre</a>
-      <a href="#processo" class="nav-overlay__link" data-index="02">Processo</a>
-      <a href="#servicos" class="nav-overlay__link" data-index="03">Serviços</a>
-      <a href="#sistemas" class="nav-overlay__link" data-index="04">Sistemas</a>
-      <a href="#portfolio" class="nav-overlay__link" data-index="05">Portfólio</a>
-      <a href="#contato" class="nav-overlay__link" data-index="06">Contato</a>
-    </div>
-    <div class="nav-overlay__bottom">
-      <span class="nav-overlay__tagline">Tecnologia que Transforma</span>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════ HERO ═══════════════════════ -->
-  <section id="hero" class="section hero">
-    <!-- Lightning canvas (2D, hero only) -->
-    <canvas id="lightning-canvas" class="hero__lightning" aria-hidden="true"></canvas>
-    <div class="hero__noise"></div>
-
-    <div class="container hero__content">
-      <span class="hero__eyebrow label">001 — Soluções Digitais</span>
-      <h1 class="hero__heading">
-        <span class="hero__line">
-          <span class="hero__word hero__word--fill" data-original="Tecnologia">Tecnologia</span>
-        </span>
-        <span class="hero__line">
-          <span class="hero__word hero__word--stroke" data-original="que Transforma">que Transforma</span>
-        </span>
-      </h1>
-      <p class="hero__sub">Criamos experiências digitais que conectam marcas ao futuro.<br> Design com impacto. Código
-        com propósito.</p>
-      <div class="hero__ctas">
-        <a href="#processo" class="btn btn--primary">Como Trabalhamos</a>
-        <a href="#contato" class="btn btn--outline">Falar Conosco ↗</a>
-      </div>
-
-      <!-- Floating badge -->
-      <div class="hero__badge" aria-hidden="true">
-        <svg viewBox="0 0 100 100" class="hero__badge-ring">
-          <path id="badge-path" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
-          <text class="hero__badge-text">
-            <textPath href="#badge-path" startOffset="0%">★ HN SERVICES ★ WEB · IT · DESIGN ★ </textPath>
-          </text>
-        </svg>
-        <svg class="hero__badge-logo" viewBox="0 0 56 56" fill="none" width="22" height="22">
-          <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
-            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </div>
-    </div>
-
-    <div class="hero__scroll-hint">
-      <div class="hero__scroll-line"></div>
-      <span class="hero__scroll-label">SCROLL</span>
-    </div>
-
-    <!-- Bottom gradient — dissolves hero into manifesto -->
-    <div class="hero__bottom-fade" aria-hidden="true"></div>
-  </section>
-
-  <!-- ═══════════════════════ MANIFESTO ════════════════════ -->
-  <section id="manifesto" class="manifesto-section">
-    <canvas id="manifesto-canvas" class="manifesto__canvas" aria-hidden="true"></canvas>
-
-    <div class="container manifesto__content">
-      <div class="manifesto__headline" aria-label="Não criamos sites. Criamos experiências.">
-        <div class="manifesto__line-wrap">
-          <span class="manifesto__line" aria-hidden="true">Não criamos</span>
-        </div>
-        <div class="manifesto__line-wrap">
-          <span class="manifesto__line manifesto__line--stroke" aria-hidden="true">Apenas sites.</span>
-        </div>
-        <div class="manifesto__line-wrap">
-          <span class="manifesto__line" aria-hidden="true">Criamos</span>
-        </div>
-        <div class="manifesto__line-wrap">
-          <span class="manifesto__line manifesto__line--lime" aria-hidden="true">experiências.</span>
-        </div>
-      </div>
-
-      <p class="manifesto__sub">
-        Cada decisão carrega intenção. Cada pixel, propósito.<br>
-        Do primeiro scroll ao último clique — isso é o que fazemos.
-      </p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ MANIFESTO (Sistemas) ═══════════════════
-       Irmã da seção acima, mesma tipografia gigante — mas a entrada
-       é outra: linhas deslizam de lados alternados (sem pin/scrub),
-       reveal simples ao entrar na tela. Ver initManifestoAltAnimations. -->
-  <section id="manifesto-2" class="manifesto-alt">
-    <div class="container manifesto-alt__content">
-      <div class="manifesto-alt__headline" aria-label="Criamos sistemas modernos que atendem suas demandas.">
-        <div class="manifesto-alt__line-wrap">
-          <span class="manifesto-alt__line" aria-hidden="true">Criamos</span>
-        </div>
-        <div class="manifesto-alt__line-wrap">
-          <span class="manifesto-alt__line manifesto-alt__line--stroke" aria-hidden="true">sistemas modernos.</span>
-        </div>
-        <div class="manifesto-alt__line-wrap">
-          <span class="manifesto-alt__line" aria-hidden="true">Que atendem</span>
-        </div>
-        <div class="manifesto-alt__line-wrap">
-          <span class="manifesto-alt__line manifesto-alt__line--lime" aria-hidden="true">suas demandas.</span>
-        </div>
-      </div>
-
-      <p class="manifesto__sub">
-        Do fluxo de caixa à rotina do time — construímos sistemas que organizam,<br>
-        automatizam e crescem junto com o seu negócio.
-      </p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════ TICKER ═══════════════════════ -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker__inner">
-      <div class="ticker__track">
-        <span class="ticker__item">React</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">Next.js</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">Node.js</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">UI/UX Design</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">Three.js</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">PostgreSQL</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">TypeScript</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">AWS</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">Docker</span><span class="ticker__sep">★</span>
-        <span class="ticker__item">CI/CD</span><span class="ticker__sep">★</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════ SOBRE ═══════════════════════ -->
-  <section id="sobre" class="section about">
-    <div class="container about__grid">
-
-      <div class="about__left">
-        <span class="label about__label">// 002 — Sobre nós</span>
-        <h2 class="about__heading">
-          <span class="reveal-line"><span>Agilidade real,</span></span>
-          <span class="reveal-line"><span>código de</span></span>
-          <span class="reveal-line about__heading-accent"><span>elite.</span></span>
-        </h2>
-        <p class="about__text">
-          Criamos sites rápidos, sistemas web robustos e interfaces sob medida. Nosso foco é simples: engenharia de alta qualidade com velocidade de entrega e comunicação direta.
-        </p>
-        <p class="about__text">
-          Adotamos um processo ágil e estruturado para garantir que cada etapa seja transparente e sem ruídos. O alinhamento direto e o foco na execução nos permitem entregar resultados superiores dentro do prazo combinado.
-        </p>
-        <!-- <div class="about__stats">
-          <div class="stat">
-            <span class="stat__number" data-target="100" data-suffix="%">0%</span>
-            <span class="stat__label">Código Limpo</span>
-          </div>
-          <div class="stat">
-            <span class="stat__number" data-target="15" data-suffix=" Dias">0 Dias</span>
-            <span class="stat__label">Prazo Médio</span>
-          </div>
-          <div class="stat">
-            <span class="stat__number" data-target="100" data-suffix="%">0%</span>
-            <span class="stat__label">Entrega</span>
-          </div>
-        </div> -->
-      </div>
-
-      <div class="about__right">
-        <canvas class="about__canvas" id="about-canvas" aria-hidden="true"></canvas>
-        <div class="about__bg-letters" aria-hidden="true">HN</div>
-        <div class="about__card">
-          <div class="about__card-tag label">Manifesto</div>
-          <p class="about__card-text">
-            "Nossa estrutura é enxuta por escolha. Sem burocracia, entregamos projetos premium em tempo recorde, direto do código para o ar."
-          </p>
-          <div class="about__card-line"></div>
-          <span class="about__card-author">— Time HN Services</span>
-        </div>
-        <div class="about__deco-square"></div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════ PROCESSO ════════════════════ -->
-  <section id="processo" class="section process-section">
-
-    <div class="container">
-      <div class="process-header">
-        <span class="label process-header__label">// Como trabalhamos</span>
-        <span class="process-header__tag label">Nosso processo</span>
-      </div>
-
-      <!-- Step 01 -->
-      <div class="process-step" data-step="01">
-        <div class="process-step__aside">
-          <canvas class="process-step__canvas" id="process-canvas-1" aria-hidden="true"></canvas>
-          <span class="process-step__bg-num" aria-hidden="true">01</span>
-        </div>
-        <div class="process-step__body">
-          <span class="label process-step__num">Etapa 01</span>
-          <h3 class="process-step__title">Descoberta</h3>
-          <p class="process-step__text">Mergulhamos no seu negócio. Mapeamos desafios, objetivos e oportunidades digitais para construir uma estratégia sólida e personalizada.</p>
-          <ul class="process-step__tags">
-            <li>Diagnóstico</li>
-            <li>Pesquisa UX</li>
-            <li>Briefing</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Step 02 -->
-      <div class="process-step" data-step="02">
-        <div class="process-step__aside">
-          <canvas class="process-step__canvas" id="process-canvas-2" aria-hidden="true"></canvas>
-          <span class="process-step__bg-num" aria-hidden="true">02</span>
-        </div>
-        <div class="process-step__body">
-          <span class="label process-step__num">Etapa 02</span>
-          <h3 class="process-step__title">Construção</h3>
-          <p class="process-step__text">Desenvolvimento ágil e iterativo. Design e código em paralelo, com entregas incrementais, testes constantes e feedback que molda o resultado.</p>
-          <ul class="process-step__tags">
-            <li>Design System</li>
-            <li>Dev Ágil</li>
-            <li>QA</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Step 03 -->
-      <div class="process-step" data-step="03">
-        <div class="process-step__aside">
-          <canvas class="process-step__canvas" id="process-canvas-3" aria-hidden="true"></canvas>
-          <span class="process-step__bg-num" aria-hidden="true">03</span>
-        </div>
-        <div class="process-step__body">
-          <span class="label process-step__num">Etapa 03</span>
-          <h3 class="process-step__title">Lançamento</h3>
-          <p class="process-step__text">Deploy com qualidade, monitoramento em tempo real e suporte contínuo para garantir que a solução cresce junto com o negócio.</p>
-          <ul class="process-step__tags">
-            <li>CI/CD</li>
-            <li>Monitoramento</li>
-            <li>Suporte</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════ SERVIÇOS / PREÇOS ═══════════════════
-       Antes do portfólio: preço na mesa desde já. Foco em
-       desenvolvimento de sites e sistemas.                            -->
-  <section id="servicos" class="pr-root" aria-label="Serviços e Preços">
-    <div class="pr-rules" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <div class="pr-inner">
-      <header class="pr-head">
-        <span class="label pr-head__label">// 003 — Serviços</span>
-        <h2 class="pr-head__title">Sites &amp; sistemas,<br><em>preço na mesa.</em></h2>
-        <p class="pr-head__sub">Do site de uma página ao sistema sob medida. Transparência desde o primeiro contato.</p>
-      </header>
-      <div class="pr-grid">
-        <article class="pr-card is-featured" data-reveal>
-          <div class="pr-card__top">
-            <span class="pr-card__num label">01</span>
-            <span class="pr-card__flag">Mais pedido</span>
-          </div>
-          <h3 class="pr-card__name">Landing Page Simples</h3>
-          <p class="pr-card__desc">Uma página feita para converter. Responsiva, veloz e otimizada para SEO.</p>
-          <ul class="pr-card__feats">
-            <li>Design sob medida</li>
-            <li>Responsivo e rápido</li>
-            <li>Publicação inclusa</li>
-          </ul>
-          <div class="pr-card__price">
-            <span class="pr-card__from">A partir de</span>
-            <span class="pr-card__value">R$ 399</span>
-          </div>
-          <p class="pr-card__bonus">★ Manutenção e alterações grátis por 3 meses</p>
-          <a href="#contato" class="btn btn--primary pr-card__cta" data-scroll>Começar →</a>
-        </article>
-        <article class="pr-card" data-reveal>
-          <div class="pr-card__top">
-            <span class="pr-card__num label">02</span>
-            
-          </div>
-          <h3 class="pr-card__name">Landing Page Completa</h3>
-          <p class="pr-card__desc">Múltiplas seções, mais recursos e integrações — para contar uma história maior.</p>
-          <ul class="pr-card__feats">
-            <li>Várias seções</li>
-            <li>Formulários e integrações</li>
-            <li>SEO técnico</li>
-          </ul>
-          <div class="pr-card__price">
-            <span class="pr-card__from">A partir de</span>
-            <span class="pr-card__value">R$ 599</span>
-          </div>
-          <p class="pr-card__bonus">★ Manutenção e alterações grátis por 3 meses</p>
-          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Começar →</a>
-        </article>
-        <article class="pr-card" data-reveal>
-          <div class="pr-card__top">
-            <span class="pr-card__num label">03</span>
-            
-          </div>
-          <h3 class="pr-card__name">Landing com Vídeos &amp; Animações</h3>
-          <p class="pr-card__desc">Vídeos, WebGL, scroll-scrub e interações sob medida — como os cases acima.</p>
-          <ul class="pr-card__feats">
-            <li>Animações personalizadas</li>
-            <li>Vídeo / 3D / WebGL</li>
-            <li>Experiência premium</li>
-          </ul>
-          <div class="pr-card__price">
-            <span class="pr-card__value">Sob consulta</span>
-          </div>
-          
-          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Consultar →</a>
-        </article>
-        <article class="pr-card" data-reveal>
-          <div class="pr-card__top">
-            <span class="pr-card__num label">04</span>
-            
-          </div>
-          <h3 class="pr-card__name">Sistema Web para seu Negócio</h3>
-          <p class="pr-card__desc">Aplicações, dashboards e integrações para a operação do seu negócio — do frontend ao banco.</p>
-          <ul class="pr-card__feats">
-            <li>Sob medida</li>
-            <li>Painéis e automações</li>
-            <li>Suporte contínuo</li>
-          </ul>
-          <div class="pr-card__price">
-            <span class="pr-card__value">Sob consulta</span>
-          </div>
-          
-          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Consultar →</a>
-        </article>
-        <article class="pr-card" data-reveal>
-          <div class="pr-card__top">
-            <span class="pr-card__num label">05</span>
-            
-          </div>
-          <h3 class="pr-card__name">Consultoria de TI</h3>
-          <p class="pr-card__desc">Diagnóstico, orientação técnica e apoio estratégico para decisões de tecnologia e evolução digital.</p>
-          <ul class="pr-card__feats">
-            <li>Arquitetura e stack</li>
-            <li>Auditoria técnica</li>
-            <li>Plano de ação</li>
-          </ul>
-          <div class="pr-card__price">
-            <span class="pr-card__value">Sob consulta</span>
-          </div>
-          
-          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Consultar →</a>
-        </article>
-        <article class="pr-card" data-reveal>
-          <div class="pr-card__top">
-            <span class="pr-card__num label">06</span>
-          </div>
-          <h3 class="pr-card__name">Planilhas Prontas</h3>
-          <p class="pr-card__desc">Modelos com dashboard automático para gerenciar você e seu negócio.</p>
-          <ul class="pr-card__feats">
-            <li>Gestão de Vendas</li>
-            <li>Gestão Financeira</li>
-            <li>Investimentos · Metas · Refeições</li>
-          </ul>
-          <div class="pr-card__price">
-            <span class="pr-card__from">cada planilha</span>
-            <span class="pr-card__value">R$ 9,90</span>
-          </div>
-          <p class="pr-card__bonus">★ Personalizadas sob encomenda — fale com a gente</p>
-          <a href="#contato" class="btn btn--outline pr-card__cta" data-scroll>Comprar →</a>
-        </article>
-      </div>
-      <p class="pr-foot">Valores de referência para landing pages. Consultoria, projetos maiores e sistemas são orçados sob medida — <a href="#contato" data-scroll>fale com a gente</a>.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════ SISTEMAS DISPONÍVEIS ═══════════════════
-       Entre Serviços e Portfólio: produtos prontos por assinatura
-       (HN Finances, com carrossel de telas) e sistema sob demanda. -->
-  <section id="sistemas" class="sis-root" aria-label="Sistemas disponíveis">
-    <div class="sis-inner">
-      <header class="sis-head">
-        <span class="label sis-head__label">// 004 — Sistemas</span>
-        <h2 class="sis-head__title">Sistemas prontos,<br><em>ou sob medida.</em></h2>
-        <p class="sis-head__sub">Produtos que já nascem prontos para o seu negócio — ou construímos o seu do zero.</p>
-      </header>
-
-      <article class="sis-card sis-card--finances" data-reveal>
-        <div class="sis-card__media">
-          <div class="sis-carousel" id="sis-carousel">
-            <div class="sis-carousel__bar">
-              <span class="sis-carousel__tl"></span><span class="sis-carousel__tl"></span><span class="sis-carousel__tl"></span>
-              <span class="sis-carousel__url">HN Finances — painel do assinante</span>
-            </div>
-            <div class="sis-carousel__viewport">
-              <div class="sis-carousel__track">
-                <figure class="sis-carousel__slide"><img src="assets/images/hn-finances/visao-geral.png" alt="HN Finances — visão geral com saldo, receitas, despesas e leitura inteligente do período" loading="lazy" width="1917" height="1078"></figure>
-                <figure class="sis-carousel__slide"><img src="assets/images/hn-finances/graficos.png" alt="HN Finances — gráficos de evolução financeira, comparativo mensal e despesas por categoria" loading="lazy" width="1917" height="1078"></figure>
-                <figure class="sis-carousel__slide"><img src="assets/images/hn-finances/lancamentos.png" alt="HN Finances — lista de lançamentos com busca, filtros e totais" loading="lazy" width="1917" height="1078"></figure>
-                <figure class="sis-carousel__slide"><img src="assets/images/hn-finances/importar-extrato.png" alt="HN Finances — importação de extrato em CSV com revisão automática" loading="lazy" width="1917" height="1078"></figure>
-                <figure class="sis-carousel__slide"><img src="assets/images/hn-finances/perfis.png" alt="HN Finances — perfis financeiros separados por contexto" loading="lazy" width="1917" height="1078"></figure>
-                <figure class="sis-carousel__slide"><img src="assets/images/hn-finances/relatorio.png" alt="HN Finances — relatório mensal pronto para exportar ou imprimir" loading="lazy" width="1917" height="1078"></figure>
-              </div>
-            </div>
-            <button type="button" class="sis-carousel__nav sis-carousel__nav--prev" aria-label="Slide anterior">‹</button>
-            <button type="button" class="sis-carousel__nav sis-carousel__nav--next" aria-label="Próximo slide">›</button>
-            <div class="sis-carousel__dots" aria-hidden="true"></div>
-          </div>
-        </div>
-        <div class="sis-card__info">
-          <span class="sis-card__tag">Disponível por assinatura</span>
-          <h3 class="sis-card__name">HN Finances</h3>
-          <p class="sis-card__desc">
-            Gerenciador financeiro simples para organizar a vida pessoal ou um pequeno negócio: perfis separados
-            (Pessoal, Autônomo, Loja...), lançamentos fixos e parcelados, cartões de crédito, metas por categoria,
-            importação de extrato em CSV e relatório mensal pronto para exportar.
-          </p>
-          <ul class="sis-card__feats">
-            <li>Perfis financeiros separados por contexto</li>
-            <li>Cartões, metas e importação de CSV</li>
-            <li>Dashboard e relatórios automáticos</li>
-          </ul>
-          <a href="#contato" class="btn btn--primary sis-card__cta">Entrar em contato →</a>
-        </div>
-      </article>
-
-      <article class="sis-card sis-card--custom" data-reveal>
-        <div class="sis-card__info">
-          <span class="sis-card__tag sis-card__tag--outline">Sob demanda</span>
-          <h3 class="sis-card__name">Sistema personalizado</h3>
-          <p class="sis-card__desc">Sua operação não é igual a nenhuma outra. Construímos o sistema do zero — do frontend ao banco de dados — sob medida para o seu fluxo, com os painéis e automações que fizerem sentido pra você.</p>
-        </div>
-        <a href="#contato" class="btn btn--outline sis-card__cta">Solicitar orçamento →</a>
-      </article>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ INTERLÚDIO — FLOW WAVE ══════════════════
-       Puro visual, como o estudo flow-wave: só a onda. Sem texto e sem
-       "informações" — a câmera atravessa a onda conforme você rola e as
-       partículas fogem do cursor. Interlúdio decorativo, transição para o
-       portfólio: aria-hidden.  -->
-  <section id="interacao" class="flow-root" aria-hidden="true">
-    <div class="flow__sticky">
-      <canvas id="flow-canvas" class="flow__canvas"></canvas>
-      <div class="flow__hint">
-        <span class="flow__hint-label">Role para continuar</span>
-        <svg class="flow__hint-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 8 L12 16 L20 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <!-- Slam: entra no fim da travessia da onda -->
-      <div class="flow__slam" id="flow-slam" aria-hidden="true">
-        <span class="flow__slam-word"></span>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════ PORTFÓLIO ═══════════════════════ -->
-  <!-- ═══════════════════════ PORTFÓLIO (horizontal) ═══════════════
-       Scroll vertical dirige a translação horizontal do track (GSAP pin).
-       1 painel = 1 projeto. Vídeo só toca no painel ativo. Mobile: empilha. -->
-  <!-- ═══════════════════════ PORTFÓLIO (horizontal) ═══════════════
-       Scroll vertical dirige a translação horizontal do track (GSAP pin).
-       1 painel = 1 projeto. Vídeo só toca no painel ativo. Mobile: empilha. -->
-  <!-- ═══════════════════════ PORTFÓLIO (horizontal + exibir mais) ═════
-       Mostra 3 projetos; o botão revela +5 por vez. Scroll vertical
-       dirige a translação horizontal (GSAP pin). Mobile: carrossel por swipe. -->
-  <section id="portfolio" class="pf-root" style="--pf-count:15">
-    <div class="pf-pin">
-      <div class="pf-head">
-        <div class="pf-head__left">
-          <span class="label pf-head__label">// 005 — Portfólio</span>
-          <h2 class="pf-head__title">Alguns de<br>nossos projetos</h2>
-        </div>
-        <div class="pf-head__right">
-          <span class="pf-head__count"><i id="pf-count">01</i><b id="pf-total">/03</b></span>
-        </div>
-      </div>
-      <div class="pf-track" id="pf-track">
-        <article class="pf-panel" data-i="0" style="--accent:#c8ccd0">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">01</span>
-                <span class="pf-info__tier">Cinematográfico</span>
-              </div>
-              <h3 class="pf-info__name">M4 Competition</h3>
-              <span class="label pf-info__cat">Hero · Automotivo</span>
-              <p class="pf-info__desc">Hero em vídeo 1080p dirigido pelo scroll: o BMW M4 gira em cena com specs animadas. Produção cinematográfica.</p>
-              <ul class="pf-tags"><li>Vídeo 1080p</li><li>Scroll-scrub</li><li>GSAP</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://m4-competition.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">m4-competition.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="0" data-src="assets/video/m4.mp4"
-                       poster="assets/video/m4.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel" data-i="1" style="--accent:#c8a96e">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">02</span>
-                <span class="pf-info__tier">Cinematográfico</span>
-              </div>
-              <h3 class="pf-info__name">HN Arquitetura</h3>
-              <span class="label pf-info__cat">Landing · Arquitetura</span>
-              <p class="pf-info__desc">Estúdio de arquitetura e construção: hero em vídeo dirigido pelo scroll, do primeiro traço à entrega das chaves.</p>
-              <ul class="pf-tags"><li>Vídeo</li><li>Scroll-scrub</li><li>Editorial</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://hn-construction.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">hn-construction.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="1" data-src="assets/video/hn-construction.mp4"
-                       poster="assets/video/hn-construction.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel" data-i="2" style="--accent:#a0c4e8">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">03</span>
-                <span class="pf-info__tier">Conversão</span>
-              </div>
-              <h3 class="pf-info__name">JD Flooring &amp; Cleaning</h3>
-              <span class="label pf-info__cat">Web · Serviços</span>
-              <p class="pf-info__desc">A tela se divide e revela os dois serviços conforme o cursor caminha. Alta conversão e SEO local na Flórida.</p>
-              <ul class="pf-tags"><li>Conversão</li><li>SEO Local</li><li>Interação</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://www.jdfcs.com" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">jdfcs.com</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="2" data-src="assets/video/jd.mp4"
-                       poster="assets/video/jd.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="3" style="--accent:#6d7fd8">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">04</span>
-                <span class="pf-info__tier">Institucional</span>
-              </div>
-              <h3 class="pf-info__name">CEVIP · Vida Plena</h3>
-              <span class="label pf-info__cat">Web · Institucional</span>
-              <p class="pf-info__desc">Centro espiritualista e terreiro de Umbanda em Olinda: agenda de eventos, história da casa, loja e fotos reais.</p>
-              <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>Agenda</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://www.cevidaplena.com" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">cevidaplena.com</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="3" data-src="assets/video/cevidaplena.mp4"
-                       poster="assets/video/cevidaplena.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="4" style="--accent:#b87333">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">05</span>
-                <span class="pf-info__tier">Complexo</span>
-              </div>
-              <h3 class="pf-info__name">Laocoön</h3>
-              <span class="label pf-info__cat">Experiência · WebGL</span>
-              <p class="pf-info__desc">Cena Three.js dirigida por scroll: shaders, partículas e câmera em órbita. O nosso limite superior.</p>
-              <ul class="pf-tags"><li>Three.js</li><li>Shaders</li><li>WebGL</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://laocoon-delta.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">laocoon-delta.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="4" data-src="assets/video/laocoon.mp4"
-                       poster="assets/video/laocoon.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="5" style="--accent:#9c7b52">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">06</span>
-                <span class="pf-info__tier">Premium</span>
-              </div>
-              <h3 class="pf-info__name">Ferreira &amp; Monteiro</h3>
-              <span class="label pf-info__cat">Web · Arquitetura</span>
-              <p class="pf-info__desc">Escritório de arquitetura e interiores autoral: do primeiro traço à última peça, com editorial fotográfico e prova social — 700+ clientes em 18 estados.</p>
-              <ul class="pf-tags"><li>Web</li><li>Editorial</li><li>Arquitetura</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://arquitetura-premium.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">arquitetura-premium.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="5" data-src="assets/video/arquitetura-premium.mp4"
-                       poster="assets/video/arquitetura-premium.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="6" style="--accent:#e0537a">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">07</span>
-                <span class="pf-info__tier">Avançado</span>
-              </div>
-              <h3 class="pf-info__name">Arkkhe</h3>
-              <span class="label pf-info__cat">Hero · Automotivo</span>
-              <p class="pf-info__desc">Vídeo controlado pelo scroll, intro cinematográfica e transições de troca — fidelidade total ao design.</p>
-              <ul class="pf-tags"><li>React</li><li>Vídeo</li><li>Scroll-scrub</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://arkkhe-hero.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">arkkhe-hero.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="6" data-src="assets/video/arkkhe.mp4"
-                       poster="assets/video/arkkhe.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="7" style="--accent:#7fb2d6">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">08</span>
-                <span class="pf-info__tier">Imersivo</span>
-              </div>
-              <h3 class="pf-info__name">Glacius</h3>
-              <span class="label pf-info__cat">Landing · Imersiva</span>
-              <p class="pf-info__desc">Parallax por camadas, neve em movimento e reveals cinematográficos — profundidade sem peso.</p>
-              <ul class="pf-tags"><li>React</li><li>Parallax</li><li>GSAP</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://glacius-frost.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">glacius-frost.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="7" data-src="assets/video/glacius.mp4"
-                       poster="assets/video/glacius.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="8" style="--accent:#c9a227">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">09</span>
-                <span class="pf-info__tier">Premium</span>
-              </div>
-              <h3 class="pf-info__name">Studio Ferré 97</h3>
-              <span class="label pf-info__cat">Landing · Barbearia</span>
-              <p class="pf-info__desc">Barbearia premium de Olinda: tipografia imponente, agendamento e um editorial escuro e dourado à altura da marca.</p>
-              <ul class="pf-tags"><li>Next.js</li><li>Editorial</li><li>Agendamento</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://studio-ferre-97.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">studio-ferre-97.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="8" data-src="assets/video/ferre.mp4"
-                       poster="assets/video/ferre.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="9" style="--accent:#7c5cff">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">10</span>
-                <span class="pf-info__tier">Essencial</span>
-              </div>
-              <h3 class="pf-info__name">Jofer Poeta</h3>
-              <span class="label pf-info__cat">Web · Literatura</span>
-              <p class="pf-info__desc">Portal lírico do escritor João Ferreira: cordéis espíritas da Série Reluz, livros autorais e agenda de palestras.</p>
-              <ul class="pf-tags"><li>Web</li><li>SEO</li><li>Editorial</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://jofer.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">jofer.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="9" data-src="assets/video/jofer.mp4"
-                       poster="assets/video/jofer.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="10" style="--accent:#22b07d">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">11</span>
-                <span class="pf-info__tier">Avançado</span>
-              </div>
-              <h3 class="pf-info__name">Diet Soda</h3>
-              <span class="label pf-info__cat">Produto · 3D</span>
-              <p class="pf-info__desc">Produto 3D interativo com troca de sabor em tempo real, blur de movimento e atmosfera viva.</p>
-              <ul class="pf-tags"><li>3D</li><li>model-viewer</li><li>GSAP</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://diet-soda-nine.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">diet-soda-nine.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="10" data-src="assets/video/diet-soda.mp4"
-                       poster="assets/video/diet-soda.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="11" style="--accent:#ef5f8e">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">12</span>
-                <span class="pf-info__tier">Conversão</span>
-              </div>
-              <h3 class="pf-info__name">Julia Miçangas</h3>
-              <span class="label pf-info__cat">E-commerce · Infantil</span>
-              <p class="pf-info__desc">Loja de joias de miçanga infantis feitas à mão: catálogo lúdico em tons pastel, personalização e pedido direto pelo WhatsApp.</p>
-              <ul class="pf-tags"><li>Loja</li><li>UI/UX</li><li>Motion</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://pulseiras-kappa.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">pulseiras-kappa.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="11" data-src="assets/video/pulseiras.mp4"
-                       poster="assets/video/pulseiras.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="12" style="--accent:#c8a96e">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">13</span>
-                <span class="pf-info__tier">Institucional</span>
-              </div>
-              <h3 class="pf-info__name">Marim dos Caetés</h3>
-              <span class="label pf-info__cat">Dev · Frevo e Cultura</span>
-              <p class="pf-info__desc">Portal oficial da histórica agremiação de Olinda. Preservação do Frevo — patrimônio UNESCO — e memória.</p>
-              <ul class="pf-tags"><li>Web</li><li>Institucional</li><li>CMS</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://www.marim-dos-caetes.com.br" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">marim-dos-caetes.com.br</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="12" data-src="assets/video/marim.mp4"
-                       poster="assets/video/marim.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="13" style="--accent:#c56a3f">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">14</span>
-                <span class="pf-info__tier">Essencial</span>
-              </div>
-              <h3 class="pf-info__name">Baseline</h3>
-              <span class="label pf-info__cat">Landing · Esporte</span>
-              <p class="pf-info__desc">Elegância e ritmo com o mínimo: física de mola coesa, revelações no scroll e zero excesso.</p>
-              <ul class="pf-tags"><li>UI/UX</li><li>Motion</li><li>Lenis</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://baseline-plum-five.vercel.app/" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">baseline-plum-five.vercel.app</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="13" data-src="assets/video/baseline.mp4"
-                       poster="assets/video/baseline.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="pf-panel is-hidden" data-i="14" style="--accent:#C9F31D">
-          <div class="pf-panel__inner">
-            <div class="pf-info">
-              <div class="pf-info__top">
-                <span class="pf-info__idx label">15</span>
-                <span class="pf-info__tier">Interativo</span>
-              </div>
-              <h3 class="pf-info__name">Heitor Negromonte</h3>
-              <span class="label pf-info__cat">Design · Portfólio</span>
-              <p class="pf-info__desc">Portfólio interativo de engenharia de software. Arquiteturas de alto desempenho e interfaces táteis.</p>
-              <ul class="pf-tags"><li>Next.js</li><li>Node.js</li><li>Interativo</li></ul>
-              <div class="pf-info__actions">
-                <a class="btn btn--primary" href="https://www.heitor-negromonte.com.br" target="_blank" rel="noopener">Acessar Projeto ↗</a>
-              </div>
-            </div>
-            <div class="pf-browser">
-              <div class="pf-browser__bar">
-                <span class="pf-browser__tl"></span><span class="pf-browser__tl"></span><span class="pf-browser__tl"></span>
-                <span class="pf-browser__url">heitor-negromonte.com.br</span>
-              </div>
-              <div class="pf-browser__view">
-                <video class="pf-video" data-i="14" data-src="assets/video/heitor.mp4"
-                       poster="assets/video/heitor.jpg" muted playsinline preload="none"
-                       aria-hidden="true" tabindex="-1"></video>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <div class="pf-more" id="pf-more" data-initial="3" data-step="5" data-total="15">
-          <button type="button" class="pf-more__btn" id="pf-more-btn">
-            <span class="pf-more__plus">+</span>
-            <span class="pf-more__label">Exibir mais</span>
-            <span class="pf-more__count" id="pf-more-count">próximos 5</span>
-          </button>
-        </div>
-      </div>
-      <div class="pf-progress" aria-hidden="true"><span class="pf-progress__fill" id="pf-progress-fill"></span></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════ BRIDGE CTA ══════════════════════ -->
-  <div class="cta-root">
-    <section id="cta-bridge" class="cta-bridge">
-      <canvas id="cta-canvas" class="cta-bridge__canvas" aria-hidden="true"></canvas>
-
-      <div class="cta-bridge__inner">
-        <p class="cta-bridge__kicker label">// Próximo passo</p>
-
-        <h2 class="cta-bridge__title">Construímos o digital que você merece.</h2>
-
-        <div class="cta-bridge__actions">
-          <a href="#contato" class="btn btn--primary">Iniciar Projeto →</a>
-          <a href="#portfolio" class="btn btn--outline">Ver mais cases</a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ═══════════════════════ CONTATO ══════════════════════ -->
-  <section id="contato" class="section contact">
-    <div class="contact__blob" aria-hidden="true"></div>
-    <div class="container contact__grid">
-
-      <div class="contact__left">
-        <span class="label contact__label">// 006 — Contato</span>
-        <h2 class="display contact__heading">
-          <span class="reveal-line"><span>Vamos criar</span></span>
-          <span class="reveal-line"><span>algo incrível</span></span>
-          <span class="reveal-line"><span>juntos.</span></span>
-        </h2>
-        <p class="contact__sub">Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 24h.</p>
-
-        <ul class="contact__info-list">
-          <li>
-            <span class="label">E-mail</span>
-            <a href="mailto:contato@hnservices.com.br">contato@hnservices.com.br</a>
-          </li>
-          <li>
-            <span class="label">WhatsApp</span>
-            <a href="https://wa.me/5581996213652" target="_blank" rel="noopener">+55 81 99621-3652</a>
-          </li>
-          <li>
-            <span class="label">Localização</span>
-            <span>Recife, Brasil — atendemos globalmente</span>
-          </li>
-        </ul>
-
-        <!-- <div class="contact__socials">
-          <a href="https://instagram.com/hnservices" target="_blank" rel="noopener" class="contact__social-link label">Instagram ↗</a>
-          <a href="https://linkedin.com/company/hn-services" target="_blank" rel="noopener" class="contact__social-link label">LinkedIn ↗</a>
-          <a href="https://github.com/hn-services" target="_blank" rel="noopener" class="contact__social-link label">GitHub ↗</a>
-        </div> -->
-      </div>
-
-      <div class="contact__right">
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="contact-form__fields">
-            <div class="form-field">
-              <input type="text" id="f-name" name="name" placeholder=" " autocomplete="name" required>
-              <label for="f-name">Nome</label>
-            </div>
-            <div class="form-field">
-              <input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" required>
-              <label for="f-email">E-mail</label>
-            </div>
-            <div class="form-field">
-              <label for="f-service">Serviço</label>
-              <div class="select-wrap">
-                <select id="f-service" name="service" required>
-                  <option value="" disabled selected>Selecione um serviço</option>
-                  <option value="landing-simples">Landing Page Simples</option>
-                  <option value="landing-completa">Landing Page Completa</option>
-                  <option value="landing-video">Landing com Vídeos &amp; Animações</option>
-                  <option value="sistema-web">Sistema Web para seu Negócio</option>
-                  <option value="consultoria-ti">Consultoria de TI</option>
-                  <option value="outros">Outros</option>
-                </select>
-                <span class="select-arrow">↓</span>
-              </div>
-            </div>
-            <div class="form-field form-field--full">
-              <textarea id="f-message" name="message" placeholder=" " rows="4" required></textarea>
-              <label for="f-message">Mensagem</label>
-            </div>
-            <button type="submit" class="btn btn--submit" id="btn-submit">
-              <span class="btn-text">Enviar Mensagem</span>
-              <span class="btn-spinner" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                </svg>
-              </span>
-            </button>
-          </div>
-        </form>
-
-        <div class="contact-success" id="contact-success" aria-live="polite">
-          <svg class="success-check" viewBox="0 0 52 52" fill="none">
-            <circle cx="26" cy="26" r="24" stroke="var(--accent)" stroke-width="2" />
-            <path class="success-check__path" d="M14 26 L22 34 L38 18" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <h3>Mensagem enviada!</h3>
-          <p>Obrigado pelo contato. Retornaremos em breve.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__logo">
-        <svg viewBox="0 0 56 56" fill="none" width="28" height="28">
-          <path d="M8 6 L8 50 M28 6 L28 50 M8 26 L28 26 M48 6 L48 50 M28 6 L48 50" stroke="url(#logo-grad)"
-            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <span>HN Services</span>
-      </div>
-      <p class="footer__copy">© 2026 HN Services. Todos os direitos reservados.</p>
-    </div>
-  </footer>
-
-  <!-- Text-particle canvas: direct body child so z-index is in root stacking context -->
-  <canvas id="text-particles-canvas" aria-hidden="true"></canvas>
-
-  <!-- Local Libraries (Resilient to CDN network drops) -->
-  <script src="js/libs/three.min.js"></script>
-  <script src="js/libs/gsap.min.js"></script>
-  <script src="js/libs/ScrollTrigger.min.js"></script>
-  <script src="js/libs/ScrollToPlugin.min.js"></script>
-  <!-- App Scripts -->
-  <script src="js/text-particles.js"></script>
-  <script src="js/three-scene.js"></script>
-  <script src="js/lightning.js"></script>
-  <script src="js/process-canvas.js"></script>
-  <script src="js/precos.js"></script>
-  <script src="js/sistemas.js"></script>
-  <!-- FlowWave: porte fiel do estudo flow-wave. ES module que usa os addons de
-       pós-processamento (bloom seletivo). O importmap resolve "three" para a
-       cópia LOCAL vendorizada — offline-first, nenhum CDN (§5 do guia). -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "/js/libs/three/three.module.js",
-      "three/addons/": "/js/libs/three/addons/"
-    }
-  }
-  </script>
-  <script type="module" src="js/flow-wave.js"></script>
-  <script src="js/portfolio.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/manifesto-shader.js"></script>
-  <script src="js/portfolio-shader.js"></script>
-  <script src="js/cta-shader.js"></script>
-  <script src="js/main.js"></script>
-  <!-- Vercel Analytics — ativar em: vercel.com/dashboard → projeto → Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script>
-    /* Scroll progress bar + section tracker live update */
-    (function () {
-      var bar = document.getElementById('scroll-progress');
-      var items = document.querySelectorAll('.section-tracker__item');
-      var secs = Array.from(document.querySelectorAll('section[id]'));
-      function onScroll() {
-        var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-        if (bar) bar.style.transform = 'scaleX(' + Math.min(1, pct) + ')';
-        var sy = window.scrollY + window.innerHeight * 0.4;
-        var active = null;
-        secs.forEach(function (s) { if (sy >= s.offsetTop) active = s.id; });
-        
-        // Robust bottom check: if scroll is at the very bottom, force active to the last section
-        if ((window.scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 50)) {
-          if (secs.length > 0) active = secs[secs.length - 1].id;
-        }
-        
-        items.forEach(function (it) { it.classList.toggle('is-active', it.dataset.section === active); });
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }());
-  </script>
 </body>
-
 </html>

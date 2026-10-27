@@ -1,18 +1,14 @@
 {
   "name": "HN Services",
   "short_name": "HN Services",
-  "description": "Criação de sites, consultoria de TI e sistemas web que transformam negócios.",
+  "description": "Criação de sites, landing pages, sistemas web e consultoria de TI em Recife.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#080808",
-  "theme_color": "#C9F31D",
+  "background_color": "#0E0D0B",
+  "theme_color": "#0E0D0B",
   "lang": "pt-BR",
   "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
